@@ -21,7 +21,7 @@ const Index = () => {
         <Button
           size="lg"
           className="bg-[#0FA0CE] hover:bg-[#0D8CB6] text-white px-8 py-6 text-lg"
-          onClick={() => window.open("https://apps.apple.com/app/ischedulEDU", "_blank")}
+          onClick={() => window.open("https://apps.apple.com/us/app/ischeduledu/id6504114850", "_blank")}
         >
           <Download className="mr-2" />
           Download on the App Store
