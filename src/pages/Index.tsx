@@ -10,7 +10,7 @@ const Index = () => {
         <img
           src="/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png"
           alt="iSchedulEDU Logo"
-          className="mx-auto w-32 h-32 mb-8"
+          className="mx-auto w-32 h-32 mb-8 rounded-full"
         />
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
           iSchedulEDU
