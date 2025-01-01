@@ -10,19 +10,19 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
-        <Toaster />
-        <Sonner />
-      </TooltipProvider>
-    </QueryClientProvider>
-  </BrowserRouter>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
 );
 
 export default App;
