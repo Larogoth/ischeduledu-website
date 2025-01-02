@@ -29,6 +29,24 @@ const Index = () => {
         </Button>
       </header>
 
+      {/* Pricing Section */}
+      <section className="bg-[#F5F9FF] py-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">Try Before You Buy</h2>
+          <div className="max-w-2xl mx-auto bg-white rounded-lg p-6 shadow-md">
+            <p className="text-lg mb-4">
+              iSchedulEDU is now free-to-try for 4 in-app sessions.
+            </p>
+            <p className="text-lg mb-4">
+              Once the trial ends, unlock the app forever for a small, one-time fee.
+            </p>
+            <p className="text-sm text-gray-600">
+              Note: Anyone who purchased the app prior to January 01, 2025 is considered a grandfathered user and can restore full access by clicking "Restore Purchases" within the app.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
@@ -60,7 +78,7 @@ const Index = () => {
       <section className="py-16 bg-[#F5F9FF]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">See it in Action</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
             <img
               src="/lovable-uploads/6c266668-5642-4712-9338-9675b98e1a6d.png"
               alt="Schedule Input Screen"
