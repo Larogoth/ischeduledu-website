@@ -4,12 +4,15 @@ import { Download, Clock, Share2, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
+  // Get the base URL from Vite's import.meta.env
+  const baseUrl = import.meta.env.BASE_URL;
+
   return (
     <div className="min-h-screen bg-[#E6F3FF]">
       {/* Hero Section */}
       <header className="container mx-auto px-4 py-16 text-center">
         <img
-          src="/ischeduledu-website/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png"
+          src={`${baseUrl}lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png`}
           alt="iSchedulEDU Logo"
           className="mx-auto w-32 h-32 mb-8 rounded-full"
         />
@@ -47,6 +50,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Features Section */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
@@ -80,17 +84,17 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">See it in Action</h2>
           <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
             <img
-              src="/ischeduledu-website/lovable-uploads/6c266668-5642-4712-9338-9675b98e1a6d.png"
+              src={`${baseUrl}lovable-uploads/6c266668-5642-4712-9338-9675b98e1a6d.png`}
               alt="Schedule Input Screen"
               className="w-64 rounded-xl shadow-lg"
             />
             <img
-              src="/ischeduledu-website/lovable-uploads/6a72f919-7ce6-40ea-9c79-6427f39d32ac.png"
+              src={`${baseUrl}lovable-uploads/6a72f919-7ce6-40ea-9c79-6427f39d32ac.png`}
               alt="Generated Schedule Screen"
               className="w-64 rounded-xl shadow-lg"
             />
             <img
-              src="/ischeduledu-website/lovable-uploads/ad95bed2-74c4-4fde-8699-d7ab121a81fb.png"
+              src={`${baseUrl}lovable-uploads/ad95bed2-74c4-4fde-8699-d7ab121a81fb.png`}
               alt="Saved Schedules Screen"
               className="w-64 rounded-xl shadow-lg"
             />
