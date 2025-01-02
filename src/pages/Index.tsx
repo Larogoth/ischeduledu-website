@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   // Get the base URL from Vite's import.meta.env
-  const baseUrl = import.meta.env.BASE_URL;
+  const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
 
   return (
     <div className="min-h-screen bg-[#E6F3FF]">
