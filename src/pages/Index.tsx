@@ -2,10 +2,24 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download, Clock, Share2, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
+import TestimonialCard from "@/components/TestimonialCard";
+import { useEffect, useState } from "react";
+
+interface Testimonial {
+  id: number;
+  name: string;
+  content: string;
+  date: string;
+}
 
 const Index = () => {
-  // Get the base URL from Vite's import.meta.env
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
+
+  useEffect(() => {
+    const storedTestimonials = JSON.parse(localStorage.getItem("testimonials") || "[]");
+    setTestimonials(storedTestimonials);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#E6F3FF]">
@@ -79,6 +93,25 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      {testimonials.length > 0 && (
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">What Users Are Saying</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id}
+                  name={testimonial.name}
+                  content={testimonial.content}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Screenshots Section */}
       <section className="py-16 bg-[#F5F9FF]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">See it in Action</h2>
