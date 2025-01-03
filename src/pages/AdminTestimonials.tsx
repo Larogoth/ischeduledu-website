@@ -4,19 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { Trash2 } from "lucide-react";
+import { Trash2, Star } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
 
 interface Testimonial {
   id: number;
+  title: string;
   name: string;
   content: string;
+  stars: number;
   date: string;
 }
 
 const AdminTestimonials = () => {
+  const [title, setTitle] = useState("");
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
+  const [stars, setStars] = useState(5);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -29,11 +33,12 @@ const AdminTestimonials = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Add new testimonial
     const newTestimonial = {
       id: Date.now(),
+      title,
       name,
       content,
+      stars,
       date: new Date().toISOString()
     };
     
@@ -46,8 +51,10 @@ const AdminTestimonials = () => {
       description: "Testimonial added successfully!",
     });
     
+    setTitle("");
     setName("");
     setContent("");
+    setStars(5);
   };
 
   const handleDelete = (id: number) => {
@@ -77,6 +84,19 @@ const AdminTestimonials = () => {
             <h2 className="text-2xl font-semibold">Add New Testimonial</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
+                <label htmlFor="title" className="block text-sm font-medium mb-2">
+                  Review Title
+                </label>
+                <Input
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  placeholder="Enter review title"
+                />
+              </div>
+              
+              <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Reviewer Name
                 </label>
@@ -87,6 +107,23 @@ const AdminTestimonials = () => {
                   required
                   placeholder="Enter reviewer name"
                 />
+              </div>
+
+              <div>
+                <label htmlFor="stars" className="block text-sm font-medium mb-2">
+                  Rating (out of 5 stars)
+                </label>
+                <div className="flex gap-2">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star
+                      key={index}
+                      className={`h-6 w-6 cursor-pointer ${
+                        index < stars ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                      }`}
+                      onClick={() => setStars(index + 1)}
+                    />
+                  ))}
+                </div>
               </div>
               
               <div>
@@ -119,8 +156,10 @@ const AdminTestimonials = () => {
                 testimonials.map((testimonial) => (
                   <div key={testimonial.id} className="relative">
                     <TestimonialCard
+                      title={testimonial.title}
                       name={testimonial.name}
                       content={testimonial.content}
+                      stars={testimonial.stars}
                     />
                     <Button
                       variant="destructive"

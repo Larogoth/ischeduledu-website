@@ -102,8 +102,10 @@ const Index = () => {
               {testimonials.map((testimonial) => (
                 <TestimonialCard
                   key={testimonial.id}
+                  title={testimonial.title}
                   name={testimonial.name}
                   content={testimonial.content}
+                  stars={testimonial.stars}
                 />
               ))}
             </div>
