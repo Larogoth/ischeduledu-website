@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 
 interface Testimonial {
   id: number;
+  title: string;
   name: string;
   content: string;
+  stars: number;
   date: string;
 }
 
