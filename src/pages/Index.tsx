@@ -4,9 +4,6 @@ import { Download, Clock, Share2, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { supabase, checkSupabaseConnection } from "../lib/supabase";
-import { useToast } from "@/components/ui/use-toast";
 
 interface Testimonial {
   id: number;
@@ -14,42 +11,17 @@ interface Testimonial {
   name: string;
   content: string;
   stars: number;
-  created_at: string;
+  date: string;
 }
 
 const Index = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
-  const { toast } = useToast();
 
-  const { data: testimonials = [], isLoading, error } = useQuery({
-    queryKey: ['testimonials'],
-    queryFn: async () => {
-      const isConnected = await checkSupabaseConnection();
-      if (!isConnected) {
-        toast({
-          title: "Connection Error",
-          description: "Please connect your Supabase project in the Lovable interface.",
-          variant: "destructive",
-        });
-        return [];
-      }
-
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) {
-        toast({
-          title: "Error",
-          description: "Failed to load testimonials. Please try again later.",
-          variant: "destructive",
-        });
-        throw error;
-      }
-      return data as Testimonial[];
-    },
-  });
+  useEffect(() => {
+    const storedTestimonials = JSON.parse(localStorage.getItem("testimonials") || "[]");
+    setTestimonials(storedTestimonials);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#E6F3FF]">
@@ -124,7 +96,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      {testimonials && testimonials.length > 0 && (
+      {testimonials.length > 0 && (
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">What Users Are Saying</h2>
