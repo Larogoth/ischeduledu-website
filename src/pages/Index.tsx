@@ -39,7 +39,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white">
-      {/* Hero Section */}
       <header className="container mx-auto px-4 py-24 text-center animate-fade-in">
         <div className="relative">
           <div className="absolute inset-0 bg-[#0FA0CE] opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
@@ -147,7 +146,7 @@ const Index = () => {
             {/* Social Media Links */}
             <div className="flex space-x-6">
               <a
-                href="https://twitter.com/ischeduledu"
+                href="https://x.com/ischeduledu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#0FA0CE] transition-colors"
