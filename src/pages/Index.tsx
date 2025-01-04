@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useEffect, useState } from "react";
-import Navigation from "@/components/Navigation";
 import Features from "@/components/Features";
 import { Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -40,8 +39,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-[#E6F3FF]">
-      <Navigation baseUrl={baseUrl} />
-
       {/* Hero Section */}
       <header className="container mx-auto px-4 py-16 text-center">
         <img
