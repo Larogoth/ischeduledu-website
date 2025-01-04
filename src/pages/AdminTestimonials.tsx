@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,8 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { Trash2, Star } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "../lib/supabase";
 
 interface Testimonial {
   id: number;
@@ -15,7 +13,7 @@ interface Testimonial {
   name: string;
   content: string;
   stars: number;
-  created_at: string;
+  date: string;
 }
 
 const AdminTestimonials = () => {
@@ -23,71 +21,51 @@ const AdminTestimonials = () => {
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [stars, setStars] = useState(5);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
-  const { data: testimonials = [], isLoading } = useQuery({
-    queryKey: ['testimonials'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data as Testimonial[];
-    },
-  });
-
-  const addTestimonialMutation = useMutation({
-    mutationFn: async (newTestimonial: Omit<Testimonial, 'id' | 'created_at'>) => {
-      const { data, error } = await supabase
-        .from('testimonials')
-        .insert([newTestimonial])
-        .select();
-      
-      if (error) throw error;
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
-      toast({
-        title: "Success",
-        description: "Testimonial added successfully!",
-      });
-      setTitle("");
-      setName("");
-      setContent("");
-      setStars(5);
-    },
-  });
-
-  const deleteTestimonialMutation = useMutation({
-    mutationFn: async (id: number) => {
-      const { error } = await supabase
-        .from('testimonials')
-        .delete()
-        .eq('id', id);
-      
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
-      toast({
-        title: "Success",
-        description: "Testimonial deleted successfully!",
-      });
-    },
-  });
+  useEffect(() => {
+    const storedTestimonials = JSON.parse(localStorage.getItem("testimonials") || "[]");
+    setTestimonials(storedTestimonials);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addTestimonialMutation.mutate({ title, name, content, stars });
+    
+    const newTestimonial = {
+      id: Date.now(),
+      title,
+      name,
+      content,
+      stars,
+      date: new Date().toISOString()
+    };
+    
+    const updatedTestimonials = [...testimonials, newTestimonial];
+    localStorage.setItem("testimonials", JSON.stringify(updatedTestimonials));
+    setTestimonials(updatedTestimonials);
+    
+    toast({
+      title: "Success",
+      description: "Testimonial added successfully!",
+    });
+    
+    setTitle("");
+    setName("");
+    setContent("");
+    setStars(5);
   };
 
   const handleDelete = (id: number) => {
-    deleteTestimonialMutation.mutate(id);
+    const updatedTestimonials = testimonials.filter(t => t.id !== id);
+    localStorage.setItem("testimonials", JSON.stringify(updatedTestimonials));
+    setTestimonials(updatedTestimonials);
+    
+    toast({
+      title: "Success",
+      description: "Testimonial deleted successfully!",
+    });
   };
 
   return (

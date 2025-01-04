@@ -4,8 +4,6 @@ import { Download, Clock, Share2, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../lib/supabase";
 
 interface Testimonial {
   id: number;
@@ -13,24 +11,17 @@ interface Testimonial {
   name: string;
   content: string;
   stars: number;
-  created_at: string;
+  date: string;
 }
 
 const Index = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
 
-  const { data: testimonials = [], isLoading } = useQuery({
-    queryKey: ['testimonials'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data as Testimonial[];
-    },
-  });
+  useEffect(() => {
+    const storedTestimonials = JSON.parse(localStorage.getItem("testimonials") || "[]");
+    setTestimonials(storedTestimonials);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#E6F3FF]">
