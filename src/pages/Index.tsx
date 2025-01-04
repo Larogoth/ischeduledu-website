@@ -13,7 +13,7 @@ interface Testimonial {
   name: string;
   content: string;
   stars: number;
-  date: string;
+  created_at: string;
 }
 
 const Index = () => {
