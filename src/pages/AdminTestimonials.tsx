@@ -22,22 +22,28 @@ const AdminTestimonials = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    // Check authentication status immediately
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session) {
-        checkAdminStatus(session.user.id);
+      if (!session) {
+        navigate('/login');
+        return;
       }
+      setSession(session);
+      checkAdminStatus(session.user.id);
     });
 
+    // Subscribe to auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (session) {
-        checkAdminStatus(session.user.id);
+      if (!session) {
+        navigate('/login');
+        return;
       }
+      setSession(session);
+      checkAdminStatus(session.user.id);
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [navigate]);
 
   const checkAdminStatus = async (userId: string) => {
     const { data: profile } = await supabase
