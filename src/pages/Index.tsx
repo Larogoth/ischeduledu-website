@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Features from "@/components/Features";
 import { Download } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Testimonial {
   id: number;
@@ -20,8 +21,21 @@ const Index = () => {
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
 
   useEffect(() => {
-    const storedTestimonials = JSON.parse(localStorage.getItem("testimonials") || "[]");
-    setTestimonials(storedTestimonials);
+    const fetchTestimonials = async () => {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching testimonials:', error);
+        return;
+      }
+
+      setTestimonials(data || []);
+    };
+
+    fetchTestimonials();
   }, []);
 
   return (
