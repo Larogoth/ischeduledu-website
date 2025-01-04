@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useEffect, useState } from "react";
 import Features from "@/components/Features";
-import { Download } from "lucide-react";
+import { Download, Mail, Twitter, Instagram } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Testimonial {
@@ -142,19 +142,54 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="mb-6 text-gray-300">© 2024 iSchedulEDU. All rights reserved.</p>
-          <div className="flex justify-center gap-6">
-            <Link to="/privacy-policy">
-              <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
-                Privacy Policy
-              </Button>
-            </Link>
-            <Link to="/faq">
-              <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
-                Support
-              </Button>
-            </Link>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center space-y-6">
+            {/* Social Media Links */}
+            <div className="flex space-x-6">
+              <a
+                href="https://twitter.com/iSchedulEDU"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0FA0CE] transition-colors"
+              >
+                <Twitter className="h-6 w-6" />
+              </a>
+              <a
+                href="https://instagram.com/ischeduledu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0FA0CE] transition-colors"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+            </div>
+
+            {/* Contact Support Button */}
+            <Button
+              variant="outline"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900 transition-colors"
+              onClick={() => window.location.href = 'mailto:ischeduledu@gmail.com'}
+            >
+              <Mail className="mr-2 h-4 w-4" />
+              Contact Support
+            </Button>
+
+            {/* Copyright and Links */}
+            <div className="text-center">
+              <p className="mb-6 text-gray-300">© 2024 iSchedulEDU. All rights reserved.</p>
+              <div className="flex justify-center gap-6">
+                <Link to="/privacy-policy">
+                  <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
+                    Privacy Policy
+                  </Button>
+                </Link>
+                <Link to="/faq">
+                  <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
+                    Support
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
