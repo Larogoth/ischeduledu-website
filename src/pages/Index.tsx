@@ -165,14 +165,13 @@ const Index = () => {
             </div>
 
             {/* Contact Support Button */}
-            <Button
-              variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900 transition-colors"
-              onClick={() => window.location.href = 'mailto:ischeduledu@gmail.com'}
+            <a
+              href="mailto:ischeduledu@gmail.com"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-transparent border-white text-white hover:bg-white hover:text-gray-900 transition-colors h-10 px-4 py-2 border"
             >
-              <Mail className="mr-2 h-4 w-4" />
+              <Mail className="h-4 w-4" />
               Contact Support
-            </Button>
+            </a>
 
             {/* Copyright and Links */}
             <div className="text-center">
