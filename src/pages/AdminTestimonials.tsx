@@ -64,6 +64,19 @@ const AdminTestimonials = () => {
     setIsAdmin(true);
   };
 
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      navigate('/login');
+    }
+  };
+
   const fetchTestimonials = async () => {
     const { data, error } = await supabase
       .from('testimonials')
@@ -97,9 +110,14 @@ const AdminTestimonials = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Manage Testimonials</h1>
-          <Button variant="outline" onClick={() => navigate("/")}>
-            Back to Home
-          </Button>
+          <div className="space-x-4">
+            <Button variant="outline" onClick={() => navigate("/")}>
+              Back to Home
+            </Button>
+            <Button variant="destructive" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
