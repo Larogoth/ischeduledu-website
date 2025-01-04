@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { Trash2, Star } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
+import { supabase } from "@/integrations/supabase/client";
+import Login from "@/components/Login";
 
 interface Testimonial {
   id: number;
@@ -22,8 +24,21 @@ const AdminTestimonials = () => {
   const [content, setContent] = useState("");
   const [stars, setStars] = useState(5);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [session, setSession] = useState(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     const storedTestimonials = JSON.parse(localStorage.getItem("testimonials") || "[]");
@@ -67,6 +82,10 @@ const AdminTestimonials = () => {
       description: "Testimonial deleted successfully!",
     });
   };
+
+  if (!session) {
+    return <Login />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
