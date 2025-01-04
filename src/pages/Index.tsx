@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useEffect, useState } from "react";
 import Features from "@/components/Features";
-import { Download, Mail, Twitter, Instagram } from "lucide-react";
+import { Download, Mail, Twitter, Facebook } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Testimonial {
@@ -147,7 +147,7 @@ const Index = () => {
             {/* Social Media Links */}
             <div className="flex space-x-6">
               <a
-                href="https://twitter.com/iSchedulEDU"
+                href="https://twitter.com/ischeduledu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#0FA0CE] transition-colors"
@@ -155,12 +155,12 @@ const Index = () => {
                 <Twitter className="h-6 w-6" />
               </a>
               <a
-                href="https://instagram.com/ischeduledu"
+                href="https://www.facebook.com/share/15dGQKa8ha/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#0FA0CE] transition-colors"
               >
-                <Instagram className="h-6 w-6" />
+                <Facebook className="h-6 w-6" />
               </a>
             </div>
 
