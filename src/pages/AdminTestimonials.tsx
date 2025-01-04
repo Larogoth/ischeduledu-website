@@ -110,7 +110,7 @@ const AdminTestimonials = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Manage Testimonials</h1>
-          <div className="space-x-4">
+          <div className="flex gap-4">
             <Button variant="outline" onClick={() => navigate("/")}>
               Back to Home
             </Button>
