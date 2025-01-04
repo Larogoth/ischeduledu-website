@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useEffect, useState } from "react";
 import Features from "@/components/Features";
-import { Download, Mail, X, Facebook } from "lucide-react";
+import { Download, Mail, Twitter, Facebook } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Testimonial {
@@ -151,7 +151,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="hover:text-[#0FA0CE] transition-colors"
               >
-                <X className="h-6 w-6" />
+                <Twitter className="h-6 w-6" />
               </a>
               <a
                 href="https://www.facebook.com/share/15dGQKa8ha/?mibextid=wwXIfr"
