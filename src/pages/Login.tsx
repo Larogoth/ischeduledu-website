@@ -8,31 +8,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
-        // Fetch the user's profile from the profiles table to check their role
-        const { data: profile, error } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("user_id", session.user.id)
-          .single();
-
-        if (error) {
-          console.error("Error fetching profile:", error.message);
-          return;
-        }
-
-        // If the user is an admin, redirect to the admin testimonials page
-        if (profile?.role === "admin") {
-          navigate("/admin/testimonials");
-        } else {
-          // If the user is not an admin, redirect to the landing page
-          navigate("https://larogoth.github.io/ischeduledu-website/#/");
-        }
+        navigate("/");
       }
     });
 
-    // Cleanup the subscription when the component unmounts
     return () => subscription.unsubscribe();
   }, [navigate]);
 
