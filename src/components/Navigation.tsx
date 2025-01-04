@@ -38,13 +38,9 @@ const Navigation = ({ baseUrl }: { baseUrl: string }) => {
           alt="iSchedulEDU Logo"
           className="w-10 h-10 rounded-full"
         />
-        {session ? (
+        {session && (
           <Button variant="outline" onClick={handleSignOut}>
             Sign Out
-          </Button>
-        ) : (
-          <Button variant="outline" onClick={() => window.location.href = "/#/admin/testimonials"}>
-            Admin Login
           </Button>
         )}
       </div>
