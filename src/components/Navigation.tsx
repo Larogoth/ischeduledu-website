@@ -18,7 +18,7 @@ const Navigation = ({ baseUrl }: { baseUrl: string }) => {
 
   return (
     <nav className="bg-white shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-4 flex justify-center items-center">
         <img
           src={`${baseUrl}lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png`}
           alt="iSchedulEDU Logo"
