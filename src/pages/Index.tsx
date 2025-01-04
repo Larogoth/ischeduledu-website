@@ -38,23 +38,26 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#E6F3FF]">
+    <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white">
       {/* Hero Section */}
-      <header className="container mx-auto px-4 py-16 text-center">
-        <img
-          src={`${baseUrl}lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png`}
-          alt="iSchedulEDU Logo"
-          className="mx-auto w-32 h-32 mb-8 rounded-full"
-        />
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+      <header className="container mx-auto px-4 py-24 text-center animate-fade-in">
+        <div className="relative">
+          <div className="absolute inset-0 bg-[#0FA0CE] opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
+          <img
+            src={`${baseUrl}lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png`}
+            alt="iSchedulEDU Logo"
+            className="mx-auto w-32 h-32 mb-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
           iSchedulEDU
         </h1>
-        <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
           Create abbreviated schedules for your school day quickly and easily
         </p>
         <Button
           size="lg"
-          className="bg-[#0FA0CE] hover:bg-[#0D8CB6] text-white px-8 py-6 text-lg"
+          className="bg-[#0FA0CE] hover:bg-[#0D8CB6] text-white px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
           onClick={() => window.open("https://apps.apple.com/us/app/ischeduledu/id6504114850", "_blank")}
         >
           <Download className="mr-2" />
@@ -63,17 +66,17 @@ const Index = () => {
       </header>
 
       {/* Pricing Section */}
-      <section className="bg-[#F5F9FF] py-12">
+      <section className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Try Before You Buy</h2>
-          <div className="max-w-2xl mx-auto bg-white rounded-lg p-6 shadow-md">
-            <p className="text-lg mb-4">
+          <h2 className="text-4xl font-bold mb-12 text-gray-900">Try Before You Buy</h2>
+          <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <p className="text-xl mb-6 text-gray-700">
               iSchedulEDU is now free-to-try for 4 in-app sessions.
             </p>
-            <p className="text-lg mb-4">
+            <p className="text-xl mb-6 text-gray-700">
               Once the trial ends, unlock the app forever for a small, one-time fee.
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-500 italic">
               Note: Anyone who purchased the app prior to January 01, 2025 is considered a grandfathered user and can restore full access by clicking "Restore Purchases" within the app.
             </p>
           </div>
@@ -84,18 +87,19 @@ const Index = () => {
 
       {/* Testimonials Section */}
       {testimonials.length > 0 && (
-        <section className="py-16 bg-white">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">What Users Are Saying</h2>
+            <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">What Users Are Saying</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonials.map((testimonial) => (
-                <TestimonialCard
-                  key={testimonial.id}
-                  title={testimonial.title}
-                  name={testimonial.name}
-                  content={testimonial.content}
-                  stars={testimonial.stars}
-                />
+                <div key={testimonial.id} className="transform hover:-translate-y-2 transition-transform duration-300">
+                  <TestimonialCard
+                    title={testimonial.title}
+                    name={testimonial.name}
+                    content={testimonial.content}
+                    stars={testimonial.stars}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -103,41 +107,51 @@ const Index = () => {
       )}
 
       {/* Screenshots Section */}
-      <section className="py-16 bg-[#F5F9FF]">
+      <section className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">See it in Action</h2>
-          <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-            <img
-              src={`${baseUrl}lovable-uploads/6c266668-5642-4712-9338-9675b98e1a6d.png`}
-              alt="Schedule Input Screen"
-              className="w-64 rounded-xl shadow-lg"
-            />
-            <img
-              src={`${baseUrl}lovable-uploads/6a72f919-7ce6-40ea-9c79-6427f39d32ac.png`}
-              alt="Generated Schedule Screen"
-              className="w-64 rounded-xl shadow-lg"
-            />
-            <img
-              src={`${baseUrl}lovable-uploads/ad95bed2-74c4-4fde-8699-d7ab121a81fb.png`}
-              alt="Saved Schedules Screen"
-              className="w-64 rounded-xl shadow-lg"
-            />
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">See it in Action</h2>
+          <div className="flex flex-col md:flex-row gap-12 justify-center items-center">
+            {[
+              {
+                src: `${baseUrl}lovable-uploads/6c266668-5642-4712-9338-9675b98e1a6d.png`,
+                alt: "Schedule Input Screen"
+              },
+              {
+                src: `${baseUrl}lovable-uploads/6a72f919-7ce6-40ea-9c79-6427f39d32ac.png`,
+                alt: "Generated Schedule Screen"
+              },
+              {
+                src: `${baseUrl}lovable-uploads/ad95bed2-74c4-4fde-8699-d7ab121a81fb.png`,
+                alt: "Saved Schedules Screen"
+              }
+            ].map((image, index) => (
+              <div
+                key={index}
+                className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-64 rounded-xl shadow-lg"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="mb-4">© 2024 iSchedulEDU. All rights reserved.</p>
-          <div className="flex justify-center gap-4">
+          <p className="mb-6 text-gray-300">© 2024 iSchedulEDU. All rights reserved.</p>
+          <div className="flex justify-center gap-6">
             <Link to="/privacy-policy">
-              <Button variant="link" className="text-white">
+              <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
                 Privacy Policy
               </Button>
             </Link>
             <Link to="/faq">
-              <Button variant="link" className="text-white">
+              <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
                 Support
               </Button>
             </Link>
