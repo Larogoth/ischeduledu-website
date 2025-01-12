@@ -112,15 +112,15 @@ const Index = () => {
           <div className="flex flex-col md:flex-row gap-12 justify-center items-center">
             {[
               {
-                src: `${baseUrl}lovable-uploads/6c266668-5642-4712-9338-9675b98e1a6d.png`,
+                src: `${baseUrl}lovable-uploads/iphone-input.png`,
                 alt: "Schedule Input Screen"
               },
               {
-                src: `${baseUrl}lovable-uploads/6a72f919-7ce6-40ea-9c79-6427f39d32ac.png`,
+                src: `${baseUrl}lovable-uploads/iphone-generated.png`,
                 alt: "Generated Schedule Screen"
               },
               {
-                src: `${baseUrl}lovable-uploads/ad95bed2-74c4-4fde-8699-d7ab121a81fb.png`,
+                src: `${baseUrl}lovable-uploads/iphone-saved.png`,
                 alt: "Saved Schedules Screen"
               }
             ].map((image, index) => (
