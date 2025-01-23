@@ -1,41 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import TestimonialCard from "@/components/TestimonialCard";
-import { useEffect, useState } from "react";
 import Features from "@/components/Features";
 import { Download, Mail, Twitter, Facebook } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-
-interface Testimonial {
-  id: number;
-  title: string;
-  name: string;
-  content: string;
-  stars: number;
-  created_at: string;
-}
+import { testimonials } from "@/data/testimonials";
 
 const Index = () => {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching testimonials:', error);
-        return;
-      }
-
-      setTestimonials(data || []);
-    };
-
-    fetchTestimonials();
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white">
