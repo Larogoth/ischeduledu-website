@@ -93,7 +93,7 @@ const Index = () => {
                       name={review.name}
                       content={review.content}
                       stars={review.stars}
-                      isAppStoreReview={review.id > fallbackTestimonials.length}
+                      isAppStoreReview={review.isAppStoreReview}
                     />
                   </div>
                 ))}
