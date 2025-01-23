@@ -9,11 +9,21 @@ import type { Testimonial } from "@/data/testimonials";
 const Index = () => {
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
   const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
+  const [isLoadingReviews, setIsLoadingReviews] = useState(true);
 
   useEffect(() => {
     const loadReviews = async () => {
-      const fetchedReviews = await getTestimonials();
-      setReviews(fetchedReviews);
+      setIsLoadingReviews(true);
+      try {
+        console.log("Starting to fetch reviews...");
+        const fetchedReviews = await getTestimonials();
+        console.log("Fetched reviews:", fetchedReviews);
+        setReviews(fetchedReviews);
+      } catch (error) {
+        console.error("Error loading reviews:", error);
+      } finally {
+        setIsLoadingReviews(false);
+      }
     };
     loadReviews();
   }, []);
@@ -69,7 +79,12 @@ const Index = () => {
         {reviews.length > 0 && (
           <section aria-labelledby="testimonials-title" className="py-20 bg-white">
             <div className="container mx-auto px-4">
-              <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-gray-900">What Users Are Saying</h2>
+              <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-gray-900">
+                What Users Are Saying
+                {import.meta.env.DEV && isLoadingReviews && (
+                  <span className="text-sm text-gray-400 block mt-2">(Loading reviews...)</span>
+                )}
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {reviews.map((review) => (
                   <div key={review.id} className="transform hover:-translate-y-2 transition-transform duration-300">
@@ -78,6 +93,7 @@ const Index = () => {
                       name={review.name}
                       content={review.content}
                       stars={review.stars}
+                      isAppStoreReview={review.id > fallbackTestimonials.length}
                     />
                   </div>
                 ))}
