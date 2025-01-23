@@ -1,3 +1,5 @@
+import { fetchAppStoreReviews } from "@/utils/appStoreReviews";
+
 export interface Testimonial {
   id: number;
   title: string;
@@ -6,7 +8,8 @@ export interface Testimonial {
   stars: number;
 }
 
-export const testimonials: Testimonial[] = [
+// Keeping the original testimonials as fallback
+const fallbackTestimonials: Testimonial[] = [
   {
     id: 1,
     title: "Easy and Helpful",
@@ -22,3 +25,15 @@ export const testimonials: Testimonial[] = [
     stars: 5
   }
 ];
+
+export const getTestimonials = async (): Promise<Testimonial[]> => {
+  try {
+    const appStoreReviews = await fetchAppStoreReviews();
+    return appStoreReviews.length > 0 ? appStoreReviews : fallbackTestimonials;
+  } catch (error) {
+    console.error("Error getting testimonials:", error);
+    return fallbackTestimonials;
+  }
+};
+
+export { fallbackTestimonials as testimonials };

@@ -2,10 +2,21 @@ import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import Features from "@/components/Features";
 import { Download, Mail, Twitter, Facebook } from "lucide-react";
-import { testimonials } from "@/data/testimonials";
+import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
+import { useEffect, useState } from "react";
+import type { Testimonial } from "@/data/testimonials";
 
 const Index = () => {
   const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
+  const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
+
+  useEffect(() => {
+    const loadReviews = async () => {
+      const fetchedReviews = await getTestimonials();
+      setReviews(fetchedReviews);
+    };
+    loadReviews();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white">
@@ -55,18 +66,18 @@ const Index = () => {
 
         <Features />
 
-        {testimonials.length > 0 && (
+        {reviews.length > 0 && (
           <section aria-labelledby="testimonials-title" className="py-20 bg-white">
             <div className="container mx-auto px-4">
               <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-gray-900">What Users Are Saying</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="transform hover:-translate-y-2 transition-transform duration-300">
+                {reviews.map((review) => (
+                  <div key={review.id} className="transform hover:-translate-y-2 transition-transform duration-300">
                     <TestimonialCard
-                      title={testimonial.title}
-                      name={testimonial.name}
-                      content={testimonial.content}
-                      stars={testimonial.stars}
+                      title={review.title}
+                      name={review.name}
+                      content={review.content}
+                      stars={review.stars}
                     />
                   </div>
                 ))}
