@@ -46,15 +46,18 @@ const Index = () => {
           <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
             Create abbreviated schedules for your school day quickly and easily
           </p>
-          <Button
-            size="lg"
-            className="bg-[#0FA0CE] hover:bg-[#0D8CB6] text-white px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            onClick={() => window.open("https://apps.apple.com/us/app/ischeduledu/id6504114850", "_blank")}
-            aria-label="Download iSchedulEDU from the App Store"
+          <a 
+            href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block hover:opacity-80 transition-opacity"
           >
-            <Download className="mr-2" />
-            Download on the App Store
-          </Button>
+            <img 
+              src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
+              alt="Download on the App Store" 
+              className="w-[245px] h-[82px] object-contain"
+            />
+          </a>
         </header>
 
         <section aria-labelledby="pricing-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
