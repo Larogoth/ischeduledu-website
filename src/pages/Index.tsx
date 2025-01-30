@@ -62,17 +62,59 @@ const Index = () => {
 
         <section aria-labelledby="pricing-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
           <div className="container mx-auto px-4 text-center">
-            <h2 id="pricing-title" className="text-4xl font-bold mb-12 text-gray-900">Try Before You Buy</h2>
-            <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <p className="text-xl mb-6 text-gray-700">
-                iSchedulEDU is now free-to-try for 4 in-app sessions.
-              </p>
-              <p className="text-xl mb-6 text-gray-700">
-                Once the trial ends, unlock the app forever for a small, one-time fee.
-              </p>
-              <p className="text-sm text-gray-500 italic">
-                Note: Anyone who purchased the app prior to January 01, 2025 is considered a grandfathered user and can restore full access by clicking "Restore Purchases" within the app.
-              </p>
+            <h2 id="pricing-title" className="text-4xl font-bold mb-6 text-gray-900">Risk-Free Trial: Experience the Power of iSchedulEDU</h2>
+            <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="space-y-6">
+                <div className="flex items-center justify-center space-x-2 text-2xl font-bold text-blue-600">
+                  <span>4 Free Sessions</span>
+                  <span className="text-gray-400">|</span>
+                  <span>No Credit Card Required</span>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6 mt-8">
+                  <div className="text-left space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">What You Get:</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        Full access to all premium features
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        Create & save multiple schedule templates
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        Export schedules in multiple formats
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="text-left space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Our Promise:</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <span className="text-blue-500 mr-2">→</span>
+                        No hidden fees or commitments
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-blue-500 mr-2">→</span>
+                        Simple one-time purchase after trial
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-blue-500 mr-2">→</span>
+                        Lifetime access - no subscriptions
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-gray-600 italic">
+                    Note: Early adopters who purchased before January 01, 2025 have lifetime access - restore your purchase anytime through the app.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
