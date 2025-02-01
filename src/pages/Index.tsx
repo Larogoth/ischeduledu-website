@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import Features from "@/components/Features";
-import { Clock, Heart, UserCheck, Shuffle, MessageSquare, Twitter, Mail, Facebook } from "lucide-react";
+import { 
+  clock, 
+  heart, 
+  userCheck, 
+  shuffle, 
+  messageSquare, 
+  twitter, 
+  mail, 
+  facebook 
+} from "lucide-react";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
 import type { Testimonial } from "@/data/testimonials";
@@ -71,7 +80,7 @@ const Index = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div className="text-left space-y-6">
                   <div className="flex items-center gap-2">
-                    <Clock className="h-6 w-6 text-blue-500" />
+                    <clock className="h-6 w-6 text-blue-500" />
                     <h3 className="text-xl font-semibold text-gray-900">Time-Saving Focus</h3>
                   </div>
                   <ul className="space-y-3">
@@ -92,7 +101,7 @@ const Index = () => {
 
                 <div className="text-left space-y-6">
                   <div className="flex items-center gap-2">
-                    <Heart className="h-6 w-6 text-blue-500" />
+                    <heart className="h-6 w-6 text-blue-500" />
                     <h3 className="text-xl font-semibold text-gray-900">Stress Reduction</h3>
                   </div>
                   <ul className="space-y-3">
@@ -113,7 +122,7 @@ const Index = () => {
 
                 <div className="text-left space-y-6">
                   <div className="flex items-center gap-2">
-                    <UserCheck className="h-6 w-6 text-blue-500" />
+                    <userCheck className="h-6 w-6 text-blue-500" />
                     <h3 className="text-xl font-semibold text-gray-900">Professional Impact</h3>
                   </div>
                   <ul className="space-y-3">
@@ -130,7 +139,7 @@ const Index = () => {
 
                 <div className="text-left space-y-6">
                   <div className="flex items-center gap-2">
-                    <Shuffle className="h-6 w-6 text-blue-500" />
+                    <shuffle className="h-6 w-6 text-blue-500" />
                     <h3 className="text-xl font-semibold text-gray-900">Flexibility Benefits</h3>
                   </div>
                   <ul className="space-y-3">
@@ -147,7 +156,7 @@ const Index = () => {
 
                 <div className="text-left space-y-6">
                   <div className="flex items-center gap-2">
-                    <MessageSquare className="h-6 w-6 text-blue-500" />
+                    <messageSquare className="h-6 w-6 text-blue-500" />
                     <h3 className="text-xl font-semibold text-gray-900">Communication Value</h3>
                   </div>
                   <ul className="space-y-3">
@@ -246,7 +255,7 @@ const Index = () => {
                 className="hover:text-[#0FA0CE] transition-colors"
                 aria-label="Follow us on Twitter"
               >
-                <Twitter className="h-6 w-6" />
+                <twitter className="h-6 w-6" />
               </a>
               <a
                 href="https://www.facebook.com/share/15dGQKa8ha/?mibextid=wwXIfr"
@@ -255,7 +264,7 @@ const Index = () => {
                 className="hover:text-[#0FA0CE] transition-colors"
                 aria-label="Follow us on Facebook"
               >
-                <Facebook className="h-6 w-6" />
+                <facebook className="h-6 w-6" />
               </a>
             </nav>
 
@@ -264,7 +273,7 @@ const Index = () => {
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-transparent border-white text-white hover:bg-white hover:text-gray-900 transition-colors h-10 px-4 py-2 border"
               aria-label="Contact Support via Email"
             >
-              <Mail className="h-4 w-4" />
+              <mail className="h-4 w-4" />
               Contact Support
             </a>
 
