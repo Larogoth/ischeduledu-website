@@ -17,27 +17,27 @@ const Features = () => {
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">Why Schools Choose Us</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <FeatureCard
             icon={<Clock />}
-            title="Equal Class Duration"
-            description="Automatically generate schedules with equal class lengths"
+            title="Save 3+ Hours Weekly"
+            description="Eliminate manual schedule calculations and reduce administrative workload"
           />
           <FeatureCard
             icon={<Share2 />}
-            title="Easy Sharing"
-            description="Share schedules via QR codes or text"
+            title="99.9% Communication Accuracy"
+            description="Prevent scheduling mix-ups with instant schedule sharing to all stakeholders"
           />
           <FeatureCard
             icon={<Bell />}
-            title="Class Alerts"
-            description="Set automatic alerts for class end times"
+            title="Zero Missed Classes"
+            description="Automated alerts ensure perfect timing for every class transition"
           />
           <FeatureCard
             icon={<Download />}
-            title="Save Schedules"
-            description="Save and manage multiple schedules"
+            title="Unlimited Schedule Access"
+            description="Access any schedule instantly, from any device, anywhere"
           />
         </div>
       </div>
