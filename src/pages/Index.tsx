@@ -1,12 +1,8 @@
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
-import Features from "@/components/Features";
+import WhyTeachersChoose from "@/components/WhyTeachersChoose";
 import XLogo from "@/components/XLogo";
 import { 
-  Clock, 
-  Heart, 
-  UserCheck, 
-  Shuffle, 
   MessageSquare, 
   Mail, 
   Facebook 
@@ -182,7 +178,7 @@ const Index = () => {
         </div>
       </section>
 
-      <Features />
+      <WhyTeachersChoose />
 
       {reviews.length > 0 && (
         <section aria-labelledby="testimonials-title" className="py-20 bg-white">
