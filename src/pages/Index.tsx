@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import Features from "@/components/Features";
-import { Clock, Heart, UserCheck, Shuffle, MessageSquare } from "lucide-react";
+import { Clock, Heart, UserCheck, Shuffle, MessageSquare, Twitter, Mail, Facebook } from "lucide-react";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
 import type { Testimonial } from "@/data/testimonials";
