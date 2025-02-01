@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import Features from "@/components/Features";
-import { Download, Mail, Twitter, Facebook } from "lucide-react";
+import { Clock, Heart, UserCheck, Shuffle, MessageSquare } from "lucide-react";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
 import type { Testimonial } from "@/data/testimonials";
@@ -62,53 +62,102 @@ const Index = () => {
       <section aria-labelledby="pricing-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
         <div className="container mx-auto px-4 text-center">
           <h2 id="pricing-title" className="text-4xl font-bold mb-6 text-gray-900">Transform Your School Day with iSchedulEDU</h2>
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-            <div className="space-y-6">
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <div className="space-y-8">
               <div className="text-2xl font-bold text-blue-600">
                 <span>Start with 4 Free Sessions</span>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-6 mt-8">
-                <div className="text-left space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-900">Experience The Benefits:</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="text-left space-y-6">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-6 w-6 text-blue-500" />
+                    <h3 className="text-xl font-semibold text-gray-900">Time-Saving Focus</h3>
+                  </div>
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <span className="text-green-500 mr-2">✓</span>
-                      <span>Create schedules in minutes, not hours</span>
+                      <span>Spend more time with students, less time on creating schedules</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-green-500 mr-2">✓</span>
-                      <span>Eliminate last-minute scheduling stress</span>
+                      <span>Create schedules in minutes</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-green-500 mr-2">✓</span>
-                      <span>Keep your entire team synchronized</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-green-500 mr-2">✓</span>
-                      <span>Adapt quickly to unexpected changes</span>
+                      <span>Quick adjustments for unexpected changes</span>
                     </li>
                   </ul>
                 </div>
-                
-                <div className="text-left space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-900">Focus On What Matters:</h3>
+
+                <div className="text-left space-y-6">
+                  <div className="flex items-center gap-2">
+                    <Heart className="h-6 w-6 text-blue-500" />
+                    <h3 className="text-xl font-semibold text-gray-900">Stress Reduction</h3>
+                  </div>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">→</span>
-                      <span>More time with students, less on admin</span>
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Eliminate last-minute scheduling scrambles</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">→</span>
-                      <span>Run classes with confidence</span>
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Peace of mind with error-free schedules</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">→</span>
-                      <span>Maintain educational momentum</span>
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Always know your next class timing</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="text-left space-y-6">
+                  <div className="flex items-center gap-2">
+                    <UserCheck className="h-6 w-6 text-blue-500" />
+                    <h3 className="text-xl font-semibold text-gray-900">Professional Impact</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Run your classes with confidence</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">→</span>
-                      <span>Simple one-time purchase</span>
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Maintain educational momentum with smooth transitions</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="text-left space-y-6">
+                  <div className="flex items-center gap-2">
+                    <Shuffle className="h-6 w-6 text-blue-500" />
+                    <h3 className="text-xl font-semibold text-gray-900">Flexibility Benefits</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Adapt to school events without disruption</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Quick response to weather delays</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="text-left space-y-6">
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="h-6 w-6 text-blue-500" />
+                    <h3 className="text-xl font-semibold text-gray-900">Communication Value</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Keep everyone on the same page</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✓</span>
+                      <span>Instant schedule updates for your whole team</span>
                     </li>
                   </ul>
                 </div>
