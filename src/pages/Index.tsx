@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import Features from "@/components/Features";
+import XLogo from "@/components/XLogo";
 import { 
   Clock, 
   Heart, 
   UserCheck, 
   Shuffle, 
   MessageSquare, 
-  Twitter, 
   Mail, 
   Facebook 
 } from "lucide-react";
@@ -253,9 +253,9 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#0FA0CE] transition-colors"
-                aria-label="Follow us on Twitter"
+                aria-label="Follow us on X (formerly Twitter)"
               >
-                <Twitter className="h-6 w-6" />
+                <XLogo />
               </a>
               <a
                 href="https://www.facebook.com/share/15dGQKa8ha/?mibextid=wwXIfr"
