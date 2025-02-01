@@ -5,7 +5,11 @@ import XLogo from "@/components/XLogo";
 import { 
   MessageSquare, 
   Mail, 
-  Facebook 
+  Facebook,
+  Clock,
+  Heart,
+  UserCheck,
+  Shuffle
 } from "lucide-react";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
