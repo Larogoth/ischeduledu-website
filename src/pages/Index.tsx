@@ -65,27 +65,25 @@ const Index = () => {
             <h2 id="pricing-title" className="text-4xl font-bold mb-6 text-gray-900">Risk-Free Trial: Experience the Power of iSchedulEDU</h2>
             <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <div className="space-y-6">
-                <div className="flex items-center justify-center space-x-2 text-2xl font-bold text-blue-600">
-                  <span>4 Free Sessions</span>
-                  <span className="text-gray-400">|</span>
-                  <span>No Credit Card Required</span>
+                <div className="text-2xl font-bold text-blue-600">
+                  <span>4 Free Sessions to Transform Your Scheduling</span>
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-6 mt-8">
                   <div className="text-left space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-900">What You Get:</h3>
+                    <h3 className="text-xl font-semibold text-gray-900">How It Helps You:</h3>
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <span className="text-green-500 mr-2">✓</span>
-                        Full access to all premium features
+                        Save hours of manual schedule creation
                       </li>
                       <li className="flex items-start">
                         <span className="text-green-500 mr-2">✓</span>
-                        Create & save multiple schedule templates
+                        Eliminate scheduling mistakes
                       </li>
                       <li className="flex items-start">
                         <span className="text-green-500 mr-2">✓</span>
-                        Export schedules in multiple formats
+                        Share schedules instantly with staff
                       </li>
                     </ul>
                   </div>
@@ -95,7 +93,7 @@ const Index = () => {
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <span className="text-blue-500 mr-2">→</span>
-                        No hidden fees or commitments
+                        Focus on teaching, not scheduling
                       </li>
                       <li className="flex items-start">
                         <span className="text-blue-500 mr-2">→</span>
