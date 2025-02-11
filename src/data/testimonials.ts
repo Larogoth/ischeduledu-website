@@ -1,3 +1,4 @@
+
 import { fetchAppStoreReviews } from "@/utils/appStoreReviews";
 
 export interface Testimonial {
@@ -29,13 +30,18 @@ const fallbackTestimonials: Testimonial[] = [
   }
 ];
 
+const MINIMUM_STARS = 4; // Only show reviews with 4 or more stars
+
 export const getTestimonials = async (): Promise<Testimonial[]> => {
   try {
     const appStoreReviews = await fetchAppStoreReviews();
-    const processedAppStoreReviews = appStoreReviews.map(review => ({
-      ...review,
-      isAppStoreReview: true
-    }));
+    const processedAppStoreReviews = appStoreReviews
+      .filter(review => review.stars >= MINIMUM_STARS) // Filter reviews by minimum stars
+      .map(review => ({
+        ...review,
+        isAppStoreReview: true
+      }));
+    
     return processedAppStoreReviews.length > 0 ? processedAppStoreReviews : fallbackTestimonials;
   } catch (error) {
     console.error("Error getting testimonials:", error);
