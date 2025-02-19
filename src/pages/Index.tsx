@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import WhyTeachersChoose from "@/components/WhyTeachersChoose";
@@ -18,7 +17,6 @@ import { useEffect, useState } from "react";
 import type { Testimonial } from "@/data/testimonials";
 
 const Index = () => {
-  const baseUrl = import.meta.env.MODE === 'development' ? '/' : '/ischeduledu-website/';
   const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
   const [isLoadingReviews, setIsLoadingReviews] = useState(true);
 
@@ -45,7 +43,7 @@ const Index = () => {
         <div className="relative">
           <div className="absolute inset-0 bg-[#0FA0CE] opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
           <img
-            src={`${baseUrl}lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png`}
+            src="/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png"
             alt="iSchedulEDU Logo - School Schedule Generator App"
             className="mx-auto w-32 h-32 mb-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
           />
@@ -218,15 +216,15 @@ const Index = () => {
           <div className="flex flex-col md:flex-row gap-12 justify-center items-center">
             {[
               {
-                src: `${baseUrl}lovable-uploads/iphone-input.png`,
+                src: "/lovable-uploads/iphone-input.png",
                 alt: "iSchedulEDU Schedule Input Screen - Create your school schedule"
               },
               {
-                src: `${baseUrl}lovable-uploads/iphone-generated.png`,
+                src: "/lovable-uploads/iphone-generated.png",
                 alt: "iSchedulEDU Generated Schedule Screen - View your generated schedule"
               },
               {
-                src: `${baseUrl}lovable-uploads/iphone-saved.png`,
+                src: "/lovable-uploads/iphone-saved.png",
                 alt: "iSchedulEDU Saved Schedules Screen - Access your saved schedules"
               }
             ].map((image, index) => (
