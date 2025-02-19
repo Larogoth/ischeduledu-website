@@ -1,7 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import TestimonialCard from "@/components/TestimonialCard";
 import WhyTeachersChoose from "@/components/WhyTeachersChoose";
 import XLogo from "@/components/XLogo";
+import { Link } from "react-router-dom";
 import { 
   MessageSquare, 
   Mail, 
@@ -280,12 +282,18 @@ const Index = () => {
             <div className="text-center">
               <p className="mb-6 text-gray-300">© 2024 iSchedulEDU. All rights reserved.</p>
               <nav className="flex justify-center gap-6" aria-label="Footer navigation">
-                <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
+                <Link 
+                  to="/privacy-policy" 
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Privacy Policy
-                </Button>
-                <Button variant="link" className="text-gray-300 hover:text-white transition-colors">
+                </Link>
+                <Link 
+                  to="/faq" 
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Support
-                </Button>
+                </Link>
               </nav>
             </div>
           </div>
