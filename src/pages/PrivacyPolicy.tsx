@@ -1,5 +1,7 @@
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 
 const PrivacyPolicy = () => {
   const sections = [
@@ -63,15 +65,22 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
-          <p className="text-gray-600">Effective Date: 06/05/2024</p>
-        </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
+        <Link to="/" className="inline-flex items-center text-primary hover:underline">
+          <ChevronLeft className="h-4 w-4 mr-1" />
+          Back to Home
+        </Link>
+      </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <ScrollArea className="h-[700px]">
+      <div className="py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
+            <p className="text-gray-600">Effective Date: 06/05/2024</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-sm p-6">
             <div className="space-y-8">
               <p className="text-gray-600">
                 Thank you for using iSchedulEDU. This Privacy Policy explains how we collect, use, and protect your information when you use our application.
@@ -90,13 +99,7 @@ const PrivacyPolicy = () => {
                 </div>
               ))}
             </div>
-          </ScrollArea>
-        </div>
-
-        <div className="mt-8 text-center">
-          <Link to="/" className="text-primary hover:underline">
-            Back to Home
-          </Link>
+          </div>
         </div>
       </div>
     </div>

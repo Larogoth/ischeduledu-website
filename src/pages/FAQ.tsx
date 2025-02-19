@@ -1,7 +1,8 @@
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 
 const FAQ = () => {
   const faqSections = [
@@ -59,36 +60,39 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
-          <p className="text-lg text-gray-600">Find answers to common questions about iSchedulEDU</p>
-        </div>
-        
-        <ScrollArea className="h-[700px] rounded-md border p-4">
-          {faqSections.map((section, idx) => (
-            <Card key={idx} className="mb-6">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-gray-900">{section.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {section.questions.map((item, qIdx) => (
-                  <div key={qIdx} className="mb-6 last:mb-0">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">{item.q}</h3>
-                    <p className="text-gray-600">{item.a}</p>
-                    {qIdx < section.questions.length - 1 && <Separator className="my-4" />}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
-        </ScrollArea>
+    <div className="min-h-screen bg-gray-50">
+      <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
+        <Link to="/" className="inline-flex items-center text-primary hover:underline">
+          <ChevronLeft className="h-4 w-4 mr-1" />
+          Back to Home
+        </Link>
+      </div>
 
-        <div className="mt-8 text-center">
-          <Link to="/" className="text-primary hover:underline">
-            Back to Home
-          </Link>
+      <div className="py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
+            <p className="text-lg text-gray-600">Find answers to common questions about iSchedulEDU</p>
+          </div>
+          
+          <div className="space-y-6">
+            {faqSections.map((section, idx) => (
+              <Card key={idx} className="mb-6">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-gray-900">{section.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {section.questions.map((item, qIdx) => (
+                    <div key={qIdx} className="mb-6 last:mb-0">
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">{item.q}</h3>
+                      <p className="text-gray-600">{item.a}</p>
+                      {qIdx < section.questions.length - 1 && <Separator className="my-4" />}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </div>
