@@ -25,15 +25,15 @@ const Screenshots = () => {
           ].map((image, index) => (
             <div
               key={index}
-              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl w-full max-w-[180px]"
+              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl w-full max-w-[180px] md:max-w-[220px]"
             >
               <img
                 src={image.src}
                 alt={image.alt}
                 className="w-full rounded-xl shadow-lg"
                 loading="lazy"
-                width="180"
-                height="389"
+                width="220"
+                height="476"
               />
               <p className="text-xs md:text-sm text-gray-600 mt-2 text-center px-2">
                 {image.alt}
