@@ -3,8 +3,8 @@ const Screenshots = () => {
   return (
     <section aria-labelledby="screenshots-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
       <div className="container mx-auto px-4">
-        <h2 id="screenshots-title" className="text-4xl font-bold text-center mb-16 text-gray-900">Experience iSchedulEDU in Action</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        <h2 id="screenshots-title" className="text-4xl font-bold text-center mb-16 text-gray-900">More Features to Explore</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
           {[
             {
               src: "/lovable-uploads/28317119-fd83-41b2-b877-3b195a794b2a.png",
@@ -25,17 +25,17 @@ const Screenshots = () => {
           ].map((image, index) => (
             <div
               key={index}
-              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl w-full max-w-[320px]"
+              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl w-full max-w-[180px]"
             >
               <img
                 src={image.src}
                 alt={image.alt}
                 className="w-full rounded-xl shadow-lg"
                 loading="lazy"
-                width="320"
-                height="692"
+                width="180"
+                height="389"
               />
-              <p className="text-sm text-gray-600 mt-2 text-center px-4">
+              <p className="text-xs md:text-sm text-gray-600 mt-2 text-center px-2">
                 {image.alt}
               </p>
             </div>
