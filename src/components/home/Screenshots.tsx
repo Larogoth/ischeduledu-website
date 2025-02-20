@@ -7,24 +7,8 @@ const Screenshots = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           {[
             {
-              src: "/lovable-uploads/200d9b16-92c1-4ec3-aa24-584072b0cdb1.png",
-              alt: "iSchedulEDU Schedule Generator - Create custom school schedules with flexible start and end times"
-            },
-            {
-              src: "/lovable-uploads/b93434c2-d5af-4b8b-96d7-1f09f8c3abba.png",
-              alt: "iSchedulEDU Generated Schedule View - Review your automatically generated class periods and events"
-            },
-            {
-              src: "/lovable-uploads/88b88a71-f341-4d17-9270-8ad773044011.png",
-              alt: "iSchedulEDU Event Editor - Customize class period colors and notifications"
-            },
-            {
               src: "/lovable-uploads/28317119-fd83-41b2-b877-3b195a794b2a.png",
               alt: "iSchedulEDU Schedule Management - Organize and access all your saved school schedules"
-            },
-            {
-              src: "/lovable-uploads/bc8e3985-c051-4af2-a5fc-afcefeb6ddae.png",
-              alt: "iSchedulEDU Block Schedule Example - View detailed class blocks with study halls and lunch periods"
             },
             {
               src: "/lovable-uploads/75200545-4ea3-40be-90f7-7448e464ef66.png",
