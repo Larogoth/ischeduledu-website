@@ -67,12 +67,14 @@ const GenerationProcess = () => {
                     <CarouselItem key={index}>
                       <div className="p-1">
                         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <img
-                            src={step.image}
-                            alt={step.title}
-                            className="w-full object-contain"
-                            style={{ height: '400px' }}
-                          />
+                          <div className="max-w-[180px] md:max-w-[220px] mx-auto">
+                            <img
+                              src={step.image}
+                              alt={step.title}
+                              className="w-full object-contain"
+                              style={{ height: '400px' }}
+                            />
+                          </div>
                           <div className="p-6 text-center">
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
                               {step.title}
@@ -104,12 +106,14 @@ const GenerationProcess = () => {
                     <CarouselItem key={index}>
                       <div className="p-1">
                         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <img
-                            src={step.image}
-                            alt={step.title}
-                            className="w-full object-contain"
-                            style={{ height: '400px' }}
-                          />
+                          <div className="max-w-[180px] md:max-w-[220px] mx-auto">
+                            <img
+                              src={step.image}
+                              alt={step.title}
+                              className="w-full object-contain"
+                              style={{ height: '400px' }}
+                            />
+                          </div>
                           <div className="p-6 text-center">
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
                               {step.title}
