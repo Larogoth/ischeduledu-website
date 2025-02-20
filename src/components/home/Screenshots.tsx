@@ -44,9 +44,9 @@ const Screenshots = () => {
 
         <div className="mt-12 text-center">
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Streamline your school scheduling with powerful features including abbreviated schedule generation, 
-            A/B rotating block tracking, daily notifications, visual timeline views, and easy schedule sharing 
-            via QR codes or text messages. The perfect solution for educators managing dynamic schedules.
+            Experience the full power of iSchedulEDU with features like rotating block schedules, 
+            daily notifications, and easy schedule sharing. Perfect for teachers and administrators 
+            managing complex school timetables.
           </p>
         </div>
       </div>
