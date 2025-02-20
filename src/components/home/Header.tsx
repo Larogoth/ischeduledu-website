@@ -15,17 +15,9 @@ const Header = () => {
       <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
         iSchedulEDU
       </h1>
-      <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">
-        Create custom and abbreviated schedules for your school day with ease
+      <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
+        Create abbreviated schedules for your school day quickly and easily
       </p>
-
-      <img 
-        src="/lovable-uploads/200d9b16-92c1-4ec3-aa24-584072b0cdb1.png"
-        alt="iSchedulEDU Schedule Generator Interface"
-        className="w-48 md:w-64 mx-auto rounded-xl shadow-lg mb-8"
-        loading="eager"
-      />
-
       <a 
         href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
         target="_blank" 
