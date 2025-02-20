@@ -5,6 +5,7 @@ import Header from "@/components/home/Header";
 import Pricing from "@/components/home/Pricing";
 import Screenshots from "@/components/home/Screenshots";
 import Footer from "@/components/home/Footer";
+import GenerationProcess from "@/components/home/GenerationProcess";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
 import type { Testimonial } from "@/data/testimonials";
@@ -33,6 +34,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white">
       <Header />
+      <GenerationProcess />
       <Pricing />
       <WhyTeachersChoose />
       
