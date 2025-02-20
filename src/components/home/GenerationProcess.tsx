@@ -60,7 +60,7 @@ const GenerationProcess = () => {
             <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
               Quick Schedule Generation
             </h3>
-            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
+            <div className="max-w-[180px] md:max-w-[220px] mx-auto relative">
               <Carousel className="w-full">
                 <CarouselContent>
                   {steps.map((step, index) => (
@@ -71,13 +71,14 @@ const GenerationProcess = () => {
                             src={step.image}
                             alt={step.title}
                             className="w-full object-contain"
-                            style={{ height: '400px' }}
+                            width="220"
+                            height="476"
                           />
-                          <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                          <div className="p-4">
+                            <h3 className="text-sm md:text-base font-semibold mb-2 text-gray-900">
                               {step.title}
                             </h3>
-                            <p className="text-gray-600">
+                            <p className="text-xs md:text-sm text-gray-600">
                               {step.description}
                             </p>
                           </div>
@@ -97,7 +98,7 @@ const GenerationProcess = () => {
             <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
               Custom Schedule Creation
             </h3>
-            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
+            <div className="max-w-[180px] md:max-w-[220px] mx-auto relative">
               <Carousel className="w-full">
                 <CarouselContent>
                   {customSteps.map((step, index) => (
@@ -108,13 +109,14 @@ const GenerationProcess = () => {
                             src={step.image}
                             alt={step.title}
                             className="w-full object-contain"
-                            style={{ height: '400px' }}
+                            width="220"
+                            height="476"
                           />
-                          <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                          <div className="p-4">
+                            <h3 className="text-sm md:text-base font-semibold mb-2 text-gray-900">
                               {step.title}
                             </h3>
-                            <p className="text-gray-600">
+                            <p className="text-xs md:text-sm text-gray-600">
                               {step.description}
                             </p>
                           </div>
