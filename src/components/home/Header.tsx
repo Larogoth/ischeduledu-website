@@ -8,8 +8,10 @@ const Header = () => {
         <div className="absolute inset-0 bg-[#0FA0CE] opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
         <img
           src="/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png"
-          alt="iSchedulEDU Logo - School Schedule Generator App"
+          alt="iSchedulEDU App Logo - School Schedule Generator Application"
           className="mx-auto w-32 h-32 mb-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+          width="128"
+          height="128"
         />
       </div>
       <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
@@ -23,11 +25,14 @@ const Header = () => {
         target="_blank" 
         rel="noopener noreferrer"
         className="inline-block hover:opacity-80 transition-opacity"
+        aria-label="Download iSchedulEDU on the App Store"
       >
         <img 
           src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
-          alt="Download on the App Store" 
+          alt="Download iSchedulEDU on the App Store" 
           className="w-[245px] h-[82px] object-contain"
+          width="245"
+          height="82"
         />
       </a>
     </header>
