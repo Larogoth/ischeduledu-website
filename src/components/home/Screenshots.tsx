@@ -11,8 +11,8 @@ const Screenshots = () => {
               alt: "iSchedulEDU Schedule Management - Organize and access all your saved school schedules"
             },
             {
-              src: "/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png",
-              alt: "iSchedulEDU Visual Timeline - See your daily schedule in an intuitive timeline view"
+              src: "/lovable-uploads/bc8e3985-c051-4af2-a5fc-afcefeb6ddae.png",
+              alt: "iSchedulEDU Block Schedule Example - View detailed class blocks with study halls and lunch periods"
             },
             {
               src: "/lovable-uploads/75200545-4ea3-40be-90f7-7448e464ef66.png",
