@@ -54,13 +54,13 @@ const GenerationProcess = () => {
           Choose between quick auto-generation or full custom creation
         </p>
         
-        <div className="space-y-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Auto-Generation Process */}
           <div>
             <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
               Quick Schedule Generation
             </h3>
-            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md lg:max-w-lg relative">
+            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
               <Carousel className="w-full">
                 <CarouselContent>
                   {steps.map((step, index) => (
@@ -71,7 +71,7 @@ const GenerationProcess = () => {
                             src={step.image}
                             alt={step.title}
                             className="w-full object-contain"
-                            style={{ height: '600px' }}
+                            style={{ height: '400px' }}
                           />
                           <div className="p-6 text-center">
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
@@ -97,7 +97,7 @@ const GenerationProcess = () => {
             <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
               Custom Schedule Creation
             </h3>
-            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md lg:max-w-lg relative">
+            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
               <Carousel className="w-full">
                 <CarouselContent>
                   {customSteps.map((step, index) => (
@@ -108,7 +108,7 @@ const GenerationProcess = () => {
                             src={step.image}
                             alt={step.title}
                             className="w-full object-contain"
-                            style={{ height: '600px' }}
+                            style={{ height: '400px' }}
                           />
                           <div className="p-6 text-center">
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
