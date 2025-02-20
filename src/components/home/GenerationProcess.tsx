@@ -67,12 +67,12 @@ const GenerationProcess = () => {
                     <CarouselItem key={index}>
                       <div className="p-1">
                         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <div className="max-w-[180px] md:max-w-[220px] mx-auto">
+                          <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
                               alt={step.title}
                               className="w-full object-contain"
-                              style={{ height: '400px' }}
+                              style={{ height: '450px' }}
                             />
                           </div>
                           <div className="p-6 text-center">
@@ -106,12 +106,12 @@ const GenerationProcess = () => {
                     <CarouselItem key={index}>
                       <div className="p-1">
                         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <div className="max-w-[180px] md:max-w-[220px] mx-auto">
+                          <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
                               alt={step.title}
                               className="w-full object-contain"
-                              style={{ height: '400px' }}
+                              style={{ height: '450px' }}
                             />
                           </div>
                           <div className="p-6 text-center">
