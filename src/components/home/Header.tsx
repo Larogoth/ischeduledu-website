@@ -16,7 +16,7 @@ const Header = () => {
         iSchedulEDU
       </h1>
       <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
-        Create abbreviated schedules for your school day quickly and easily
+        Create custom or abbreviated schedules for your school day quickly and easily
       </p>
       <a 
         href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
