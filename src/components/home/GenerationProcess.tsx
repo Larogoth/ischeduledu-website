@@ -10,11 +10,6 @@ import {
 const GenerationProcess = () => {
   const steps = [
     {
-      image: "/lovable-uploads/25b49ccf-1f94-4b40-a2df-b3a033f39666.png",
-      title: "Choose Your Schedule Type",
-      description: "Pick between auto-generation or custom creation to start building your schedule"
-    },
-    {
       image: "/lovable-uploads/99aa0220-3f06-4237-97d0-1829aa8487b5.png",
       title: "Set Your Parameters",
       description: "Enter your schedule details including start time, end time, and any pre-set events like lunch or electives"
@@ -33,14 +28,9 @@ const GenerationProcess = () => {
 
   const customSteps = [
     {
-      image: "/lovable-uploads/be07fb29-2abf-4347-8f0b-70842c8b9ad3.png",
-      title: "Name Your Schedule",
-      description: "Give your custom schedule a name that describes its purpose"
-    },
-    {
       image: "/lovable-uploads/3a4efc3e-4e22-4e25-af6f-2c157fcb7a8e.png",
-      title: "Add Events",
-      description: "Click the Add Event button to start building your schedule"
+      title: "Name Your Schedule & Add Events",
+      description: "Give your schedule a name and start adding your custom events"
     },
     {
       image: "/lovable-uploads/ba0a9b4b-cc7c-4dec-9265-f1a15dcbc09e.png",
