@@ -16,7 +16,7 @@ const Header = () => {
         iSchedulEDU
       </h1>
       <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">
-        Create abbreviated schedules for your school day quickly and easily
+        Create custom and abbreviated schedules for your school day with ease
       </p>
 
       <img 
