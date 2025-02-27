@@ -1,5 +1,6 @@
 
 import { Clock, Heart, UserCheck, Shuffle, MessageSquare } from "lucide-react";
+import AppName from "@/components/AppName";
 
 const FeatureSection = ({ icon: Icon, title, items }: { 
   icon: React.ComponentType<any>;
@@ -26,7 +27,7 @@ const Pricing = () => {
   return (
     <section aria-labelledby="pricing-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
       <div className="container mx-auto px-4 text-center">
-        <h2 id="pricing-title" className="text-4xl font-bold mb-6 text-gray-900">Transform Your School Day with iSchedulEDU</h2>
+        <h2 id="pricing-title" className="text-4xl font-bold mb-6 text-gray-900">Transform Your School Day with <AppName size="xl" /></h2>
         <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <div className="space-y-8">
             <div className="text-2xl font-bold text-blue-600">

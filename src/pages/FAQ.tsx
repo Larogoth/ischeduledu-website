@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import AppName from "@/components/AppName";
 
 const FAQ = () => {
   const faqSections = [
@@ -72,7 +73,7 @@ const FAQ = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
-            <p className="text-lg text-gray-600">Find answers to common questions about iSchedulEDU</p>
+            <p className="text-lg text-gray-600">Find answers to common questions about <AppName /></p>
           </div>
           
           <div className="space-y-6">

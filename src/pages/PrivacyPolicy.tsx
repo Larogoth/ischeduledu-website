@@ -2,6 +2,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import AppName from "@/components/AppName";
 
 const PrivacyPolicy = () => {
   const sections = [
@@ -83,7 +84,7 @@ const PrivacyPolicy = () => {
           <div className="bg-white rounded-lg shadow-sm p-6">
             <div className="space-y-8">
               <p className="text-gray-600">
-                Thank you for using iSchedulEDU. This Privacy Policy explains how we collect, use, and protect your information when you use our application.
+                Thank you for using <AppName />. This Privacy Policy explains how we collect, use, and protect your information when you use our application.
               </p>
 
               {sections.map((section, idx) => (

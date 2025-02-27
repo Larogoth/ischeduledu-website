@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Facebook } from "lucide-react";
 import XLogo from "@/components/XLogo";
+import AppName from "@/components/AppName";
 
 const Footer = () => {
   return (
@@ -39,7 +40,7 @@ const Footer = () => {
           </a>
 
           <div className="text-center">
-            <p className="mb-6 text-gray-300">© 2024 iSchedulEDU. All rights reserved.</p>
+            <p className="mb-6 text-gray-300">© 2024 <AppName size="sm" className="text-white" />. All rights reserved.</p>
             <nav className="flex justify-center gap-6" aria-label="Footer navigation">
               <Link 
                 to="/privacy-policy" 
