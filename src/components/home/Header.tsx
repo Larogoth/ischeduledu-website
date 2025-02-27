@@ -14,7 +14,7 @@ const Header = () => {
           height="128"
         />
       </div>
-      <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
+      <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight font-euclid">
         iSchedulEDU
       </h1>
       <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
