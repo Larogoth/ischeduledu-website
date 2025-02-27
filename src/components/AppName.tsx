@@ -11,7 +11,7 @@ const AppName: React.FC<AppNameProps> = ({ className = "", size = "md" }) => {
     sm: "text-lg",
     md: "text-xl",
     lg: "text-2xl",
-    xl: "text-3xl",
+    xl: "text-4xl", // Changed from text-3xl to text-4xl to match heading sizes
   };
 
   return (
