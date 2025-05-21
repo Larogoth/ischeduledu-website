@@ -1,6 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 const StickyNavigation = () => {
   return (
@@ -15,22 +14,16 @@ const StickyNavigation = () => {
           <span className="font-bold text-lg text-gray-900">iSchedulEDU</span>
         </div>
         
-        <div className="flex items-center gap-4">
-          <Link to="/version-b" className="text-blue-600 hover:text-blue-800">
-            Version B
-          </Link>
-          
-          <a 
-            href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="transition-opacity hover:opacity-80"
-          >
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-              <span>Download Now</span>
-            </Button>
-          </a>
-        </div>
+        <a 
+          href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="transition-opacity hover:opacity-80"
+        >
+          <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+            <span>Download Now</span>
+          </Button>
+        </a>
       </div>
     </div>
   );
