@@ -1,8 +1,12 @@
 
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const StickyNavigation = () => {
+  const location = useLocation();
+  const isVersionA = location.pathname === "/";
+  const isVersionB = location.pathname === "/version-b";
+
   return (
     <div className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -16,8 +20,18 @@ const StickyNavigation = () => {
         </div>
         
         <div className="flex items-center gap-4">
-          <Link to="/" className="text-sm font-bold text-blue-600">Version A</Link>
-          <Link to="/version-b" className="text-sm text-gray-600 hover:text-gray-900">Version B</Link>
+          <Link 
+            to="/" 
+            className={`text-sm ${isVersionA ? 'font-bold text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+          >
+            Version A
+          </Link>
+          <Link 
+            to="/version-b" 
+            className={`text-sm ${isVersionB ? 'font-bold text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+          >
+            Version B
+          </Link>
           <a 
             href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
             target="_blank" 
@@ -25,7 +39,7 @@ const StickyNavigation = () => {
             className="transition-opacity hover:opacity-80"
           >
             <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-              <span>Download Now</span>
+              Download Now
             </Button>
           </a>
         </div>
