@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="container mx-auto px-4 py-24 text-center animate-fade-in">
+    <header className="container mx-auto px-4 py-20 text-center animate-fade-in">
       <div className="relative">
         <div className="absolute inset-0 bg-[#0FA0CE] opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
         <img
