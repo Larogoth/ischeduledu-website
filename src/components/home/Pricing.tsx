@@ -1,6 +1,7 @@
 
 import { Clock, Heart, UserCheck, Shuffle, MessageSquare } from "lucide-react";
 import AppName from "@/components/AppName";
+import { Button } from "@/components/ui/button";
 
 const FeatureSection = ({ icon: Icon, title, items }: { 
   icon: React.ComponentType<any>;
@@ -27,13 +28,32 @@ const Pricing = () => {
   return (
     <section aria-labelledby="pricing-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
       <div className="container mx-auto px-4 text-center">
-        <h2 id="pricing-title" className="text-4xl font-bold mb-6 text-gray-900">
-          Transform Your School Day with <AppName size="xl" className="inline" />
+        <h2 id="pricing-title" className="text-3xl font-bold mb-4 text-gray-900">
+          Start Free, Upgrade When Ready
         </h2>
+        <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
+          Try <AppName size="md" className="inline" /> risk-free with 4 free sessions to see how much time you'll save
+        </p>
+        
         <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <div className="space-y-8">
-            <div className="text-2xl font-bold text-blue-600">
+            <div className="text-2xl font-bold text-blue-600 mb-4">
               <span>Start with 4 Free Sessions</span>
+            </div>
+            
+            <div className="flex flex-col md:flex-row gap-4 justify-center mb-8">
+              <a 
+                href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
+                  alt="Download iSchedulEDU on the App Store" 
+                  className="w-[185px] h-[62px] object-contain"
+                />
+              </a>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
