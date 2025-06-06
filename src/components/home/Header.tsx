@@ -17,14 +17,14 @@ const Header = () => {
       <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight font-euclid">
         iSchedulEDU
       </h1>
-      <p className="text-xl md:text-2xl text-gray-800 mb-12 max-w-2xl mx-auto leading-relaxed">
+      <p className="text-xl md:text-2xl text-gray-900 mb-12 max-w-2xl mx-auto leading-relaxed">
         Create custom or abbreviated schedules for your school day quickly and easily
       </p>
       <a 
         href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="inline-block hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
+        className="inline-block hover:opacity-80 transition-opacity focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-offset-2 rounded"
         aria-label="Download iSchedulEDU on the App Store"
       >
         <img 

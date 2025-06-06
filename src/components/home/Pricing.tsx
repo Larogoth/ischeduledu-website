@@ -9,14 +9,14 @@ const FeatureSection = ({ icon: Icon, title, items }: {
 }) => (
   <div className="text-left space-y-6">
     <div className="flex items-center gap-2">
-      <Icon className="h-6 w-6 text-blue-600" />
+      <Icon className="h-6 w-6 text-blue-700" />
       <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
     </div>
     <ul className="space-y-3">
       {items.map((item, index) => (
         <li key={index} className="flex items-start">
-          <span className="text-green-600 mr-2">✓</span>
-          <span className="text-gray-800">{item}</span>
+          <span className="text-green-700 mr-2 font-bold">✓</span>
+          <span className="text-gray-900">{item}</span>
         </li>
       ))}
     </ul>
@@ -32,7 +32,7 @@ const Pricing = () => {
         </h2>
         <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <div className="space-y-8">
-            <div className="text-2xl font-bold text-blue-600">
+            <div className="text-2xl font-bold text-blue-700">
               <span>Start with 4 Free Sessions</span>
             </div>
             
@@ -86,7 +86,7 @@ const Pricing = () => {
             </div>
 
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-              <p className="text-sm text-gray-700 italic">
+              <p className="text-sm text-gray-800 italic">
                 Note: Early adopters who purchased before January 01, 2025 have lifetime access - restore your purchase anytime through the app.
               </p>
             </div>
