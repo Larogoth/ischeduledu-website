@@ -8,17 +8,17 @@ const FeatureCard = ({ icon, title, description, bulletPoints }: {
   description: string;
   bulletPoints?: string[];
 }) => (
-  <Card className="text-left p-6 hover:shadow-lg transition-shadow">
-    <CardContent className="pt-6">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="p-3 bg-[#E6F3FF] rounded-full">
+  <Card className="text-left p-4 hover:shadow-lg transition-shadow">
+    <CardContent className="pt-4">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="p-2 bg-[#E6F3FF] rounded-full">
           {icon}
         </div>
         <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
       </div>
-      <p className="text-gray-900 mb-4">{description}</p>
+      <p className="text-gray-900 mb-3">{description}</p>
       {bulletPoints && bulletPoints.length > 0 && (
-        <ul className="list-disc list-inside text-gray-900 space-y-2">
+        <ul className="list-disc list-inside text-gray-900 space-y-1">
           {bulletPoints.map((point, index) => (
             <li key={index} className="ml-4">{point}</li>
           ))}
@@ -30,10 +30,10 @@ const FeatureCard = ({ icon, title, description, bulletPoints }: {
 
 const WhyTeachersChoose = () => {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-14">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Why Teachers Choose iSchedulEDU</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">Why Teachers Choose iSchedulEDU</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FeatureCard
             icon={<Clock className="h-6 w-6 text-blue-700" />}
             title="Simplifies Schedule Adjustments"
