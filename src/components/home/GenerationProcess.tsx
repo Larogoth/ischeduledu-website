@@ -45,19 +45,19 @@ const GenerationProcess = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-[#F5F9FF]">
+    <section className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-3 text-gray-900">
+        <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
           Two Ways to Create Your Perfect Schedule
         </h2>
-        <p className="text-xl text-gray-700 text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-700 text-center mb-16 max-w-2xl mx-auto">
           Choose between quick auto-generation or full custom creation
         </p>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Auto-Generation Process */}
           <div>
-            <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+            <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
               Quick Schedule Generation
             </h3>
             <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
@@ -75,7 +75,7 @@ const GenerationProcess = () => {
                               style={{ height: '450px' }}
                             />
                           </div>
-                          <div className="p-5 text-center">
+                          <div className="p-6 text-center">
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
                               {step.title}
                             </h3>
@@ -96,7 +96,7 @@ const GenerationProcess = () => {
 
           {/* Custom Creation Process */}
           <div>
-            <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+            <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
               Custom Schedule Creation
             </h3>
             <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
@@ -114,7 +114,7 @@ const GenerationProcess = () => {
                               style={{ height: '450px' }}
                             />
                           </div>
-                          <div className="p-5 text-center">
+                          <div className="p-6 text-center">
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
                               {step.title}
                             </h3>

@@ -51,15 +51,15 @@ const Index = () => {
       <WhyTeachersChoose />
       
       {reviews.length > 0 && (
-        <section aria-labelledby="testimonials-title" className="py-16 bg-white">
+        <section aria-labelledby="testimonials-title" className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-12 text-app-primary">
+            <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-app-primary">
               What Users Are Saying
               {import.meta.env.DEV && isLoadingReviews && (
                 <span className="text-sm text-app-muted block mt-2">(Loading reviews...)</span>
               )}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {reviews.map((review) => (
                 <div key={review.id} className="transform hover:-translate-y-2 transition-transform duration-300">
                   <TestimonialCard

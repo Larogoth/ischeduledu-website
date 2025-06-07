@@ -1,10 +1,10 @@
 
 const Screenshots = () => {
   return (
-    <section aria-labelledby="screenshots-title" className="py-16 bg-gradient-to-b from-white to-[#F5F9FF]">
+    <section aria-labelledby="screenshots-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
       <div className="container mx-auto px-4">
-        <h2 id="screenshots-title" className="text-4xl font-bold text-center mb-12 text-gray-900">More Features to Explore</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5 justify-items-center">
+        <h2 id="screenshots-title" className="text-4xl font-bold text-center mb-16 text-gray-900">More Features to Explore</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
           {[
             {
               src: "/lovable-uploads/28317119-fd83-41b2-b877-3b195a794b2a.png",
@@ -43,7 +43,7 @@ const Screenshots = () => {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <p className="text-lg text-gray-900 max-w-3xl mx-auto">
             Experience the full power of iSchedulEDU with features like rotating block schedules, 
             daily notifications, and easy schedule sharing. Perfect for teachers and administrators 
