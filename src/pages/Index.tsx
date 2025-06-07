@@ -33,30 +33,20 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-app-background-primary pt-14">
+    <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white pt-14">
       <StickyNavigation />
-      
-      <div className="bg-gradient-to-b from-app-background-primary to-white">
-        <Header />
-      </div>
-      
-      <div className="bg-gradient-to-b from-white to-app-background-secondary">
-        <GenerationProcess />
-      </div>
-      
-      <div className="bg-gradient-to-b from-app-background-secondary to-white">
-        <Pricing />
-      </div>
-      
+      <Header />
+      <GenerationProcess />
+      <Pricing />
       <WhyTeachersChoose />
       
       {reviews.length > 0 && (
         <section aria-labelledby="testimonials-title" className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-app-primary">
+            <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-gray-900">
               What Users Are Saying
               {import.meta.env.DEV && isLoadingReviews && (
-                <span className="text-sm text-app-muted block mt-2">(Loading reviews...)</span>
+                <span className="text-sm text-gray-400 block mt-2">(Loading reviews...)</span>
               )}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -76,10 +66,7 @@ const Index = () => {
         </section>
       )}
 
-      <div className="bg-gradient-to-b from-white to-app-background-secondary">
-        <Screenshots />
-      </div>
-      
+      <Screenshots />
       <Footer />
     </div>
   );
