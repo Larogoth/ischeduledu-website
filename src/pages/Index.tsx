@@ -7,16 +7,13 @@ import Screenshots from "@/components/home/Screenshots";
 import Footer from "@/components/home/Footer";
 import GenerationProcess from "@/components/home/GenerationProcess";
 import StickyNavigation from "@/components/home/StickyNavigation";
-import VersionSwitcher from "@/components/VersionSwitcher";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import type { Testimonial } from "@/data/testimonials";
 
 const Index = () => {
   const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
   const [isLoadingReviews, setIsLoadingReviews] = useState(true);
-  const { scheme, setScheme } = useColorScheme();
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -37,7 +34,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-app-background-primary pt-14">
-      <VersionSwitcher currentVersion={scheme} onVersionChange={setScheme} />
       <StickyNavigation />
       
       <div className="bg-gradient-to-b from-app-background-primary to-white">
