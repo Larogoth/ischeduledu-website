@@ -21,6 +21,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'euclid': ['"Euclid Circular B"', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
