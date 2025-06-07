@@ -7,13 +7,16 @@ import Screenshots from "@/components/home/Screenshots";
 import Footer from "@/components/home/Footer";
 import GenerationProcess from "@/components/home/GenerationProcess";
 import StickyNavigation from "@/components/home/StickyNavigation";
+import VersionSwitcher from "@/components/VersionSwitcher";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import type { Testimonial } from "@/data/testimonials";
 
 const Index = () => {
   const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
   const [isLoadingReviews, setIsLoadingReviews] = useState(true);
+  const { scheme, setScheme } = useColorScheme();
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -33,20 +36,31 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] to-white pt-14">
+    <div className="min-h-screen bg-app-background-primary pt-14">
+      <VersionSwitcher currentVersion={scheme} onVersionChange={setScheme} />
       <StickyNavigation />
-      <Header />
-      <GenerationProcess />
-      <Pricing />
+      
+      <div className="bg-gradient-to-b from-app-background-primary to-white">
+        <Header />
+      </div>
+      
+      <div className="bg-gradient-to-b from-white to-app-background-secondary">
+        <GenerationProcess />
+      </div>
+      
+      <div className="bg-gradient-to-b from-app-background-secondary to-white">
+        <Pricing />
+      </div>
+      
       <WhyTeachersChoose />
       
       {reviews.length > 0 && (
         <section aria-labelledby="testimonials-title" className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-gray-900">
+            <h2 id="testimonials-title" className="text-4xl font-bold text-center mb-16 text-app-primary">
               What Users Are Saying
               {import.meta.env.DEV && isLoadingReviews && (
-                <span className="text-sm text-gray-400 block mt-2">(Loading reviews...)</span>
+                <span className="text-sm text-app-muted block mt-2">(Loading reviews...)</span>
               )}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -66,7 +80,10 @@ const Index = () => {
         </section>
       )}
 
-      <Screenshots />
+      <div className="bg-gradient-to-b from-white to-app-background-secondary">
+        <Screenshots />
+      </div>
+      
       <Footer />
     </div>
   );
