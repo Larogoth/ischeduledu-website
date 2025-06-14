@@ -21,6 +21,30 @@ export const detectLanguage = (text: string): string => {
   if (/[\u0600-\u06ff]/.test(text)) {
     return 'ar';
   }
+  // Hebrew
+  if (/[\u0590-\u05ff]/.test(text)) {
+    return 'he';
+  }
+  // Thai
+  if (/[\u0e00-\u0e7f]/.test(text)) {
+    return 'th';
+  }
+  // Hindi/Devanagari
+  if (/[\u0900-\u097f]/.test(text)) {
+    return 'hi';
+  }
+  // Greek
+  if (/[\u0370-\u03ff]/.test(text)) {
+    return 'el';
+  }
+  // Portuguese (check for specific Portuguese characters)
+  if (/[ãõçáéíóúâêîôûàèìòù]/i.test(text)) {
+    return 'pt';
+  }
+  // Italian (check for specific Italian characters)
+  if (/[àèéìíîòóù]/i.test(text)) {
+    return 'it';
+  }
   // Spanish (check for specific Spanish characters)
   if (/[ñáéíóúü¿¡]/i.test(text)) {
     return 'es';
@@ -32,6 +56,38 @@ export const detectLanguage = (text: string): string => {
   // German (check for specific German characters)
   if (/[äöüß]/i.test(text)) {
     return 'de';
+  }
+  // Dutch (check for specific Dutch characters)
+  if (/[áàéèíìóòúùäëïöü]/i.test(text)) {
+    return 'nl';
+  }
+  // Swedish/Norwegian/Danish (check for Nordic characters)
+  if (/[åäöæøé]/i.test(text)) {
+    return 'sv'; // Default to Swedish, but covers Nordic languages
+  }
+  // Polish (check for specific Polish characters)
+  if (/[ąćęłńóśźż]/i.test(text)) {
+    return 'pl';
+  }
+  // Czech (check for specific Czech characters)
+  if (/[áčďéěíňóřšťúůýž]/i.test(text)) {
+    return 'cs';
+  }
+  // Turkish (check for specific Turkish characters)
+  if (/[çğıöşü]/i.test(text)) {
+    return 'tr';
+  }
+  // Romanian (check for specific Romanian characters)
+  if (/[ăâîșțşţ]/i.test(text)) {
+    return 'ro';
+  }
+  // Hungarian (check for specific Hungarian characters)
+  if (/[áéíóöőúüű]/i.test(text)) {
+    return 'hu';
+  }
+  // Vietnamese (check for specific Vietnamese characters)
+  if (/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(text)) {
+    return 'vi';
   }
   // Default to English if no specific patterns found
   return 'en';
