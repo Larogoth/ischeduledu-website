@@ -1,6 +1,9 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Quote, Star } from "lucide-react";
+import { useState } from "react";
+import { isEnglish, translateText } from "@/utils/translation";
 
 interface TestimonialCardProps {
   title: string;
@@ -11,6 +14,36 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: TestimonialCardProps) => {
+  const [translatedTitle, setTranslatedTitle] = useState<string>("");
+  const [translatedContent, setTranslatedContent] = useState<string>("");
+  const [isTranslated, setIsTranslated] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+
+  const needsTranslation = !isEnglish(title) || !isEnglish(content);
+
+  const handleTranslate = async () => {
+    if (isTranslating) return;
+    
+    setIsTranslating(true);
+    try {
+      const [titleTranslation, contentTranslation] = await Promise.all([
+        !isEnglish(title) ? translateText(title) : Promise.resolve(title),
+        !isEnglish(content) ? translateText(content) : Promise.resolve(content)
+      ]);
+      
+      setTranslatedTitle(titleTranslation);
+      setTranslatedContent(contentTranslation);
+      setIsTranslated(true);
+    } catch (error) {
+      console.error('Failed to translate:', error);
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+
+  const displayTitle = isTranslated && translatedTitle ? translatedTitle : title;
+  const displayContent = isTranslated && translatedContent ? translatedContent : content;
+
   return (
     <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 border border-blue-100 hover:border-[#0FA0CE]/40 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
@@ -29,9 +62,23 @@ const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: Test
           </div>
         </div>
         
-        <h3 className="text-xl font-bold mb-3 text-gray-900">{title}</h3>
+        {needsTranslation && (
+          <div className="mb-4">
+            <Button
+              onClick={handleTranslate}
+              variant="outline"
+              size="sm"
+              disabled={isTranslating}
+              className="text-xs"
+            >
+              {isTranslating ? "Translating..." : isTranslated ? "Show Original" : "Translate to English"}
+            </Button>
+          </div>
+        )}
+        
+        <h3 className="text-xl font-bold mb-3 text-gray-900">{displayTitle}</h3>
         <blockquote className="text-gray-700 mb-6 leading-relaxed font-medium italic">
-          "{content}"
+          "{displayContent}"
         </blockquote>
         
         <footer className="border-t border-gray-100 pt-4">
