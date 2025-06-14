@@ -24,6 +24,12 @@ const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: Test
   const handleTranslate = async () => {
     if (isTranslating) return;
     
+    // If already translated, toggle back to original
+    if (isTranslated) {
+      setIsTranslated(false);
+      return;
+    }
+    
     setIsTranslating(true);
     try {
       const [titleTranslation, contentTranslation] = await Promise.all([
