@@ -69,7 +69,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-500"></div>
-            <span>iOS Compatible</span>
+            <span>iOS and iPadOS Compatible</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-[#0FA0CE] rounded-full animate-pulse delay-1000"></div>
