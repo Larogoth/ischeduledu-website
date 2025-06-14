@@ -19,7 +19,7 @@ const StickyNavigation = () => {
           </div>
           <span className="font-bold text-xl text-gray-900">iSchedulEDU</span>
           <span className="hidden sm:inline-block bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
-            #1 Teacher Tool
+            Teacher's Choice
           </span>
         </div>
         

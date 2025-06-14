@@ -14,7 +14,7 @@ const Header = () => {
         {/* Badge with sparkle effect */}
         <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
           <Sparkles className="w-4 h-4" />
-          <span>The #1 Schedule Creator for Teachers</span>
+          <span>Loved by Teachers Everywhere</span>
         </div>
 
         <div className="relative mb-8">
@@ -40,7 +40,7 @@ const Header = () => {
         {/* Enhanced CTA with urgency */}
         <div className="space-y-4 mb-8">
           <p className="text-lg text-gray-700 font-semibold">
-            Join <span className="text-[#0FA0CE] font-bold">1000+</span> teachers already saving time!
+            Join <span className="text-[#0FA0CE] font-bold">hundreds</span> of teachers already saving time!
           </p>
           
           <a 
@@ -73,7 +73,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-[#0FA0CE] rounded-full animate-pulse delay-1000"></div>
-            <span>Teacher Approved</span>
+            <span>Teacher Tested</span>
           </div>
         </div>
       </div>

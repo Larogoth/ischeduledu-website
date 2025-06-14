@@ -36,7 +36,7 @@ const Pricing = () => {
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <Star className="w-4 h-4" />
-            <span>Teacher's Choice Award Winner</span>
+            <span>Trusted by Teachers</span>
           </div>
           
           <h2 id="pricing-title" className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">

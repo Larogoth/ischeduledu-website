@@ -52,17 +52,17 @@ const Index = () => {
               Ready to Save Hours Every Week?
             </h2>
             <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-              Join the thousands of teachers who've already transformed their scheduling workflow
+              Join the hundreds of teachers who've already transformed their scheduling workflow
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <div className="flex items-center gap-3 text-white">
                 <Users className="w-6 h-6 text-blue-200" />
-                <span className="text-lg font-semibold">1000+ Teachers</span>
+                <span className="text-lg font-semibold">Hundreds of Teachers</span>
               </div>
               <div className="flex items-center gap-3 text-white">
                 <Clock className="w-6 h-6 text-blue-200" />
-                <span className="text-lg font-semibold">5+ Hours Saved Weekly</span>
+                <span className="text-lg font-semibold">Hours Saved Weekly</span>
               </div>
               <div className="flex items-center gap-3 text-white">
                 <Download className="w-6 h-6 text-blue-200" />
