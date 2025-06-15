@@ -23,6 +23,13 @@ const VersionSwitcher = () => {
         >
           B
         </Button>
+        <Button
+          size="sm"
+          variant={version === 'c' ? 'default' : 'outline'}
+          onClick={() => setVersion('c')}
+        >
+          C
+        </Button>
       </div>
     </div>
   );

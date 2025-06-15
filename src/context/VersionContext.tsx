@@ -1,7 +1,6 @@
-
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
-type Version = 'a' | 'b';
+type Version = 'a' | 'b' | 'c';
 
 interface VersionContextType {
   version: Version;
@@ -15,7 +14,7 @@ export const VersionProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const storedVersion = localStorage.getItem('app_version') as Version;
-    if (storedVersion && ['a', 'b'].includes(storedVersion)) {
+    if (storedVersion && ['a', 'b', 'c'].includes(storedVersion)) {
       setVersionState(storedVersion);
     }
   }, []);
