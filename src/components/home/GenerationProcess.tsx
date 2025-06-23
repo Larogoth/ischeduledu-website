@@ -45,7 +45,7 @@ const GenerationProcess = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
+    <section className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
           Two Ways to Create Your Perfect Schedule
@@ -66,7 +66,7 @@ const GenerationProcess = () => {
                   {steps.map((step, index) => (
                     <CarouselItem key={index}>
                       <div className="p-1">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-white/50">
                           <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
@@ -105,7 +105,7 @@ const GenerationProcess = () => {
                   {customSteps.map((step, index) => (
                     <CarouselItem key={index}>
                       <div className="p-1">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-white/50">
                           <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}

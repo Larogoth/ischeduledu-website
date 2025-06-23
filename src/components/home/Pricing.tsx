@@ -7,7 +7,7 @@ const FeatureSection = ({ icon: Icon, title, items }: {
   title: string;
   items: string[];
 }) => (
-  <div className="text-left space-y-4 p-6 bg-gradient-to-br from-white to-blue-50/50 rounded-xl border border-blue-100 hover:border-[#0FA0CE]/30 transition-all duration-300 hover:shadow-lg">
+  <div className="text-left space-y-4 p-6 bg-gradient-to-br from-white/90 to-blue-50/50 backdrop-blur-sm rounded-xl border border-blue-100/50 hover:border-[#0FA0CE]/30 transition-all duration-300 hover:shadow-lg">
     <div className="flex items-center gap-3">
       <div className="p-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-lg">
         <Icon className="h-5 w-5 text-white" />
@@ -27,7 +27,7 @@ const FeatureSection = ({ icon: Icon, title, items }: {
 
 const Pricing = () => {
   return (
-    <section aria-labelledby="pricing-title" className="py-16 bg-gradient-to-b from-white to-[#F5F9FF] relative overflow-hidden">
+    <section aria-labelledby="pricing-title" className="py-16 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 rounded-full blur-2xl"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
@@ -48,7 +48,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto bg-white rounded-3xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden">
           {/* Gradient overlay */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
           
