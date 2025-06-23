@@ -41,16 +41,12 @@ const Index = () => {
       
       <StickyNavigation />
       <Header />
+      <GenerationProcess />
       
-      {/* Smooth transition to GenerationProcess */}
-      <div className="bg-gradient-to-b from-[#F0F8FF] via-white to-[#F5F9FF]">
-        <GenerationProcess />
-      </div>
-      
-      {/* Enhanced Call-to-Action Section with smooth transitions */}
-      <section className="bg-gradient-to-b from-[#F5F9FF] via-[#0FA0CE] to-blue-600 relative overflow-hidden">
+      {/* Enhanced Call-to-Action Section */}
+      <section className="py-16 bg-gradient-to-r from-[#0FA0CE] to-blue-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="container mx-auto px-4 text-center relative z-10 py-16">
+        <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to Save Hours Every Week?
@@ -92,18 +88,11 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Smooth transition to Pricing */}
-      <div className="bg-gradient-to-b from-blue-600 via-white to-[#F5F9FF]">
-        <Pricing />
-      </div>
-      
-      {/* Smooth transition to WhyTeachersChoose */}
-      <div className="bg-gradient-to-b from-[#F5F9FF] via-white to-[#F8FBFF]">
-        <WhyTeachersChoose />
-      </div>
+      <Pricing />
+      <WhyTeachersChoose />
       
       {reviews.length > 0 && (
-        <section aria-labelledby="testimonials-title" className="py-16 bg-gradient-to-b from-[#F8FBFF] via-white to-[#F5F9FF] relative">
+        <section aria-labelledby="testimonials-title" className="py-16 bg-gradient-to-b from-white to-[#F8FBFF] relative">
           <div className="absolute top-0 left-1/4 w-32 h-32 bg-[#0FA0CE]/10 rounded-full blur-2xl"></div>
           <div className="absolute bottom-0 right-1/4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
           
@@ -139,15 +128,8 @@ const Index = () => {
         </section>
       )}
 
-      {/* Smooth transition to Screenshots */}
-      <div className="bg-gradient-to-b from-[#F5F9FF] via-white to-[#F5F9FF]">
-        <Screenshots />
-      </div>
-      
-      {/* Smooth transition to Footer */}
-      <div className="bg-gradient-to-b from-[#F5F9FF] to-gray-900">
-        <Footer />
-      </div>
+      <Screenshots />
+      <Footer />
     </div>
   );
 };

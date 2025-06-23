@@ -1,7 +1,7 @@
 
 const Screenshots = () => {
   return (
-    <section aria-labelledby="screenshots-title" className="py-20">
+    <section aria-labelledby="screenshots-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
       <div className="container mx-auto px-4">
         <h2 id="screenshots-title" className="text-4xl font-bold text-center mb-16 text-gray-900">More Features to Explore</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
@@ -25,7 +25,7 @@ const Screenshots = () => {
           ].map((image, index) => (
             <div
               key={index}
-              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl w-full max-w-[180px] md:max-w-[220px] bg-white/80 backdrop-blur-sm border border-white/50 p-2"
+              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl w-full max-w-[180px] md:max-w-[220px]"
             >
               <img
                 src={image.src}
