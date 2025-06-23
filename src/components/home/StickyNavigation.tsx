@@ -4,7 +4,7 @@ import { Download, Sparkles } from "lucide-react";
 
 const StickyNavigation = () => {
   return (
-    <div className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg border-b border-[#0FA0CE]/20 z-50 transition-all duration-300">
+    <div className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg border-b border-slate-200 z-50 transition-all duration-300">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -31,7 +31,7 @@ const StickyNavigation = () => {
         >
           <Button 
             size="sm" 
-            className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0D8CB6] hover:to-blue-700 shadow-lg hover:shadow-xl text-white font-semibold px-4 py-2 gap-2"
+            className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl text-white font-semibold px-4 py-2 gap-2"
           >
             <Download className="w-4 h-4" />
             <span className="hidden sm:inline">Download Free</span>
