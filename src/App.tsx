@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Login from "./pages/Login";
+import AdminTestimonials from "./pages/AdminTestimonials";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,14 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/login" element={<Login />} />
+          <Route 
+            path="/admin/testimonials" 
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminTestimonials />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
