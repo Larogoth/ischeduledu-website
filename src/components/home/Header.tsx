@@ -29,18 +29,38 @@ const Header = () => {
         </div>
 
         <h1 className="text-6xl md:text-8xl font-bold text-gray-900 mb-6 tracking-tight font-euclid bg-gradient-to-r from-gray-900 via-[#0FA0CE] to-gray-900 bg-clip-text text-transparent">
-          iSchedulEDU
+          iSchedulEDU - School Schedule Generator for Teachers
         </h1>
         
         <p className="text-2xl md:text-3xl text-gray-800 mb-8 max-w-3xl mx-auto leading-relaxed font-medium">
-          Create custom or abbreviated schedules for your school day 
+          The ultimate <strong>education scheduling app</strong> for teachers and administrators. Create custom bell schedules, manage A/B day rotations, and share academic timetables 
           <span className="text-[#0FA0CE] font-bold"> quickly and easily</span>
         </p>
+
+        {/* Enhanced content with internal links and keywords */}
+        <div className="max-w-4xl mx-auto mb-8 text-lg text-gray-700 leading-relaxed">
+          <p className="mb-4">
+            Transform your classroom scheduling workflow with our comprehensive <strong>school schedule maker</strong>. 
+            Whether you need daily schedules, abbreviated day planning, or complex period rotations, iSchedulEDU simplifies 
+            academic time management for educators nationwide.
+          </p>
+          <p className="mb-6">
+            Join hundreds of teachers who trust our <strong>education planner</strong> for seamless schedule creation. 
+            <Link to="/faq" className="text-[#0FA0CE] hover:text-blue-600 font-semibold underline ml-1 mr-1">
+              Learn more about our features
+            </Link>
+            or review our 
+            <Link to="/privacy-policy" className="text-[#0FA0CE] hover:text-blue-600 font-semibold underline ml-1">
+              privacy commitment
+            </Link>
+            to your data security.
+          </p>
+        </div>
 
         {/* Enhanced CTA with urgency */}
         <div className="space-y-4 mb-8">
           <p className="text-lg text-gray-700 font-semibold">
-            Join <span className="text-[#0FA0CE] font-bold">hundreds</span> of teachers already saving time!
+            Join <span className="text-[#0FA0CE] font-bold">hundreds</span> of educators already saving time with our scheduling software!
           </p>
           
           <a 
@@ -48,12 +68,12 @@ const Header = () => {
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-block group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-offset-2"
-            aria-label="Download iSchedulEDU on the App Store"
+            aria-label="Download iSchedulEDU School Schedule Generator on the App Store"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#0FA0CE] to-blue-600 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
             <img 
               src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
-              alt="Download iSchedulEDU on the App Store" 
+              alt="Download iSchedulEDU School Schedule Generator on the App Store" 
               className="w-[280px] h-[94px] object-contain relative z-10"
               width="280"
               height="94"
@@ -73,7 +93,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-[#0FA0CE] rounded-full animate-pulse delay-1000"></div>
-            <span>Teacher Tested</span>
+            <span>Teacher Tested & Approved</span>
           </div>
         </div>
       </div>
