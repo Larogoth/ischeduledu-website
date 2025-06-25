@@ -12,36 +12,6 @@ export const validateEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-export const validateTestimonialInput = (data: {
-  title: string;
-  name?: string;
-  content?: string;
-  stars?: number;
-}): { isValid: boolean; errors: string[] } => {
-  const errors: string[] = [];
-
-  if (!data.title || data.title.length < 3) {
-    errors.push('Title must be at least 3 characters long');
-  }
-
-  if (data.title && data.title.length > 200) {
-    errors.push('Title must be less than 200 characters');
-  }
-
-  if (data.content && data.content.length > 1000) {
-    errors.push('Content must be less than 1000 characters');
-  }
-
-  if (data.stars && (data.stars < 1 || data.stars > 5)) {
-    errors.push('Stars must be between 1 and 5');
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors
-  };
-};
-
 // Rate limiting helper (client-side basic implementation)
 class RateLimiter {
   private requests: Map<string, number[]> = new Map();
