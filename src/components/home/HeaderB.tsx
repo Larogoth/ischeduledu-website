@@ -11,7 +11,7 @@ const HeaderB = () => {
           <div className="text-left">
             <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-6">
               <Star className="w-4 h-4 fill-current" />
-              <span>4.8★ App Store Rating</span>
+              <span>5.0★ App Store Rating</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
