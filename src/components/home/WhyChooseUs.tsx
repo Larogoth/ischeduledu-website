@@ -10,18 +10,18 @@ const WhyChooseUs = () => {
     },
     {
       icon: <DollarSign className="w-6 h-6 text-green-500" />,
-      title: "Free to Start",
-      description: "4 free schedule generations, then affordable pricing"
+      title: "One-Time Purchase",
+      description: "4 free schedules, then just $4.99 - no subscriptions!"
     },
     {
       icon: <Palette className="w-6 h-6 text-purple-500" />,
       title: "Beautiful Design",
-      description: "Clean, intuitive interface designed for educators"
+      description: "Clean, intuitive interface designed by a teacher"
     },
     {
       icon: <HeadphonesIcon className="w-6 h-6 text-blue-500" />,
       title: "Teacher Support",
-      description: "Built by educators, supported by our education team"
+      description: "Built and supported by a fellow educator"
     }
   ];
 
@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
             What Makes Us Different
           </h2>
           <p className="text-xl text-gray-600">
-            We understand the unique challenges teachers face with schedule management
+            Built by a teacher who understands the challenges you face
           </p>
         </div>
 

@@ -36,7 +36,7 @@ const Pricing = () => {
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <Star className="w-4 h-4" />
-            <span>Trusted by Teachers</span>
+            <span>Built by a Teacher</span>
           </div>
           
           <h2 id="pricing-title" className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
@@ -57,7 +57,7 @@ const Pricing = () => {
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full text-lg font-bold mb-4 shadow-lg animate-pulse">
                 <span>🎉 Start with 4 FREE Sessions</span>
               </div>
-              <p className="text-gray-600">No credit card required • Full feature access</p>
+              <p className="text-gray-600">Then just $4.99 one-time purchase • No subscriptions</p>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -113,11 +113,11 @@ const Pricing = () => {
 
               <div className="md:col-span-2 lg:col-span-1 bg-gradient-to-br from-[#0FA0CE]/10 to-blue-600/10 rounded-xl p-6 border-2 border-[#0FA0CE]/30 relative">
                 <div className="absolute -top-2 -right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold transform rotate-12">
-                  LIMITED TIME
+                  NO SUBSCRIPTIONS
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-4">🚀 Early Bird Special</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-4">💡 Teacher's Promise</h3>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  Teachers who purchased before January 1, 2025 get <strong>lifetime access</strong> - restore anytime through the app!
+                  As a fellow educator, I believe in <strong>simple, affordable pricing</strong>. One purchase, lifetime access - no monthly fees!
                 </p>
               </div>
             </div>

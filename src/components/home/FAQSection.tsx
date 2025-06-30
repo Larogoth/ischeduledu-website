@@ -10,7 +10,7 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "Is iSchedulEDU free to use?",
-      answer: "Yes! iSchedulEDU offers 4 free schedule generations to get you started. After that, you can continue with our affordable paid plans designed specifically for educators."
+      answer: "Yes! iSchedulEDU offers 4 free schedule generations to get you started. After that, it's a simple one-time purchase of $4.99 - no subscriptions or monthly fees!"
     },
     {
       question: "How long does it take to set up a schedule?",

@@ -20,7 +20,7 @@ const TrustSection = () => {
           <div className="w-px h-12 bg-gray-300"></div>
           <div className="text-center">
             <div className="text-3xl font-bold text-[#0FA0CE] mb-1">100%</div>
-            <div className="text-sm text-gray-600">Educator Built</div>
+            <div className="text-sm text-gray-600">Teacher Built</div>
           </div>
         </div>
         
@@ -42,7 +42,7 @@ const TrustSection = () => {
         
         <div className="text-center mt-8">
           <p className="text-gray-500 text-sm">
-            Used by teachers in school districts and individual educators nationwide
+            Built by a teacher for teachers nationwide
           </p>
         </div>
       </div>
