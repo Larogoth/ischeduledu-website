@@ -15,7 +15,7 @@ const HeaderB = () => {
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Create School Schedules in 
+              Create Class Schedules in 
               <span className="text-[#0FA0CE]"> Seconds</span>
             </h1>
             
