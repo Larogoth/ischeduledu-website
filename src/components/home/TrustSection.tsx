@@ -9,7 +9,7 @@ const TrustSection = () => {
         
         <div className="flex justify-center items-center gap-8 mb-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-[#0FA0CE] mb-1">500+</div>
+            <div className="text-3xl font-bold text-[#0FA0CE] mb-1">161</div>
             <div className="text-sm text-gray-600">Downloads</div>
           </div>
           <div className="w-px h-12 bg-gray-300"></div>
