@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Sparkles, Download } from "lucide-react";
 
@@ -40,7 +39,7 @@ const Header = () => {
         {/* Enhanced CTA with urgency */}
         <div className="space-y-4 mb-8">
           <p className="text-lg text-gray-700 font-semibold">
-            Join <span className="text-[#0FA0CE] font-bold">hundreds</span> of teachers already saving time!
+            Join <span className="text-[#0FA0CE] font-bold">hundreds</span> of teachers handling unexpected schedule changes quickly!
           </p>
           
           <a 

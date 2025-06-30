@@ -21,7 +21,7 @@ const HeaderB = () => {
             
             <p className="text-xl text-gray-700 mb-8 leading-relaxed">
               Generate perfect class schedules for early dismissals, delays, and special events. 
-              Trusted by hundreds of teachers to save hours every week.
+              Trusted by hundreds of teachers to handle unexpected schedule changes quickly.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
