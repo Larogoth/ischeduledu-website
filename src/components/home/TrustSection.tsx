@@ -24,23 +24,7 @@ const TrustSection = () => {
           </div>
         </div>
         
-        <div className="flex justify-center items-center gap-8 opacity-60">
-          {/* Placeholder for representative user groups */}
-          <div className="bg-gray-300 h-12 w-32 rounded flex items-center justify-center text-gray-600 text-sm font-medium">
-            School District
-          </div>
-          <div className="bg-gray-300 h-12 w-32 rounded flex items-center justify-center text-gray-600 text-sm font-medium">
-            Teachers
-          </div>
-          <div className="bg-gray-300 h-12 w-32 rounded flex items-center justify-center text-gray-600 text-sm font-medium">
-            Educators
-          </div>
-          <div className="bg-gray-300 h-12 w-32 rounded flex items-center justify-center text-gray-600 text-sm font-medium">
-            App Store
-          </div>
-        </div>
-        
-        <div className="text-center mt-8">
+        <div className="text-center">
           <p className="text-gray-500 text-sm">
             Built by a teacher for teachers nationwide
           </p>
