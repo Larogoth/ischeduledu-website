@@ -1,4 +1,5 @@
 
+
 const TrustSection = () => {
   return (
     <section className="py-12 bg-gray-50 border-y border-gray-200">
@@ -26,7 +27,7 @@ const TrustSection = () => {
         
         <div className="text-center">
           <p className="text-gray-500 text-sm">
-            Built by a teacher for teachers nationwide
+            Built by a teacher for teachers worldwide
           </p>
         </div>
       </div>
@@ -35,3 +36,4 @@ const TrustSection = () => {
 };
 
 export default TrustSection;
+
