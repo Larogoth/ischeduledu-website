@@ -1,6 +1,5 @@
 
-import { Download, CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
 
 const FinalCTA = () => {
   return (
@@ -35,12 +34,15 @@ const FinalCTA = () => {
               href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-block"
+              className="inline-block transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
             >
-              <Button size="lg" className="bg-white text-[#0FA0CE] hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                <Download className="w-5 h-5 mr-2" />
-                Download Free Now
-              </Button>
+              <img 
+                src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1718150400" 
+                alt="Download iSchedulEDU on the App Store" 
+                className="w-[300px] h-[100px] object-contain"
+                width="300"
+                height="100"
+              />
             </a>
           </div>
 

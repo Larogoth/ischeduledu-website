@@ -1,5 +1,5 @@
 
-import { Download, Play, Star } from "lucide-react";
+import { Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeaderB = () => {
@@ -29,12 +29,15 @@ const HeaderB = () => {
                 href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-block"
+                className="inline-block transform hover:scale-105 transition-all duration-300"
               >
-                <Button size="lg" className="bg-[#0FA0CE] hover:bg-[#0D8CB6] text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Free App
-                </Button>
+                <img 
+                  src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
+                  alt="Download iSchedulEDU on the App Store" 
+                  className="w-[200px] h-auto"
+                  width="200"
+                  height="59"
+                />
               </a>
               
               <Button variant="outline" size="lg" className="px-8 py-4 text-lg font-semibold border-2 border-gray-300 hover:border-[#0FA0CE] hover:text-[#0FA0CE]">
