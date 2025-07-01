@@ -50,7 +50,7 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
   const displayContent = isTranslated && translatedContent ? translatedContent : content;
 
   return (
-    <Card className="h-full bg-white border border-gray-200 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="bg-white border border-gray-200 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-4">
           <Quote className="h-6 w-6 text-[#0FA0CE] opacity-60" />
