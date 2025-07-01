@@ -65,8 +65,8 @@ const Index = () => {
       <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 rounded-full blur-3xl -translate-x-1/2"></div>
       <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl translate-x-1/2"></div>
       
-      {/* Language selector - made more prominent */}
-      <div className="fixed top-4 right-4 z-[100]">
+      {/* Language selector - positioned below sticky nav */}
+      <div className="fixed top-16 right-4 z-[100]">
         <LanguageSelector />
       </div>
       
