@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Sparkles, Download } from "lucide-react";
 
@@ -60,8 +61,8 @@ const Header = () => {
           </a>
         </div>
 
-        {/* Social proof badges */}
-        <div className="flex justify-center items-center gap-6 text-sm text-gray-600">
+        {/* Social proof badges - improved mobile layout */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-sm text-gray-600">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             <span>Free to Start</span>
