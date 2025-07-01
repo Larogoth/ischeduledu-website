@@ -61,7 +61,7 @@ export const useTranslation = () => {
     localStorage.setItem('preferredLanguage', language);
   }, []);
 
-  const t = useCallback((key: string): string => {
+  const t = useCallback((key: string): any => {
     const keys = key.split('.');
     let value = translations;
     
@@ -69,7 +69,8 @@ export const useTranslation = () => {
       value = value?.[k];
     }
     
-    return typeof value === 'string' ? value : key;
+    // Return the value as-is (could be string, array, or object)
+    return value !== undefined ? value : key;
   }, [translations]);
 
   return {

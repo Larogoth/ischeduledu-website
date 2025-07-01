@@ -66,7 +66,7 @@ const WhyTeachersChoose = () => {
             icon={<Settings className="h-6 w-6 text-blue-700" />}
             title={t('whyTeachers.flexibility.title')}
             description={t('whyTeachers.flexibility.description')}
-            bulletPoints={t('whyTeachers.flexibility.bullets') as string[]}
+            bulletPoints={t('whyTeachers.flexibility.bullets')}
           />
         </div>
       </div>
