@@ -28,7 +28,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
           )}
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
           {reviews.slice(0, 6).map((review) => (
             <TestimonialCardB
               key={review.id}
