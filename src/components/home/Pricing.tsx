@@ -44,7 +44,7 @@ const Pricing = () => {
           </h2>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Stop wasting time on manual schedule creation. Start your transformation today!
+            Be prepared for unexpected schedule changes with instant solutions!
           </p>
         </div>
 
@@ -63,10 +63,10 @@ const Pricing = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <FeatureSection
                 icon={Clock}
-                title="Save Hours Weekly"
+                title="Quick Emergency Relief"
                 items={[
                   "Create schedules in under 2 minutes",
-                  "Quick adjustments for unexpected changes",
+                  "Instant solutions for unexpected changes",
                   "More time for what matters: teaching"
                 ]}
               />

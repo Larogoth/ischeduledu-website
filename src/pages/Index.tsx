@@ -50,10 +50,10 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Save Hours Every Week?
+              Ready for Schedule Emergencies?
             </h2>
             <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-              Join the hundreds of teachers who've already transformed their scheduling workflow
+              Join the hundreds of teachers who are prepared for unexpected schedule changes
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
@@ -63,7 +63,7 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-3 text-white">
                 <Clock className="w-6 h-6 text-blue-200" />
-                <span className="text-lg font-semibold">Hours Saved Weekly</span>
+                <span className="text-lg font-semibold">Quick Relief in Emergencies</span>
               </div>
               <div className="flex items-center gap-3 text-white">
                 <Download className="w-6 h-6 text-blue-200" />
