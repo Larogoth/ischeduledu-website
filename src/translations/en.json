@@ -12,6 +12,11 @@
       "teacherTested": "Teacher Tested"
     }
   },
+  "navigation": {
+    "teachersChoice": "Teacher's Choice",
+    "downloadFree": "Download Free",
+    "getApp": "Get App"
+  },
   "cta": {
     "title": "Ready to Save Hours Every Week?",
     "subtitle": "Join the hundreds of teachers who've already transformed their scheduling workflow",
@@ -20,6 +25,14 @@
       "timeSaved": "Hours Saved Weekly",
       "freeSessions": "4 Free Sessions"
     }
+  },
+  "features": {
+    "moreFeatures": "More Features to Explore",
+    "scheduleManagement": "iSchedulEDU Schedule Management - Organize and access all your saved school schedules",
+    "scheduleAlerts": "iSchedulEDU Schedule Alerts - Set up daily notifications for your class schedule",
+    "dailyTimeline": "iSchedulEDU Daily Timeline View - See your complete school day schedule at a glance",
+    "rotatingSchedule": "iSchedulEDU Rotating Schedule Calendar - Manage A/B and rotating block schedules with ease",
+    "experienceText": "Experience the full power of iSchedulEDU with features like rotating block schedules, daily notifications, and easy schedule sharing. Perfect for teachers and administrators managing complex school timetables."
   },
   "testimonials": {
     "badge": "Real Teacher Reviews",

@@ -1,0 +1,47 @@
+
+{
+  "header": {
+    "title": "iSchedulEDU",
+    "subtitle": "Erstellen Sie individuelle oder verkürzte Stundenpläne für Ihren Schultag schnell und einfach",
+    "tagline": "Von Lehrern Überall Geliebt",
+    "cta": "Schließen Sie sich Hunderten von Lehrern an, die unerwartete Stundenplanänderungen schnell bewältigen!",
+    "downloadAlt": "iSchedulEDU im App Store herunterladen",
+    "badges": {
+      "freeToStart": "Kostenlos zu Beginnen",
+      "iosCompatible": "iOS und iPadOS Kompatibel",
+      "teacherTested": "Lehrergeprüft"
+    }
+  },
+  "navigation": {
+    "teachersChoice": "Lehrerwahl",
+    "downloadFree": "Kostenlos Herunterladen",
+    "getApp": "App Holen"
+  },
+  "cta": {
+    "title": "Bereit, Jede Woche Stunden zu Sparen?",
+    "subtitle": "Schließen Sie sich den Hunderten von Lehrern an, die bereits ihren Planungsworkflow transformiert haben",
+    "stats": {
+      "teachers": "Hunderte von Lehrern",
+      "timeSaved": "Wöchentlich Gesparte Stunden",
+      "freeSessions": "4 Kostenlose Sitzungen"
+    }
+  },
+  "features": {
+    "moreFeatures": "Weitere Funktionen zu Entdecken",
+    "scheduleManagement": "iSchedulEDU Stundenplanverwaltung - Organisieren und greifen Sie auf alle Ihre gespeicherten Schulstundenpläne zu",
+    "scheduleAlerts": "iSchedulEDU Stundenplanbenachrichtigungen - Richten Sie tägliche Benachrichtigungen für Ihren Klassenplan ein",
+    "dailyTimeline": "iSchedulEDU Tägliche Zeitleiste - Sehen Sie Ihren kompletten Schultag auf einen Blick",
+    "rotatingSchedule": "iSchedulEDU Rotierender Stundenplankalender - Verwalten Sie A/B und rotierende Blockstundenpläne mit Leichtigkeit",
+    "experienceText": "Erleben Sie die volle Kraft von iSchedulEDU mit Funktionen wie rotierenden Blockstundenplänen, täglichen Benachrichtigungen und einfachem Stundenplan-Teilen. Perfekt für Lehrer und Administratoren, die komplexe Schulstundenpläne verwalten."
+  },
+  "testimonials": {
+    "badge": "Echte Lehrerbewertungen",
+    "title": "Was Lehrer Sagen",
+    "subtitle": "Glauben Sie nicht nur uns - sehen Sie, warum Pädagogen iSchedulEDU lieben",
+    "loading": "(Bewertungen werden geladen...)"
+  },
+  "meta": {
+    "title": "iSchedulEDU - Schulstundenplan-Generator App | Einfache Stundenplanerstellung für Lehrer",
+    "description": "Vereinfachen Sie Ihre Schulplanung mit iSchedulEDU. Erstellen Sie individuelle Stundenpläne, verwalten Sie A/B-Rotationen, richten Sie Benachrichtigungen ein und teilen Sie über QR-Codes. Die perfekte Planungslösung für Lehrer und Schuladministratoren."
+  }
+}

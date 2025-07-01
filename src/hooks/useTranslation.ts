@@ -10,7 +10,7 @@ const getDefaultLanguage = (): string => {
   const browserLang = navigator.language.split('-')[0];
   
   // Supported languages
-  const supportedLanguages = ['en', 'es', 'fr'];
+  const supportedLanguages = ['en', 'es', 'fr', 'de', 'it', 'pt', 'nl'];
   
   // Check if browser language is supported, otherwise default to English
   return supportedLanguages.includes(browserLang) ? browserLang : 'en';
@@ -73,6 +73,6 @@ export const useTranslation = () => {
     currentLanguage,
     changeLanguage,
     isLoading,
-    supportedLanguages: ['en', 'es', 'fr']
+    supportedLanguages: ['en', 'es', 'fr', 'de', 'it', 'pt', 'nl']
   };
 };

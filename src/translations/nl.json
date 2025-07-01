@@ -1,0 +1,47 @@
+
+{
+  "header": {
+    "title": "iSchedulEDU",
+    "subtitle": "Maak aangepaste of verkorte roosters voor uw schooldag snel en gemakkelijk",
+    "tagline": "Geliefd door Leraren Overal",
+    "cta": "Sluit je aan bij honderden leraren die onverwachte roosterwijzigingen snel aanpakken!",
+    "downloadAlt": "Download iSchedulEDU op de App Store",
+    "badges": {
+      "freeToStart": "Gratis om te Beginnen",
+      "iosCompatible": "iOS en iPadOS Compatibel",
+      "teacherTested": "Door Leraren Getest"
+    }
+  },
+  "navigation": {
+    "teachersChoice": "Leraar's Keuze",
+    "downloadFree": "Gratis Downloaden",
+    "getApp": "App Krijgen"
+  },
+  "cta": {
+    "title": "Klaar om Uren per Week te Besparen?",
+    "subtitle": "Sluit je aan bij de honderden leraren die hun planningsworkflow al hebben getransformeerd",
+    "stats": {
+      "teachers": "Honderden Leraren",
+      "timeSaved": "Wekelijks Bespaarde Uren",
+      "freeSessions": "4 Gratis Sessies"
+    }
+  },
+  "features": {
+    "moreFeatures": "Meer Functies om te Ontdekken",
+    "scheduleManagement": "iSchedulEDU Roosterbeheer - Organiseer en benader al uw opgeslagen schoolroosters",
+    "scheduleAlerts": "iSchedulEDU Roostermeldingen - Stel dagelijkse meldingen in voor uw lesrooster",
+    "dailyTimeline": "iSchedulEDU Dagelijkse Tijdlijn Weergave - Zie uw complete schooldag in één oogopslag",
+    "rotatingSchedule": "iSchedulEDU Roterende Roosterkalender - Beheer A/B en roterende blokroosters met gemak",
+    "experienceText": "Ervaar de volledige kracht van iSchedulEDU met functies zoals roterende blokroosters, dagelijkse meldingen en eenvoudig roosters delen. Perfect voor leraren en beheerders die complexe schoolroosters beheren."
+  },
+  "testimonials": {
+    "badge": "Echte Leraar Beoordelingen",
+    "title": "Wat Leraren Zeggen",
+    "subtitle": "Geloof ons niet op ons woord - zie waarom onderwijzers van iSchedulEDU houden",
+    "loading": "(Beoordelingen laden...)"
+  },
+  "meta": {
+    "title": "iSchedulEDU - School Rooster Generator App | Eenvoudige Rooster Creatie voor Leraren",
+    "description": "Vereenvoudig uw schoolplanning met iSchedulEDU. Maak aangepaste roosters, beheer A/B rotaties, stel meldingen in en deel via QR-codes. De perfecte planningsoplossing voor leraren en schoolbeheerders."
+  }
+}

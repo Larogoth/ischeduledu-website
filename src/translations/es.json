@@ -12,6 +12,11 @@
       "teacherTested": "Probado por Maestros"
     }
   },
+  "navigation": {
+    "teachersChoice": "Elección de Maestros",
+    "downloadFree": "Descargar Gratis",
+    "getApp": "Obtener App"
+  },
   "cta": {
     "title": "¿Listo para Ahorrar Horas Cada Semana?",
     "subtitle": "Únete a los cientos de maestros que ya han transformado su flujo de trabajo de programación",
@@ -20,6 +25,14 @@
       "timeSaved": "Horas Ahorradas Semanalmente", 
       "freeSessions": "4 Sesiones Gratis"
     }
+  },
+  "features": {
+    "moreFeatures": "Más Funciones para Explorar",
+    "scheduleManagement": "Gestión de Horarios iSchedulEDU - Organiza y accede a todos tus horarios escolares guardados",
+    "scheduleAlerts": "Alertas de Horarios iSchedulEDU - Configura notificaciones diarias para tu horario de clases",
+    "dailyTimeline": "Vista de Cronología Diaria iSchedulEDU - Ve tu horario escolar completo de un vistazo",
+    "rotatingSchedule": "Calendario de Horarios Rotativos iSchedulEDU - Gestiona horarios A/B y rotativos con facilidad",
+    "experienceText": "Experimenta todo el poder de iSchedulEDU con funciones como horarios de bloques rotativos, notificaciones diarias y fácil compartir de horarios. Perfecto para maestros y administradores que gestionan horarios escolares complejos."
   },
   "testimonials": {
     "badge": "Reseñas Reales de Maestros",

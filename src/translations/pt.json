@@ -1,0 +1,47 @@
+
+{
+  "header": {
+    "title": "iSchedulEDU",
+    "subtitle": "Crie horários personalizados ou abreviados para o seu dia escolar de forma rápida e fácil",
+    "tagline": "Amado por Professores em Toda Parte",
+    "cta": "Junte-se a centenas de professores que lidam rapidamente com mudanças inesperadas de horário!",
+    "downloadAlt": "Baixar iSchedulEDU na App Store",
+    "badges": {
+      "freeToStart": "Grátis para Começar",
+      "iosCompatible": "Compatível com iOS e iPadOS",
+      "teacherTested": "Testado por Professores"
+    }
+  },
+  "navigation": {
+    "teachersChoice": "Escolha dos Professores",
+    "downloadFree": "Baixar Grátis",
+    "getApp": "Obter App"
+  },
+  "cta": {
+    "title": "Pronto para Economizar Horas Toda Semana?",
+    "subtitle": "Junte-se às centenas de professores que já transformaram seu fluxo de trabalho de agendamento",
+    "stats": {
+      "teachers": "Centenas de Professores",
+      "timeSaved": "Horas Economizadas Semanalmente",
+      "freeSessions": "4 Sessões Gratuitas"
+    }
+  },
+  "features": {
+    "moreFeatures": "Mais Funcionalidades para Explorar",
+    "scheduleManagement": "Gerenciamento de Horários iSchedulEDU - Organize e acesse todos os seus horários escolares salvos",
+    "scheduleAlerts": "Alertas de Horários iSchedulEDU - Configure notificações diárias para seu horário de aulas",
+    "dailyTimeline": "Visualização de Cronograma Diário iSchedulEDU - Veja seu horário escolar completo de relance",
+    "rotatingSchedule": "Calendário de Horários Rotativos iSchedulEDU - Gerencie horários A/B e rotativos com facilidade",
+    "experienceText": "Experimente todo o poder do iSchedulEDU com recursos como horários de blocos rotativos, notificações diárias e compartilhamento fácil de horários. Perfeito para professores e administradores que gerenciam horários escolares complexos."
+  },
+  "testimonials": {
+    "badge": "Avaliações Reais de Professores",
+    "title": "O Que os Professores Estão Dizendo",
+    "subtitle": "Não acredite apenas em nossa palavra - veja por que educadores amam o iSchedulEDU",
+    "loading": "(Carregando avaliações...)"
+  },
+  "meta": {
+    "title": "iSchedulEDU - App Gerador de Horários Escolares | Criação Fácil de Horários para Professores",
+    "description": "Simplifique o agendamento da sua escola com iSchedulEDU. Crie horários personalizados, gerencie rotações A/B, configure notificações e compartilhe via códigos QR. A solução perfeita de agendamento para professores e administradores escolares."
+  }
+}
