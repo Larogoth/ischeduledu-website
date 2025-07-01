@@ -1,11 +1,15 @@
-
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import AppName from "@/components/AppName";
+import { useEffect } from "react";
 
 const FAQ = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const faqSections = [
     {
       title: "General Information",

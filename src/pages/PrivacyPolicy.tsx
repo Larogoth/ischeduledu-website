@@ -1,10 +1,14 @@
-
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import AppName from "@/components/AppName";
+import { useEffect } from "react";
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const sections = [
     {
       title: "1. Information We Collect",
