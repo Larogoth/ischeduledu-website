@@ -69,8 +69,13 @@ export const useTranslation = () => {
       value = value?.[k];
     }
     
-    // Return the value as-is (could be string, array, or object)
-    return value !== undefined ? value : key;
+    // Return the value as-is, but provide fallback for undefined
+    if (value === undefined) {
+      console.warn(`Translation key not found: ${key}`);
+      return key;
+    }
+    
+    return value;
   }, [translations]);
 
   return {

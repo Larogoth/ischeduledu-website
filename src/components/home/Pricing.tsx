@@ -7,6 +7,13 @@ import { useTranslation } from "@/hooks/useTranslation";
 const Pricing = () => {
   const { t } = useTranslation();
 
+  // Get features and ensure they're arrays
+  const freeFeatures = t('pricing.free.features');
+  const proFeatures = t('pricing.pro.features');
+  
+  const freeFeaturesList = Array.isArray(freeFeatures) ? freeFeatures : [];
+  const proFeaturesList = Array.isArray(proFeatures) ? proFeatures : [];
+
   return (
     <section className="py-20 bg-gradient-to-b from-[#F8FBFF] to-white relative overflow-hidden">
       <div className="absolute top-10 left-1/3 w-20 h-20 bg-[#0FA0CE]/10 rounded-full blur-2xl"></div>
@@ -36,7 +43,7 @@ const Pricing = () => {
             </CardHeader>
             <CardContent className="pt-0">
               <ul className="space-y-4 mb-8">
-                {(t('pricing.free.features') || []).map((feature: string, index: number) => (
+                {freeFeaturesList.map((feature: string, index: number) => (
                   <li key={index} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <span className="text-gray-700">{feature}</span>
@@ -77,7 +84,7 @@ const Pricing = () => {
             </CardHeader>
             <CardContent className="pt-0">
               <ul className="space-y-4 mb-8">
-                {(t('pricing.pro.features') || []).map((feature: string, index: number) => (
+                {proFeaturesList.map((feature: string, index: number) => (
                   <li key={index} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <span className="text-gray-700">{feature}</span>

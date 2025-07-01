@@ -18,7 +18,7 @@ const FeatureCard = ({ icon, title, description, bulletPoints }: {
         <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
       </div>
       <p className="text-gray-900 mb-4">{description}</p>
-      {bulletPoints && bulletPoints.length > 0 && (
+      {bulletPoints && Array.isArray(bulletPoints) && bulletPoints.length > 0 && (
         <ul className="list-disc list-inside text-gray-900 space-y-2">
           {bulletPoints.map((point, index) => (
             <li key={index} className="ml-4">{point}</li>
@@ -31,6 +31,10 @@ const FeatureCard = ({ icon, title, description, bulletPoints }: {
 
 const WhyTeachersChoose = () => {
   const { t } = useTranslation();
+
+  // Get bullets and ensure it's an array
+  const flexibilityBullets = t('whyTeachers.flexibility.bullets');
+  const bulletPoints = Array.isArray(flexibilityBullets) ? flexibilityBullets : [];
 
   return (
     <section className="bg-white py-16">
@@ -66,7 +70,7 @@ const WhyTeachersChoose = () => {
             icon={<Settings className="h-6 w-6 text-blue-700" />}
             title={t('whyTeachers.flexibility.title')}
             description={t('whyTeachers.flexibility.description')}
-            bulletPoints={t('whyTeachers.flexibility.bullets')}
+            bulletPoints={bulletPoints}
           />
         </div>
       </div>
