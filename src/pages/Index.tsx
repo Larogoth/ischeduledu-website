@@ -7,15 +7,18 @@ import Screenshots from "@/components/home/Screenshots";
 import Footer from "@/components/home/Footer";
 import GenerationProcess from "@/components/home/GenerationProcess";
 import StickyNavigation from "@/components/home/StickyNavigation";
+import LanguageSelector from "@/components/LanguageSelector";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect } from "react";
 import type { Testimonial } from "@/data/testimonials";
 import { Download, Users, Clock } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Index = () => {
   const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
   const [isLoadingReviews, setIsLoadingReviews] = useState(true);
+  const { t, isLoading: isTranslationLoading } = useTranslation();
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -34,11 +37,38 @@ const Index = () => {
     loadReviews();
   }, []);
 
+  // Update document title and meta description when translations load
+  useEffect(() => {
+    if (!isTranslationLoading) {
+      document.title = t('meta.title');
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', t('meta.description'));
+      }
+    }
+  }, [t, isTranslationLoading]);
+
+  if (isTranslationLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0FA0CE] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] pt-14 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 rounded-full blur-3xl -translate-x-1/2"></div>
       <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl translate-x-1/2"></div>
+      
+      {/* Language selector */}
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSelector />
+      </div>
       
       <StickyNavigation />
       <Header />
@@ -50,24 +80,24 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Save Hours Every Week?
+              {t('cta.title')}
             </h2>
             <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-              Join the hundreds of teachers who've already transformed their scheduling workflow
+              {t('cta.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <div className="flex items-center gap-3 text-white">
                 <Users className="w-6 h-6 text-blue-200" />
-                <span className="text-lg font-semibold">Hundreds of Teachers</span>
+                <span className="text-lg font-semibold">{t('cta.stats.teachers')}</span>
               </div>
               <div className="flex items-center gap-3 text-white">
                 <Clock className="w-6 h-6 text-blue-200" />
-                <span className="text-lg font-semibold">Hours Saved Weekly</span>
+                <span className="text-lg font-semibold">{t('cta.stats.timeSaved')}</span>
               </div>
               <div className="flex items-center gap-3 text-white">
                 <Download className="w-6 h-6 text-blue-200" />
-                <span className="text-lg font-semibold">4 Free Sessions</span>
+                <span className="text-lg font-semibold">{t('cta.stats.freeSessions')}</span>
               </div>
             </div>
 
@@ -79,7 +109,7 @@ const Index = () => {
             >
               <img 
                 src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1718150400" 
-                alt="Download iSchedulEDU on the App Store" 
+                alt={t('header.downloadAlt')}
                 className="w-[300px] h-[100px] object-contain"
                 width="300"
                 height="100"
@@ -100,16 +130,16 @@ const Index = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                <span>⭐ Real Teacher Reviews</span>
+                <span>⭐ {t('testimonials.badge')}</span>
               </div>
               <h2 id="testimonials-title" className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-                What Teachers Are Saying
+                {t('testimonials.title')}
               </h2>
               <p className="text-xl text-gray-600">
-                Don't just take our word for it - see why educators love iSchedulEDU
+                {t('testimonials.subtitle')}
               </p>
               {import.meta.env.DEV && isLoadingReviews && (
-                <span className="text-sm text-gray-400 block mt-2">(Loading reviews...)</span>
+                <span className="text-sm text-gray-400 block mt-2">{t('testimonials.loading')}</span>
               )}
             </div>
             

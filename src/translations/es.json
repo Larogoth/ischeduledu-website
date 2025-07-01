@@ -1,0 +1,34 @@
+
+{
+  "header": {
+    "title": "iSchedulEDU",
+    "subtitle": "Crea horarios personalizados o abreviados para tu día escolar de forma rápida y fácil",
+    "tagline": "Amado por Maestros en Todas Partes",
+    "cta": "¡Únete a cientos de maestros que manejan cambios de horario inesperados rápidamente!",
+    "downloadAlt": "Descargar iSchedulEDU en el App Store",
+    "badges": {
+      "freeToStart": "Gratis para Empezar",
+      "iosCompatible": "Compatible con iOS y iPadOS",
+      "teacherTested": "Probado por Maestros"
+    }
+  },
+  "cta": {
+    "title": "¿Listo para Ahorrar Horas Cada Semana?",
+    "subtitle": "Únete a los cientos de maestros que ya han transformado su flujo de trabajo de programación",
+    "stats": {
+      "teachers": "Cientos de Maestros",
+      "timeSaved": "Horas Ahorradas Semanalmente", 
+      "freeSessions": "4 Sesiones Gratis"
+    }
+  },
+  "testimonials": {
+    "badge": "Reseñas Reales de Maestros",
+    "title": "Lo Que Dicen los Maestros",
+    "subtitle": "No solo tomes nuestra palabra - ve por qué los educadores aman iSchedulEDU",
+    "loading": "(Cargando reseñas...)"
+  },
+  "meta": {
+    "title": "iSchedulEDU - Aplicación Generadora de Horarios Escolares | Creación Fácil de Horarios para Maestros",
+    "description": "Simplifica la programación de tu escuela con iSchedulEDU. Crea horarios personalizados, gestiona rotaciones A/B, configura notificaciones y comparte a través de códigos QR. La solución perfecta de programación para maestros y administradores escolares."
+  }
+}

@@ -1,0 +1,34 @@
+
+{
+  "header": {
+    "title": "iSchedulEDU",
+    "subtitle": "Create custom or abbreviated schedules for your school day quickly and easily",
+    "tagline": "Loved by Teachers Everywhere",
+    "cta": "Join hundreds of teachers handling unexpected schedule changes quickly!",
+    "downloadAlt": "Download iSchedulEDU on the App Store",
+    "badges": {
+      "freeToStart": "Free to Start",
+      "iosCompatible": "iOS and iPadOS Compatible", 
+      "teacherTested": "Teacher Tested"
+    }
+  },
+  "cta": {
+    "title": "Ready to Save Hours Every Week?",
+    "subtitle": "Join the hundreds of teachers who've already transformed their scheduling workflow",
+    "stats": {
+      "teachers": "Hundreds of Teachers",
+      "timeSaved": "Hours Saved Weekly",
+      "freeSessions": "4 Free Sessions"
+    }
+  },
+  "testimonials": {
+    "badge": "Real Teacher Reviews",
+    "title": "What Teachers Are Saying",
+    "subtitle": "Don't just take our word for it - see why educators love iSchedulEDU",
+    "loading": "(Loading reviews...)"
+  },
+  "meta": {
+    "title": "iSchedulEDU - School Schedule Generator App | Easy Schedule Creation for Teachers",
+    "description": "Simplify your school scheduling with iSchedulEDU. Create custom schedules, manage A/B rotations, set up notifications, and share via QR codes. The perfect scheduling solution for teachers and school administrators."
+  }
+}
