@@ -21,7 +21,7 @@ const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
+        <Button variant="outline" size="sm" className="gap-2 bg-white/90 backdrop-blur-sm shadow-lg border border-gray-200 hover:bg-white">
           <Globe className="w-4 h-4" />
           {languages[currentLanguage as keyof typeof languages]?.flag}
           <span className="hidden sm:inline">
@@ -29,12 +29,12 @@ const LanguageSelector = () => {
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="bg-white shadow-lg border border-gray-200 z-[60]">
         {Object.entries(languages).map(([code, { name, flag }]) => (
           <DropdownMenuItem
             key={code}
             onClick={() => changeLanguage(code)}
-            className={`gap-2 ${currentLanguage === code ? 'bg-muted' : ''}`}
+            className={`gap-2 cursor-pointer hover:bg-gray-100 ${currentLanguage === code ? 'bg-blue-50 text-blue-700' : ''}`}
           >
             <span>{flag}</span>
             <span>{name}</span>
