@@ -71,12 +71,12 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-500"></div>
             <span>iOS and iPadOS Compatible</span>
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse sm:hidden"></div>
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-500 sm:hidden"></div>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-[#0FA0CE] rounded-full animate-pulse delay-1000"></div>
             <span>Teacher Tested</span>
-            <div className="w-2 h-2 bg-[#0FA0CE] rounded-full animate-pulse sm:hidden"></div>
+            <div className="w-2 h-2 bg-[#0FA0CE] rounded-full animate-pulse delay-1000 sm:hidden"></div>
           </div>
         </div>
       </div>
