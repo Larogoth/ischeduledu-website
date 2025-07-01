@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Translation {
   [key: string]: any;
@@ -36,12 +36,15 @@ export const useTranslation = () => {
   const [translations, setTranslations] = useState<Translation>({});
   const [isLoading, setIsLoading] = useState(true);
 
+  // Load translations whenever language changes
   useEffect(() => {
     const loadCurrentTranslation = async () => {
       setIsLoading(true);
       try {
+        console.log('Loading translation for language:', currentLanguage);
         const translation = await loadTranslation(currentLanguage);
         setTranslations(translation);
+        console.log('Translation loaded successfully:', translation);
       } catch (error) {
         console.error('Error loading translation:', error);
       } finally {
@@ -52,12 +55,13 @@ export const useTranslation = () => {
     loadCurrentTranslation();
   }, [currentLanguage]);
 
-  const changeLanguage = (language: string) => {
+  const changeLanguage = useCallback((language: string) => {
+    console.log('Changing language to:', language);
     setCurrentLanguage(language);
     localStorage.setItem('preferredLanguage', language);
-  };
+  }, []);
 
-  const t = (key: string): string => {
+  const t = useCallback((key: string): string => {
     const keys = key.split('.');
     let value = translations;
     
@@ -66,7 +70,7 @@ export const useTranslation = () => {
     }
     
     return typeof value === 'string' ? value : key;
-  };
+  }, [translations]);
 
   return {
     t,

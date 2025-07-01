@@ -40,6 +40,86 @@
     "subtitle": "Non crederci solo sulla parola - vedi perché gli educatori amano iSchedulEDU",
     "loading": "(Caricamento recensioni...)"
   },
+  "whyTeachers": {
+    "title": "Perché gli Insegnanti Scelgono iSchedulEDU",
+    "simplifySchedule": {
+      "title": "Semplifica gli Aggiustamenti dell'Orario",
+      "description": "Gestisci i cambiamenti dell'ultimo minuto dovuti a uscite anticipate, eventi speciali o ritardi meteorologici con facilità. Genera orari abbreviati che regolano automaticamente le durate delle lezioni preservando eventi chiave come pranzo ed elettive."
+    },
+    "rotatingSchedules": {
+      "title": "Mantiene gli Orari Rotativi in Carreggiata",
+      "description": "Gestisci orari di rotazione A/B o multi-giorno senza sforzo. iSchedulEDU ricalcola gli orari istantaneamente, assicurandoti di sapere sempre che giorno è e quali lezioni preparare—senza dipendere da calendari cartacei."
+    },
+    "reliableSharing": {
+      "title": "Condivisione Affidabile degli Orari",
+      "description": "Comunica cambiamenti di orario rapidamente tramite codice QR o testo. Mantieni insegnanti supplenti, studenti e colleghi sincronizzati senza sforzo."
+    },
+    "smartAlerts": {
+      "title": "Avvisi di Transizione Intelligenti",
+      "description": "Avvisi integrati per i tempi di fine lezione ed eventi significano non più guardare l'orologio. Scegli quali eventi hanno bisogno di allarme per transizioni fluide senza interruzioni inutili."
+    },
+    "visualOverview": {
+      "title": "Panoramica Visiva Chiara",
+      "description": "Vedi la tua giornata completa a colpo d'occhio con la nostra griglia oraria 12-12. Visualizza e regola gli orari facilmente con una vista completa della tua giornata a portata di mano."
+    },
+    "flexibility": {
+      "title": "Flessibilità Senza Complessità",
+      "description": "Gestire i cambiamenti di orario non dovrebbe essere difficile. iSchedulEDU ti dà controllo completo:",
+      "bullets": [
+        "Assegna orari personalizzati a giorni specifici con interruttori semplici",
+        "Imposta avvisi di orario ricorrenti per routine settimanali",
+        "Personalizza allarmi per ogni evento basato sull'importanza"
+      ]
+    }
+  },
+  "generation": {
+    "title": "Come Funziona iSchedulEDU",
+    "subtitle": "Trasforma la tua gestione degli orari in 3 passaggi semplici",
+    "steps": {
+      "input": {
+        "title": "Inserisci il Tuo Orario",
+        "description": "Inserisci la tua ora di inizio, ora di fine e qualsiasi evento fisso come pause pranzo o periodi speciali."
+      },
+      "generate": {
+        "title": "Genera Istantaneamente",
+        "description": "Il nostro algoritmo intelligente crea periodi di lezione perfettamente bilanciati che si adattano alle tue esigenze di tempo esatte."
+      },
+      "share": {
+        "title": "Salva e Condividi",
+        "description": "Salva i tuoi orari per uso futuro e condividili istantaneamente tramite codice QR o messaggio di testo."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Prezzi Semplici e Trasparenti",
+    "subtitle": "Inizia gratis, aggiorna quando sei pronto",
+    "free": {
+      "title": "Prova Gratuita",
+      "price": "0€",
+      "description": "Perfetto per provare iSchedulEDU",
+      "features": [
+        "4 generazioni di orario gratuite",
+        "Condivisione orario di base",
+        "Supporto iOS e iPadOS",
+        "Nessun limite di tempo"
+      ],
+      "cta": "Scarica Gratis"
+    },
+    "pro": {
+      "title": "Versione Completa",
+      "price": "4,99€",
+      "description": "Sblocca il potere di pianificazione illimitato",
+      "features": [
+        "Generazioni di orario illimitate",
+        "Opzioni di condivisione avanzate",
+        "Supporto orario rotativo",
+        "Notifiche personalizzate",
+        "Supporto clienti prioritario"
+      ],
+      "cta": "Aggiorna Ora"
+    },
+    "note": "Acquisto unico, nessun abbonamento"
+  },
   "meta": {
     "title": "iSchedulEDU - App Generatore Orari Scolastici | Creazione Facile di Orari per Insegnanti",
     "description": "Semplifica la pianificazione della tua scuola con iSchedulEDU. Crea orari personalizzati, gestisci rotazioni A/B, imposta notifiche e condividi tramite codici QR. La soluzione di pianificazione perfetta per insegnanti e amministratori scolastici."

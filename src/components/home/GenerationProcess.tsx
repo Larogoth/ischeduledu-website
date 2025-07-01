@@ -1,137 +1,98 @@
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { ArrowRight, Clock, Download } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+
+const StepCard = ({ number, title, description, image, isLast = false }: {
+  number: number;
+  title: string;
+  description: string;
+  image: string;
+  isLast?: boolean;
+}) => (
+  <div className="flex flex-col items-center text-center relative">
+    <div className="relative mb-6">
+      <div className="absolute inset-0 bg-[#0FA0CE]/10 rounded-2xl blur-xl"></div>
+      <img
+        src={image}
+        alt={title}
+        className="relative z-10 w-48 h-auto rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
+        width="192"
+        height="416"
+      />
+    </div>
+    <div className="bg-[#0FA0CE] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg mb-4">
+      {number}
+    </div>
+    <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+    <p className="text-gray-700 max-w-xs leading-relaxed">{description}</p>
+    
+    {!isLast && (
+      <div className="hidden lg:block absolute -right-12 top-1/2 transform -translate-y-1/2">
+        <ArrowRight className="w-6 h-6 text-[#0FA0CE]" />
+      </div>
+    )}
+  </div>
+);
 
 const GenerationProcess = () => {
+  const { t } = useTranslation();
+
   const steps = [
     {
-      image: "/lovable-uploads/99aa0220-3f06-4237-97d0-1829aa8487b5.png",
-      title: "Set Your Parameters",
-      description: "Enter your schedule details including start time, end time, and any pre-set events like lunch or electives"
+      title: t('generation.steps.input.title'),
+      description: t('generation.steps.input.description'),
+      image: "/lovable-uploads/99aa0220-3f06-4237-97d0-1829aa8487b5.png"
     },
     {
-      image: "/lovable-uploads/27066ff3-0092-4675-b437-60f4d60369d1.png",
-      title: "Review Generated Schedule",
-      description: "See your automatically generated class periods with perfect timing"
+      title: t('generation.steps.generate.title'),
+      description: t('generation.steps.generate.description'),
+      image: "/lovable-uploads/27066ff3-0092-4675-b437-60f4d60369d1.png"
     },
     {
-      image: "/lovable-uploads/5c2b9336-dc95-4680-8d7f-c66087acbd47.png",
-      title: "Customize Events",
-      description: "Personalize each event with custom colors and notification settings"
-    }
-  ];
-
-  const customSteps = [
-    {
-      image: "/lovable-uploads/3a4efc3e-4e22-4e25-af6f-2c157fcb7a8e.png",
-      title: "Name Your Schedule & Add Events",
-      description: "Give your schedule a name and start adding your custom events"
-    },
-    {
-      image: "/lovable-uploads/ba0a9b4b-cc7c-4dec-9265-f1a15dcbc09e.png",
-      title: "Configure Each Event",
-      description: "Set event name, times, alerts, and choose custom colors"
-    },
-    {
-      image: "/lovable-uploads/1a30f786-7c58-4bba-ae60-0328a33c5615.png",
-      title: "Review Your Schedule",
-      description: "See all your events laid out with their custom settings"
+      title: t('generation.steps.share.title'),
+      description: t('generation.steps.share.description'),
+      image: "/lovable-uploads/5c2b9336-dc95-4680-8d7f-c66087acbd47.png"
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-          Two Ways to Create Your Perfect Schedule
-        </h2>
-        <p className="text-xl text-gray-700 text-center mb-16 max-w-2xl mx-auto">
-          Choose between quick auto-generation or full custom creation
-        </p>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Auto-Generation Process */}
-          <div>
-            <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
-              Quick Schedule Generation
-            </h3>
-            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {steps.map((step, index) => (
-                    <CarouselItem key={index}>
-                      <div className="p-1">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <div className="max-w-[180px] md:max-w-[260px] mx-auto">
-                            <img
-                              src={step.image}
-                              alt={step.title}
-                              className="w-full object-contain"
-                              style={{ height: '450px' }}
-                            />
-                          </div>
-                          <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                              {step.title}
-                            </h3>
-                            <p className="text-gray-600">
-                              {step.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="left-0 -translate-x-1/2" />
-                <CarouselNext className="right-0 translate-x-1/2" />
-              </Carousel>
-            </div>
-          </div>
+    <section className="py-20 bg-gradient-to-b from-white to-[#F8FBFF] relative overflow-hidden">
+      <div className="absolute top-0 right-1/4 w-32 h-32 bg-[#0FA0CE]/5 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-0 left-1/4 w-24 h-24 bg-blue-500/5 rounded-full blur-xl"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            {t('generation.title')}
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            {t('generation.subtitle')}
+          </p>
+        </div>
 
-          {/* Custom Creation Process */}
-          <div>
-            <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
-              Custom Schedule Creation
-            </h3>
-            <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {customSteps.map((step, index) => (
-                    <CarouselItem key={index}>
-                      <div className="p-1">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <div className="max-w-[180px] md:max-w-[260px] mx-auto">
-                            <img
-                              src={step.image}
-                              alt={step.title}
-                              className="w-full object-contain"
-                              style={{ height: '450px' }}
-                            />
-                          </div>
-                          <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                              {step.title}
-                            </h3>
-                            <p className="text-gray-600">
-                              {step.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="left-0 -translate-x-1/2" />
-                <CarouselNext className="right-0 translate-x-1/2" />
-              </Carousel>
-            </div>
-          </div>
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 max-w-5xl mx-auto relative">
+          {steps.map((step, index) => (
+            <StepCard
+              key={index}
+              number={index + 1}
+              title={step.title}
+              description={step.description}
+              image={step.image}
+              isLast={index === steps.length - 1}
+            />
+          ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <a 
+            href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0D8CB6] hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          >
+            <Download className="w-5 h-5" />
+            {t('pricing.free.cta')}
+          </a>
         </div>
       </div>
     </section>

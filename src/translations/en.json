@@ -40,6 +40,86 @@
     "subtitle": "Don't just take our word for it - see why educators love iSchedulEDU",
     "loading": "(Loading reviews...)"
   },
+  "whyTeachers": {
+    "title": "Why Teachers Choose iSchedulEDU",
+    "simplifySchedule": {
+      "title": "Simplifies Schedule Adjustments",
+      "description": "Handle last-minute changes due to early dismissals, special events, or weather delays with ease. Generate abbreviated schedules that automatically adjust class durations while preserving key events like lunch and electives."
+    },
+    "rotatingSchedules": {
+      "title": "Keeps Rotating Schedules on Track",
+      "description": "Manage A/B or multi-day rotation schedules effortlessly. iSchedulEDU recalculates schedules instantly, ensuring you always know what day it is and which classes to prepare for—without relying on paper calendars."
+    },
+    "reliableSharing": {
+      "title": "Reliable Schedule Sharing",
+      "description": "Communicate schedule changes quickly via QR code or text. Keep substitute teachers, students, and colleagues in sync effortlessly."
+    },
+    "smartAlerts": {
+      "title": "Smart Transition Alerts",
+      "description": "Built-in alerts for class and event end times mean no more clock-watching. Choose which events need an alarm for smooth transitions without unnecessary interruptions."
+    },
+    "visualOverview": {
+      "title": "Clear Visual Overview",
+      "description": "See your full day at a glance with our 12 AM–12 AM time grid. Visualize and adjust schedules easily with a complete view of your day at your fingertips."
+    },
+    "flexibility": {
+      "title": "Flexibility Without Complexity",
+      "description": "Managing schedule changes shouldn't be difficult. iSchedulEDU gives you complete control:",
+      "bullets": [
+        "Assign custom schedules to specific days with simple toggles",
+        "Set up recurring schedule alerts for weekly routines",
+        "Customize alarms for each event based on importance"
+      ]
+    }
+  },
+  "generation": {
+    "title": "How iSchedulEDU Works",
+    "subtitle": "Transform your schedule management in 3 simple steps",
+    "steps": {
+      "input": {
+        "title": "Input Your Schedule",
+        "description": "Enter your start time, end time, and any fixed events like lunch breaks or special periods."
+      },
+      "generate": {
+        "title": "Generate Instantly",
+        "description": "Our smart algorithm creates perfectly balanced class periods that fit your exact timing needs."
+      },
+      "share": {
+        "title": "Save & Share",
+        "description": "Save your schedules for future use and share them instantly via QR code or text message."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Start free, upgrade when you're ready",
+    "free": {
+      "title": "Free Trial",
+      "price": "$0",
+      "description": "Perfect for trying out iSchedulEDU",
+      "features": [
+        "4 free schedule generations",
+        "Basic schedule sharing",
+        "iOS and iPadOS support",
+        "No time limits"
+      ],
+      "cta": "Download Free"
+    },
+    "pro": {
+      "title": "Full Version",
+      "price": "$4.99",
+      "description": "Unlock unlimited scheduling power",
+      "features": [
+        "Unlimited schedule generations",
+        "Advanced sharing options",
+        "Rotating schedule support",
+        "Custom notifications",
+        "Priority customer support"
+      ],
+      "cta": "Upgrade Now"
+    },
+    "note": "One-time purchase, no subscriptions"
+  },
   "meta": {
     "title": "iSchedulEDU - School Schedule Generator App | Easy Schedule Creation for Teachers",
     "description": "Simplify your school scheduling with iSchedulEDU. Create custom schedules, manage A/B rotations, set up notifications, and share via QR codes. The perfect scheduling solution for teachers and school administrators."
