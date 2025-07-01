@@ -51,7 +51,7 @@ const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: Test
   const displayContent = isTranslated && translatedContent ? translatedContent : content;
 
   return (
-    <Card className="hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 border border-blue-100 hover:border-[#0FA0CE]/40 relative overflow-hidden">
+    <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 border border-blue-100 hover:border-[#0FA0CE]/40 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
       <CardContent className="pt-8 pb-6 px-6">
         <div className="flex justify-between items-start mb-6">
