@@ -7,19 +7,19 @@ const Screenshots = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
           {[
             {
-              src: "/lovable-uploads/28317119-fd83-41b2-b877-3b195a794b2a.png",
-              alt: "iSchedulEDU saved schedules management interface showing organized school timetables for teachers"
+              src: "/lovable-uploads/ischededu-saved-schedules-management-interface.png",
+              alt: "iSchedulEDU saved schedules management interface showing organized school timetables for teachers and administrators"
             },
             {
-              src: "/lovable-uploads/75200545-4ea3-40be-90f7-7448e464ef66.png",
-              alt: "iSchedulEDU daily schedule notifications setup screen for class period alerts and reminders"
+              src: "/lovable-uploads/ischededu-daily-notifications-setup-screen.png",
+              alt: "iSchedulEDU daily schedule notifications setup screen for class period alerts and reminders for educators"
             },
             {
-              src: "/lovable-uploads/53195535-6434-4fc8-abce-a78ac1dc6f99.png",
-              alt: "iSchedulEDU daily timeline view displaying complete school day schedule with class periods and times"
+              src: "/lovable-uploads/ischededu-daily-timeline-schedule-view.png",
+              alt: "iSchedulEDU daily timeline view displaying complete school day schedule with class periods and break times"
             },
             {
-              src: "/lovable-uploads/900bfec1-1999-467d-872a-7be015674168.png",
+              src: "/lovable-uploads/ischededu-rotating-block-schedule-calendar.png",
               alt: "iSchedulEDU rotating block schedule calendar managing A-day B-day alternating class periods for schools"
             }
           ].map((image, index) => (
