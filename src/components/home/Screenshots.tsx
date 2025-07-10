@@ -36,9 +36,6 @@ const Screenshots = () => {
                 height="476"
                 tabIndex={0}
               />
-              <p className="text-xs md:text-sm text-gray-900 mt-2 text-center px-2">
-                {image.alt}
-              </p>
             </div>
           ))}
         </div>
