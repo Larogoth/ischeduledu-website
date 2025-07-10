@@ -33,7 +33,7 @@ const HeaderB = () => {
               >
                 <img 
                   src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
-                  alt="Download iSchedulEDU on the App Store" 
+                  alt="Download iSchedulEDU school schedule generator app on Apple App Store for iOS and iPadOS devices" 
                   className="w-[200px] h-auto"
                   width="200"
                   height="59"
@@ -68,7 +68,7 @@ const HeaderB = () => {
               <div className="absolute inset-0 bg-[#0FA0CE]/20 rounded-3xl blur-2xl transform rotate-6"></div>
               <img
                 src="/lovable-uploads/99aa0220-3f06-4237-97d0-1829aa8487b5.png"
-                alt="iSchedulEDU App Interface - Easy Schedule Generation"
+                alt="iSchedulEDU app interface showing schedule parameter setup screen for quick school timetable generation"
                 className="relative z-10 w-80 h-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500"
                 width="320"
                 height="693"

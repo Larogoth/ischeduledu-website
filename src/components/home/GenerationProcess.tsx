@@ -12,17 +12,20 @@ const GenerationProcess = () => {
     {
       image: "/lovable-uploads/99aa0220-3f06-4237-97d0-1829aa8487b5.png",
       title: "Set Your Parameters",
-      description: "Enter your schedule details including start time, end time, and any pre-set events like lunch or electives"
+      description: "Enter your schedule details including start time, end time, and any pre-set events like lunch or electives",
+      alt: "iSchedulEDU schedule parameter setup screen showing start time, end time, and lunch period configuration for teachers"
     },
     {
       image: "/lovable-uploads/27066ff3-0092-4675-b437-60f4d60369d1.png",
       title: "Review Generated Schedule",
-      description: "See your automatically generated class periods with perfect timing"
+      description: "See your automatically generated class periods with perfect timing",
+      alt: "iSchedulEDU generated class schedule display showing perfectly timed school periods and breaks"
     },
     {
       image: "/lovable-uploads/5c2b9336-dc95-4680-8d7f-c66087acbd47.png",
       title: "Customize Events",
-      description: "Personalize each event with custom colors and notification settings"
+      description: "Personalize each event with custom colors and notification settings",
+      alt: "iSchedulEDU schedule customization interface with color coding and notification settings for class periods"
     }
   ];
 
@@ -30,17 +33,20 @@ const GenerationProcess = () => {
     {
       image: "/lovable-uploads/3a4efc3e-4e22-4e25-af6f-2c157fcb7a8e.png",
       title: "Name Your Schedule & Add Events",
-      description: "Give your schedule a name and start adding your custom events"
+      description: "Give your schedule a name and start adding your custom events",
+      alt: "iSchedulEDU custom schedule creation screen for naming and adding school events manually"
     },
     {
       image: "/lovable-uploads/ba0a9b4b-cc7c-4dec-9265-f1a15dcbc09e.png",
       title: "Configure Each Event",
-      description: "Set event name, times, alerts, and choose custom colors"
+      description: "Set event name, times, alerts, and choose custom colors",
+      alt: "iSchedulEDU event configuration interface showing time settings, alerts, and color customization options"
     },
     {
       image: "/lovable-uploads/1a30f786-7c58-4bba-ae60-0328a33c5615.png",
       title: "Review Your Schedule",
-      description: "See all your events laid out with their custom settings"
+      description: "See all your events laid out with their custom settings",
+      alt: "iSchedulEDU final schedule review showing completed custom school timetable with color-coded events"
     }
   ];
 
@@ -70,7 +76,7 @@ const GenerationProcess = () => {
                           <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
-                              alt={step.title}
+                              alt={step.alt}
                               className="w-full object-contain"
                               style={{ height: '450px' }}
                             />
@@ -109,7 +115,7 @@ const GenerationProcess = () => {
                           <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
-                              alt={step.title}
+                              alt={step.alt}
                               className="w-full object-contain"
                               style={{ height: '450px' }}
                             />

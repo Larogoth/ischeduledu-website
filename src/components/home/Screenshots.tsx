@@ -8,19 +8,19 @@ const Screenshots = () => {
           {[
             {
               src: "/lovable-uploads/28317119-fd83-41b2-b877-3b195a794b2a.png",
-              alt: "iSchedulEDU Schedule Management - Organize and access all your saved school schedules"
+              alt: "iSchedulEDU saved schedules management interface showing organized school timetables for teachers"
             },
             {
               src: "/lovable-uploads/75200545-4ea3-40be-90f7-7448e464ef66.png",
-              alt: "iSchedulEDU Schedule Alerts - Set up daily notifications for your class schedule"
+              alt: "iSchedulEDU daily schedule notifications setup screen for class period alerts and reminders"
             },
             {
               src: "/lovable-uploads/53195535-6434-4fc8-abce-a78ac1dc6f99.png",
-              alt: "iSchedulEDU Daily Timeline View - See your complete school day schedule at a glance"
+              alt: "iSchedulEDU daily timeline view displaying complete school day schedule with class periods and times"
             },
             {
               src: "/lovable-uploads/900bfec1-1999-467d-872a-7be015674168.png",
-              alt: "iSchedulEDU Rotating Schedule Calendar - Manage A/B and rotating block schedules with ease"
+              alt: "iSchedulEDU rotating block schedule calendar managing A-day B-day alternating class periods for schools"
             }
           ].map((image, index) => (
             <div

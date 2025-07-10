@@ -38,7 +38,7 @@ const FinalCTA = () => {
             >
               <img 
                 src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1718150400" 
-                alt="Download iSchedulEDU on the App Store" 
+                alt="Download iSchedulEDU school schedule generator app on Apple App Store - free scheduling tool for teachers" 
                 className="w-[300px] h-[100px] object-contain"
                 width="300"
                 height="100"
@@ -49,7 +49,7 @@ const FinalCTA = () => {
           <div className="flex justify-center">
             <img
               src="/lovable-uploads/53195535-6434-4fc8-abce-a78ac1dc6f99.png"
-              alt="iSchedulEDU Daily Schedule View"
+              alt="iSchedulEDU daily school schedule timeline view showing complete class periods and break times for teachers"
               className="w-64 h-auto rounded-xl shadow-2xl"
               width="256"
               height="555"

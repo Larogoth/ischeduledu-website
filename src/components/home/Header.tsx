@@ -21,7 +21,7 @@ const Header = () => {
           <div className="absolute inset-0 bg-[#0FA0CE] opacity-10 rounded-full blur-3xl transform -translate-y-1/2"></div>
           <img
             src="/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png"
-            alt="iSchedulEDU App Logo - School Schedule Generator Application"
+            alt="iSchedulEDU school schedule generator app logo - educational scheduling software for teachers and administrators"
             className="mx-auto w-36 h-36 mb-8 rounded-full shadow-2xl hover:scale-110 transition-all duration-500 ring-4 ring-white ring-opacity-50"
             width="144"
             height="144"
@@ -48,12 +48,12 @@ const Header = () => {
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-block group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-offset-2"
-            aria-label="Download iSchedulEDU on the App Store"
+            aria-label="Download iSchedulEDU school schedule generator app on the App Store for iOS and iPadOS"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#0FA0CE] to-blue-600 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
             <img 
               src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
-              alt="Download iSchedulEDU on the App Store" 
+              alt="Download iSchedulEDU school schedule generator app on Apple App Store for teachers and educators" 
               className="w-[280px] h-[94px] object-contain relative z-10"
               width="280"
               height="94"
