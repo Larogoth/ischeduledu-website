@@ -67,7 +67,7 @@ const HeaderB = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-[#0FA0CE]/20 rounded-3xl blur-2xl transform rotate-6"></div>
               <img
-                src="/lovable-uploads/ischeduledu-schedule-parameter-setup-teacher-interface.png"
+                src="/lovable-uploads/99aa0220-3f06-4237-97d0-1829aa8487b5.png"
                 alt="iSchedulEDU app interface showing schedule parameter setup screen for quick school timetable generation"
                 className="relative z-10 w-80 h-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500"
                 width="320"
