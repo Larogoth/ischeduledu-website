@@ -48,31 +48,13 @@ const ImportSchedule = () => {
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
-  // Convert iOS timestamp to readable time - handles both seconds and milliseconds
+  // Convert Unix epoch timestamp to readable time
   const formatTimeFromTimestamp = (timestamp: number): string => {
     console.log('Original timestamp:', timestamp);
     
-    // Try different interpretations of the timestamp
-    let date: Date;
-    
-    // If timestamp seems to be in seconds since a reference date (like NSDate's timeIntervalSinceReferenceDate)
-    // iOS NSDate reference date is January 1, 2001, 00:00:00 UTC
-    const referenceDate = new Date('2001-01-01T00:00:00Z').getTime() / 1000;
-    date = new Date((referenceDate + timestamp) * 1000);
-    
+    // Handle Unix epoch timestamp (seconds since Jan 1, 1970)
+    const date = new Date(timestamp * 1000);
     console.log('Converted date:', date);
-    
-    // If the date seems invalid, try treating as seconds since Unix epoch
-    if (date.getFullYear() < 2020 || date.getFullYear() > 2030) {
-      date = new Date(timestamp * 1000);
-      console.log('Alternative date interpretation:', date);
-    }
-    
-    // If still invalid, try as milliseconds
-    if (date.getFullYear() < 2020 || date.getFullYear() > 2030) {
-      date = new Date(timestamp);
-      console.log('Milliseconds interpretation:', date);
-    }
     
     return date.toLocaleTimeString('en-US', { 
       hour: 'numeric', 
