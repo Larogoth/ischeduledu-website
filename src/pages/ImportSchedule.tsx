@@ -168,25 +168,23 @@ const ImportSchedule = () => {
             {/* Action Cards */}
             <div className="space-y-4">
               {isMobile ? (
-                <>
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="text-center">
-                        <Smartphone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Open in iSchedulEDU App</h3>
-                        <p className="text-gray-600 mb-4">
-                          Import this schedule directly into your iSchedulEDU app
-                        </p>
-                        <Button onClick={handleOpenInApp} className="w-full mb-2">
-                          Open in App
-                        </Button>
-                        <Button onClick={handleDownloadApp} variant="outline" className="w-full">
-                          Download App
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </>
+                <Card>
+                  <CardContent className="pt-6">
+                    <div className="text-center">
+                      <Smartphone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Open in iSchedulEDU App</h3>
+                      <p className="text-gray-600 mb-4">
+                        Import this schedule directly into your iSchedulEDU app
+                      </p>
+                      <Button onClick={handleOpenInApp} className="w-full mb-2">
+                        Open in App
+                      </Button>
+                      <Button onClick={handleDownloadApp} variant="outline" className="w-full">
+                        Download App
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               ) : (
                 <Card>
                   <CardContent className="pt-6">
@@ -207,12 +205,13 @@ const ImportSchedule = () => {
                           Copy Link
                         </Button>
                       </div>
-                    </CardContent>
-                  </Card>
-                )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </>
-        )}
+        ) : null}
 
         {/* Footer */}
         <div className="text-center mt-8 pt-8 border-t border-gray-200">
