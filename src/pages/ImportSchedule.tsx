@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -41,6 +41,7 @@ interface IOSScheduleData {
 const ImportSchedule = () => {
   const { scheduleId } = useParams();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const isMobile = useIsMobile();
   const [scheduleData, setScheduleData] = useState<ScheduleData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -107,9 +108,39 @@ const ImportSchedule = () => {
   useEffect(() => {
     const loadScheduleData = () => {
       try {
+        console.log('Current URL:', window.location.href);
+        console.log('Location search:', location.search);
+        console.log('All search params:', Object.fromEntries(searchParams.entries()));
+        
         // Try to get data from URL query parameter first
         const encodedData = searchParams.get('data');
         console.log('Encoded data from URL:', encodedData);
+        
+        // Also try getting it directly from the URL hash or search
+        if (!encodedData) {
+          const urlParams = new URLSearchParams(window.location.search);
+          const urlEncodedData = urlParams.get('data');
+          console.log('Encoded data from direct URL parsing:', urlEncodedData);
+          
+          if (urlEncodedData) {
+            const decodedData = JSON.parse(atob(urlEncodedData));
+            console.log('Decoded data from direct URL:', decodedData);
+            
+            // Check if this is iOS app format or web format
+            if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
+              console.log('Detected iOS app format:', decodedData);
+              const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
+              setScheduleData(transformedData);
+            } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
+              console.log('Detected web format:', decodedData);
+              setScheduleData(decodedData as ScheduleData);
+            } else {
+              console.error('Unknown data format:', decodedData);
+              setError('Unsupported schedule data format');
+            }
+            return;
+          }
+        }
         
         if (encodedData) {
           const decodedData = JSON.parse(atob(encodedData));
@@ -133,6 +164,7 @@ const ImportSchedule = () => {
           // For future implementation with specific schedule IDs
           setError('Schedule ID lookup not yet implemented');
         } else {
+          console.error('No schedule data found - URL:', window.location.href);
           setError('No schedule data found in URL');
         }
       } catch (err) {
@@ -144,7 +176,7 @@ const ImportSchedule = () => {
     };
 
     loadScheduleData();
-  }, [scheduleId, searchParams]);
+  }, [scheduleId, searchParams, location.search]);
 
   const checkAppInstallation = () => {
     if (!isMobile) return;
