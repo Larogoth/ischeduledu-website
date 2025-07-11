@@ -48,9 +48,32 @@ const ImportSchedule = () => {
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
-  // Convert iOS timestamp to readable time
+  // Convert iOS timestamp to readable time - handles both seconds and milliseconds
   const formatTimeFromTimestamp = (timestamp: number): string => {
-    const date = new Date(timestamp * 1000);
+    console.log('Original timestamp:', timestamp);
+    
+    // Try different interpretations of the timestamp
+    let date: Date;
+    
+    // If timestamp seems to be in seconds since a reference date (like NSDate's timeIntervalSinceReferenceDate)
+    // iOS NSDate reference date is January 1, 2001, 00:00:00 UTC
+    const referenceDate = new Date('2001-01-01T00:00:00Z').getTime() / 1000;
+    date = new Date((referenceDate + timestamp) * 1000);
+    
+    console.log('Converted date:', date);
+    
+    // If the date seems invalid, try treating as seconds since Unix epoch
+    if (date.getFullYear() < 2020 || date.getFullYear() > 2030) {
+      date = new Date(timestamp * 1000);
+      console.log('Alternative date interpretation:', date);
+    }
+    
+    // If still invalid, try as milliseconds
+    if (date.getFullYear() < 2020 || date.getFullYear() > 2030) {
+      date = new Date(timestamp);
+      console.log('Milliseconds interpretation:', date);
+    }
+    
     return date.toLocaleTimeString('en-US', { 
       hour: 'numeric', 
       minute: '2-digit',
@@ -60,6 +83,7 @@ const ImportSchedule = () => {
 
   // Transform iOS schedule data to web format
   const transformIOSScheduleData = (iosData: IOSScheduleData): ScheduleData => {
+    console.log('Transforming iOS data:', iosData);
     const events = iosData.events || [];
     const subjects = events.map(event => event.name);
     
@@ -74,6 +98,17 @@ const ImportSchedule = () => {
 
     const startTime = earliestStart !== Infinity ? formatTimeFromTimestamp(earliestStart) : '8:00 AM';
     const endTime = latestEnd > 0 ? formatTimeFromTimestamp(latestEnd) : '3:00 PM';
+    
+    console.log('Transformed data:', {
+      name: iosData.name,
+      type: iosData.scheduleType || 'custom',
+      subjects: subjects,
+      periods: events.length,
+      startTime: startTime,
+      endTime: endTime,
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      notifications: events.some(event => event.enableAlert)
+    });
     
     return {
       name: iosData.name,
@@ -92,8 +127,11 @@ const ImportSchedule = () => {
       try {
         // Try to get data from URL query parameter first
         const encodedData = searchParams.get('data');
+        console.log('Encoded data from URL:', encodedData);
+        
         if (encodedData) {
           const decodedData = JSON.parse(atob(encodedData));
+          console.log('Decoded data:', decodedData);
           
           // Check if this is iOS app format or web format
           if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
