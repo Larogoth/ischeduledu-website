@@ -1,10 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Smartphone, Download, Calendar, Clock, Users } from 'lucide-react';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Smartphone, Download, Calendar, Clock, Users, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ScheduleData {
@@ -25,6 +25,8 @@ const ImportSchedule = () => {
   const [scheduleData, setScheduleData] = useState<ScheduleData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
+  const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
   useEffect(() => {
     const loadScheduleData = () => {
@@ -51,20 +53,83 @@ const ImportSchedule = () => {
     loadScheduleData();
   }, [scheduleId, searchParams]);
 
-  const handleOpenInApp = () => {
-    // Try to open in the iOS app using custom URL scheme
-    const appUrl = `ischededu://import?data=${searchParams.get('data')}`;
-    window.location.href = appUrl;
+  const checkAppInstallation = () => {
+    if (!isMobile) return;
     
-    // Fallback to App Store after a delay if app doesn't open
+    setAppStatus('checking');
+    
+    // Create a hidden iframe to test the custom URL scheme
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'ischededu://test';
+    document.body.appendChild(iframe);
+    
+    // Set a timeout to detect if the app opened
+    const timeout = setTimeout(() => {
+      setAppStatus('not-installed');
+      document.body.removeChild(iframe);
+    }, 2500);
+    
+    // If the page becomes hidden (app opened), we assume the app is installed
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearTimeout(timeout);
+        setAppStatus('installed');
+        document.body.removeChild(iframe);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Fallback: assume not installed after timeout
     setTimeout(() => {
-      window.open('https://apps.apple.com/app/your-app-id', '_blank');
-    }, 2000);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }, 3000);
+  };
+
+  const handleOpenInApp = () => {
+    const appUrl = `ischededu://import?data=${searchParams.get('data')}`;
+    
+    if (appStatus === 'installed') {
+      // Direct open since we know the app is there
+      window.location.href = appUrl;
+    } else {
+      // Try to open and detect
+      setAppStatus('checking');
+      const startTime = Date.now();
+      
+      // Try to open the app
+      window.location.href = appUrl;
+      
+      // Check if we're still on the page after a delay
+      setTimeout(() => {
+        const timeElapsed = Date.now() - startTime;
+        
+        // If we're still here and enough time has passed, show App Store option
+        if (timeElapsed > 2000 && !document.hidden) {
+          setAppStatus('not-installed');
+          setShowAppStoreRedirect(true);
+        }
+      }, 2500);
+    }
   };
 
   const handleDownloadApp = () => {
     window.open('https://apps.apple.com/app/your-app-id', '_blank');
   };
+
+  const handleTryAgain = () => {
+    setShowAppStoreRedirect(false);
+    setAppStatus('unknown');
+    checkAppInstallation();
+  };
+
+  useEffect(() => {
+    if (isMobile && scheduleData) {
+      checkAppInstallation();
+    }
+  }, [isMobile, scheduleData]);
 
   if (isLoading) {
     return (
@@ -168,31 +233,96 @@ const ImportSchedule = () => {
             {/* Action Cards */}
             <div className="space-y-4">
               {isMobile ? (
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="text-center">
-                      <Smartphone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Open in iSchedulEDU App</h3>
-                      <p className="text-gray-600 mb-4">
-                        Import this schedule directly into your iSchedulEDU app
-                      </p>
-                      <Button onClick={handleOpenInApp} className="w-full mb-2">
-                        Open in App
-                      </Button>
-                      <Button onClick={handleDownloadApp} variant="outline" className="w-full">
-                        Download App
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                <>
+                  {/* App Status Alert */}
+                  {appStatus === 'checking' && (
+                    <Alert>
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertDescription>
+                        Checking if iSchedulEDU is installed...
+                      </AlertDescription>
+                    </Alert>
+                  )}
+                  
+                  {appStatus === 'installed' && (
+                    <Alert className="border-green-200 bg-green-50">
+                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <AlertDescription className="text-green-800">
+                        Great! iSchedulEDU is installed on your device.
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
+                  {showAppStoreRedirect && (
+                    <Alert className="border-orange-200 bg-orange-50">
+                      <AlertCircle className="h-4 w-4 text-orange-600" />
+                      <AlertDescription className="text-orange-800">
+                        It looks like iSchedulEDU isn't installed. Download the app to import this schedule directly.
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-center">
+                        <Smartphone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                        {appStatus === 'installed' ? (
+                          <>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to Import</h3>
+                            <p className="text-gray-600 mb-4">
+                              Tap the button below to import this schedule directly into your iSchedulEDU app.
+                            </p>
+                            <Button onClick={handleOpenInApp} className="w-full">
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              Import to iSchedulEDU
+                            </Button>
+                          </>
+                        ) : appStatus === 'not-installed' || showAppStoreRedirect ? (
+                          <>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Get iSchedulEDU App</h3>
+                            <p className="text-gray-600 mb-4">
+                              Download iSchedulEDU to easily import and manage this schedule on your device.
+                            </p>
+                            <div className="space-y-2">
+                              <Button onClick={handleDownloadApp} className="w-full">
+                                <Download className="w-4 h-4 mr-2" />
+                                Download iSchedulEDU
+                              </Button>
+                              <Button onClick={handleTryAgain} variant="outline" className="w-full">
+                                I Already Have the App
+                              </Button>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Import Schedule</h3>
+                            <p className="text-gray-600 mb-4">
+                              If you have iSchedulEDU installed, tap "Open in App" to import directly. Otherwise, download the app first.
+                            </p>
+                            <div className="space-y-2">
+                              <Button onClick={handleOpenInApp} className="w-full">
+                                <ExternalLink className="w-4 h-4 mr-2" />
+                                Open in App
+                              </Button>
+                              <Button onClick={handleDownloadApp} variant="outline" className="w-full">
+                                <Download className="w-4 h-4 mr-2" />
+                                Download App
+                              </Button>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </>
               ) : (
                 <Card>
                   <CardContent className="pt-6">
                     <div className="text-center">
                       <Download className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Get iSchedulEDU</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Get iSchedulEDU Mobile App</h3>
                       <p className="text-gray-600 mb-4">
-                        Download the iSchedulEDU app on your mobile device to import this schedule
+                        This schedule is designed for mobile import. Download the iSchedulEDU app on your phone or tablet to import this schedule.
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <Button onClick={handleDownloadApp} className="flex items-center gap-2">
@@ -202,9 +332,12 @@ const ImportSchedule = () => {
                         <Button variant="outline" onClick={() => {
                           navigator.clipboard.writeText(window.location.href);
                         }}>
-                          Copy Link
+                          Copy Link for Mobile
                         </Button>
                       </div>
+                      <p className="text-sm text-gray-500 mt-3">
+                        Send this link to your mobile device to import the schedule
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
