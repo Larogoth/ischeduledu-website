@@ -18,6 +18,26 @@ interface ScheduleData {
   notifications: boolean;
 }
 
+interface IOSScheduleEvent {
+  id: string;
+  name: string;
+  startTime: number;
+  endTime: number;
+  enableAlert: boolean;
+  colorData?: {
+    red: number;
+    green: number;
+    blue: number;
+  };
+}
+
+interface IOSScheduleData {
+  name: string;
+  scheduleType: string;
+  id: string;
+  events: IOSScheduleEvent[];
+}
+
 const ImportSchedule = () => {
   const { scheduleId } = useParams();
   const [searchParams] = useSearchParams();
@@ -28,6 +48,45 @@ const ImportSchedule = () => {
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
+  // Convert iOS timestamp to readable time
+  const formatTimeFromTimestamp = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true 
+    });
+  };
+
+  // Transform iOS schedule data to web format
+  const transformIOSScheduleData = (iosData: IOSScheduleData): ScheduleData => {
+    const events = iosData.events || [];
+    const subjects = events.map(event => event.name);
+    
+    // Calculate time range from events
+    let earliestStart = Infinity;
+    let latestEnd = 0;
+    
+    events.forEach(event => {
+      if (event.startTime < earliestStart) earliestStart = event.startTime;
+      if (event.endTime > latestEnd) latestEnd = event.endTime;
+    });
+
+    const startTime = earliestStart !== Infinity ? formatTimeFromTimestamp(earliestStart) : '8:00 AM';
+    const endTime = latestEnd > 0 ? formatTimeFromTimestamp(latestEnd) : '3:00 PM';
+    
+    return {
+      name: iosData.name,
+      type: iosData.scheduleType || 'custom',
+      subjects: subjects,
+      periods: events.length,
+      startTime: startTime,
+      endTime: endTime,
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], // Default school days
+      notifications: events.some(event => event.enableAlert)
+    };
+  };
+
   useEffect(() => {
     const loadScheduleData = () => {
       try {
@@ -35,15 +94,29 @@ const ImportSchedule = () => {
         const encodedData = searchParams.get('data');
         if (encodedData) {
           const decodedData = JSON.parse(atob(encodedData));
-          setScheduleData(decodedData);
+          
+          // Check if this is iOS app format or web format
+          if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
+            // iOS app format
+            console.log('Detected iOS app format:', decodedData);
+            const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
+            setScheduleData(transformedData);
+          } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
+            // Web format
+            console.log('Detected web format:', decodedData);
+            setScheduleData(decodedData as ScheduleData);
+          } else {
+            console.error('Unknown data format:', decodedData);
+            setError('Unsupported schedule data format');
+          }
         } else if (scheduleId) {
           // For future implementation with specific schedule IDs
-          // This would normally fetch from a backend, but for now we'll show a message
           setError('Schedule ID lookup not yet implemented');
         } else {
           setError('No schedule data found in URL');
         }
       } catch (err) {
+        console.error('Error parsing schedule data:', err);
         setError('Invalid schedule data format');
       } finally {
         setIsLoading(false);
