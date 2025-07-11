@@ -117,41 +117,37 @@ const ImportSchedule = () => {
   useEffect(() => {
     const loadScheduleData = () => {
       try {
+        console.log('=== DEBUGGING URL PARSING ===');
         console.log('Current URL:', window.location.href);
+        console.log('Location pathname:', location.pathname);
         console.log('Location search:', location.search);
+        console.log('Location hash:', location.hash);
         console.log('All search params:', Object.fromEntries(searchParams.entries()));
         
-        // Try to get data from URL query parameter first
-        const encodedData = searchParams.get('data');
-        console.log('Encoded data from URL:', encodedData);
+        // Multiple methods to extract the data parameter
+        const methods = [
+          { name: 'searchParams.get', value: searchParams.get('data') },
+          { name: 'URLSearchParams from location.search', value: new URLSearchParams(location.search).get('data') },
+          { name: 'URLSearchParams from window.location.search', value: new URLSearchParams(window.location.search).get('data') },
+          { name: 'Manual regex extraction', value: window.location.href.match(/[?&]data=([^&]*)/)?.[1] }
+        ];
         
-        // Also try getting it directly from the URL hash or search
-        if (!encodedData) {
-          const urlParams = new URLSearchParams(window.location.search);
-          const urlEncodedData = urlParams.get('data');
-          console.log('Encoded data from direct URL parsing:', urlEncodedData);
-          
-          if (urlEncodedData) {
-            const decodedData = JSON.parse(atob(urlEncodedData));
-            console.log('Decoded data from direct URL:', decodedData);
-            
-            // Check if this is iOS app format or web format
-            if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
-              console.log('Detected iOS app format:', decodedData);
-              const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
-              setScheduleData(transformedData);
-            } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
-              console.log('Detected web format:', decodedData);
-              setScheduleData(decodedData as ScheduleData);
-            } else {
-              console.error('Unknown data format:', decodedData);
-              setError('Unsupported schedule data format');
-            }
-            return;
+        methods.forEach(method => {
+          console.log(`${method.name}:`, method.value);
+        });
+        
+        // Try each method until we find data
+        let encodedData = null;
+        for (const method of methods) {
+          if (method.value) {
+            encodedData = method.value;
+            console.log(`Using data from: ${method.name}`);
+            break;
           }
         }
         
         if (encodedData) {
+          console.log('Found encoded data:', encodedData);
           const decodedData = JSON.parse(atob(encodedData));
           console.log('Decoded data:', decodedData);
           
@@ -171,10 +167,11 @@ const ImportSchedule = () => {
           }
         } else if (scheduleId) {
           // For future implementation with specific schedule IDs
+          console.log('Attempting to load schedule by ID:', scheduleId);
           setError('Schedule ID lookup not yet implemented');
         } else {
-          console.error('No schedule data found - URL:', window.location.href);
-          setError('No schedule data found in URL');
+          console.error('No schedule data found - Full debugging info above');
+          setError('No schedule data found in URL. Please check that the link is complete and try again.');
         }
       } catch (err) {
         console.error('Error parsing schedule data:', err);
@@ -184,8 +181,10 @@ const ImportSchedule = () => {
       }
     };
 
-    loadScheduleData();
-  }, [scheduleId, searchParams, location.search]);
+    // Add a small delay to ensure all URL parsing is complete
+    const timer = setTimeout(loadScheduleData, 100);
+    return () => clearTimeout(timer);
+  }, [scheduleId, searchParams, location.search, location.pathname]);
 
   const checkAppInstallation = () => {
     if (!isMobile) return;
@@ -297,9 +296,14 @@ const ImportSchedule = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Schedule</h3>
                 <p className="text-gray-600 mb-4">{error}</p>
-                <Button onClick={() => window.location.href = '/'} variant="outline">
-                  Go to Home
-                </Button>
+                <div className="space-y-2">
+                  <Button onClick={() => window.location.reload()} variant="outline">
+                    Reload Page
+                  </Button>
+                  <Button onClick={() => window.location.href = '/'} variant="outline">
+                    Go to Home
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
