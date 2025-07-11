@@ -207,10 +207,9 @@ const ImportSchedule = () => {
                           Copy Link
                         </Button>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+                    </CardContent>
+                  </Card>
+                )}
             </div>
           </>
         )}
