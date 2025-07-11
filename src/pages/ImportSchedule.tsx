@@ -61,7 +61,7 @@ const ImportSchedule = () => {
     // Create a hidden iframe to test the custom URL scheme
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
-    iframe.src = 'ischededu://test';
+    iframe.src = 'ischeduled://test';
     document.body.appendChild(iframe);
     
     // Set a timeout to detect if the app opened
@@ -89,7 +89,7 @@ const ImportSchedule = () => {
   };
 
   const handleOpenInApp = () => {
-    const appUrl = `ischededu://import?data=${searchParams.get('data')}`;
+    const appUrl = `ischeduled://import?data=${searchParams.get('data')}`;
     
     if (appStatus === 'installed') {
       // Direct open since we know the app is there
