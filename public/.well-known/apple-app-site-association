@@ -1,0 +1,12 @@
+
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "CK3F2F6ZW3.com.BretMay.iSchedulED",
+        "paths": ["/import", "/import/*"]
+      }
+    ]
+  }
+}
