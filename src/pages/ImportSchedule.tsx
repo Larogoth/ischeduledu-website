@@ -49,12 +49,21 @@ const ImportSchedule = () => {
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
-  // Convert Unix epoch timestamp to readable time
+  // Convert Swift TimeInterval to readable time
+  // Swift TimeInterval is seconds since January 1, 2001 00:00:00 UTC
   const formatTimeFromTimestamp = (timestamp: number): string => {
-    console.log('Original timestamp:', timestamp);
+    console.log('Original Swift TimeInterval:', timestamp);
     
-    // Handle Unix epoch timestamp (seconds since Jan 1, 1970)
-    const date = new Date(timestamp * 1000);
+    // Swift's reference date: January 1, 2001 00:00:00 UTC
+    // Unix epoch: January 1, 1970 00:00:00 UTC
+    // Difference: 31 years = 978307200 seconds
+    const swiftReferenceOffset = 978307200;
+    const unixTimestamp = timestamp + swiftReferenceOffset;
+    
+    console.log('Converted to Unix timestamp:', unixTimestamp);
+    
+    // Convert to milliseconds for JavaScript Date
+    const date = new Date(unixTimestamp * 1000);
     console.log('Converted date:', date);
     
     return date.toLocaleTimeString('en-US', { 
