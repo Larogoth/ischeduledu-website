@@ -8,9 +8,41 @@
       // Single Page Apps for GitHub Pages
       // MIT License
       // https://github.com/rafgraph/spa-github-pages
-      var segmentCount = 0;
+      // Modified to handle Universal Links with query parameters correctly
+      
       var location = window.location;
       var pathName = location.pathname;
+      var search = location.search;
+      var hash = location.hash;
+      
+      console.log('404.html redirect script - Original URL:', location.href);
+      console.log('404.html redirect script - Pathname:', pathName);
+      console.log('404.html redirect script - Search:', search);
+      
+      // Handle the specific case where query parameters got mixed into the pathname
+      // This happens with Universal Links like /import?data=... becoming /data=.../import
+      if (pathName.includes('data=') && pathName.includes('/import')) {
+        console.log('404.html redirect script - Detected malformed Universal Link');
+        
+        // Extract the data parameter from the pathname
+        var dataMatch = pathName.match(/data=([^\/]+)/);
+        if (dataMatch) {
+          var dataParam = dataMatch[1];
+          console.log('404.html redirect script - Extracted data param:', dataParam);
+          
+          // Reconstruct the correct URL
+          var correctUrl = location.protocol + '//' + location.hostname + 
+                          (location.port ? ':' + location.port : '') + 
+                          '/import?data=' + dataParam;
+          
+          console.log('404.html redirect script - Redirecting to:', correctUrl);
+          window.location.replace(correctUrl);
+          return;
+        }
+      }
+      
+      // Original GitHub Pages SPA redirect logic for normal cases
+      var segmentCount = 0;
       var redirectUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
 
       if (pathName.slice(-1) === '/') {
@@ -23,13 +55,14 @@
       redirectUrl += cleanPath.split('/').slice(0, 1 + segmentCount).join('/');
       redirectUrl += '/?/' + cleanPath.slice(1).split('/').slice(segmentCount).join('/');
 
-      if (location.search && location.search.indexOf('?/') !== 0) {
-        redirectUrl = redirectUrl.replace('/?/', '/?/' + location.search.slice(1) + '/');
+      if (search && search.indexOf('?/') !== 0) {
+        redirectUrl = redirectUrl.replace('/?/', '/?/' + search.slice(1) + '/');
       }
-      if (location.hash) {
-        redirectUrl += location.hash;
+      if (hash) {
+        redirectUrl += hash;
       }
 
+      console.log('404.html redirect script - Final redirect URL:', redirectUrl);
       window.location.replace(redirectUrl);
     </script>
   </head>

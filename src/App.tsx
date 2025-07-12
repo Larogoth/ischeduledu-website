@@ -27,6 +27,37 @@ const RouteDebugger = () => {
   return null;
 };
 
+// Component to handle malformed Universal Link URLs
+const URLFixer = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    const pathname = location.pathname;
+    
+    // Check if this is a malformed Universal Link URL
+    if (pathname.includes('data=') && pathname.includes('/import')) {
+      console.log('URLFixer - Detected malformed Universal Link in React Router');
+      
+      // Extract the data parameter from the pathname
+      const dataMatch = pathname.match(/data=([^\/]+)/);
+      if (dataMatch) {
+        const dataParam = dataMatch[1];
+        console.log('URLFixer - Extracted data param:', dataParam);
+        
+        // Construct the correct URL and redirect
+        const correctPath = `/import?data=${dataParam}`;
+        console.log('URLFixer - Redirecting to:', correctPath);
+        
+        // Use window.location to ensure a clean redirect
+        window.history.replaceState(null, '', correctPath);
+        window.location.reload();
+      }
+    }
+  }, [location.pathname]);
+  
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -34,6 +65,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <RouteDebugger />
+        <URLFixer />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/faq" element={<FAQ />} />
