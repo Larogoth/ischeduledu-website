@@ -38,6 +38,7 @@ const URLFixer = () => {
     // Check if this is a malformed Universal Link URL
     if (pathname.includes('data=') && pathname.includes('/import')) {
       console.log('URLFixer - Detected malformed Universal Link in React Router');
+      console.log('URLFixer - Full pathname:', pathname);
       
       // Extract the data parameter from the pathname
       const dataMatch = pathname.match(/data=([^\/]+)/);
@@ -49,8 +50,11 @@ const URLFixer = () => {
         const correctPath = `/import?data=${dataParam}`;
         console.log('URLFixer - Navigating to:', correctPath);
         
-        // Use React Router's navigate for clean navigation
-        navigate(correctPath, { replace: true });
+        // Use a timeout to ensure the navigation happens after the current render cycle
+        setTimeout(() => {
+          console.log('URLFixer - Executing navigation now');
+          navigate(correctPath, { replace: true });
+        }, 0);
       }
     }
   }, [location.pathname, navigate]);
