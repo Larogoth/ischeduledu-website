@@ -568,17 +568,27 @@ const ImportSchedule = () => {
   };
 
   // Updated copy share link function to match iOS app format
+// Updated copy share link function that constructs the correct URL
 const copyShareLink = async () => {
   try {
-    const currentUrl = window.location.href;
+    // Get the clean parameters
+    const { data: encodedData, version, isCompressed } = extractDataParameters();
+    
+    // Construct the correct URL manually
+    const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+    const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+    
     const scheduleName = scheduleData?.name || "Schedule";
     
     // Format the message exactly like the iOS app
     const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
 
-${currentUrl}
+${correctUrl}
 
 Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850`;
+
+    console.log('Copying correct URL:', correctUrl);
+    console.log('Share text:', shareText);
 
     await navigator.clipboard.writeText(shareText);
     setShareUrlCopied(true);
