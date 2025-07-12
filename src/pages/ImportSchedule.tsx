@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, GraduationCap } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, GraduationCap, Copy } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
 
@@ -54,10 +54,10 @@ const ImportSchedule = () => {
   const [error, setError] = useState<string | null>(null);
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
+  const [shareUrlCopied, setShareUrlCopied] = useState(false);
 
   // Convert TimeInterval (seconds since 2001-01-01) to JavaScript Date
   const parseTimeInterval = (timeInterval: number): Date => {
-    // Swift TimeInterval is seconds since 2001-01-01 00:00:00 UTC
     const swiftReferenceDate = new Date('2001-01-01T00:00:00Z');
     return new Date(swiftReferenceDate.getTime() + (timeInterval * 1000));
   };
@@ -67,29 +67,22 @@ const ImportSchedule = () => {
     console.log('Parsing date value:', dateValue, 'Type:', typeof dateValue);
     
     if (typeof dateValue === 'string') {
-      // ISO string format
       const date = new Date(dateValue);
       if (!isNaN(date.getTime())) {
         return date;
       }
     } else if (typeof dateValue === 'number') {
-      // Check if it's Swift TimeInterval (seconds since 2001-01-01)
       if (dateValue > 0 && dateValue < 1000000000) {
-        // Likely Swift TimeInterval
         return parseTimeInterval(dateValue);
       } else if (dateValue > 1000000000) {
-        // Likely Unix timestamp in seconds or milliseconds
         if (dateValue > 10000000000) {
-          // Milliseconds
           return new Date(dateValue);
         } else {
-          // Seconds
           return new Date(dateValue * 1000);
         }
       }
     }
     
-    // Fallback to current time if parsing fails
     console.warn('Failed to parse date value, using current time:', dateValue);
     return new Date();
   };
@@ -102,7 +95,6 @@ const ImportSchedule = () => {
     });
   };
 
-  // Convert RGB color data to CSS color
   const formatColor = (colorData?: any): string => {
     if (!colorData) return 'rgb(59, 130, 246)'; // Default blue
     
@@ -117,7 +109,6 @@ const ImportSchedule = () => {
     }
   };
 
-  // Calculate duration between two times
   const calculateDuration = (startTime: Date, endTime: Date): string => {
     const diffMs = endTime.getTime() - startTime.getTime();
     const diffMinutes = Math.round(diffMs / (1000 * 60));
@@ -131,11 +122,9 @@ const ImportSchedule = () => {
     }
   };
 
-  // Convert minimal format to full schedule object
   const convertMinimalToFullSchedule = (shareableSchedule: ShareableSchedule): any => {
     console.log('Converting minimal format:', shareableSchedule);
     
-    // Convert minimal events to full events
     const fullEvents = shareableSchedule.e.map(event => {
       const startTime = parseTimeInterval(event.s);
       const endTime = parseTimeInterval(event.e);
@@ -152,7 +141,6 @@ const ImportSchedule = () => {
       };
     });
     
-    // Convert schedule type
     const scheduleType = shareableSchedule.t === 0 ? 'custom' : 'generated';
     
     const fullSchedule = {
@@ -168,17 +156,14 @@ const ImportSchedule = () => {
     return fullSchedule;
   };
 
-  // Universal schedule transformer that handles any format
   const transformScheduleData = (rawData: any): ScheduleData => {
     console.log('=== TRANSFORMING SCHEDULE DATA ===');
     console.log('Raw data:', JSON.stringify(rawData, null, 2));
-    console.log('Raw data keys:', Object.keys(rawData));
     
     let events: any[] = [];
     let scheduleName = '';
     let scheduleType = 'custom';
     
-    // Extract basic info
     if (rawData.name) {
       scheduleName = rawData.name;
     }
@@ -189,7 +174,6 @@ const ImportSchedule = () => {
       scheduleType = rawData.type;
     }
     
-    // Extract events from various possible formats
     if (rawData.events && Array.isArray(rawData.events)) {
       events = rawData.events;
       console.log('Found events array with', events.length, 'events');
@@ -201,7 +185,6 @@ const ImportSchedule = () => {
       events = [];
     }
     
-    // Process events
     const processed: ProcessedEvent[] = [];
     let earliestTime: Date | null = null;
     let latestTime: Date | null = null;
@@ -217,7 +200,6 @@ const ImportSchedule = () => {
         let endTime: Date;
         let color = formatColor(event.colorData);
         
-        // Parse start time
         if (event.startTime !== undefined) {
           startTime = parseDate(event.startTime);
         } else if (event.start !== undefined) {
@@ -227,7 +209,6 @@ const ImportSchedule = () => {
           startTime = new Date();
         }
         
-        // Parse end time
         if (event.endTime !== undefined) {
           endTime = parseDate(event.endTime);
         } else if (event.end !== undefined) {
@@ -237,12 +218,10 @@ const ImportSchedule = () => {
           endTime = new Date(startTime.getTime() + 3600000); // Add 1 hour
         }
         
-        // Check for alerts
         if (event.enableAlert || event.alarmsEnabled) {
           hasAlerts = true;
         }
         
-        // Track earliest and latest times
         if (!earliestTime || startTime < earliestTime) {
           earliestTime = startTime;
         }
@@ -261,7 +240,6 @@ const ImportSchedule = () => {
         console.log(`Successfully processed event: ${eventName}, ${formatTimeFromDate(startTime)} - ${formatTimeFromDate(endTime)}, Duration: ${calculateDuration(startTime, endTime)}`);
       } catch (eventError) {
         console.error('Error processing event:', eventError, 'Event data:', event);
-        // Continue processing other events
       }
     }
     
@@ -284,17 +262,12 @@ const ImportSchedule = () => {
     
     console.log('=== FINAL TRANSFORMED DATA ===');
     console.log('Transformed data:', transformedData);
-    console.log('Processed events:', processed);
     
     return transformedData;
   };
 
-  // Enhanced data extraction function with version and compression support
-  // Enhanced data extraction function that handles malformed URLs
   const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
     console.log('=== ENHANCED DATA EXTRACTION ===');
-    console.log('Full URL:', window.location.href);
-    console.log('Search params:', window.location.search);
     
     const urlParams = new URLSearchParams(window.location.search);
     let data = urlParams.get('data');
@@ -303,35 +276,28 @@ const ImportSchedule = () => {
     
     console.log('Initial parsing results:', { data: data?.substring(0, 50) + '...', version, isCompressed });
     
-    // Handle malformed URLs where data parameter includes query string
     if (data && data.includes('?v=')) {
       console.log('🔧 Detected malformed URL with query string in data parameter');
-      console.log('Original malformed data:', data);
       
-      // Extract version using regex
       const versionMatch = data.match(/\?v=(\d+)/);
       if (versionMatch) {
         version = versionMatch[1];
         console.log('✅ Extracted version:', version);
       }
       
-      // Extract compression using regex (looking for ?c= or ?v=3?c=)
       const compressionMatch = data.match(/\?c=(\d+)/);
       if (compressionMatch) {
         isCompressed = compressionMatch[1] === '1';
         console.log('✅ Extracted compression:', isCompressed);
       }
       
-      // Clean the data by removing everything from the first ?v= onwards
       const cleanData = data.split('?v=')[0];
       data = cleanData;
       console.log('✅ Cleaned data:', data.substring(0, 50) + '...');
-      console.log('✅ Cleaned data length:', data.length);
     }
     
     console.log('Final extracted parameters:', { 
       data: data?.substring(0, 50) + '...', 
-      dataLength: data?.length,
       version, 
       isCompressed 
     });
@@ -339,23 +305,17 @@ const ImportSchedule = () => {
     return { data, version, isCompressed };
   };
 
-  // Convert URL-safe base64 to binary data
   const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
     try {
-      // Convert URL-safe base64 back to regular base64
       let base64 = urlSafeBase64
         .replace(/-/g, '+')
         .replace(/_/g, '/');
       
-      // Add padding if needed
       const remainder = base64.length % 4;
       if (remainder > 0) {
         base64 += '='.repeat(4 - remainder);
       }
       
-      console.log('Converted to regular base64, length:', base64.length);
-      
-      // Decode base64 to binary
       const binaryString = atob(base64);
       const bytes = new Uint8Array(binaryString.length);
       for (let i = 0; i < binaryString.length; i++) {
@@ -369,122 +329,67 @@ const ImportSchedule = () => {
     }
   };
   
-  // Handle v3 format with gzip compression
   const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
     try {
       console.log('Processing v3 format, compressed:', isCompressed);
-      console.log('Input data length:', encodedData.length);
-      console.log('Input data sample:', encodedData.substring(0, 100));
       
-      // Decode URL-safe base64
       const binaryData = decodeUrlSafeBase64(encodedData);
-      console.log('Decoded binary data length:', binaryData.length);
-      console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
       
       let jsonData: string;
       
       if (isCompressed) {
         console.log('🔍 Attempting decompression...');
         
-        // First, try to decode as uncompressed JSON in case the compression flag is wrong
+        let decompressedData: Uint8Array | null = null;
+        
         try {
-          console.log('🔧 Trying as uncompressed JSON first (despite c=1 flag)...');
-          const testJsonData = new TextDecoder().decode(binaryData);
-          console.log('Test JSON data:', testJsonData.substring(0, 200));
-          
-          // Try to parse as JSON to see if it's valid
-          const testParsed = JSON.parse(testJsonData);
-          console.log('✅ Successfully parsed as uncompressed JSON despite c=1 flag');
-          jsonData = testJsonData;
-        } catch (uncompressedError) {
-          console.log('❌ Not valid uncompressed JSON, trying actual decompression...');
-          
-          // Try different decompression methods
-          let decompressedData: Uint8Array | null = null;
-          let lastError: any = null;
-          
-          // Method 1: Try inflateRaw (for raw deflate - most likely for iOS COMPRESSION_ZLIB)
+          decompressedData = pako.inflateRaw(binaryData);
+        } catch (error) {
+          console.log('❌ inflateRaw failed:', error.message || error);
+        }
+        
+        if (!decompressedData) {
           try {
-            console.log('🔧 Trying inflateRaw...');
-            decompressedData = pako.inflateRaw(binaryData);
-            console.log('✅ Successfully decompressed with inflateRaw');
+            decompressedData = pako.inflate(binaryData);
           } catch (error) {
-            console.log('❌ inflateRaw failed:', error.message || error);
-            lastError = error;
-          }
-          
-          // Method 2: Try inflate (for zlib)
-          if (!decompressedData) {
-            try {
-              console.log('🔧 Trying inflate...');
-              decompressedData = pako.inflate(binaryData);
-              console.log('✅ Successfully decompressed with inflate');
-            } catch (error) {
-              console.log('❌ inflate failed:', error.message || error);
-              lastError = error;
-            }
-          }
-          
-          // Method 3: Try ungzip (for gzip)
-          if (!decompressedData) {
-            try {
-              console.log('🔧 Trying ungzip...');
-              decompressedData = pako.ungzip(binaryData);
-              console.log('✅ Successfully decompressed with ungzip');
-            } catch (error) {
-              console.log('❌ ungzip failed:', error.message || error);
-              lastError = error;
-            }
-          }
-          
-          if (!decompressedData) {
-            // If decompression failed, try treating as uncompressed anyway
-            console.log('🔧 All decompression methods failed, trying as uncompressed data...');
-            try {
-              jsonData = new TextDecoder().decode(binaryData);
-              console.log('✅ Using as uncompressed data after decompression failures');
-            } catch (decodeError) {
-              const errorMsg = lastError?.message || lastError?.toString() || 'Unknown decompression error';
-              throw new Error(`All decompression methods failed: ${errorMsg}`);
-            }
-          } else {
-            jsonData = new TextDecoder().decode(decompressedData);
-            console.log('✅ Successfully decoded decompressed data');
+            console.log('❌ inflate failed:', error.message || error);
           }
         }
+        
+        if (!decompressedData) {
+          try {
+            decompressedData = pako.ungzip(binaryData);
+          } catch (error) {
+            console.log('❌ ungzip failed:', error.message || error);
+          }
+        }
+        
+        if (!decompressedData) {
+          jsonData = new TextDecoder().decode(binaryData);
+        } else {
+          jsonData = new TextDecoder().decode(decompressedData);
+        }
       } else {
-        // Not compressed, convert binary to string
         jsonData = new TextDecoder().decode(binaryData);
-        console.log('✅ Decoded uncompressed data');
       }
       
-      console.log('JSON data length:', jsonData.length);
-      console.log('JSON preview:', jsonData.substring(0, 200) + '...');
-      
-      // Validate that we have valid JSON
       if (!jsonData || jsonData.length === 0) {
         throw new Error('Decompressed data is empty');
       }
       
-      // Parse the minimal format JSON
       let shareableSchedule: ShareableSchedule;
       try {
         shareableSchedule = JSON.parse(jsonData);
-        console.log('✅ Successfully parsed JSON');
-        console.log('Parsed schedule:', shareableSchedule);
       } catch (parseError) {
         console.error('❌ JSON parsing failed:', parseError);
-        console.error('JSON data that failed to parse (first 500 chars):', jsonData.substring(0, 500));
         throw new Error(`JSON parsing failed: ${parseError.message}`);
       }
       
-      // Validate the parsed data structure
       if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
         console.error('❌ Invalid schedule data structure:', shareableSchedule);
         throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
       }
       
-      // Convert from minimal format to full schedule object
       const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
       
       console.log('✅ Converted to full schedule:', fullSchedule.name);
@@ -492,14 +397,10 @@ const ImportSchedule = () => {
       
     } catch (error) {
       console.error('❌ V3 format processing error:', error);
-      
-      // Re-throw with more context
-      const errorMessage = error?.message || error?.toString() || 'Unknown error';
-      throw new Error(`V3 format processing failed: ${errorMessage}`);
+      throw new Error(`V3 format processing failed: ${error.message}`);
     }
   };
 
-  // Handle v2 format (URL-safe base64 without compression)
   const handleV2Format = (encodedData: string): any => {
     try {
       const binaryData = decodeUrlSafeBase64(encodedData);
@@ -511,7 +412,6 @@ const ImportSchedule = () => {
     }
   };
 
-  // Handle v1 format (legacy standard base64)
   const handleV1Format = (encodedData: string): any => {
     try {
       const decodedData = decodeURIComponent(encodedData);
@@ -523,21 +423,15 @@ const ImportSchedule = () => {
     }
   };
 
-  // Updated decode function with proper version handling
   const safeBase64Decode = (encodedData: string, version: string, isCompressed: boolean): any => {
     console.log('=== COMPREHENSIVE BASE64 DECODE ===');
-    console.log('Input encoded data length:', encodedData.length);
-    console.log('Version:', version, 'Compressed:', isCompressed);
     
     try {
       if (version === '3') {
-        // Handle v3 format with minimal structure and optional compression
         return handleV3Format(encodedData, isCompressed);
       } else if (version === '2') {
-        // Handle v2 format (URL-safe base64 without compression)
         return handleV2Format(encodedData);
       } else {
-        // Handle v1 format (legacy)
         return handleV1Format(encodedData);
       }
     } catch (error) {
@@ -557,38 +451,15 @@ const ImportSchedule = () => {
         
         if (encodedData) {
           console.log('Found encoded data, attempting to decode...');
-          console.log('Format version:', version, 'Compressed:', isCompressed);
           
           try {
             const decodedData = safeBase64Decode(encodedData, version, isCompressed);
-            console.log('Successfully decoded data:', decodedData);
-            console.log('Data type:', typeof decodedData);
-            console.log('Data keys:', Object.keys(decodedData));
-            
-            // Use universal transformer
             const transformedData = transformScheduleData(decodedData);
             setScheduleData(transformedData);
             
           } catch (decodeError) {
             console.error('Failed to decode data:', decodeError);
-            console.error('Raw encoded data for debugging:', encodedData);
-            console.error('Encoded data length:', encodedData.length);
-            console.error('Encoded data sample:', encodedData.substring(0, 100) + '...');
-            
-            // Try to provide more helpful error message
-            let errorMessage = 'Invalid schedule data format. ';
-            if (version === '3' && isCompressed) {
-              errorMessage += 'Failed to decompress gzip data. ';
-            }
-            if (encodedData.length < 10) {
-              errorMessage += 'The data appears to be too short.';
-            } else if (encodedData.length > 10000) {
-              errorMessage += 'The data appears to be too long.';
-            } else {
-              errorMessage += `Decode error: ${decodeError.message}`;
-            }
-            
-            setError(errorMessage);
+            setError('Invalid schedule data format.');
           }
         } else if (scheduleId) {
           console.log('Attempting to load schedule by ID:', scheduleId);
@@ -644,14 +515,11 @@ const ImportSchedule = () => {
     }, 3000);
   };
 
-  // Add this helper function to fix base64 padding
   const fixBase64Padding = (base64String: string): string => {
-    // Add padding if needed
     const paddingNeeded = (4 - (base64String.length % 4)) % 4;
     return base64String + '='.repeat(paddingNeeded);
   };
 
-  // Update your handleOpenInApp function
   const handleOpenInApp = () => {
     const { data: encodedData } = extractDataParameters();
     if (!encodedData) {
@@ -659,27 +527,20 @@ const ImportSchedule = () => {
       return;
     }
     
-    // Fix base64 padding before sending to iOS
     const fixedData = fixBase64Padding(encodedData);
     
-    // Don't double-encode the data
     const appURL = `ischeduled://import?data=${fixedData}`;
     
     console.log('Opening app with URL:', appURL);
-    console.log('Base64 data length:', fixedData.length);
-    console.log('Base64 data (first 100 chars):', fixedData.substring(0, 100));
     
-    // Test app detection
     setAppStatus('checking');
     
-    // Try to open the app
     const timeoutId = setTimeout(() => {
       console.log('App did not open, showing App Store redirect');
       setAppStatus('not-installed');
       setShowAppStoreRedirect(true);
     }, 2000);
     
-    // Clear timeout if page becomes hidden (app opened)
     const handleVisibilityChange = () => {
       if (document.hidden) {
         clearTimeout(timeoutId);
@@ -689,10 +550,8 @@ const ImportSchedule = () => {
     
     document.addEventListener('visibilitychange', handleVisibilityChange);
     
-    // Attempt to open the app
     window.location.href = appURL;
     
-    // Clean up
     setTimeout(() => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, 3000);
@@ -706,6 +565,17 @@ const ImportSchedule = () => {
     setShowAppStoreRedirect(false);
     setAppStatus('unknown');
     checkAppInstallation();
+  };
+
+  const copyShareLink = async () => {
+    try {
+      const currentUrl = window.location.href;
+      await navigator.clipboard.writeText(currentUrl);
+      setShareUrlCopied(true);
+      setTimeout(() => setShareUrlCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy share link:', error);
+    }
   };
 
   useEffect(() => {
@@ -729,14 +599,12 @@ const ImportSchedule = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-100 relative overflow-hidden">
-      {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-cyan-200/20 to-teal-200/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
-        {/* Enhanced Header with Logo */}
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
             <div className="w-20 h-20 rounded-full overflow-hidden mx-auto shadow-lg ring-4 ring-white/20">
@@ -763,32 +631,6 @@ const ImportSchedule = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Unable to Load Schedule</h3>
                 <p className="text-gray-700 mb-6 max-w-md mx-auto leading-relaxed text-sm">{error}</p>
-                
-                {/* Enhanced debug info */}
-                <div className="bg-gray-100 p-4 rounded-lg text-left text-xs mb-4 max-w-lg mx-auto">
-                  <p><strong>Debug Information:</strong></p>
-                  <p className="break-all mb-2">URL: {window.location.href}</p>
-                  <p className="break-all mb-2">Data param: {extractDataParameters().data}</p>
-                  <p className="mb-2">Data length: {extractDataParameters().data?.length || 'N/A'}</p>
-                  <p className="mb-2">Version: {extractDataParameters().version}</p>
-                  <p className="mb-2">Compressed: {extractDataParameters().isCompressed ? 'Yes' : 'No'}</p>
-                  <p className="break-all">Data sample: {extractDataParameters().data?.substring(0, 50) || 'N/A'}...</p>
-                  <Button 
-                    onClick={() => {
-                      const { data } = extractDataParameters();
-                      if (data) {
-                        navigator.clipboard.writeText(data);
-                        alert('Debug data copied to clipboard');
-                      }
-                    }}
-                    variant="outline"
-                    size="sm"
-                    className="mt-2"
-                  >
-                    Copy Debug Data
-                  </Button>
-                </div>
-                
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
                     Try Again
@@ -802,7 +644,6 @@ const ImportSchedule = () => {
           </Card>
         ) : scheduleData ? (
           <>
-            {/* Enhanced Schedule Preview */}
             <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/80 backdrop-blur-sm">
               <CardHeader className="bg-gradient-to-r from-cyan-500 via-[#0FA0CE] to-teal-600 text-white p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-teal-600/20"></div>
@@ -844,8 +685,6 @@ const ImportSchedule = () => {
                             className="absolute left-0 top-0 bottom-0 w-1.5 rounded-r-full"
                             style={{ backgroundColor: event.color }}
                           ></div>
-                          
-                          {/* Mobile Layout */}
                           <div className="md:hidden pl-4">
                             <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-cyan-600 transition-colors break-words">
                               {event.name}
@@ -860,8 +699,6 @@ const ImportSchedule = () => {
                               </div>
                             </div>
                           </div>
-
-                          {/* Desktop/Tablet Layout */}
                           <div className="hidden md:flex items-center justify-between">
                             <div className="flex-1 pl-4">
                               <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-cyan-600 transition-colors">
@@ -882,7 +719,6 @@ const ImportSchedule = () => {
                               </div>
                             </div>
                           </div>
-                          
                           <div className="absolute inset-0 bg-gradient-to-r from-cyan-50/0 to-teal-50/0 group-hover:from-cyan-50/30 group-hover:to-teal-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                       ))}
@@ -892,8 +728,37 @@ const ImportSchedule = () => {
               </CardContent>
             </Card>
 
-            {/* Enhanced Action Cards */}
             <div className="space-y-6">
+              {isMobile && (
+                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
+                  <CardContent className="pt-6 pb-6">
+                    <div className="text-center">
+                      <h3 className="text-lg font-bold text-gray-900 mb-3">Share This Schedule</h3>
+                      <p className="text-gray-600 mb-4 text-sm">
+                        Copy the link to easily share this schedule in messages
+                      </p>
+                      <Button 
+                        onClick={copyShareLink}
+                        variant="outline"
+                        className="w-full max-w-sm flex items-center gap-2 py-3"
+                      >
+                        {shareUrlCopied ? (
+                          <>
+                            <CheckCircle className="w-4 h-4 text-green-600" />
+                            Link Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            Copy Share Link
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
               {appStatus === 'checking' && (
                 <Alert>
                   <AlertCircle className="h-4 w-4" />
@@ -1057,7 +922,6 @@ const ImportSchedule = () => {
           </>
         ) : null}
 
-        {/* Enhanced Footer */}
         <div className="text-center mt-12 pt-8 border-t border-gray-200/50">
           <div className="flex items-center justify-center gap-2 mb-2">
             <GraduationCap className="w-5 h-5 text-cyan-600" />
