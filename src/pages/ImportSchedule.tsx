@@ -353,49 +353,104 @@ const extractDataParameters = (): { data: string | null; version: string; isComp
       throw new Error('Invalid base64 encoding');
     }
   };
-
+  
   // Handle v3 format with gzip compression
-  const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
-    try {
-      console.log('Processing v3 format, compressed:', isCompressed);
+const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
+  try {
+    console.log('Processing v3 format, compressed:', isCompressed);
+    console.log('Input data length:', encodedData.length);
+    console.log('Input data sample:', encodedData.substring(0, 100));
+    
+    // Decode URL-safe base64
+    const binaryData = decodeUrlSafeBase64(encodedData);
+    console.log('Decoded binary data length:', binaryData.length);
+    
+    let jsonData: string;
+    if (isCompressed) {
+      // Decompress using gzip (pako)
+      console.log('Decompressing data with gzip...');
+      console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
       
-      // Decode URL-safe base64
-      const binaryData = decodeUrlSafeBase64(encodedData);
-      
-      let jsonData: string;
-      if (isCompressed) {
-        // Decompress using gzip (pako)
-        console.log('Decompressing data with gzip...');
+      try {
+        // Try different decompression methods
+        let decompressedData: Uint8Array;
+        
+        // Method 1: Try inflateRaw (for raw deflate)
         try {
-          const decompressedData = pako.inflate(binaryData);
-          jsonData = new TextDecoder().decode(decompressedData);
-          console.log('✅ Successfully decompressed data');
-        } catch (error) {
-          console.error('❌ Gzip decompression failed:', error);
-          throw new Error('Failed to decompress data: ' + error.message);
+          decompressedData = pako.inflateRaw(binaryData);
+          console.log('✅ Successfully decompressed with inflateRaw');
+        } catch (rawError) {
+          console.log('❌ inflateRaw failed:', rawError);
+          
+          // Method 2: Try inflate (for zlib/gzip)
+          try {
+            decompressedData = pako.inflate(binaryData);
+            console.log('✅ Successfully decompressed with inflate');
+          } catch (inflateError) {
+            console.log('❌ inflate failed:', inflateError);
+            
+            // Method 3: Try ungzip (for gzip specifically)
+            try {
+              decompressedData = pako.ungzip(binaryData);
+              console.log('✅ Successfully decompressed with ungzip');
+            } catch (ungzipError) {
+              console.log('❌ ungzip failed:', ungzipError);
+              
+              // All methods failed
+              throw new Error(`All decompression methods failed. Raw: ${rawError?.message}, Inflate: ${inflateError?.message}, Ungzip: ${ungzipError?.message}`);
+            }
+          }
         }
-      } else {
-        // Not compressed, convert binary to string
-        jsonData = new TextDecoder().decode(binaryData);
+        
+        jsonData = new TextDecoder().decode(decompressedData);
+        console.log('✅ Successfully decoded decompressed data');
+        console.log('Decompressed data length:', jsonData.length);
+        
+      } catch (error) {
+        console.error('❌ Gzip decompression failed:', error);
+        console.error('Error details:', error.message);
+        console.error('Error stack:', error.stack);
+        
+        // Provide more detailed error information
+        throw new Error(`Failed to decompress data: ${error.message || 'Unknown compression error'}`);
       }
-      
-      console.log('JSON data length:', jsonData.length);
-      console.log('JSON preview:', jsonData.substring(0, 200) + '...');
-      
-      // Parse the minimal format JSON
-      const shareableSchedule: ShareableSchedule = JSON.parse(jsonData);
-      
-      // Convert from minimal format to full schedule object
-      const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
-      
-      console.log('✅ Converted to full schedule:', fullSchedule.name);
-      return fullSchedule;
-      
-    } catch (error) {
-      console.error('❌ V3 format processing error:', error);
-      throw error;
+    } else {
+      // Not compressed, convert binary to string
+      jsonData = new TextDecoder().decode(binaryData);
+      console.log('✅ Decoded uncompressed data');
     }
-  };
+    
+    console.log('JSON data length:', jsonData.length);
+    console.log('JSON preview:', jsonData.substring(0, 200) + '...');
+    
+    // Validate that we have valid JSON
+    if (!jsonData || jsonData.length === 0) {
+      throw new Error('Decompressed data is empty');
+    }
+    
+    // Parse the minimal format JSON
+    const shareableSchedule: ShareableSchedule = JSON.parse(jsonData);
+    console.log('✅ Successfully parsed JSON');
+    
+    // Validate the parsed data structure
+    if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
+      throw new Error('Invalid schedule data structure');
+    }
+    
+    // Convert from minimal format to full schedule object
+    const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
+    
+    console.log('✅ Converted to full schedule:', fullSchedule.name);
+    return fullSchedule;
+    
+  } catch (error) {
+    console.error('❌ V3 format processing error:', error);
+    console.error('Error type:', typeof error);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    throw error;
+  }
+};
 
   // Handle v2 format (URL-safe base64 without compression)
   const handleV2Format = (encodedData: string): any => {
