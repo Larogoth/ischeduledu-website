@@ -20,27 +20,27 @@
         console.log('404.html redirect script - Pathname:', pathName);
         console.log('404.html redirect script - Search:', search);
         
-        // Handle the specific case where query parameters got mixed into the pathname
-        // This happens with Universal Links like /import?data=... becoming /data=.../import
-        if (pathName.includes('data=') && pathName.includes('/import')) {
-          console.log('404.html redirect script - Detected malformed Universal Link');
-          
-          // Extract the data parameter from the pathname
-          var dataMatch = pathName.match(/data=([^\/]+)/);
-          if (dataMatch) {
-            var dataParam = dataMatch[1];
-            console.log('404.html redirect script - Extracted data param:', dataParam);
-            
-            // Reconstruct the correct URL
-            var correctUrl = location.protocol + '//' + location.hostname + 
-                            (location.port ? ':' + location.port : '') + 
-                            '/import?data=' + dataParam;
-            
-            console.log('404.html redirect script - Redirecting to:', correctUrl);
-            window.location.replace(correctUrl);
-            return;
-          }
-        }
+        // DISABLE Universal Link handling - let React Router handle it
+        // This prevents race conditions between 404.html and React Router URLFixer
+        // if (pathName.includes('data=') && pathName.includes('/import')) {
+        //   console.log('404.html redirect script - Detected malformed Universal Link');
+        //   
+        //   // Extract the data parameter from the pathname
+        //   var dataMatch = pathName.match(/data=([^\/]+)/);
+        //   if (dataMatch) {
+        //     var dataParam = dataMatch[1];
+        //     console.log('404.html redirect script - Extracted data param:', dataParam);
+        //     
+        //     // Reconstruct the correct URL
+        //     var correctUrl = location.protocol + '//' + location.hostname + 
+        //                     (location.port ? ':' + location.port : '') + 
+        //                     '/import?data=' + dataParam;
+        //     
+        //     console.log('404.html redirect script - Redirecting to:', correctUrl);
+        //     window.location.replace(correctUrl);
+        //     return;
+        //   }
+        // }
         
         // Original GitHub Pages SPA redirect logic for normal cases
         var segmentCount = 0;
