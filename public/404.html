@@ -31,7 +31,7 @@
             var dataParam = dataMatch[1];
             console.log('404.html redirect script - Extracted data param:', dataParam);
             
-            // Reconstruct the correct URL
+            // Reconstruct the correct URL - use replace to avoid history issues
             var correctUrl = location.protocol + '//' + location.hostname + 
                             (location.port ? ':' + location.port : '') + 
                             '/import?data=' + dataParam;
@@ -42,7 +42,7 @@
           }
         }
         
-        // Original GitHub Pages SPA redirect logic for normal cases
+        // Handle normal GitHub Pages SPA routing
         var segmentCount = 0;
         var redirectUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
 
@@ -69,5 +69,6 @@
     </script>
   </head>
   <body>
+    <p>Redirecting...</p>
   </body>
 </html>
