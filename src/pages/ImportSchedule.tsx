@@ -926,48 +926,57 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                 </Card>
               ) : (
                 <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
-                  <CardContent className="pt-8 pb-8">
-                    <div className="text-center">
-                      <div className="relative inline-block mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto">
-                          <Download className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                          <Smartphone className="w-3 h-3 text-white" />
-                        </div>
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3">Get iSchedulEDU Mobile App</h3>
-                      <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-lg mx-auto">
-                        This schedule is designed for mobile import. Download the iSchedulEDU app on your phone or tablet to import this schedule.
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a 
-                          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img 
-                            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                            alt="Download on the App Store"
-                            className="h-16 mx-auto hover:scale-105 transition-transform duration-200"
-                          />
-                        </a>
-                        <Button 
-                          variant="outline" 
-                          onClick={() => {
-                            navigator.clipboard.writeText(window.location.href);
-                          }}
-                          className="py-4 px-8 rounded-xl border-2 hover:bg-gray-50"
-                        >
-                          Copy Link for Mobile
-                        </Button>
-                      </div>
-                      <p className="text-sm text-gray-500 mt-4 italic">
-                        Send this link to your mobile device to import the schedule
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
+  <CardContent className="pt-8 pb-8">
+    <div className="text-center">
+      <div className="relative inline-block mb-6">
+        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto">
+          <Download className="w-8 h-8 text-white" />
+        </div>
+        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+          <Smartphone className="w-3 h-3 text-white" />
+        </div>
+      </div>
+      <h3 className="text-2xl font-bold text-gray-900 mb-3">Get iSchedulEDU Mobile App</h3>
+      <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-lg mx-auto">
+        This schedule is designed for mobile import. Download the iSchedulEDU app on your phone or tablet to import this schedule.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img 
+            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+            alt="Download on the App Store"
+            className="h-16 mx-auto hover:scale-105 transition-transform duration-200"
+          />
+        </a>
+        <Button 
+          variant="outline" 
+          onClick={copyShareLink}
+          className="py-4 px-8 rounded-xl border-2 hover:bg-gray-50 flex items-center gap-2"
+        >
+          {shareUrlCopied ? (
+            <>
+              <CheckCircle className="w-4 h-4 text-green-600" />
+              Link Copied!
+            </>
+          ) : (
+            <>
+              <Copy className="w-4 h-4" />
+              Copy Link for Mobile
+            </>
+          )}
+        </Button>
+      </div>
+      <p className="text-sm text-gray-500 mt-4 italic leading-relaxed">
+        Users with iSchedulEDU can tap the link to import directly into the app.<br />
+        Others will be directed to download the app first.
+      </p>
+    </div>
+  </CardContent>
+</Card>
               )}
             </div>
           </>
