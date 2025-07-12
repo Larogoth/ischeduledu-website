@@ -26,6 +26,19 @@ interface ProcessedEvent {
   color?: string;
 }
 
+// Minimal format interfaces matching iOS app
+interface ShareableEvent {
+  n: string;  // name
+  s: number;  // startTime (TimeInterval)
+  e: number;  // endTime (TimeInterval)
+}
+
+interface ShareableSchedule {
+  n: string;  // name
+  e: ShareableEvent[];  // events
+  t: number;  // type (0 = custom, 1 = generated)
+}
+
 const ImportSchedule = () => {
   console.log('=== ImportSchedule COMPONENT MOUNTED ===');
   console.log('Component render timestamp:', new Date().toISOString());
@@ -41,6 +54,13 @@ const ImportSchedule = () => {
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
+  // Convert TimeInterval (seconds since 2001-01-01) to JavaScript Date
+  const parseTimeInterval = (timeInterval: number): Date => {
+    // Swift TimeInterval is seconds since 2001-01-01 00:00:00 UTC
+    const swiftReferenceDate = new Date('2001-01-01T00:00:00Z');
+    return new Date(swiftReferenceDate.getTime() + (timeInterval * 1000));
+  };
+
   // Convert various date formats to readable time
   const parseDate = (dateValue: any): Date => {
     console.log('Parsing date value:', dateValue, 'Type:', typeof dateValue);
@@ -55,9 +75,7 @@ const ImportSchedule = () => {
       // Check if it's Swift TimeInterval (seconds since 2001-01-01)
       if (dateValue > 0 && dateValue < 1000000000) {
         // Likely Swift TimeInterval
-        const swiftReferenceOffset = 978307200; // Seconds between Jan 1, 1970 and Jan 1, 2001
-        const unixTimestamp = dateValue + swiftReferenceOffset;
-        return new Date(unixTimestamp * 1000);
+        return parseTimeInterval(dateValue);
       } else if (dateValue > 1000000000) {
         // Likely Unix timestamp in seconds or milliseconds
         if (dateValue > 10000000000) {
@@ -96,6 +114,43 @@ const ImportSchedule = () => {
       console.warn('Failed to parse color data:', colorData);
       return 'rgb(59, 130, 246)'; // Default blue
     }
+  };
+
+  // Convert minimal format to full schedule object
+  const convertMinimalToFullSchedule = (shareableSchedule: ShareableSchedule): any => {
+    console.log('Converting minimal format:', shareableSchedule);
+    
+    // Convert minimal events to full events
+    const fullEvents = shareableSchedule.e.map(event => {
+      const startTime = parseTimeInterval(event.s);
+      const endTime = parseTimeInterval(event.e);
+      
+      return {
+        name: event.n,
+        startTime: startTime.toISOString(),
+        endTime: endTime.toISOString(),
+        start: startTime,
+        end: endTime,
+        color: '#3B82F6', // Default blue color
+        colorData: { red: 0.231, green: 0.510, blue: 0.965 }, // Blue color data
+        enableAlert: true  // Default alerts enabled
+      };
+    });
+    
+    // Convert schedule type
+    const scheduleType = shareableSchedule.t === 0 ? 'custom' : 'generated';
+    
+    const fullSchedule = {
+      name: shareableSchedule.n,
+      scheduleType: scheduleType,
+      type: scheduleType,
+      events: fullEvents,
+      setEvents: fullEvents, // Legacy support
+      importedAt: new Date().toISOString()
+    };
+    
+    console.log('✅ Converted schedule:', fullSchedule.name, 'with', fullEvents.length, 'events');
+    return fullSchedule;
   };
 
   // Universal schedule transformer that handles any format
@@ -218,132 +273,139 @@ const ImportSchedule = () => {
     return transformedData;
   };
 
-  // Enhanced data extraction function
-  const extractDataParameter = (): string | null => {
+  // Enhanced data extraction function with version and compression support
+  const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
     console.log('=== ENHANCED DATA EXTRACTION ===');
     console.log('Full URL:', window.location.href);
     
-    const methods = [
-      { name: 'React Router searchParams', value: searchParams.get('data') },
-      { name: 'URLSearchParams from location.search', value: new URLSearchParams(location.search).get('data') },
-      { name: 'URLSearchParams from window.location.search', value: new URLSearchParams(window.location.search).get('data') },
-      { name: 'Regex extraction from full URL', value: window.location.href.match(/[?&]data=([^&]*)/)?.[1] },
-      { name: 'Regex extraction from hash', value: window.location.hash.match(/[?&]data=([^&]*)/)?.[1] },
-    ];
+    const urlParams = new URLSearchParams(window.location.search);
+    const data = urlParams.get('data');
+    const version = urlParams.get('v') || '1'; // Default to v1 if not specified
+    const isCompressed = urlParams.get('c') === '1';
     
-    // Check pathname for malformed URLs
-    const pathname = window.location.pathname;
-    if (pathname.includes('data=')) {
-      const dataIndex = pathname.indexOf('data=');
-      const dataStart = dataIndex + 5;
-      const dataEnd = pathname.indexOf('/', dataStart);
-      const pathnameData = dataEnd === -1 ? pathname.substring(dataStart) : pathname.substring(dataStart, dataEnd);
-      methods.push({ name: 'Data extraction from pathname', value: pathnameData });
-    }
+    console.log('Extracted parameters:', { data: data?.substring(0, 50) + '...', version, isCompressed });
     
-    for (const method of methods) {
-      if (method.value) {
-        console.log(`SUCCESS: Using data from ${method.name}`);
-        console.log(`Raw data: ${method.value}`);
-        console.log(`Data length: ${method.value.length}`);
-        return method.value;
-      }
-    }
-    
-    console.log('ERROR: No data parameter found using any method');
-    return null;
+    return { data, version, isCompressed };
   };
 
-  // Enhanced base64 decode function with gzip support
-  const safeBase64Decode = (encodedData: string): any => {
-    console.log('=== COMPREHENSIVE BASE64 DECODE WITH GZIP ===');
-    console.log('Input encoded data:', encodedData);
-    console.log('Input data length:', encodedData.length);
-    
-    const decodeMethods = [
-      {
-        name: 'Gzip compressed base64 decode',
-        decode: (data: string) => {
-          // Fix base64 padding
-          const paddingNeeded = (4 - (data.length % 4)) % 4;
-          const paddedData = data + '='.repeat(paddingNeeded);
-          
-          // Decode base64 to binary data
-          const binaryString = atob(paddedData);
-          const bytes = new Uint8Array(binaryString.length);
-          for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-          }
-          
-          // Decompress using pako
-          const decompressed = pako.inflate(bytes, { to: 'string' });
-          return JSON.parse(decompressed);
-        }
-      },
-      {
-        name: 'URL decode then gzip compressed base64 decode',
-        decode: (data: string) => {
-          const urlDecoded = decodeURIComponent(data);
-          const paddingNeeded = (4 - (urlDecoded.length % 4)) % 4;
-          const paddedData = urlDecoded + '='.repeat(paddingNeeded);
-          
-          const binaryString = atob(paddedData);
-          const bytes = new Uint8Array(binaryString.length);
-          for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-          }
-          
-          const decompressed = pako.inflate(bytes, { to: 'string' });
-          return JSON.parse(decompressed);
-        }
-      },
-      {
-        name: 'Direct base64 decode (fallback)',
-        decode: (data: string) => {
-          const jsonString = atob(data);
-          return JSON.parse(jsonString);
-        }
-      },
-      {
-        name: 'URL decode then base64 decode (fallback)',
-        decode: (data: string) => {
-          const urlDecoded = decodeURIComponent(data);
-          const jsonString = atob(urlDecoded);
-          return JSON.parse(jsonString);
-        }
-      },
-      {
-        name: 'Replace URL encoded chars then base64 decode (fallback)',
-        decode: (data: string) => {
-          const fixed = data.replace(/%2B/g, '+').replace(/%2F/g, '/').replace(/%3D/g, '=');
-          const jsonString = atob(fixed);
-          return JSON.parse(jsonString);
-        }
-      },
-      {
-        name: 'Try as JSON string directly (fallback)',
-        decode: (data: string) => {
-          return JSON.parse(data);
-        }
+  // Convert URL-safe base64 to binary data
+  const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
+    try {
+      // Convert URL-safe base64 back to regular base64
+      let base64 = urlSafeBase64
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+      
+      // Add padding if needed
+      const remainder = base64.length % 4;
+      if (remainder > 0) {
+        base64 += '='.repeat(4 - remainder);
       }
-    ];
-    
-    for (const method of decodeMethods) {
-      try {
-        console.log(`Trying decode method: ${method.name}`);
-        const result = method.decode(encodedData);
-        console.log(`✅ Success with ${method.name}`);
-        console.log('Decoded result:', result);
-        return result;
-      } catch (error) {
-        console.log(`❌ Failed with ${method.name}:`, error.message);
-        if (method.name.includes('gzip') || method.name.includes('Gzip')) {
-          console.log('Gzip decompression error details:', error);
-        }
+      
+      console.log('Converted to regular base64, length:', base64.length);
+      
+      // Decode base64 to binary
+      const binaryString = atob(base64);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
       }
+      
+      return bytes;
+    } catch (error) {
+      console.error('❌ Base64 decoding error:', error);
+      throw new Error('Invalid base64 encoding');
     }
+  };
+
+  // Handle v3 format with gzip compression
+  const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
+    try {
+      console.log('Processing v3 format, compressed:', isCompressed);
+      
+      // Decode URL-safe base64
+      const binaryData = decodeUrlSafeBase64(encodedData);
+      
+      let jsonData: string;
+      if (isCompressed) {
+        // Decompress using gzip (pako)
+        console.log('Decompressing data with gzip...');
+        try {
+          const decompressedData = pako.inflate(binaryData);
+          jsonData = new TextDecoder().decode(decompressedData);
+          console.log('✅ Successfully decompressed data');
+        } catch (error) {
+          console.error('❌ Gzip decompression failed:', error);
+          throw new Error('Failed to decompress data: ' + error.message);
+        }
+      } else {
+        // Not compressed, convert binary to string
+        jsonData = new TextDecoder().decode(binaryData);
+      }
+      
+      console.log('JSON data length:', jsonData.length);
+      console.log('JSON preview:', jsonData.substring(0, 200) + '...');
+      
+      // Parse the minimal format JSON
+      const shareableSchedule: ShareableSchedule = JSON.parse(jsonData);
+      
+      // Convert from minimal format to full schedule object
+      const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
+      
+      console.log('✅ Converted to full schedule:', fullSchedule.name);
+      return fullSchedule;
+      
+    } catch (error) {
+      console.error('❌ V3 format processing error:', error);
+      throw error;
+    }
+  };
+
+  // Handle v2 format (URL-safe base64 without compression)
+  const handleV2Format = (encodedData: string): any => {
+    try {
+      const binaryData = decodeUrlSafeBase64(encodedData);
+      const jsonData = new TextDecoder().decode(binaryData);
+      return JSON.parse(jsonData);
+    } catch (error) {
+      console.error('❌ V2 format processing error:', error);
+      throw error;
+    }
+  };
+
+  // Handle v1 format (legacy standard base64)
+  const handleV1Format = (encodedData: string): any => {
+    try {
+      const decodedData = decodeURIComponent(encodedData);
+      const jsonString = atob(decodedData);
+      return JSON.parse(jsonString);
+    } catch (error) {
+      console.error('❌ V1 format processing error:', error);
+      throw error;
+    }
+  };
+
+  // Updated decode function with proper version handling
+  const safeBase64Decode = (encodedData: string, version: string, isCompressed: boolean): any => {
+    console.log('=== COMPREHENSIVE BASE64 DECODE ===');
+    console.log('Input encoded data length:', encodedData.length);
+    console.log('Version:', version, 'Compressed:', isCompressed);
     
-    throw new Error('All decode methods failed, including gzip decompression');
+    try {
+      if (version === '3') {
+        // Handle v3 format with minimal structure and optional compression
+        return handleV3Format(encodedData, isCompressed);
+      } else if (version === '2') {
+        // Handle v2 format (URL-safe base64 without compression)
+        return handleV2Format(encodedData);
+      } else {
+        // Handle v1 format (legacy)
+        return handleV1Format(encodedData);
+      }
+    } catch (error) {
+      console.error('❌ All decode methods failed:', error);
+      throw new Error('Failed to decode schedule data: ' + error.message);
+    }
   };
 
   useEffect(() => {
@@ -353,13 +415,14 @@ const ImportSchedule = () => {
       try {
         console.log('=== STARTING DATA LOAD PROCESS ===');
         
-        const encodedData = extractDataParameter();
+        const { data: encodedData, version, isCompressed } = extractDataParameters();
         
         if (encodedData) {
           console.log('Found encoded data, attempting to decode...');
+          console.log('Format version:', version, 'Compressed:', isCompressed);
           
           try {
-            const decodedData = safeBase64Decode(encodedData);
+            const decodedData = safeBase64Decode(encodedData, version, isCompressed);
             console.log('Successfully decoded data:', decodedData);
             console.log('Data type:', typeof decodedData);
             console.log('Data keys:', Object.keys(decodedData));
@@ -376,6 +439,9 @@ const ImportSchedule = () => {
             
             // Try to provide more helpful error message
             let errorMessage = 'Invalid schedule data format. ';
+            if (version === '3' && isCompressed) {
+              errorMessage += 'Failed to decompress gzip data. ';
+            }
             if (encodedData.length < 10) {
               errorMessage += 'The data appears to be too short.';
             } else if (encodedData.length > 10000) {
@@ -441,58 +507,58 @@ const ImportSchedule = () => {
   };
 
   // Add this helper function to fix base64 padding
-const fixBase64Padding = (base64String: string): string => {
-  // Add padding if needed
-  const paddingNeeded = (4 - (base64String.length % 4)) % 4;
-  return base64String + '='.repeat(paddingNeeded);
-};
-
-// Update your handleOpenInApp function
-const handleOpenInApp = () => {
-  const encodedData = extractDataParameter();
-  if (!encodedData) {
-    console.error('No data parameter found for app opening');
-    return;
-  }
-  
-  // Fix base64 padding before sending to iOS
-  const fixedData = fixBase64Padding(encodedData);
-  
-  // Don't double-encode the data
-  const appURL = `ischeduled://import?data=${fixedData}`;
-  
-  console.log('Opening app with URL:', appURL);
-  console.log('Base64 data length:', fixedData.length);
-  console.log('Base64 data (first 100 chars):', fixedData.substring(0, 100));
-  
-  // Test app detection
-  setAppStatus('checking');
-  
-  // Try to open the app
-  const timeoutId = setTimeout(() => {
-    console.log('App did not open, showing App Store redirect');
-    setAppStatus('not-installed');
-    setShowAppStoreRedirect(true);
-  }, 2000);
-  
-  // Clear timeout if page becomes hidden (app opened)
-  const handleVisibilityChange = () => {
-    if (document.hidden) {
-      clearTimeout(timeoutId);
-      setAppStatus('installed');
-    }
+  const fixBase64Padding = (base64String: string): string => {
+    // Add padding if needed
+    const paddingNeeded = (4 - (base64String.length % 4)) % 4;
+    return base64String + '='.repeat(paddingNeeded);
   };
-  
-  document.addEventListener('visibilitychange', handleVisibilityChange);
-  
-  // Attempt to open the app
-  window.location.href = appURL;
-  
-  // Clean up
-  setTimeout(() => {
-    document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, 3000);
-};
+
+  // Update your handleOpenInApp function
+  const handleOpenInApp = () => {
+    const { data: encodedData } = extractDataParameters();
+    if (!encodedData) {
+      console.error('No data parameter found for app opening');
+      return;
+    }
+    
+    // Fix base64 padding before sending to iOS
+    const fixedData = fixBase64Padding(encodedData);
+    
+    // Don't double-encode the data
+    const appURL = `ischeduled://import?data=${fixedData}`;
+    
+    console.log('Opening app with URL:', appURL);
+    console.log('Base64 data length:', fixedData.length);
+    console.log('Base64 data (first 100 chars):', fixedData.substring(0, 100));
+    
+    // Test app detection
+    setAppStatus('checking');
+    
+    // Try to open the app
+    const timeoutId = setTimeout(() => {
+      console.log('App did not open, showing App Store redirect');
+      setAppStatus('not-installed');
+      setShowAppStoreRedirect(true);
+    }, 2000);
+    
+    // Clear timeout if page becomes hidden (app opened)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearTimeout(timeoutId);
+        setAppStatus('installed');
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Attempt to open the app
+    window.location.href = appURL;
+    
+    // Clean up
+    setTimeout(() => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }, 3000);
+  };
 
   const handleDownloadApp = () => {
     window.open('https://apps.apple.com/app/your-app-id', '_blank');
@@ -564,12 +630,14 @@ const handleOpenInApp = () => {
                 <div className="bg-gray-100 p-4 rounded-lg text-left text-xs mb-4 max-w-lg mx-auto">
                   <p><strong>Debug Information:</strong></p>
                   <p className="break-all mb-2">URL: {window.location.href}</p>
-                  <p className="break-all mb-2">Data param: {extractDataParameter()}</p>
-                  <p className="mb-2">Data length: {extractDataParameter()?.length || 'N/A'}</p>
-                  <p className="break-all">Data sample: {extractDataParameter()?.substring(0, 50) || 'N/A'}...</p>
+                  <p className="break-all mb-2">Data param: {extractDataParameters().data}</p>
+                  <p className="mb-2">Data length: {extractDataParameters().data?.length || 'N/A'}</p>
+                  <p className="mb-2">Version: {extractDataParameters().version}</p>
+                  <p className="mb-2">Compressed: {extractDataParameters().isCompressed ? 'Yes' : 'No'}</p>
+                  <p className="break-all">Data sample: {extractDataParameters().data?.substring(0, 50) || 'N/A'}...</p>
                   <Button 
                     onClick={() => {
-                      const data = extractDataParameter();
+                      const { data } = extractDataParameters();
                       if (data) {
                         navigator.clipboard.writeText(data);
                         alert('Debug data copied to clipboard');
