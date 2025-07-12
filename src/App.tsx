@@ -31,14 +31,15 @@ const RouteDebugger = () => {
 const URLFixer = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const hasProcessed = useRef(false);
+  const processedURLs = useRef(new Set<string>());
   
   useEffect(() => {
     const pathname = location.pathname;
+    const fullURL = pathname + location.search;
     
-    // Prevent multiple processing of the same URL
-    if (hasProcessed.current) {
-      console.log('URLFixer - Already processed this URL, skipping');
+    // Check if this specific URL has already been processed
+    if (processedURLs.current.has(fullURL)) {
+      console.log('URLFixer - Already processed this exact URL, skipping:', fullURL);
       return;
     }
     
@@ -46,6 +47,7 @@ const URLFixer = () => {
     if (pathname.includes('data=') && pathname.includes('/import')) {
       console.log('URLFixer - Detected malformed Universal Link in React Router');
       console.log('URLFixer - Full pathname:', pathname);
+      console.log('URLFixer - Processing URL:', fullURL);
       
       // Extract the data parameter from the pathname
       const dataMatch = pathname.match(/data=([^\/]+)/);
@@ -53,28 +55,31 @@ const URLFixer = () => {
         const dataParam = dataMatch[1];
         console.log('URLFixer - Extracted data param:', dataParam);
         
-        // Mark as processed to prevent loops
-        hasProcessed.current = true;
+        // Mark this URL as processed
+        processedURLs.current.add(fullURL);
         
-        // Construct the correct URL and navigate with a small delay
+        // Construct the correct URL
         const correctPath = `/import?data=${dataParam}`;
         console.log('URLFixer - Navigating to:', correctPath);
         
-        // Use a small timeout to ensure React Router is ready
-        setTimeout(() => {
+        // Use immediate navigation with proper error handling
+        try {
           console.log('URLFixer - Executing navigation now');
-          try {
-            navigate(correctPath, { replace: true });
-            console.log('URLFixer - Navigation completed successfully');
-          } catch (error) {
-            console.error('URLFixer - Navigation failed:', error);
-            // Fallback: try window.location
-            window.location.replace(correctPath);
-          }
-        }, 50);
+          navigate(correctPath, { replace: true });
+          console.log('URLFixer - Navigation completed successfully');
+        } catch (error) {
+          console.error('URLFixer - Navigation failed:', error);
+          // Fallback: try window.location
+          console.log('URLFixer - Attempting window.location fallback');
+          window.location.replace(correctPath);
+        }
+      } else {
+        console.error('URLFixer - Could not extract data parameter from:', pathname);
       }
+    } else {
+      console.log('URLFixer - Normal URL, no fixing needed:', pathname);
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, location.search, navigate]);
   
   return null;
 };
