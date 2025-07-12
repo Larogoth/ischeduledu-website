@@ -521,22 +521,26 @@ const ImportSchedule = () => {
   };
 
   const handleOpenInApp = () => {
-  // Get the clean parameters including version and compression info
-  const { data: encodedData, version, isCompressed } = extractDataParameters();
-  if (!encodedData) {
-    console.error('No data parameter found for app opening');
+  // Get the original URL that was used to access this website
+  const originalUrl = window.location.href;
+  console.log('Original website URL:', originalUrl);
+  
+  // Simply replace the scheme and domain to convert it to the app URL
+  // From: https://ischeduledu.app/import?data=...&v=3&c=1
+  // To:   ischeduled://import?data=...&v=3&c=1
+  const appURL = originalUrl
+    .replace('https://ischeduledu.app/import', 'ischeduled://import')
+    .replace('http://ischeduledu.app/import', 'ischeduled://import'); // Just in case
+  
+  console.log('App URL (preserving original parameters):', appURL);
+  
+  // Verify it's a valid conversion
+  if (!appURL.startsWith('ischeduled://import?')) {
+    console.error('Failed to convert URL properly');
+    console.error('Original:', originalUrl);
+    console.error('Converted:', appURL);
     return;
   }
-  
-  console.log('Raw data for app:', encodedData);
-  console.log('Version:', version, 'Compressed:', isCompressed);
-  
-  // Don't URL-encode the data - iOS handles URL-safe base64 directly
-  // Just pass the clean data as-is
-  const appURL = `ischeduled://import?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
-  
-  console.log('Final app URL:', appURL);
-  console.log('Data length:', encodedData.length);
   
   setAppStatus('checking');
   
