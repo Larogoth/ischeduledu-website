@@ -355,6 +355,7 @@ const extractDataParameters = (): { data: string | null; version: string; isComp
   };
   
   // Handle v3 format with gzip compression
+// Handle v3 format with gzip compression
 const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
   try {
     console.log('Processing v3 format, compressed:', isCompressed);
@@ -364,55 +365,78 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
     // Decode URL-safe base64
     const binaryData = decodeUrlSafeBase64(encodedData);
     console.log('Decoded binary data length:', binaryData.length);
+    console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
     
     let jsonData: string;
+    
     if (isCompressed) {
-      // Decompress using gzip (pako)
-      console.log('Decompressing data with gzip...');
-      console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
+      console.log('🔍 Attempting decompression...');
       
+      // First, try to decode as uncompressed JSON in case the compression flag is wrong
       try {
-        // Try different decompression methods
-        let decompressedData: Uint8Array;
+        console.log('🔧 Trying as uncompressed JSON first (despite c=1 flag)...');
+        const testJsonData = new TextDecoder().decode(binaryData);
+        console.log('Test JSON data:', testJsonData.substring(0, 200));
         
-        // Method 1: Try inflateRaw (for raw deflate)
+        // Try to parse as JSON to see if it's valid
+        const testParsed = JSON.parse(testJsonData);
+        console.log('✅ Successfully parsed as uncompressed JSON despite c=1 flag');
+        jsonData = testJsonData;
+      } catch (uncompressedError) {
+        console.log('❌ Not valid uncompressed JSON, trying actual decompression...');
+        
+        // Try different decompression methods
+        let decompressedData: Uint8Array | null = null;
+        let lastError: any = null;
+        
+        // Method 1: Try inflateRaw (for raw deflate - most likely for iOS COMPRESSION_ZLIB)
         try {
+          console.log('🔧 Trying inflateRaw...');
           decompressedData = pako.inflateRaw(binaryData);
           console.log('✅ Successfully decompressed with inflateRaw');
-        } catch (rawError) {
-          console.log('❌ inflateRaw failed:', rawError);
-          
-          // Method 2: Try inflate (for zlib/gzip)
+        } catch (error) {
+          console.log('❌ inflateRaw failed:', error.message || error);
+          lastError = error;
+        }
+        
+        // Method 2: Try inflate (for zlib)
+        if (!decompressedData) {
           try {
+            console.log('🔧 Trying inflate...');
             decompressedData = pako.inflate(binaryData);
             console.log('✅ Successfully decompressed with inflate');
-          } catch (inflateError) {
-            console.log('❌ inflate failed:', inflateError);
-            
-            // Method 3: Try ungzip (for gzip specifically)
-            try {
-              decompressedData = pako.ungzip(binaryData);
-              console.log('✅ Successfully decompressed with ungzip');
-            } catch (ungzipError) {
-              console.log('❌ ungzip failed:', ungzipError);
-              
-              // All methods failed
-              throw new Error(`All decompression methods failed. Raw: ${rawError?.message}, Inflate: ${inflateError?.message}, Ungzip: ${ungzipError?.message}`);
-            }
+          } catch (error) {
+            console.log('❌ inflate failed:', error.message || error);
+            lastError = error;
           }
         }
         
-        jsonData = new TextDecoder().decode(decompressedData);
-        console.log('✅ Successfully decoded decompressed data');
-        console.log('Decompressed data length:', jsonData.length);
+        // Method 3: Try ungzip (for gzip)
+        if (!decompressedData) {
+          try {
+            console.log('🔧 Trying ungzip...');
+            decompressedData = pako.ungzip(binaryData);
+            console.log('✅ Successfully decompressed with ungzip');
+          } catch (error) {
+            console.log('❌ ungzip failed:', error.message || error);
+            lastError = error;
+          }
+        }
         
-      } catch (error) {
-        console.error('❌ Gzip decompression failed:', error);
-        console.error('Error details:', error.message);
-        console.error('Error stack:', error.stack);
-        
-        // Provide more detailed error information
-        throw new Error(`Failed to decompress data: ${error.message || 'Unknown compression error'}`);
+        if (!decompressedData) {
+          // If decompression failed, try treating as uncompressed anyway
+          console.log('🔧 All decompression methods failed, trying as uncompressed data...');
+          try {
+            jsonData = new TextDecoder().decode(binaryData);
+            console.log('✅ Using as uncompressed data after decompression failures');
+          } catch (decodeError) {
+            const errorMsg = lastError?.message || lastError?.toString() || 'Unknown decompression error';
+            throw new Error(`All decompression methods failed: ${errorMsg}`);
+          }
+        } else {
+          jsonData = new TextDecoder().decode(decompressedData);
+          console.log('✅ Successfully decoded decompressed data');
+        }
       }
     } else {
       // Not compressed, convert binary to string
@@ -429,12 +453,21 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
     }
     
     // Parse the minimal format JSON
-    const shareableSchedule: ShareableSchedule = JSON.parse(jsonData);
-    console.log('✅ Successfully parsed JSON');
+    let shareableSchedule: ShareableSchedule;
+    try {
+      shareableSchedule = JSON.parse(jsonData);
+      console.log('✅ Successfully parsed JSON');
+      console.log('Parsed schedule:', shareableSchedule);
+    } catch (parseError) {
+      console.error('❌ JSON parsing failed:', parseError);
+      console.error('JSON data that failed to parse (first 500 chars):', jsonData.substring(0, 500));
+      throw new Error(`JSON parsing failed: ${parseError.message}`);
+    }
     
     // Validate the parsed data structure
     if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
-      throw new Error('Invalid schedule data structure');
+      console.error('❌ Invalid schedule data structure:', shareableSchedule);
+      throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
     }
     
     // Convert from minimal format to full schedule object
@@ -445,10 +478,10 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
     
   } catch (error) {
     console.error('❌ V3 format processing error:', error);
-    console.error('Error type:', typeof error);
-    console.error('Error message:', error.message);
-    console.error('Error stack:', error.stack);
-    throw error;
+    
+    // Re-throw with more context
+    const errorMessage = error?.message || error?.toString() || 'Unknown error';
+    throw new Error(`V3 format processing failed: ${errorMessage}`);
   }
 };
 
