@@ -749,11 +749,8 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-              <Sparkles className="w-3 h-3 text-white" />
-            </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-[#0FA0CE] to-gray-900 bg-clip-text text-transparent mb-3 font-euclid">
             iSchedulEDU
           </h1>
           <p className="text-xl text-gray-600 font-medium">Teacher Schedule Management</p>
@@ -962,7 +959,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                           </p>
                           <div className="space-y-3">
                             <Button 
-                              onClick={handleDownloadApp} 
+                              onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank')} 
                               className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                               <Download className="w-6 h-6 mr-3" />
@@ -992,7 +989,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                               Open in App
                             </Button>
                             <Button 
-                              onClick={handleDownloadApp} 
+                              onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank')} 
                               variant="outline" 
                               className="w-full max-w-sm py-3 rounded-xl border-2 hover:bg-gray-50"
                             >
@@ -1023,7 +1020,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                       </p>
                       <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button 
-                          onClick={handleDownloadApp} 
+                          onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank')} 
                           className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                           <Smartphone className="w-5 h-5 mr-2" />
