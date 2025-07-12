@@ -39,6 +39,9 @@ interface IOSScheduleData {
 }
 
 const ImportSchedule = () => {
+  console.log('=== ImportSchedule COMPONENT MOUNTED ===');
+  console.log('Component render timestamp:', new Date().toISOString());
+  
   const { scheduleId } = useParams();
   const [searchParams] = useSearchParams();
   const location = useLocation();
@@ -115,6 +118,9 @@ const ImportSchedule = () => {
   };
 
   useEffect(() => {
+    console.log('=== ImportSchedule useEffect TRIGGERED ===');
+    console.log('Effect dependencies - scheduleId:', scheduleId, 'searchParams keys:', Array.from(searchParams.keys()));
+    
     const loadScheduleData = () => {
       try {
         console.log('=== DEBUGGING URL PARSING ===');
