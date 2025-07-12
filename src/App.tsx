@@ -22,6 +22,7 @@ const RouteDebugger = () => {
     console.log('Current search:', location.search);
     console.log('Current hash:', location.hash);
     console.log('Full location object:', location);
+    console.log('Full URL:', window.location.href);
   }, [location]);
   
   return null;
@@ -35,7 +36,12 @@ const URLFixer = () => {
   
   useEffect(() => {
     const pathname = location.pathname;
-    const fullURL = pathname + location.search;
+    const search = location.search;
+    const fullURL = pathname + search;
+    
+    console.log('URLFixer - Processing URL:', fullURL);
+    console.log('URLFixer - Pathname:', pathname);
+    console.log('URLFixer - Search params:', search);
     
     // Check if this specific URL has already been processed
     if (processedURLs.current.has(fullURL)) {
@@ -43,11 +49,11 @@ const URLFixer = () => {
       return;
     }
     
-    // Check if this is a malformed Universal Link URL
-    if (pathname.includes('data=') && pathname.includes('/import')) {
-      console.log('URLFixer - Detected malformed Universal Link in React Router');
+    // Only process malformed URLs where data parameter is in the pathname
+    // Normal URLs like /import?data=xyz should be left alone
+    if (pathname.includes('data=') && pathname.includes('/import') && !search) {
+      console.log('URLFixer - Detected malformed Universal Link in pathname (no search params)');
       console.log('URLFixer - Full pathname:', pathname);
-      console.log('URLFixer - Processing URL:', fullURL);
       
       // Extract the data parameter from the pathname
       const dataMatch = pathname.match(/data=([^\/]+)/);
@@ -60,11 +66,10 @@ const URLFixer = () => {
         
         // Construct the correct URL
         const correctPath = `/import?data=${dataParam}`;
-        console.log('URLFixer - Navigating to:', correctPath);
+        console.log('URLFixer - Navigating to corrected path:', correctPath);
         
         // Use immediate navigation with proper error handling
         try {
-          console.log('URLFixer - Executing navigation now');
           navigate(correctPath, { replace: true });
           console.log('URLFixer - Navigation completed successfully');
         } catch (error) {
@@ -76,6 +81,9 @@ const URLFixer = () => {
       } else {
         console.error('URLFixer - Could not extract data parameter from:', pathname);
       }
+    } else if (pathname === '/import' && search.includes('data=')) {
+      console.log('URLFixer - Normal Universal Link detected, letting React Router handle it');
+      // This is a normal Universal Link, don't interfere
     } else {
       console.log('URLFixer - Normal URL, no fixing needed:', pathname);
     }
