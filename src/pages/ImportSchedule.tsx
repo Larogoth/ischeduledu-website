@@ -18,6 +18,29 @@ interface ScheduleData {
   notifications: boolean;
 }
 
+// Updated interface to match the actual CustomEvent structure from iOS
+interface CustomEvent {
+  id: string;
+  name: string;
+  startTime: number; // Swift Date becomes number in JSON
+  endTime: number;   // Swift Date becomes number in JSON
+  enableAlert: boolean;
+  colorData: {
+    red: number;
+    green: number;
+    blue: number;
+  };
+}
+
+// Updated interface to match the actual CustomSchedule structure from iOS
+interface CustomSchedule {
+  id: string;
+  name: string;
+  events: CustomEvent[]; // This is the correct field name
+  scheduleType: string;
+}
+
+// Legacy interface for backward compatibility
 interface IOSScheduleEvent {
   id: string;
   name: string;
@@ -64,6 +87,9 @@ const ImportSchedule = () => {
   const formatTimeFromTimestamp = (timestamp: number): string => {
     console.log('Original Swift TimeInterval:', timestamp);
     
+    // Swift's reference date: January 1, 2001 00:00:00 UTC
+    // Unix epoch: January 1, 1970 00:00:00 UTC
+    // Difference: 31 years = 978307200 seconds
     const swiftReferenceOffset = 978307200;
     const unixTimestamp = timestamp + swiftReferenceOffset;
     
@@ -90,10 +116,10 @@ const ImportSchedule = () => {
     return `rgb(${r}, ${g}, ${b})`;
   };
 
-  // Transform iOS schedule data to web format
-  const transformIOSScheduleData = (iosData: IOSScheduleData): ScheduleData => {
-    console.log('Transforming iOS data:', iosData);
-    const events = iosData.events || [];
+  // Transform CustomSchedule (new format) to web format
+  const transformCustomScheduleData = (customSchedule: CustomSchedule): ScheduleData => {
+    console.log('Transforming CustomSchedule data:', customSchedule);
+    const events = customSchedule.events || [];
     const subjects = events.map(event => event.name);
     
     // Process events with colors and times
@@ -119,8 +145,8 @@ const ImportSchedule = () => {
     const endTime = latestEnd > 0 ? formatTimeFromTimestamp(latestEnd) : '3:00 PM';
     
     console.log('Transformed data:', {
-      name: iosData.name,
-      type: iosData.scheduleType || 'custom',
+      name: customSchedule.name,
+      type: customSchedule.scheduleType || 'custom',
       subjects: subjects,
       periods: events.length,
       startTime: startTime,
@@ -128,6 +154,46 @@ const ImportSchedule = () => {
       days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       notifications: events.some(event => event.enableAlert)
     });
+    
+    return {
+      name: customSchedule.name,
+      type: customSchedule.scheduleType || 'custom',
+      subjects: subjects,
+      periods: events.length,
+      startTime: startTime,
+      endTime: endTime,
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      notifications: events.some(event => event.enableAlert)
+    };
+  };
+
+  // Legacy transform function for backward compatibility
+  const transformIOSScheduleData = (iosData: IOSScheduleData): ScheduleData => {
+    console.log('Transforming legacy iOS data:', iosData);
+    const events = iosData.events || [];
+    const subjects = events.map(event => event.name);
+    
+    // Process events with colors and times
+    const processed: ProcessedEvent[] = events.map(event => ({
+      name: event.name,
+      startTime: formatTimeFromTimestamp(event.startTime),
+      endTime: formatTimeFromTimestamp(event.endTime),
+      color: formatColor(event.colorData)
+    }));
+    
+    setProcessedEvents(processed);
+    
+    // Calculate time range from events
+    let earliestStart = Infinity;
+    let latestEnd = 0;
+    
+    events.forEach(event => {
+      if (event.startTime < earliestStart) earliestStart = event.startTime;
+      if (event.endTime > latestEnd) latestEnd = event.endTime;
+    });
+
+    const startTime = earliestStart !== Infinity ? formatTimeFromTimestamp(earliestStart) : '8:00 AM';
+    const endTime = latestEnd > 0 ? formatTimeFromTimestamp(latestEnd) : '3:00 PM';
     
     return {
       name: iosData.name,
@@ -282,22 +348,36 @@ const ImportSchedule = () => {
           try {
             const decodedData = safeBase64Decode(encodedData);
             console.log('Successfully decoded data:', decodedData);
+            console.log('Data keys:', Object.keys(decodedData));
             
-            if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
-              console.log('Detected iOS app format');
+            // Check for the new CustomSchedule format (current iOS app format)
+            if (decodedData.scheduleType !== undefined && decodedData.events !== undefined && Array.isArray(decodedData.events)) {
+              console.log('Detected CustomSchedule format (current iOS app format)');
+              const transformedData = transformCustomScheduleData(decodedData as CustomSchedule);
+              setScheduleData(transformedData);
+            }
+            // Check for legacy iOS format
+            else if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
+              console.log('Detected legacy iOS app format');
               const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
               setScheduleData(transformedData);
-            } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
+            }
+            // Check for web format
+            else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
               console.log('Detected web format');
               setScheduleData(decodedData as ScheduleData);
-            } else {
+            }
+            else {
               console.error('Unknown data format:', decodedData);
               console.error('Data keys:', Object.keys(decodedData));
+              console.error('Sample data:', JSON.stringify(decodedData, null, 2));
               setError(`Unsupported schedule data format. Found keys: ${Object.keys(decodedData).join(', ')}`);
             }
           } catch (decodeError) {
             console.error('Failed to decode data:', decodeError);
             console.error('Raw encoded data for debugging:', encodedData);
+            console.error('Encoded data length:', encodedData.length);
+            console.error('Encoded data sample:', encodedData.substring(0, 100) + '...');
             setError(`Invalid schedule data format. Decode error: ${decodeError.message}`);
           }
         } else if (scheduleId) {
