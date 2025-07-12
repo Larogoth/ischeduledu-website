@@ -521,26 +521,22 @@ const ImportSchedule = () => {
   };
 
   const handleOpenInApp = () => {
-  // Get the original URL that was used to access this website
-  const originalUrl = window.location.href;
-  console.log('Original website URL:', originalUrl);
+  // Use the cleaned parameters instead of the potentially malformed window.location.href
+  const { data: cleanData, version, isCompressed } = extractDataParameters();
   
-  // Simply replace the scheme and domain to convert it to the app URL
-  // From: https://ischeduledu.app/import?data=...&v=3&c=1
-  // To:   ischeduled://import?data=...&v=3&c=1
-  const appURL = originalUrl
-    .replace('https://ischeduledu.app/import', 'ischeduled://import')
-    .replace('http://ischeduledu.app/import', 'ischeduled://import'); // Just in case
-  
-  console.log('App URL (preserving original parameters):', appURL);
-  
-  // Verify it's a valid conversion
-  if (!appURL.startsWith('ischeduled://import?')) {
-    console.error('Failed to convert URL properly');
-    console.error('Original:', originalUrl);
-    console.error('Converted:', appURL);
+  if (!cleanData) {
+    console.error('No data parameter found for app opening');
     return;
   }
+  
+  // Construct a properly formatted app URL with clean parameters
+  const appURL = `ischeduled://import?data=${cleanData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+  
+  console.log('Constructing clean app URL:');
+  console.log('• Clean data:', cleanData.substring(0, 50) + '...');
+  console.log('• Version:', version);
+  console.log('• Compressed:', isCompressed);
+  console.log('• Final app URL:', appURL);
   
   setAppStatus('checking');
   
