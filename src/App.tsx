@@ -46,15 +46,13 @@ const URLFixer = () => {
         const dataParam = dataMatch[1];
         console.log('URLFixer - Extracted data param:', dataParam);
         
-        // Construct the correct URL and navigate
+        // Construct the correct URL and navigate immediately
         const correctPath = `/import?data=${dataParam}`;
         console.log('URLFixer - Navigating to:', correctPath);
         
-        // Use a timeout to ensure the navigation happens after the current render cycle
-        setTimeout(() => {
-          console.log('URLFixer - Executing navigation now');
-          navigate(correctPath, { replace: true });
-        }, 0);
+        // Use immediate navigation with replace to avoid history issues
+        console.log('URLFixer - Executing navigation now');
+        navigate(correctPath, { replace: true });
       }
     }
   }, [location.pathname, navigate]);
