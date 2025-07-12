@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, Sparkles, GraduationCap } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
+import * as pako from 'pako';
 
 interface ScheduleData {
   name: string;
@@ -253,22 +254,58 @@ const ImportSchedule = () => {
     return null;
   };
 
-  // Comprehensive base64 decode function
+  // Enhanced base64 decode function with gzip support
   const safeBase64Decode = (encodedData: string): any => {
-    console.log('=== COMPREHENSIVE BASE64 DECODE ===');
+    console.log('=== COMPREHENSIVE BASE64 DECODE WITH GZIP ===');
     console.log('Input encoded data:', encodedData);
     console.log('Input data length:', encodedData.length);
     
     const decodeMethods = [
       {
-        name: 'Direct base64 decode',
+        name: 'Gzip compressed base64 decode',
+        decode: (data: string) => {
+          // Fix base64 padding
+          const paddingNeeded = (4 - (data.length % 4)) % 4;
+          const paddedData = data + '='.repeat(paddingNeeded);
+          
+          // Decode base64 to binary data
+          const binaryString = atob(paddedData);
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          
+          // Decompress using pako
+          const decompressed = pako.inflate(bytes, { to: 'string' });
+          return JSON.parse(decompressed);
+        }
+      },
+      {
+        name: 'URL decode then gzip compressed base64 decode',
+        decode: (data: string) => {
+          const urlDecoded = decodeURIComponent(data);
+          const paddingNeeded = (4 - (urlDecoded.length % 4)) % 4;
+          const paddedData = urlDecoded + '='.repeat(paddingNeeded);
+          
+          const binaryString = atob(paddedData);
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          
+          const decompressed = pako.inflate(bytes, { to: 'string' });
+          return JSON.parse(decompressed);
+        }
+      },
+      {
+        name: 'Direct base64 decode (fallback)',
         decode: (data: string) => {
           const jsonString = atob(data);
           return JSON.parse(jsonString);
         }
       },
       {
-        name: 'URL decode then base64 decode',
+        name: 'URL decode then base64 decode (fallback)',
         decode: (data: string) => {
           const urlDecoded = decodeURIComponent(data);
           const jsonString = atob(urlDecoded);
@@ -276,7 +313,7 @@ const ImportSchedule = () => {
         }
       },
       {
-        name: 'Replace URL encoded chars then base64 decode',
+        name: 'Replace URL encoded chars then base64 decode (fallback)',
         decode: (data: string) => {
           const fixed = data.replace(/%2B/g, '+').replace(/%2F/g, '/').replace(/%3D/g, '=');
           const jsonString = atob(fixed);
@@ -284,17 +321,7 @@ const ImportSchedule = () => {
         }
       },
       {
-        name: 'Manual URL decode with space handling',
-        decode: (data: string) => {
-          let manualDecoded = data.replace(/\+/g, ' ');
-          manualDecoded = decodeURIComponent(manualDecoded);
-          manualDecoded = manualDecoded.replace(/ /g, '+');
-          const jsonString = atob(manualDecoded);
-          return JSON.parse(jsonString);
-        }
-      },
-      {
-        name: 'Try as JSON string directly',
+        name: 'Try as JSON string directly (fallback)',
         decode: (data: string) => {
           return JSON.parse(data);
         }
@@ -310,10 +337,13 @@ const ImportSchedule = () => {
         return result;
       } catch (error) {
         console.log(`❌ Failed with ${method.name}:`, error.message);
+        if (method.name.includes('gzip') || method.name.includes('Gzip')) {
+          console.log('Gzip decompression error details:', error);
+        }
       }
     }
     
-    throw new Error('All decode methods failed');
+    throw new Error('All decode methods failed, including gzip decompression');
   };
 
   useEffect(() => {
