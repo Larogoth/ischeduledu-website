@@ -521,41 +521,44 @@ const ImportSchedule = () => {
   };
 
   const handleOpenInApp = () => {
-    const { data: encodedData } = extractDataParameters();
-    if (!encodedData) {
-      console.error('No data parameter found for app opening');
-      return;
+  // Get the clean parameters including version and compression info
+  const { data: encodedData, version, isCompressed } = extractDataParameters();
+  if (!encodedData) {
+    console.error('No data parameter found for app opening');
+    return;
+  }
+  
+  const fixedData = fixBase64Padding(encodedData);
+  
+  // Include version and compression parameters in the app URL
+  const appURL = `ischeduled://import?data=${fixedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+  
+  console.log('Opening app with URL:', appURL);
+  console.log('Version:', version, 'Compressed:', isCompressed);
+  
+  setAppStatus('checking');
+  
+  const timeoutId = setTimeout(() => {
+    console.log('App did not open, showing App Store redirect');
+    setAppStatus('not-installed');
+    setShowAppStoreRedirect(true);
+  }, 2000);
+  
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      clearTimeout(timeoutId);
+      setAppStatus('installed');
     }
-    
-    const fixedData = fixBase64Padding(encodedData);
-    
-    const appURL = `ischeduled://import?data=${fixedData}`;
-    
-    console.log('Opening app with URL:', appURL);
-    
-    setAppStatus('checking');
-    
-    const timeoutId = setTimeout(() => {
-      console.log('App did not open, showing App Store redirect');
-      setAppStatus('not-installed');
-      setShowAppStoreRedirect(true);
-    }, 2000);
-    
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        clearTimeout(timeoutId);
-        setAppStatus('installed');
-      }
-    };
-    
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
-    window.location.href = appURL;
-    
-    setTimeout(() => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    }, 3000);
   };
+  
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  
+  window.location.href = appURL;
+  
+  setTimeout(() => {
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, 3000);
+};
 
   const handleDownloadApp = () => {
     window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank');
