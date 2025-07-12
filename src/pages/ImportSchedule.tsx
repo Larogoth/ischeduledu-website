@@ -742,15 +742,15 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
         {/* Enhanced Header with Logo */}
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
-            <div className="w-20 h-20 rounded-full overflow-hidden mx-auto shadow-lg ring-4 ring-white/20">
+            <div className="w-20 h-20 rounded-full overflow-hidden mx-auto shadow-lg ring-4 ring-white/20 relative">
               <img 
                 src="/lovable-uploads/ischededu-app-logo-teacher-scheduling-software.png" 
                 alt="iSchedulEDU Logo" 
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-              <Sparkles className="w-3 h-3 text-white" />
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                <Sparkles className="w-3 h-3 text-white" />
+              </div>
             </div>
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
