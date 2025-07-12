@@ -18,49 +18,6 @@ interface ScheduleData {
   notifications: boolean;
 }
 
-// Updated interface to match the actual CustomEvent structure from iOS
-interface CustomEvent {
-  id: string;
-  name: string;
-  startTime: number; // Swift Date becomes number in JSON
-  endTime: number;   // Swift Date becomes number in JSON
-  enableAlert: boolean;
-  colorData: {
-    red: number;
-    green: number;
-    blue: number;
-  };
-}
-
-// Updated interface to match the actual CustomSchedule structure from iOS
-interface CustomSchedule {
-  id: string;
-  name: string;
-  events: CustomEvent[]; // This is the correct field name
-  scheduleType: string;
-}
-
-// Legacy interface for backward compatibility
-interface IOSScheduleEvent {
-  id: string;
-  name: string;
-  startTime: number;
-  endTime: number;
-  enableAlert: boolean;
-  colorData?: {
-    red: number;
-    green: number;
-    blue: number;
-  };
-}
-
-interface IOSScheduleData {
-  name: string;
-  scheduleType: string;
-  id: string;
-  events: IOSScheduleEvent[];
-}
-
 interface ProcessedEvent {
   name: string;
   startTime: string;
@@ -83,21 +40,41 @@ const ImportSchedule = () => {
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
-  // Convert Swift TimeInterval to readable time
-  const formatTimeFromTimestamp = (timestamp: number): string => {
-    console.log('Original Swift TimeInterval:', timestamp);
+  // Convert various date formats to readable time
+  const parseDate = (dateValue: any): Date => {
+    console.log('Parsing date value:', dateValue, 'Type:', typeof dateValue);
     
-    // Swift's reference date: January 1, 2001 00:00:00 UTC
-    // Unix epoch: January 1, 1970 00:00:00 UTC
-    // Difference: 31 years = 978307200 seconds
-    const swiftReferenceOffset = 978307200;
-    const unixTimestamp = timestamp + swiftReferenceOffset;
+    if (typeof dateValue === 'string') {
+      // ISO string format
+      const date = new Date(dateValue);
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    } else if (typeof dateValue === 'number') {
+      // Check if it's Swift TimeInterval (seconds since 2001-01-01)
+      if (dateValue > 0 && dateValue < 1000000000) {
+        // Likely Swift TimeInterval
+        const swiftReferenceOffset = 978307200; // Seconds between Jan 1, 1970 and Jan 1, 2001
+        const unixTimestamp = dateValue + swiftReferenceOffset;
+        return new Date(unixTimestamp * 1000);
+      } else if (dateValue > 1000000000) {
+        // Likely Unix timestamp in seconds or milliseconds
+        if (dateValue > 10000000000) {
+          // Milliseconds
+          return new Date(dateValue);
+        } else {
+          // Seconds
+          return new Date(dateValue * 1000);
+        }
+      }
+    }
     
-    console.log('Converted to Unix timestamp:', unixTimestamp);
-    
-    const date = new Date(unixTimestamp * 1000);
-    console.log('Converted date:', date);
-    
+    // Fallback to current time if parsing fails
+    console.warn('Failed to parse date value, using current time:', dateValue);
+    return new Date();
+  };
+
+  const formatTimeFromDate = (date: Date): string => {
     return date.toLocaleTimeString('en-US', { 
       hour: 'numeric', 
       minute: '2-digit',
@@ -106,105 +83,138 @@ const ImportSchedule = () => {
   };
 
   // Convert RGB color data to CSS color
-  const formatColor = (colorData?: { red: number; green: number; blue: number }): string => {
-    if (!colorData) return 'hsl(var(--primary))';
+  const formatColor = (colorData?: any): string => {
+    if (!colorData) return 'rgb(59, 130, 246)'; // Default blue
     
-    const r = Math.round(colorData.red * 255);
-    const g = Math.round(colorData.green * 255);
-    const b = Math.round(colorData.blue * 255);
-    
-    return `rgb(${r}, ${g}, ${b})`;
+    try {
+      const r = Math.round((colorData.red || 0) * 255);
+      const g = Math.round((colorData.green || 0) * 255);
+      const b = Math.round((colorData.blue || 0) * 255);
+      return `rgb(${r}, ${g}, ${b})`;
+    } catch (e) {
+      console.warn('Failed to parse color data:', colorData);
+      return 'rgb(59, 130, 246)'; // Default blue
+    }
   };
 
-  // Transform CustomSchedule (new format) to web format
-  const transformCustomScheduleData = (customSchedule: CustomSchedule): ScheduleData => {
-    console.log('Transforming CustomSchedule data:', customSchedule);
-    const events = customSchedule.events || [];
-    const subjects = events.map(event => event.name);
+  // Universal schedule transformer that handles any format
+  const transformScheduleData = (rawData: any): ScheduleData => {
+    console.log('=== TRANSFORMING SCHEDULE DATA ===');
+    console.log('Raw data:', JSON.stringify(rawData, null, 2));
+    console.log('Raw data keys:', Object.keys(rawData));
     
-    // Process events with colors and times
-    const processed: ProcessedEvent[] = events.map(event => ({
-      name: event.name,
-      startTime: formatTimeFromTimestamp(event.startTime),
-      endTime: formatTimeFromTimestamp(event.endTime),
-      color: formatColor(event.colorData)
-    }));
+    let events: any[] = [];
+    let scheduleName = '';
+    let scheduleType = 'custom';
+    
+    // Extract basic info
+    if (rawData.name) {
+      scheduleName = rawData.name;
+    }
+    
+    if (rawData.scheduleType) {
+      scheduleType = rawData.scheduleType;
+    } else if (rawData.type) {
+      scheduleType = rawData.type;
+    }
+    
+    // Extract events from various possible formats
+    if (rawData.events && Array.isArray(rawData.events)) {
+      events = rawData.events;
+      console.log('Found events array with', events.length, 'events');
+    } else if (rawData.setEvents && Array.isArray(rawData.setEvents)) {
+      events = rawData.setEvents;
+      console.log('Found setEvents array with', events.length, 'events');
+    } else {
+      console.warn('No events array found in data');
+      events = [];
+    }
+    
+    // Process events
+    const processed: ProcessedEvent[] = [];
+    let earliestTime: Date | null = null;
+    let latestTime: Date | null = null;
+    let hasAlerts = false;
+    
+    for (let i = 0; i < events.length; i++) {
+      const event = events[i];
+      console.log(`Processing event ${i}:`, event);
+      
+      try {
+        let eventName = event.name || `Event ${i + 1}`;
+        let startTime: Date;
+        let endTime: Date;
+        let color = formatColor(event.colorData);
+        
+        // Parse start time
+        if (event.startTime !== undefined) {
+          startTime = parseDate(event.startTime);
+        } else if (event.start !== undefined) {
+          startTime = parseDate(event.start);
+        } else {
+          console.warn('No start time found for event:', event);
+          startTime = new Date();
+        }
+        
+        // Parse end time
+        if (event.endTime !== undefined) {
+          endTime = parseDate(event.endTime);
+        } else if (event.end !== undefined) {
+          endTime = parseDate(event.end);
+        } else {
+          console.warn('No end time found for event:', event);
+          endTime = new Date(startTime.getTime() + 3600000); // Add 1 hour
+        }
+        
+        // Check for alerts
+        if (event.enableAlert || event.alarmsEnabled) {
+          hasAlerts = true;
+        }
+        
+        // Track earliest and latest times
+        if (!earliestTime || startTime < earliestTime) {
+          earliestTime = startTime;
+        }
+        if (!latestTime || endTime > latestTime) {
+          latestTime = endTime;
+        }
+        
+        processed.push({
+          name: eventName,
+          startTime: formatTimeFromDate(startTime),
+          endTime: formatTimeFromDate(endTime),
+          color: color
+        });
+        
+        console.log(`Successfully processed event: ${eventName}, ${formatTimeFromDate(startTime)} - ${formatTimeFromDate(endTime)}`);
+      } catch (eventError) {
+        console.error('Error processing event:', eventError, 'Event data:', event);
+        // Continue processing other events
+      }
+    }
     
     setProcessedEvents(processed);
     
-    // Calculate time range from events
-    let earliestStart = Infinity;
-    let latestEnd = 0;
+    const subjects = processed.map(event => event.name);
+    const startTime = earliestTime ? formatTimeFromDate(earliestTime) : '8:00 AM';
+    const endTime = latestTime ? formatTimeFromDate(latestTime) : '3:00 PM';
     
-    events.forEach(event => {
-      if (event.startTime < earliestStart) earliestStart = event.startTime;
-      if (event.endTime > latestEnd) latestEnd = event.endTime;
-    });
-
-    const startTime = earliestStart !== Infinity ? formatTimeFromTimestamp(earliestStart) : '8:00 AM';
-    const endTime = latestEnd > 0 ? formatTimeFromTimestamp(latestEnd) : '3:00 PM';
-    
-    console.log('Transformed data:', {
-      name: customSchedule.name,
-      type: customSchedule.scheduleType || 'custom',
+    const transformedData = {
+      name: scheduleName,
+      type: scheduleType,
       subjects: subjects,
-      periods: events.length,
+      periods: processed.length,
       startTime: startTime,
       endTime: endTime,
       days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      notifications: events.some(event => event.enableAlert)
-    });
-    
-    return {
-      name: customSchedule.name,
-      type: customSchedule.scheduleType || 'custom',
-      subjects: subjects,
-      periods: events.length,
-      startTime: startTime,
-      endTime: endTime,
-      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      notifications: events.some(event => event.enableAlert)
+      notifications: hasAlerts
     };
-  };
-
-  // Legacy transform function for backward compatibility
-  const transformIOSScheduleData = (iosData: IOSScheduleData): ScheduleData => {
-    console.log('Transforming legacy iOS data:', iosData);
-    const events = iosData.events || [];
-    const subjects = events.map(event => event.name);
     
-    // Process events with colors and times
-    const processed: ProcessedEvent[] = events.map(event => ({
-      name: event.name,
-      startTime: formatTimeFromTimestamp(event.startTime),
-      endTime: formatTimeFromTimestamp(event.endTime),
-      color: formatColor(event.colorData)
-    }));
+    console.log('=== FINAL TRANSFORMED DATA ===');
+    console.log('Transformed data:', transformedData);
+    console.log('Processed events:', processed);
     
-    setProcessedEvents(processed);
-    
-    // Calculate time range from events
-    let earliestStart = Infinity;
-    let latestEnd = 0;
-    
-    events.forEach(event => {
-      if (event.startTime < earliestStart) earliestStart = event.startTime;
-      if (event.endTime > latestEnd) latestEnd = event.endTime;
-    });
-
-    const startTime = earliestStart !== Infinity ? formatTimeFromTimestamp(earliestStart) : '8:00 AM';
-    const endTime = latestEnd > 0 ? formatTimeFromTimestamp(latestEnd) : '3:00 PM';
-    
-    return {
-      name: iosData.name,
-      type: iosData.scheduleType || 'custom',
-      subjects: subjects,
-      periods: events.length,
-      startTime: startTime,
-      endTime: endTime,
-      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      notifications: events.some(event => event.enableAlert)
-    };
+    return transformedData;
   };
 
   // Enhanced data extraction function
@@ -212,42 +222,23 @@ const ImportSchedule = () => {
     console.log('=== ENHANCED DATA EXTRACTION ===');
     console.log('Full URL:', window.location.href);
     
-    const reactRouterData = searchParams.get('data');
-    console.log('React Router searchParams.get("data"):', reactRouterData);
+    const methods = [
+      { name: 'React Router searchParams', value: searchParams.get('data') },
+      { name: 'URLSearchParams from location.search', value: new URLSearchParams(location.search).get('data') },
+      { name: 'URLSearchParams from window.location.search', value: new URLSearchParams(window.location.search).get('data') },
+      { name: 'Regex extraction from full URL', value: window.location.href.match(/[?&]data=([^&]*)/)?.[1] },
+      { name: 'Regex extraction from hash', value: window.location.hash.match(/[?&]data=([^&]*)/)?.[1] },
+    ];
     
-    const locationSearchData = new URLSearchParams(location.search).get('data');
-    console.log('URLSearchParams from location.search:', locationSearchData);
-    
-    const windowSearchData = new URLSearchParams(window.location.search).get('data');
-    console.log('URLSearchParams from window.location.search:', windowSearchData);
-    
-    const fullUrl = window.location.href;
-    const regexMatch = fullUrl.match(/[?&]data=([^&]*)/);
-    const regexData = regexMatch ? regexMatch[1] : null;
-    console.log('Regex extraction from full URL:', regexData);
-    
-    const hashMatch = window.location.hash.match(/[?&]data=([^&]*)/);
-    const hashData = hashMatch ? hashMatch[1] : null;
-    console.log('Regex extraction from hash:', hashData);
-    
+    // Check pathname for malformed URLs
     const pathname = window.location.pathname;
-    let pathnameData = null;
     if (pathname.includes('data=')) {
       const dataIndex = pathname.indexOf('data=');
       const dataStart = dataIndex + 5;
       const dataEnd = pathname.indexOf('/', dataStart);
-      pathnameData = dataEnd === -1 ? pathname.substring(dataStart) : pathname.substring(dataStart, dataEnd);
+      const pathnameData = dataEnd === -1 ? pathname.substring(dataStart) : pathname.substring(dataStart, dataEnd);
+      methods.push({ name: 'Data extraction from pathname', value: pathnameData });
     }
-    console.log('Data extraction from pathname:', pathnameData);
-    
-    const methods = [
-      { name: 'React Router searchParams', value: reactRouterData },
-      { name: 'URLSearchParams from location.search', value: locationSearchData },
-      { name: 'URLSearchParams from window.location.search', value: windowSearchData },
-      { name: 'Regex extraction from full URL', value: regexData },
-      { name: 'Regex extraction from hash', value: hashData },
-      { name: 'Data extraction from pathname', value: pathnameData }
-    ];
     
     for (const method of methods) {
       if (method.value) {
@@ -262,79 +253,71 @@ const ImportSchedule = () => {
     return null;
   };
 
-  // Safe base64 decode function that handles URL encoding
+  // Comprehensive base64 decode function
   const safeBase64Decode = (encodedData: string): any => {
-    console.log('=== SAFE BASE64 DECODE ===');
+    console.log('=== COMPREHENSIVE BASE64 DECODE ===');
     console.log('Input encoded data:', encodedData);
     console.log('Input data length:', encodedData.length);
     
-    try {
-      // First, try URL decoding in case the data was URL encoded
-      let decodedUrl = decodeURIComponent(encodedData);
-      console.log('After URL decode:', decodedUrl);
-      
-      // Handle common URL encoding issues with base64
-      // Replace URL-encoded characters back to base64 characters
-      decodedUrl = decodedUrl.replace(/%2B/g, '+').replace(/%2F/g, '/').replace(/%3D/g, '=');
-      console.log('After replacing URL encoded chars:', decodedUrl);
-      
-      // Try to decode the base64
-      let jsonString = atob(decodedUrl);
-      console.log('After base64 decode:', jsonString);
-      
-      // Parse the JSON
-      const parsedData = JSON.parse(jsonString);
-      console.log('Successfully parsed JSON:', parsedData);
-      
-      return parsedData;
-    } catch (error) {
-      console.log('First decode attempt failed:', error);
-      
-      // If that fails, try without URL decoding
-      try {
-        console.log('Trying direct base64 decode...');
-        const jsonString = atob(encodedData);
-        console.log('Direct base64 decode result:', jsonString);
-        
-        const parsedData = JSON.parse(jsonString);
-        console.log('Successfully parsed JSON (direct):', parsedData);
-        
-        return parsedData;
-      } catch (error2) {
-        console.log('Direct decode also failed:', error2);
-        
-        // Try one more time with manual URL decoding
-        try {
-          console.log('Trying manual URL decode...');
-          let manualDecoded = encodedData;
-          
-          // Manual replacement of common URL encoded characters
-          manualDecoded = manualDecoded.replace(/\+/g, ' '); // + to space
-          manualDecoded = decodeURIComponent(manualDecoded); // URL decode
-          manualDecoded = manualDecoded.replace(/ /g, '+'); // space back to +
-          
-          console.log('Manual URL decode result:', manualDecoded);
-          
+    const decodeMethods = [
+      {
+        name: 'Direct base64 decode',
+        decode: (data: string) => {
+          const jsonString = atob(data);
+          return JSON.parse(jsonString);
+        }
+      },
+      {
+        name: 'URL decode then base64 decode',
+        decode: (data: string) => {
+          const urlDecoded = decodeURIComponent(data);
+          const jsonString = atob(urlDecoded);
+          return JSON.parse(jsonString);
+        }
+      },
+      {
+        name: 'Replace URL encoded chars then base64 decode',
+        decode: (data: string) => {
+          const fixed = data.replace(/%2B/g, '+').replace(/%2F/g, '/').replace(/%3D/g, '=');
+          const jsonString = atob(fixed);
+          return JSON.parse(jsonString);
+        }
+      },
+      {
+        name: 'Manual URL decode with space handling',
+        decode: (data: string) => {
+          let manualDecoded = data.replace(/\+/g, ' ');
+          manualDecoded = decodeURIComponent(manualDecoded);
+          manualDecoded = manualDecoded.replace(/ /g, '+');
           const jsonString = atob(manualDecoded);
-          console.log('Manual decode base64 result:', jsonString);
-          
-          const parsedData = JSON.parse(jsonString);
-          console.log('Successfully parsed JSON (manual):', parsedData);
-          
-          return parsedData;
-        } catch (error3) {
-          console.log('All decode attempts failed:', error3);
-          throw new Error('Failed to decode data using all methods');
+          return JSON.parse(jsonString);
+        }
+      },
+      {
+        name: 'Try as JSON string directly',
+        decode: (data: string) => {
+          return JSON.parse(data);
         }
       }
+    ];
+    
+    for (const method of decodeMethods) {
+      try {
+        console.log(`Trying decode method: ${method.name}`);
+        const result = method.decode(encodedData);
+        console.log(`✅ Success with ${method.name}`);
+        console.log('Decoded result:', result);
+        return result;
+      } catch (error) {
+        console.log(`❌ Failed with ${method.name}:`, error.message);
+      }
     }
+    
+    throw new Error('All decode methods failed');
   };
 
   useEffect(() => {
     console.log('=== ImportSchedule useEffect TRIGGERED ===');
-    console.log('Effect dependencies - scheduleId:', scheduleId);
-    console.log('Current URL:', window.location.href);
-    console.log('Location object:', location);
     
     const loadScheduleData = () => {
       try {
@@ -348,37 +331,30 @@ const ImportSchedule = () => {
           try {
             const decodedData = safeBase64Decode(encodedData);
             console.log('Successfully decoded data:', decodedData);
+            console.log('Data type:', typeof decodedData);
             console.log('Data keys:', Object.keys(decodedData));
             
-            // Check for the new CustomSchedule format (current iOS app format)
-            if (decodedData.scheduleType !== undefined && decodedData.events !== undefined && Array.isArray(decodedData.events)) {
-              console.log('Detected CustomSchedule format (current iOS app format)');
-              const transformedData = transformCustomScheduleData(decodedData as CustomSchedule);
-              setScheduleData(transformedData);
-            }
-            // Check for legacy iOS format
-            else if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
-              console.log('Detected legacy iOS app format');
-              const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
-              setScheduleData(transformedData);
-            }
-            // Check for web format
-            else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
-              console.log('Detected web format');
-              setScheduleData(decodedData as ScheduleData);
-            }
-            else {
-              console.error('Unknown data format:', decodedData);
-              console.error('Data keys:', Object.keys(decodedData));
-              console.error('Sample data:', JSON.stringify(decodedData, null, 2));
-              setError(`Unsupported schedule data format. Found keys: ${Object.keys(decodedData).join(', ')}`);
-            }
+            // Use universal transformer
+            const transformedData = transformScheduleData(decodedData);
+            setScheduleData(transformedData);
+            
           } catch (decodeError) {
             console.error('Failed to decode data:', decodeError);
             console.error('Raw encoded data for debugging:', encodedData);
             console.error('Encoded data length:', encodedData.length);
             console.error('Encoded data sample:', encodedData.substring(0, 100) + '...');
-            setError(`Invalid schedule data format. Decode error: ${decodeError.message}`);
+            
+            // Try to provide more helpful error message
+            let errorMessage = 'Invalid schedule data format. ';
+            if (encodedData.length < 10) {
+              errorMessage += 'The data appears to be too short.';
+            } else if (encodedData.length > 10000) {
+              errorMessage += 'The data appears to be too long.';
+            } else {
+              errorMessage += `Decode error: ${decodeError.message}`;
+            }
+            
+            setError(errorMessage);
           }
         } else if (scheduleId) {
           console.log('Attempting to load schedule by ID:', scheduleId);
@@ -441,7 +417,6 @@ const ImportSchedule = () => {
       return;
     }
     
-    // Make sure to URL encode the data parameter for the app URL
     const urlEncodedData = encodeURIComponent(encodedData);
     const appUrl = `ischeduled://import?data=${urlEncodedData}`;
     console.log('Opening app with URL:', appUrl);
@@ -530,14 +505,30 @@ const ImportSchedule = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Unable to Load Schedule</h3>
                 <p className="text-gray-700 mb-6 max-w-md mx-auto leading-relaxed text-sm">{error}</p>
-                {/* Debug info for development */}
-                {process.env.NODE_ENV === 'development' && (
-                  <div className="bg-gray-100 p-3 rounded text-left text-xs mb-4 max-w-md mx-auto">
-                    <p><strong>Debug Info:</strong></p>
-                    <p className="break-all">URL: {window.location.href}</p>
-                    <p className="break-all">Data param: {extractDataParameter()}</p>
-                  </div>
-                )}
+                
+                {/* Enhanced debug info */}
+                <div className="bg-gray-100 p-4 rounded-lg text-left text-xs mb-4 max-w-lg mx-auto">
+                  <p><strong>Debug Information:</strong></p>
+                  <p className="break-all mb-2">URL: {window.location.href}</p>
+                  <p className="break-all mb-2">Data param: {extractDataParameter()}</p>
+                  <p className="mb-2">Data length: {extractDataParameter()?.length || 'N/A'}</p>
+                  <p className="break-all">Data sample: {extractDataParameter()?.substring(0, 50) || 'N/A'}...</p>
+                  <Button 
+                    onClick={() => {
+                      const data = extractDataParameter();
+                      if (data) {
+                        navigator.clipboard.writeText(data);
+                        alert('Debug data copied to clipboard');
+                      }
+                    }}
+                    variant="outline"
+                    size="sm"
+                    className="mt-2"
+                  >
+                    Copy Debug Data
+                  </Button>
+                </div>
+                
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
                     Try Again
@@ -608,7 +599,6 @@ const ImportSchedule = () => {
                               </div>
                             </div>
                           </div>
-                          {/* Subtle gradient overlay on hover */}
                           <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 to-purple-50/0 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                       ))}
