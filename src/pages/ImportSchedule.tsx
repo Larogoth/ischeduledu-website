@@ -647,19 +647,14 @@ const ImportSchedule = () => {
             {/* Generated with iSchedulEDU Banner */}
             <div className="mb-6">
               <div className="bg-gradient-to-r from-cyan-500/10 via-[#0FA0CE]/10 to-teal-500/10 border border-cyan-200/50 rounded-xl p-4 backdrop-blur-sm">
-                <div className="flex items-center justify-center gap-3 text-center">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-cyan-600" />
-                    <span className="text-gray-700 font-medium">
-                      Generated with the
-                    </span>
-                    <span className="font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
+                <div className="flex items-center justify-center gap-2 text-center">
+                  <Sparkles className="w-5 h-5 text-cyan-600" />
+                  <span className="text-gray-700 font-medium">
+                    Generated with 
+                    <span className="font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent ml-1">
                       iSchedulEDU
                     </span>
-                    <span className="text-gray-700 font-medium">
-                      iOS/iPadOS app
-                    </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
