@@ -23,6 +23,7 @@ interface ProcessedEvent {
   name: string;
   startTime: string;
   endTime: string;
+  duration: string;
   color?: string;
 }
 
@@ -113,6 +114,20 @@ const ImportSchedule = () => {
     } catch (e) {
       console.warn('Failed to parse color data:', colorData);
       return 'rgb(59, 130, 246)'; // Default blue
+    }
+  };
+
+  // Calculate duration between two times
+  const calculateDuration = (startTime: Date, endTime: Date): string => {
+    const diffMs = endTime.getTime() - startTime.getTime();
+    const diffMinutes = Math.round(diffMs / (1000 * 60));
+    
+    if (diffMinutes < 60) {
+      return `${diffMinutes}m`;
+    } else {
+      const hours = Math.floor(diffMinutes / 60);
+      const minutes = diffMinutes % 60;
+      return minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
     }
   };
 
@@ -239,10 +254,11 @@ const ImportSchedule = () => {
           name: eventName,
           startTime: formatTimeFromDate(startTime),
           endTime: formatTimeFromDate(endTime),
+          duration: calculateDuration(startTime, endTime),
           color: color
         });
         
-        console.log(`Successfully processed event: ${eventName}, ${formatTimeFromDate(startTime)} - ${formatTimeFromDate(endTime)}`);
+        console.log(`Successfully processed event: ${eventName}, ${formatTimeFromDate(startTime)} - ${formatTimeFromDate(endTime)}, Duration: ${calculateDuration(startTime, endTime)}`);
       } catch (eventError) {
         console.error('Error processing event:', eventError, 'Event data:', event);
         // Continue processing other events
@@ -824,13 +840,31 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                       {processedEvents.map((event, index) => (
                         <div 
                           key={index} 
-                          className="group relative bg-gradient-to-r from-white to-gray-50/50 rounded-xl p-6 border border-gray-200/50 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] overflow-hidden"
+                          className="group relative bg-gradient-to-r from-white to-gray-50/50 rounded-xl p-4 md:p-6 border border-gray-200/50 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] overflow-hidden"
                         >
                           <div 
                             className="absolute left-0 top-0 bottom-0 w-1.5 rounded-r-full"
                             style={{ backgroundColor: event.color }}
                           ></div>
-                          <div className="flex items-center justify-between">
+                          
+                          {/* Mobile Layout */}
+                          <div className="md:hidden pl-4">
+                            <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-blue-600 transition-colors break-words">
+                              {event.name}
+                            </h5>
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-2 text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                                <Clock className="w-4 h-4 flex-shrink-0" />
+                                <div className="text-sm font-medium">
+                                  <div>{event.startTime} - {event.endTime}</div>
+                                  <div className="text-xs text-gray-500">{event.duration}</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Desktop/Tablet Layout */}
+                          <div className="hidden md:flex items-center justify-between">
                             <div className="flex-1 pl-4">
                               <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-blue-600 transition-colors">
                                 {event.name}
@@ -839,12 +873,18 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                             <div className="text-right">
                               <div className="flex items-center gap-3 text-gray-600 bg-gray-50 rounded-lg px-4 py-2">
                                 <Clock className="w-5 h-5" />
-                                <span className="font-semibold text-lg">
-                                  {event.startTime} - {event.endTime}
-                                </span>
+                                <div className="font-semibold">
+                                  <div className="text-lg">
+                                    {event.startTime} - {event.endTime}
+                                  </div>
+                                  <div className="text-sm text-gray-500">
+                                    {event.duration}
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          
                           <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 to-purple-50/0 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                       ))}
