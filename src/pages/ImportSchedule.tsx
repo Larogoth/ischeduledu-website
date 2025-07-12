@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, Sparkles, GraduationCap } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, GraduationCap } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
 
@@ -291,54 +291,53 @@ const ImportSchedule = () => {
 
   // Enhanced data extraction function with version and compression support
   // Enhanced data extraction function that handles malformed URLs
-// Enhanced data extraction function that handles malformed URLs
-const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
-  console.log('=== ENHANCED DATA EXTRACTION ===');
-  console.log('Full URL:', window.location.href);
-  console.log('Search params:', window.location.search);
-  
-  const urlParams = new URLSearchParams(window.location.search);
-  let data = urlParams.get('data');
-  let version = urlParams.get('v') || '1';
-  let isCompressed = urlParams.get('c') === '1';
-  
-  console.log('Initial parsing results:', { data: data?.substring(0, 50) + '...', version, isCompressed });
-  
-  // Handle malformed URLs where data parameter includes query string
-  if (data && data.includes('?v=')) {
-    console.log('🔧 Detected malformed URL with query string in data parameter');
-    console.log('Original malformed data:', data);
+  const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
+    console.log('=== ENHANCED DATA EXTRACTION ===');
+    console.log('Full URL:', window.location.href);
+    console.log('Search params:', window.location.search);
     
-    // Extract version using regex
-    const versionMatch = data.match(/\?v=(\d+)/);
-    if (versionMatch) {
-      version = versionMatch[1];
-      console.log('✅ Extracted version:', version);
+    const urlParams = new URLSearchParams(window.location.search);
+    let data = urlParams.get('data');
+    let version = urlParams.get('v') || '1';
+    let isCompressed = urlParams.get('c') === '1';
+    
+    console.log('Initial parsing results:', { data: data?.substring(0, 50) + '...', version, isCompressed });
+    
+    // Handle malformed URLs where data parameter includes query string
+    if (data && data.includes('?v=')) {
+      console.log('🔧 Detected malformed URL with query string in data parameter');
+      console.log('Original malformed data:', data);
+      
+      // Extract version using regex
+      const versionMatch = data.match(/\?v=(\d+)/);
+      if (versionMatch) {
+        version = versionMatch[1];
+        console.log('✅ Extracted version:', version);
+      }
+      
+      // Extract compression using regex (looking for ?c= or ?v=3?c=)
+      const compressionMatch = data.match(/\?c=(\d+)/);
+      if (compressionMatch) {
+        isCompressed = compressionMatch[1] === '1';
+        console.log('✅ Extracted compression:', isCompressed);
+      }
+      
+      // Clean the data by removing everything from the first ?v= onwards
+      const cleanData = data.split('?v=')[0];
+      data = cleanData;
+      console.log('✅ Cleaned data:', data.substring(0, 50) + '...');
+      console.log('✅ Cleaned data length:', data.length);
     }
     
-    // Extract compression using regex (looking for ?c= or ?v=3?c=)
-    const compressionMatch = data.match(/\?c=(\d+)/);
-    if (compressionMatch) {
-      isCompressed = compressionMatch[1] === '1';
-      console.log('✅ Extracted compression:', isCompressed);
-    }
+    console.log('Final extracted parameters:', { 
+      data: data?.substring(0, 50) + '...', 
+      dataLength: data?.length,
+      version, 
+      isCompressed 
+    });
     
-    // Clean the data by removing everything from the first ?v= onwards
-    const cleanData = data.split('?v=')[0];
-    data = cleanData;
-    console.log('✅ Cleaned data:', data.substring(0, 50) + '...');
-    console.log('✅ Cleaned data length:', data.length);
-  }
-  
-  console.log('Final extracted parameters:', { 
-    data: data?.substring(0, 50) + '...', 
-    dataLength: data?.length,
-    version, 
-    isCompressed 
-  });
-  
-  return { data, version, isCompressed };
-};
+    return { data, version, isCompressed };
+  };
 
   // Convert URL-safe base64 to binary data
   const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
@@ -371,135 +370,134 @@ const extractDataParameters = (): { data: string | null; version: string; isComp
   };
   
   // Handle v3 format with gzip compression
-// Handle v3 format with gzip compression
-const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
-  try {
-    console.log('Processing v3 format, compressed:', isCompressed);
-    console.log('Input data length:', encodedData.length);
-    console.log('Input data sample:', encodedData.substring(0, 100));
-    
-    // Decode URL-safe base64
-    const binaryData = decodeUrlSafeBase64(encodedData);
-    console.log('Decoded binary data length:', binaryData.length);
-    console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
-    
-    let jsonData: string;
-    
-    if (isCompressed) {
-      console.log('🔍 Attempting decompression...');
-      
-      // First, try to decode as uncompressed JSON in case the compression flag is wrong
-      try {
-        console.log('🔧 Trying as uncompressed JSON first (despite c=1 flag)...');
-        const testJsonData = new TextDecoder().decode(binaryData);
-        console.log('Test JSON data:', testJsonData.substring(0, 200));
-        
-        // Try to parse as JSON to see if it's valid
-        const testParsed = JSON.parse(testJsonData);
-        console.log('✅ Successfully parsed as uncompressed JSON despite c=1 flag');
-        jsonData = testJsonData;
-      } catch (uncompressedError) {
-        console.log('❌ Not valid uncompressed JSON, trying actual decompression...');
-        
-        // Try different decompression methods
-        let decompressedData: Uint8Array | null = null;
-        let lastError: any = null;
-        
-        // Method 1: Try inflateRaw (for raw deflate - most likely for iOS COMPRESSION_ZLIB)
-        try {
-          console.log('🔧 Trying inflateRaw...');
-          decompressedData = pako.inflateRaw(binaryData);
-          console.log('✅ Successfully decompressed with inflateRaw');
-        } catch (error) {
-          console.log('❌ inflateRaw failed:', error.message || error);
-          lastError = error;
-        }
-        
-        // Method 2: Try inflate (for zlib)
-        if (!decompressedData) {
-          try {
-            console.log('🔧 Trying inflate...');
-            decompressedData = pako.inflate(binaryData);
-            console.log('✅ Successfully decompressed with inflate');
-          } catch (error) {
-            console.log('❌ inflate failed:', error.message || error);
-            lastError = error;
-          }
-        }
-        
-        // Method 3: Try ungzip (for gzip)
-        if (!decompressedData) {
-          try {
-            console.log('🔧 Trying ungzip...');
-            decompressedData = pako.ungzip(binaryData);
-            console.log('✅ Successfully decompressed with ungzip');
-          } catch (error) {
-            console.log('❌ ungzip failed:', error.message || error);
-            lastError = error;
-          }
-        }
-        
-        if (!decompressedData) {
-          // If decompression failed, try treating as uncompressed anyway
-          console.log('🔧 All decompression methods failed, trying as uncompressed data...');
-          try {
-            jsonData = new TextDecoder().decode(binaryData);
-            console.log('✅ Using as uncompressed data after decompression failures');
-          } catch (decodeError) {
-            const errorMsg = lastError?.message || lastError?.toString() || 'Unknown decompression error';
-            throw new Error(`All decompression methods failed: ${errorMsg}`);
-          }
-        } else {
-          jsonData = new TextDecoder().decode(decompressedData);
-          console.log('✅ Successfully decoded decompressed data');
-        }
-      }
-    } else {
-      // Not compressed, convert binary to string
-      jsonData = new TextDecoder().decode(binaryData);
-      console.log('✅ Decoded uncompressed data');
-    }
-    
-    console.log('JSON data length:', jsonData.length);
-    console.log('JSON preview:', jsonData.substring(0, 200) + '...');
-    
-    // Validate that we have valid JSON
-    if (!jsonData || jsonData.length === 0) {
-      throw new Error('Decompressed data is empty');
-    }
-    
-    // Parse the minimal format JSON
-    let shareableSchedule: ShareableSchedule;
+  const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
     try {
-      shareableSchedule = JSON.parse(jsonData);
-      console.log('✅ Successfully parsed JSON');
-      console.log('Parsed schedule:', shareableSchedule);
-    } catch (parseError) {
-      console.error('❌ JSON parsing failed:', parseError);
-      console.error('JSON data that failed to parse (first 500 chars):', jsonData.substring(0, 500));
-      throw new Error(`JSON parsing failed: ${parseError.message}`);
+      console.log('Processing v3 format, compressed:', isCompressed);
+      console.log('Input data length:', encodedData.length);
+      console.log('Input data sample:', encodedData.substring(0, 100));
+      
+      // Decode URL-safe base64
+      const binaryData = decodeUrlSafeBase64(encodedData);
+      console.log('Decoded binary data length:', binaryData.length);
+      console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
+      
+      let jsonData: string;
+      
+      if (isCompressed) {
+        console.log('🔍 Attempting decompression...');
+        
+        // First, try to decode as uncompressed JSON in case the compression flag is wrong
+        try {
+          console.log('🔧 Trying as uncompressed JSON first (despite c=1 flag)...');
+          const testJsonData = new TextDecoder().decode(binaryData);
+          console.log('Test JSON data:', testJsonData.substring(0, 200));
+          
+          // Try to parse as JSON to see if it's valid
+          const testParsed = JSON.parse(testJsonData);
+          console.log('✅ Successfully parsed as uncompressed JSON despite c=1 flag');
+          jsonData = testJsonData;
+        } catch (uncompressedError) {
+          console.log('❌ Not valid uncompressed JSON, trying actual decompression...');
+          
+          // Try different decompression methods
+          let decompressedData: Uint8Array | null = null;
+          let lastError: any = null;
+          
+          // Method 1: Try inflateRaw (for raw deflate - most likely for iOS COMPRESSION_ZLIB)
+          try {
+            console.log('🔧 Trying inflateRaw...');
+            decompressedData = pako.inflateRaw(binaryData);
+            console.log('✅ Successfully decompressed with inflateRaw');
+          } catch (error) {
+            console.log('❌ inflateRaw failed:', error.message || error);
+            lastError = error;
+          }
+          
+          // Method 2: Try inflate (for zlib)
+          if (!decompressedData) {
+            try {
+              console.log('🔧 Trying inflate...');
+              decompressedData = pako.inflate(binaryData);
+              console.log('✅ Successfully decompressed with inflate');
+            } catch (error) {
+              console.log('❌ inflate failed:', error.message || error);
+              lastError = error;
+            }
+          }
+          
+          // Method 3: Try ungzip (for gzip)
+          if (!decompressedData) {
+            try {
+              console.log('🔧 Trying ungzip...');
+              decompressedData = pako.ungzip(binaryData);
+              console.log('✅ Successfully decompressed with ungzip');
+            } catch (error) {
+              console.log('❌ ungzip failed:', error.message || error);
+              lastError = error;
+            }
+          }
+          
+          if (!decompressedData) {
+            // If decompression failed, try treating as uncompressed anyway
+            console.log('🔧 All decompression methods failed, trying as uncompressed data...');
+            try {
+              jsonData = new TextDecoder().decode(binaryData);
+              console.log('✅ Using as uncompressed data after decompression failures');
+            } catch (decodeError) {
+              const errorMsg = lastError?.message || lastError?.toString() || 'Unknown decompression error';
+              throw new Error(`All decompression methods failed: ${errorMsg}`);
+            }
+          } else {
+            jsonData = new TextDecoder().decode(decompressedData);
+            console.log('✅ Successfully decoded decompressed data');
+          }
+        }
+      } else {
+        // Not compressed, convert binary to string
+        jsonData = new TextDecoder().decode(binaryData);
+        console.log('✅ Decoded uncompressed data');
+      }
+      
+      console.log('JSON data length:', jsonData.length);
+      console.log('JSON preview:', jsonData.substring(0, 200) + '...');
+      
+      // Validate that we have valid JSON
+      if (!jsonData || jsonData.length === 0) {
+        throw new Error('Decompressed data is empty');
+      }
+      
+      // Parse the minimal format JSON
+      let shareableSchedule: ShareableSchedule;
+      try {
+        shareableSchedule = JSON.parse(jsonData);
+        console.log('✅ Successfully parsed JSON');
+        console.log('Parsed schedule:', shareableSchedule);
+      } catch (parseError) {
+        console.error('❌ JSON parsing failed:', parseError);
+        console.error('JSON data that failed to parse (first 500 chars):', jsonData.substring(0, 500));
+        throw new Error(`JSON parsing failed: ${parseError.message}`);
+      }
+      
+      // Validate the parsed data structure
+      if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
+        console.error('❌ Invalid schedule data structure:', shareableSchedule);
+        throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
+      }
+      
+      // Convert from minimal format to full schedule object
+      const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
+      
+      console.log('✅ Converted to full schedule:', fullSchedule.name);
+      return fullSchedule;
+      
+    } catch (error) {
+      console.error('❌ V3 format processing error:', error);
+      
+      // Re-throw with more context
+      const errorMessage = error?.message || error?.toString() || 'Unknown error';
+      throw new Error(`V3 format processing failed: ${errorMessage}`);
     }
-    
-    // Validate the parsed data structure
-    if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
-      console.error('❌ Invalid schedule data structure:', shareableSchedule);
-      throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
-    }
-    
-    // Convert from minimal format to full schedule object
-    const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
-    
-    console.log('✅ Converted to full schedule:', fullSchedule.name);
-    return fullSchedule;
-    
-  } catch (error) {
-    console.error('❌ V3 format processing error:', error);
-    
-    // Re-throw with more context
-    const errorMessage = error?.message || error?.toString() || 'Unknown error';
-    throw new Error(`V3 format processing failed: ${errorMessage}`);
-  }
-};
+  };
 
   // Handle v2 format (URL-safe base64 without compression)
   const handleV2Format = (encodedData: string): any => {
@@ -701,7 +699,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
   };
 
   const handleDownloadApp = () => {
-    window.open('https://apps.apple.com/app/your-app-id', '_blank');
+    window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank');
   };
 
   const handleTryAgain = () => {
@@ -718,11 +716,10 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-100 flex items-center justify-center p-4">
         <div className="text-center">
           <div className="relative">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
-            <Sparkles className="w-4 h-4 text-blue-500 absolute -top-1 -right-1 animate-pulse" />
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-cyan-200 border-t-cyan-600 mx-auto mb-4"></div>
           </div>
           <p className="text-gray-700 font-medium">Loading your schedule...</p>
         </div>
@@ -731,11 +728,11 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-100 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-indigo-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-cyan-200/20 to-teal-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
@@ -796,7 +793,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                   <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
                     Try Again
                   </Button>
-                  <Button onClick={() => window.location.href = '/'} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                  <Button onClick={() => window.location.href = '/'} className="bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700">
                     Go to Home
                   </Button>
                 </div>
@@ -807,14 +804,14 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
           <>
             {/* Enhanced Schedule Preview */}
             <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/80 backdrop-blur-sm">
-              <CardHeader className="bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 text-white p-8 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+              <CardHeader className="bg-gradient-to-r from-cyan-500 via-[#0FA0CE] to-teal-600 text-white p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-teal-600/20"></div>
                 <div className="relative z-10">
                   <CardTitle className="flex items-center gap-4 text-2xl font-bold mb-2">
                     <Calendar className="w-8 h-8" />
                     {scheduleData.name}
                   </CardTitle>
-                  <CardDescription className="text-blue-100 flex items-center gap-3 text-lg">
+                  <CardDescription className="text-cyan-100 flex items-center gap-3 text-lg">
                     <Clock className="w-5 h-5" />
                     {scheduleData.startTime} - {scheduleData.endTime}
                   </CardDescription>
@@ -827,13 +824,13 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                 <div className="space-y-6">
                   <div>
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-lg flex items-center justify-center">
                         <Calendar className="w-4 h-4 text-white" />
                       </div>
                       <h4 className="text-xl font-bold text-gray-900">
                         Schedule Events
                       </h4>
-                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white border-0">
+                      <Badge className="bg-gradient-to-r from-cyan-500 to-teal-600 text-white border-0">
                         {processedEvents.length} {processedEvents.length === 1 ? 'Event' : 'Events'}
                       </Badge>
                     </div>
@@ -850,7 +847,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                           
                           {/* Mobile Layout */}
                           <div className="md:hidden pl-4">
-                            <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-blue-600 transition-colors break-words">
+                            <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-cyan-600 transition-colors break-words">
                               {event.name}
                             </h5>
                             <div className="space-y-2">
@@ -867,7 +864,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                           {/* Desktop/Tablet Layout */}
                           <div className="hidden md:flex items-center justify-between">
                             <div className="flex-1 pl-4">
-                              <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-blue-600 transition-colors">
+                              <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-cyan-600 transition-colors">
                                 {event.name}
                               </h5>
                             </div>
@@ -886,7 +883,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                             </div>
                           </div>
                           
-                          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 to-purple-50/0 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-50/0 to-teal-50/0 group-hover:from-cyan-50/30 group-hover:to-teal-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                       ))}
                     </div>
@@ -929,7 +926,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
                       <div className="relative inline-block mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
+                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto">
                           <Smartphone className="w-8 h-8 text-white" />
                         </div>
                         <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
@@ -945,7 +942,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                           </p>
                           <Button 
                             onClick={handleOpenInApp} 
-                            className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            className="w-full max-w-sm bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                           >
                             <ExternalLink className="w-6 h-6 mr-3" />
                             Import to iSchedulEDU
@@ -958,13 +955,18 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                             Download iSchedulEDU to easily import and manage this schedule on your device.
                           </p>
                           <div className="space-y-3">
-                            <Button 
-                              onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank')} 
-                              className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            <a 
+                              href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block w-full max-w-sm"
                             >
-                              <Download className="w-6 h-6 mr-3" />
-                              Download iSchedulEDU
-                            </Button>
+                              <img 
+                                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                                alt="Download on the App Store"
+                                className="h-16 mx-auto hover:scale-105 transition-transform duration-200"
+                              />
+                            </a>
                             <Button 
                               onClick={handleTryAgain} 
                               variant="outline" 
@@ -983,19 +985,23 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                           <div className="space-y-3">
                             <Button 
                               onClick={handleOpenInApp} 
-                              className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                              className="w-full max-w-sm bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                               <ExternalLink className="w-6 h-6 mr-3" />
                               Open in App
                             </Button>
-                            <Button 
-                              onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank')} 
-                              variant="outline" 
-                              className="w-full max-w-sm py-3 rounded-xl border-2 hover:bg-gray-50"
+                            <a 
+                              href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block w-full max-w-sm"
                             >
-                              <Download className="w-6 h-6 mr-3" />
-                              Download App
-                            </Button>
+                              <img 
+                                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                                alt="Download on the App Store"
+                                className="h-12 mx-auto hover:scale-105 transition-transform duration-200 border-2 border-gray-200 rounded-lg p-2 bg-white/50 backdrop-blur-sm"
+                              />
+                            </a>
                           </div>
                         </>
                       )}
@@ -1007,7 +1013,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
                       <div className="relative inline-block mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
+                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto">
                           <Download className="w-8 h-8 text-white" />
                         </div>
                         <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
@@ -1018,14 +1024,18 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                       <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-lg mx-auto">
                         This schedule is designed for mobile import. Download the iSchedulEDU app on your phone or tablet to import this schedule.
                       </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button 
-                          onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank')} 
-                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a 
+                          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <Smartphone className="w-5 h-5 mr-2" />
-                          Download for iOS
-                        </Button>
+                          <img 
+                            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                            alt="Download on the App Store"
+                            className="h-16 mx-auto hover:scale-105 transition-transform duration-200"
+                          />
+                        </a>
                         <Button 
                           variant="outline" 
                           onClick={() => {
@@ -1050,7 +1060,7 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
         {/* Enhanced Footer */}
         <div className="text-center mt-12 pt-8 border-t border-gray-200/50">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <GraduationCap className="w-5 h-5 text-blue-600" />
+            <GraduationCap className="w-5 h-5 text-cyan-600" />
             <p className="text-gray-600 font-medium">
               iSchedulEDU - Teacher Schedule Management
             </p>
