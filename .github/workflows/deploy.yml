@@ -1,4 +1,3 @@
-
 name: Deploy to GitHub Pages
 
 on:
@@ -31,9 +30,6 @@ jobs:
         with:
           path: dist
           retention-days: 1
-        env:
-          # Ensure dotfiles are included in the artifact
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     environment:
