@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, GraduationCap, Copy } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, GraduationCap, Copy, Sparkles } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
 
@@ -644,6 +644,26 @@ const ImportSchedule = () => {
           </Card>
         ) : scheduleData ? (
           <>
+            {/* Generated with iSchedulEDU Banner */}
+            <div className="mb-6">
+              <div className="bg-gradient-to-r from-cyan-500/10 via-[#0FA0CE]/10 to-teal-500/10 border border-cyan-200/50 rounded-xl p-4 backdrop-blur-sm">
+                <div className="flex items-center justify-center gap-3 text-center">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-cyan-600" />
+                    <span className="text-gray-700 font-medium">
+                      Generated with the
+                    </span>
+                    <span className="font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
+                      iSchedulEDU
+                    </span>
+                    <span className="text-gray-700 font-medium">
+                      iOS/iPadOS app
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/80 backdrop-blur-sm">
               <CardHeader className="bg-gradient-to-r from-cyan-500 via-[#0FA0CE] to-teal-600 text-white p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-teal-600/20"></div>
@@ -735,7 +755,7 @@ const ImportSchedule = () => {
                     <div className="text-center">
                       <h3 className="text-lg font-bold text-gray-900 mb-3">Share This Schedule</h3>
                       <p className="text-gray-600 mb-4 text-sm">
-                        Copy the link to easily share this schedule in messages
+                        Share this schedule easily with others
                       </p>
                       <Button 
                         onClick={copyShareLink}
