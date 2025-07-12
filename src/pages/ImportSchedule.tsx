@@ -144,6 +144,7 @@ const ImportSchedule = () => {
   // Enhanced data extraction function
   const extractDataParameter = (): string | null => {
     console.log('=== ENHANCED DATA EXTRACTION ===');
+    console.log('Full URL:', window.location.href);
     
     const reactRouterData = searchParams.get('data');
     console.log('React Router searchParams.get("data"):', reactRouterData);
@@ -185,14 +186,82 @@ const ImportSchedule = () => {
     for (const method of methods) {
       if (method.value) {
         console.log(`SUCCESS: Using data from ${method.name}`);
+        console.log(`Raw data: ${method.value}`);
         console.log(`Data length: ${method.value.length}`);
-        console.log(`Data preview: ${method.value.substring(0, 50)}...`);
         return method.value;
       }
     }
     
     console.log('ERROR: No data parameter found using any method');
     return null;
+  };
+
+  // Safe base64 decode function that handles URL encoding
+  const safeBase64Decode = (encodedData: string): any => {
+    console.log('=== SAFE BASE64 DECODE ===');
+    console.log('Input encoded data:', encodedData);
+    console.log('Input data length:', encodedData.length);
+    
+    try {
+      // First, try URL decoding in case the data was URL encoded
+      let decodedUrl = decodeURIComponent(encodedData);
+      console.log('After URL decode:', decodedUrl);
+      
+      // Handle common URL encoding issues with base64
+      // Replace URL-encoded characters back to base64 characters
+      decodedUrl = decodedUrl.replace(/%2B/g, '+').replace(/%2F/g, '/').replace(/%3D/g, '=');
+      console.log('After replacing URL encoded chars:', decodedUrl);
+      
+      // Try to decode the base64
+      let jsonString = atob(decodedUrl);
+      console.log('After base64 decode:', jsonString);
+      
+      // Parse the JSON
+      const parsedData = JSON.parse(jsonString);
+      console.log('Successfully parsed JSON:', parsedData);
+      
+      return parsedData;
+    } catch (error) {
+      console.log('First decode attempt failed:', error);
+      
+      // If that fails, try without URL decoding
+      try {
+        console.log('Trying direct base64 decode...');
+        const jsonString = atob(encodedData);
+        console.log('Direct base64 decode result:', jsonString);
+        
+        const parsedData = JSON.parse(jsonString);
+        console.log('Successfully parsed JSON (direct):', parsedData);
+        
+        return parsedData;
+      } catch (error2) {
+        console.log('Direct decode also failed:', error2);
+        
+        // Try one more time with manual URL decoding
+        try {
+          console.log('Trying manual URL decode...');
+          let manualDecoded = encodedData;
+          
+          // Manual replacement of common URL encoded characters
+          manualDecoded = manualDecoded.replace(/\+/g, ' '); // + to space
+          manualDecoded = decodeURIComponent(manualDecoded); // URL decode
+          manualDecoded = manualDecoded.replace(/ /g, '+'); // space back to +
+          
+          console.log('Manual URL decode result:', manualDecoded);
+          
+          const jsonString = atob(manualDecoded);
+          console.log('Manual decode base64 result:', jsonString);
+          
+          const parsedData = JSON.parse(jsonString);
+          console.log('Successfully parsed JSON (manual):', parsedData);
+          
+          return parsedData;
+        } catch (error3) {
+          console.log('All decode attempts failed:', error3);
+          throw new Error('Failed to decode data using all methods');
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -211,7 +280,7 @@ const ImportSchedule = () => {
           console.log('Found encoded data, attempting to decode...');
           
           try {
-            const decodedData = JSON.parse(atob(encodedData));
+            const decodedData = safeBase64Decode(encodedData);
             console.log('Successfully decoded data:', decodedData);
             
             if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
@@ -223,11 +292,13 @@ const ImportSchedule = () => {
               setScheduleData(decodedData as ScheduleData);
             } else {
               console.error('Unknown data format:', decodedData);
-              setError('Unsupported schedule data format. Please ensure you\'re using a valid iSchedulEDU share link.');
+              console.error('Data keys:', Object.keys(decodedData));
+              setError(`Unsupported schedule data format. Found keys: ${Object.keys(decodedData).join(', ')}`);
             }
           } catch (decodeError) {
             console.error('Failed to decode data:', decodeError);
-            setError('Invalid schedule data format. The shared link may be corrupted.');
+            console.error('Raw encoded data for debugging:', encodedData);
+            setError(`Invalid schedule data format. Decode error: ${decodeError.message}`);
           }
         } else if (scheduleId) {
           console.log('Attempting to load schedule by ID:', scheduleId);
@@ -238,7 +309,7 @@ const ImportSchedule = () => {
         }
       } catch (err) {
         console.error('Error in loadScheduleData:', err);
-        setError('An error occurred while loading the schedule data.');
+        setError(`An error occurred while loading the schedule data: ${err.message}`);
       } finally {
         setIsLoading(false);
       }
@@ -260,14 +331,18 @@ const ImportSchedule = () => {
     
     const timeout = setTimeout(() => {
       setAppStatus('not-installed');
-      document.body.removeChild(iframe);
+      if (document.body.contains(iframe)) {
+        document.body.removeChild(iframe);
+      }
     }, 2500);
     
     const handleVisibilityChange = () => {
       if (document.hidden) {
         clearTimeout(timeout);
         setAppStatus('installed');
-        document.body.removeChild(iframe);
+        if (document.body.contains(iframe)) {
+          document.body.removeChild(iframe);
+        }
         document.removeEventListener('visibilitychange', handleVisibilityChange);
       }
     };
@@ -286,7 +361,9 @@ const ImportSchedule = () => {
       return;
     }
     
-    const appUrl = `ischeduled://import?data=${encodedData}`;
+    // Make sure to URL encode the data parameter for the app URL
+    const urlEncodedData = encodeURIComponent(encodedData);
+    const appUrl = `ischeduled://import?data=${urlEncodedData}`;
     console.log('Opening app with URL:', appUrl);
     
     if (appStatus === 'installed') {
@@ -372,7 +449,15 @@ const ImportSchedule = () => {
                   <AlertCircle className="w-8 h-8 text-red-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Unable to Load Schedule</h3>
-                <p className="text-gray-700 mb-6 max-w-md mx-auto leading-relaxed">{error}</p>
+                <p className="text-gray-700 mb-6 max-w-md mx-auto leading-relaxed text-sm">{error}</p>
+                {/* Debug info for development */}
+                {process.env.NODE_ENV === 'development' && (
+                  <div className="bg-gray-100 p-3 rounded text-left text-xs mb-4 max-w-md mx-auto">
+                    <p><strong>Debug Info:</strong></p>
+                    <p className="break-all">URL: {window.location.href}</p>
+                    <p className="break-all">Data param: {extractDataParameter()}</p>
+                  </div>
+                )}
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
                     Try Again
