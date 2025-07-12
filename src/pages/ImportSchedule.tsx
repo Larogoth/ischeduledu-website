@@ -739,11 +739,15 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
-        {/* Enhanced Header */}
+        {/* Enhanced Header with Logo */}
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-              <GraduationCap className="w-10 h-10 text-white" />
+            <div className="w-20 h-20 rounded-full overflow-hidden mx-auto shadow-lg ring-4 ring-white/20">
+              <img 
+                src="/lovable-uploads/ischededu-app-logo-teacher-scheduling-software.png" 
+                alt="iSchedulEDU Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-white" />
