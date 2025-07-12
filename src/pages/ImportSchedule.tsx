@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, Sparkles, GraduationCap } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ScheduleData {
@@ -326,41 +326,58 @@ const ImportSchedule = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading schedule...</p>
+          <div className="relative">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
+            <Sparkles className="w-4 h-4 text-blue-500 absolute -top-1 -right-1 animate-pulse" />
+          </div>
+          <p className="text-gray-700 font-medium">Loading your schedule...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-2xl mx-auto pt-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Calendar className="w-8 h-8 text-white" />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-indigo-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
+        {/* Enhanced Header */}
+        <div className="text-center mb-12">
+          <div className="relative inline-block mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+              <GraduationCap className="w-10 h-10 text-white" />
+            </div>
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+              <Sparkles className="w-3 h-3 text-white" />
+            </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">iSchedulEDU</h1>
-          <p className="text-gray-600">Import your shared schedule</p>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
+            iSchedulEDU
+          </h1>
+          <p className="text-xl text-gray-600 font-medium">Teacher Schedule Management</p>
+          <p className="text-gray-500 mt-2">Import your shared schedule seamlessly</p>
         </div>
 
         {error ? (
-          <Card className="mb-6">
-            <CardContent className="pt-6">
+          <Card className="mb-8 border-red-200 bg-gradient-to-br from-red-50 to-orange-50 shadow-lg">
+            <CardContent className="pt-8 pb-8">
               <div className="text-center">
-                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <AlertCircle className="w-6 h-6 text-red-600" />
+                <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <AlertCircle className="w-8 h-8 text-red-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Schedule</h3>
-                <p className="text-gray-600 mb-4">{error}</p>
-                <div className="space-y-2">
-                  <Button onClick={() => window.location.reload()} variant="outline">
-                    Reload Page
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Unable to Load Schedule</h3>
+                <p className="text-gray-700 mb-6 max-w-md mx-auto leading-relaxed">{error}</p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
+                    Try Again
                   </Button>
-                  <Button onClick={() => window.location.href = '/'} variant="outline">
+                  <Button onClick={() => window.location.href = '/'} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
                     Go to Home
                   </Button>
                 </div>
@@ -369,44 +386,65 @@ const ImportSchedule = () => {
           </Card>
         ) : scheduleData ? (
           <>
-            {/* Schedule Preview */}
-            <Card className="mb-6 shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg">
-                <CardTitle className="flex items-center gap-3 text-xl">
-                  <Calendar className="w-6 h-6" />
-                  {scheduleData.name}
-                </CardTitle>
-                <CardDescription className="text-blue-100 flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  {scheduleData.startTime} - {scheduleData.endTime}
-                </CardDescription>
+            {/* Enhanced Schedule Preview */}
+            <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/80 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 text-white p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+                <div className="relative z-10">
+                  <CardTitle className="flex items-center gap-4 text-2xl font-bold mb-2">
+                    <Calendar className="w-8 h-8" />
+                    {scheduleData.name}
+                  </CardTitle>
+                  <CardDescription className="text-blue-100 flex items-center gap-3 text-lg">
+                    <Clock className="w-5 h-5" />
+                    {scheduleData.startTime} - {scheduleData.endTime}
+                  </CardDescription>
+                </div>
+                <div className="absolute top-4 right-4 opacity-20">
+                  <GraduationCap className="w-16 h-16" />
+                </div>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-4">
+              <CardContent className="p-8">
+                <div className="space-y-6">
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-                      Schedule Events
-                    </h4>
-                    <div className="space-y-3">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <Calendar className="w-4 h-4 text-white" />
+                      </div>
+                      <h4 className="text-xl font-bold text-gray-900">
+                        Schedule Events
+                      </h4>
+                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white border-0">
+                        {processedEvents.length} {processedEvents.length === 1 ? 'Event' : 'Events'}
+                      </Badge>
+                    </div>
+                    <div className="grid gap-4">
                       {processedEvents.map((event, index) => (
                         <div 
                           key={index} 
-                          className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border-l-4 hover:shadow-md transition-shadow"
-                          style={{ borderLeftColor: event.color }}
+                          className="group relative bg-gradient-to-r from-white to-gray-50/50 rounded-xl p-6 border border-gray-200/50 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] overflow-hidden"
                         >
-                          <div className="flex-1">
-                            <h5 className="font-semibold text-gray-900 text-lg">
-                              {event.name}
-                            </h5>
-                          </div>
-                          <div className="text-right">
-                            <div className="flex items-center gap-2 text-gray-600">
-                              <Clock className="w-4 h-4" />
-                              <span className="font-medium">
-                                {event.startTime} - {event.endTime}
-                              </span>
+                          <div 
+                            className="absolute left-0 top-0 bottom-0 w-1.5 rounded-r-full"
+                            style={{ backgroundColor: event.color }}
+                          ></div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex-1 pl-4">
+                              <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-blue-600 transition-colors">
+                                {event.name}
+                              </h5>
+                            </div>
+                            <div className="text-right">
+                              <div className="flex items-center gap-3 text-gray-600 bg-gray-50 rounded-lg px-4 py-2">
+                                <Clock className="w-5 h-5" />
+                                <span className="font-semibold text-lg">
+                                  {event.startTime} - {event.endTime}
+                                </span>
+                              </div>
                             </div>
                           </div>
+                          {/* Subtle gradient overlay on hover */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 to-purple-50/0 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                       ))}
                     </div>
@@ -415,112 +453,148 @@ const ImportSchedule = () => {
               </CardContent>
             </Card>
 
-            {/* Action Cards */}
-            <div className="space-y-4">
+            {/* Enhanced Action Cards */}
+            <div className="space-y-6">
+              {appStatus === 'checking' && (
+                <Alert>
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>
+                    Checking if iSchedulEDU is installed...
+                  </AlertDescription>
+                </Alert>
+              )}
+              
+              {appStatus === 'installed' && (
+                <Alert className="border-green-200 bg-green-50">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  <AlertDescription className="text-green-800">
+                    Great! iSchedulEDU is installed on your device.
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {showAppStoreRedirect && (
+                <Alert className="border-orange-200 bg-orange-50">
+                  <AlertCircle className="h-4 w-4 text-orange-600" />
+                  <AlertDescription className="text-orange-800">
+                    It looks like iSchedulEDU isn't installed. Download the app to import this schedule directly.
+                  </AlertDescription>
+                </Alert>
+              )}
+
               {isMobile ? (
-                <>
-                  {/* App Status Alert */}
-                  {appStatus === 'checking' && (
-                    <Alert>
-                      <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>
-                        Checking if iSchedulEDU is installed...
-                      </AlertDescription>
-                    </Alert>
-                  )}
-                  
-                  {appStatus === 'installed' && (
-                    <Alert className="border-green-200 bg-green-50">
-                      <CheckCircle className="h-4 w-4 text-green-600" />
-                      <AlertDescription className="text-green-800">
-                        Great! iSchedulEDU is installed on your device.
-                      </AlertDescription>
-                    </Alert>
-                  )}
-
-                  {showAppStoreRedirect && (
-                    <Alert className="border-orange-200 bg-orange-50">
-                      <AlertCircle className="h-4 w-4 text-orange-600" />
-                      <AlertDescription className="text-orange-800">
-                        It looks like iSchedulEDU isn't installed. Download the app to import this schedule directly.
-                      </AlertDescription>
-                    </Alert>
-                  )}
-
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="text-center">
-                        <Smartphone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                        {appStatus === 'installed' ? (
-                          <>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to Import</h3>
-                            <p className="text-gray-600 mb-4">
-                              Tap the button below to import this schedule directly into your iSchedulEDU app.
-                            </p>
-                            <Button onClick={handleOpenInApp} className="w-full">
-                              <ExternalLink className="w-4 h-4 mr-2" />
-                              Import to iSchedulEDU
-                            </Button>
-                          </>
-                        ) : appStatus === 'not-installed' || showAppStoreRedirect ? (
-                          <>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Get iSchedulEDU App</h3>
-                            <p className="text-gray-600 mb-4">
-                              Download iSchedulEDU to easily import and manage this schedule on your device.
-                            </p>
-                            <div className="space-y-2">
-                              <Button onClick={handleDownloadApp} className="w-full">
-                                <Download className="w-4 h-4 mr-2" />
-                                Download iSchedulEDU
-                              </Button>
-                              <Button onClick={handleTryAgain} variant="outline" className="w-full">
-                                I Already Have the App
-                              </Button>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Import Schedule</h3>
-                            <p className="text-gray-600 mb-4">
-                              If you have iSchedulEDU installed, tap "Open in App" to import directly. Otherwise, download the app first.
-                            </p>
-                            <div className="space-y-2">
-                              <Button onClick={handleOpenInApp} className="w-full">
-                                <ExternalLink className="w-4 h-4 mr-2" />
-                                Open in App
-                              </Button>
-                              <Button onClick={handleDownloadApp} variant="outline" className="w-full">
-                                <Download className="w-4 h-4 mr-2" />
-                                Download App
-                              </Button>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </>
-              ) : (
-                <Card>
-                  <CardContent className="pt-6">
+                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
+                  <CardContent className="pt-8 pb-8">
                     <div className="text-center">
-                      <Download className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Get iSchedulEDU Mobile App</h3>
-                      <p className="text-gray-600 mb-4">
+                      <div className="relative inline-block mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
+                          <Smartphone className="w-8 h-8 text-white" />
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
+                          <CheckCircle className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                      
+                      {appStatus === 'installed' ? (
+                        <>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-3">Ready to Import! 🎉</h3>
+                          <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
+                            Tap the button below to import this schedule directly into your iSchedulEDU app.
+                          </p>
+                          <Button 
+                            onClick={handleOpenInApp} 
+                            className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                          >
+                            <ExternalLink className="w-6 h-6 mr-3" />
+                            Import to iSchedulEDU
+                          </Button>
+                        </>
+                      ) : appStatus === 'not-installed' || showAppStoreRedirect ? (
+                        <>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-3">Get iSchedulEDU App</h3>
+                          <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
+                            Download iSchedulEDU to easily import and manage this schedule on your device.
+                          </p>
+                          <div className="space-y-3">
+                            <Button 
+                              onClick={handleDownloadApp} 
+                              className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            >
+                              <Download className="w-6 h-6 mr-3" />
+                              Download iSchedulEDU
+                            </Button>
+                            <Button 
+                              onClick={handleTryAgain} 
+                              variant="outline" 
+                              className="w-full max-w-sm py-3 rounded-xl border-2 hover:bg-gray-50"
+                            >
+                              I Already Have the App
+                            </Button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-3">Import Schedule</h3>
+                          <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
+                            If you have iSchedulEDU installed, tap "Open in App" to import directly. Otherwise, download the app first.
+                          </p>
+                          <div className="space-y-3">
+                            <Button 
+                              onClick={handleOpenInApp} 
+                              className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            >
+                              <ExternalLink className="w-6 h-6 mr-3" />
+                              Open in App
+                            </Button>
+                            <Button 
+                              onClick={handleDownloadApp} 
+                              variant="outline" 
+                              className="w-full max-w-sm py-3 rounded-xl border-2 hover:bg-gray-50"
+                            >
+                              <Download className="w-6 h-6 mr-3" />
+                              Download App
+                            </Button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
+                  <CardContent className="pt-8 pb-8">
+                    <div className="text-center">
+                      <div className="relative inline-block mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
+                          <Download className="w-8 h-8 text-white" />
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                          <Smartphone className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">Get iSchedulEDU Mobile App</h3>
+                      <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-lg mx-auto">
                         This schedule is designed for mobile import. Download the iSchedulEDU app on your phone or tablet to import this schedule.
                       </p>
-                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                        <Button onClick={handleDownloadApp} className="flex items-center gap-2">
-                          <Smartphone className="w-4 h-4" />
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Button 
+                          onClick={handleDownloadApp} 
+                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          <Smartphone className="w-5 h-5 mr-2" />
                           Download for iOS
                         </Button>
-                        <Button variant="outline" onClick={() => {
-                          navigator.clipboard.writeText(window.location.href);
-                        }}>
+                        <Button 
+                          variant="outline" 
+                          onClick={() => {
+                            navigator.clipboard.writeText(window.location.href);
+                          }}
+                          className="py-4 px-8 rounded-xl border-2 hover:bg-gray-50"
+                        >
                           Copy Link for Mobile
                         </Button>
                       </div>
-                      <p className="text-sm text-gray-500 mt-3">
+                      <p className="text-sm text-gray-500 mt-4 italic">
                         Send this link to your mobile device to import the schedule
                       </p>
                     </div>
@@ -531,10 +605,16 @@ const ImportSchedule = () => {
           </>
         ) : null}
 
-        {/* Footer */}
-        <div className="text-center mt-8 pt-8 border-t border-gray-200">
+        {/* Enhanced Footer */}
+        <div className="text-center mt-12 pt-8 border-t border-gray-200/50">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <GraduationCap className="w-5 h-5 text-blue-600" />
+            <p className="text-gray-600 font-medium">
+              iSchedulEDU - Teacher Schedule Management
+            </p>
+          </div>
           <p className="text-sm text-gray-500">
-            iSchedulEDU - Teacher Schedule Management
+            Streamline your teaching schedule with intelligent automation
           </p>
         </div>
       </div>
