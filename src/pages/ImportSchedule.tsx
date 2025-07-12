@@ -410,35 +410,58 @@ const ImportSchedule = () => {
     }, 3000);
   };
 
-  const handleOpenInApp = () => {
+  // Add this helper function to fix base64 padding
+const fixBase64Padding = (base64String: string): string => {
+  // Add padding if needed
+  const paddingNeeded = (4 - (base64String.length % 4)) % 4;
+  return base64String + '='.repeat(paddingNeeded);
+};
+
+// Update your handleOpenInApp function
+const handleOpenInApp = () => {
   const encodedData = extractDataParameter();
   if (!encodedData) {
     console.error('No data parameter found for app opening');
     return;
   }
   
-  // DON'T URL encode the data - it's already base64 encoded and ready to use
-  const appUrl = `ischeduled://import?data=${encodedData}`;
-  console.log('Opening app with URL:', appUrl);
-  console.log('Data being passed to app:', encodedData);
+  // Fix base64 padding before sending to iOS
+  const fixedData = fixBase64Padding(encodedData);
   
-  if (appStatus === 'installed') {
-    window.location.href = appUrl;
-  } else {
-    setAppStatus('checking');
-    const startTime = Date.now();
-    
-    window.location.href = appUrl;
-    
-    setTimeout(() => {
-      const timeElapsed = Date.now() - startTime;
-      
-      if (timeElapsed > 2000 && !document.hidden) {
-        setAppStatus('not-installed');
-        setShowAppStoreRedirect(true);
-      }
-    }, 2500);
-  }
+  // Don't double-encode the data
+  const appURL = `ischeduled://import?data=${fixedData}`;
+  
+  console.log('Opening app with URL:', appURL);
+  console.log('Base64 data length:', fixedData.length);
+  console.log('Base64 data (first 100 chars):', fixedData.substring(0, 100));
+  
+  // Test app detection
+  setAppStatus('checking');
+  
+  // Try to open the app
+  const timeoutId = setTimeout(() => {
+    console.log('App did not open, showing App Store redirect');
+    setAppStatus('not-installed');
+    setShowAppStoreRedirect(true);
+  }, 2000);
+  
+  // Clear timeout if page becomes hidden (app opened)
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      clearTimeout(timeoutId);
+      setAppStatus('installed');
+    }
+  };
+  
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  
+  // Attempt to open the app
+  window.location.href = appURL;
+  
+  // Clean up
+  setTimeout(() => {
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, 3000);
 };
 
   const handleDownloadApp = () => {
