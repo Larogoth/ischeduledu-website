@@ -411,34 +411,35 @@ const ImportSchedule = () => {
   };
 
   const handleOpenInApp = () => {
-    const encodedData = extractDataParameter();
-    if (!encodedData) {
-      console.error('No data parameter found for app opening');
-      return;
-    }
+  const encodedData = extractDataParameter();
+  if (!encodedData) {
+    console.error('No data parameter found for app opening');
+    return;
+  }
+  
+  // DON'T URL encode the data - it's already base64 encoded and ready to use
+  const appUrl = `ischeduled://import?data=${encodedData}`;
+  console.log('Opening app with URL:', appUrl);
+  console.log('Data being passed to app:', encodedData);
+  
+  if (appStatus === 'installed') {
+    window.location.href = appUrl;
+  } else {
+    setAppStatus('checking');
+    const startTime = Date.now();
     
-    const urlEncodedData = encodeURIComponent(encodedData);
-    const appUrl = `ischeduled://import?data=${urlEncodedData}`;
-    console.log('Opening app with URL:', appUrl);
+    window.location.href = appUrl;
     
-    if (appStatus === 'installed') {
-      window.location.href = appUrl;
-    } else {
-      setAppStatus('checking');
-      const startTime = Date.now();
+    setTimeout(() => {
+      const timeElapsed = Date.now() - startTime;
       
-      window.location.href = appUrl;
-      
-      setTimeout(() => {
-        const timeElapsed = Date.now() - startTime;
-        
-        if (timeElapsed > 2000 && !document.hidden) {
-          setAppStatus('not-installed');
-          setShowAppStoreRedirect(true);
-        }
-      }, 2500);
-    }
-  };
+      if (timeElapsed > 2000 && !document.hidden) {
+        setAppStatus('not-installed');
+        setShowAppStoreRedirect(true);
+      }
+    }, 2500);
+  }
+};
 
   const handleDownloadApp = () => {
     window.open('https://apps.apple.com/app/your-app-id', '_blank');
