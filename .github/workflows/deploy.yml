@@ -24,12 +24,6 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: List build directory contents (debug)
-        run: |
-          echo "Contents of dist directory:"
-          ls -la dist/
-          echo "Contents of dist/.well-known (if exists):"
-          ls -la dist/.well-known/ || echo "No .well-known directory found"
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
@@ -37,6 +31,9 @@ jobs:
         with:
           path: dist
           retention-days: 1
+        env:
+          # Ensure dotfiles are included in the artifact
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     environment:
