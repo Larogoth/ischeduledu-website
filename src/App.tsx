@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,62 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
 
 const queryClient = new QueryClient();
+
+// GitHub Pages SPA routing handler
+const GithubPagesRouter = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Handle GitHub Pages SPA routing on initial load
+    const handleGitHubPagesRouting = () => {
+      const { pathname, search, hash } = window.location;
+      
+      console.log('=== GITHUB PAGES ROUTER ===');
+      console.log('Initial pathname:', pathname);
+      console.log('Initial search:', search);
+      console.log('Initial hash:', hash);
+      
+      // Check if we have the GitHub Pages routing format /?/
+      if (search && search.startsWith('?/')) {
+        console.log('Detected GitHub Pages SPA routing format');
+        
+        // Extract the real path from the search params
+        const realPath = search.substring(2); // Remove '?/'
+        let [path, ...queryParts] = realPath.split('?');
+        
+        console.log('Extracted path:', path);
+        console.log('Extracted query parts:', queryParts);
+        
+        // Reconstruct the proper URL
+        let newUrl = '/' + path;
+        if (queryParts.length > 0) {
+          newUrl += '?' + queryParts.join('?');
+        }
+        if (hash) {
+          newUrl += hash;
+        }
+        
+        console.log('Constructed new URL:', newUrl);
+        
+        // Replace the current URL without triggering a page reload
+        if (newUrl !== location.pathname + location.search + location.hash) {
+          console.log('Replacing URL with proper route');
+          window.history.replaceState({}, '', newUrl);
+          
+          // Trigger a route change
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
+      }
+    };
+    
+    // Only run on initial load
+    if (window.location.search.startsWith('?/')) {
+      handleGitHubPagesRouting();
+    }
+  }, []);
+  
+  return null;
+};
 
 // Debug component to log route changes
 const RouteDebugger = () => {
@@ -29,6 +84,13 @@ const RouteDebugger = () => {
       console.log('Pathname includes import?', location.pathname.includes('import'));
       console.log('Search includes data?', location.search.includes('data'));
       console.log('Search params:', new URLSearchParams(location.search).get('data') ? 'DATA FOUND' : 'NO DATA');
+      
+      // Log the actual data parameter if it exists
+      const dataParam = new URLSearchParams(location.search).get('data');
+      if (dataParam) {
+        console.log('Data parameter length:', dataParam.length);
+        console.log('Data parameter preview:', dataParam.substring(0, 50) + '...');
+      }
     }
   }, [location]);
   
@@ -41,6 +103,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GithubPagesRouter />
         <RouteDebugger />
         <Routes>
           <Route path="/" element={<Index />} />
