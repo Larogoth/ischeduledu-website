@@ -20,28 +20,30 @@
         console.log('404.html redirect script - Pathname:', pathName);
         console.log('404.html redirect script - Search:', search);
         
-        // Handle the specific case where Universal Link becomes /data=.../import
-        if (pathName.startsWith('/data=') && pathName.endsWith('/import')) {
-          console.log('404.html redirect script - Detected Universal Link pattern /data=.../import');
+        // Handle the specific case where Universal Link ?data= becomes part of pathname
+        // iOS Universal Links like /import?data=... can become /?data=.../import or /import/data=...
+        if (pathName.includes('?data=') && pathName.includes('/import')) {
+          console.log('404.html redirect script - Detected Universal Link with ?data= in pathname');
           
           // Extract the data parameter from the pathname
-          var dataParam = pathName.substring(6); // Remove '/data=' prefix
-          dataParam = dataParam.substring(0, dataParam.length - 7); // Remove '/import' suffix
-          
-          console.log('404.html redirect script - Extracted data param:', dataParam);
-          
-          // Reconstruct the correct URL - use replace to avoid history issues
-          var correctUrl = location.protocol + '//' + location.hostname + 
-                          (location.port ? ':' + location.port : '') + 
-                          '/import?data=' + dataParam;
-          
-          console.log('404.html redirect script - Redirecting to:', correctUrl);
-          window.location.replace(correctUrl);
-          return;
+          var dataMatch = pathName.match(/\?data=([^\/]+)/);
+          if (dataMatch) {
+            var dataParam = dataMatch[1];
+            console.log('404.html redirect script - Extracted data param:', dataParam);
+            
+            // Reconstruct the correct URL - use replace to avoid history issues
+            var correctUrl = location.protocol + '//' + location.hostname + 
+                            (location.port ? ':' + location.port : '') + 
+                            '/import?data=' + dataParam;
+            
+            console.log('404.html redirect script - Redirecting to:', correctUrl);
+            window.location.replace(correctUrl);
+            return;
+          }
         }
         
         // Handle the alternative case where query parameters got mixed into the pathname
-        // This happens with Universal Links like /import?data=... becoming /data=.../import
+        // This handles cases where the URL structure gets mangled differently
         if (pathName.includes('data=') && pathName.includes('/import')) {
           console.log('404.html redirect script - Detected malformed Universal Link');
           
