@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -31,9 +31,16 @@ const RouteDebugger = () => {
 const URLFixer = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const hasProcessed = useRef(false);
   
   useEffect(() => {
     const pathname = location.pathname;
+    
+    // Prevent multiple processing of the same URL
+    if (hasProcessed.current) {
+      console.log('URLFixer - Already processed this URL, skipping');
+      return;
+    }
     
     // Check if this is a malformed Universal Link URL
     if (pathname.includes('data=') && pathname.includes('/import')) {
@@ -46,13 +53,25 @@ const URLFixer = () => {
         const dataParam = dataMatch[1];
         console.log('URLFixer - Extracted data param:', dataParam);
         
-        // Construct the correct URL and navigate immediately
+        // Mark as processed to prevent loops
+        hasProcessed.current = true;
+        
+        // Construct the correct URL and navigate with a small delay
         const correctPath = `/import?data=${dataParam}`;
         console.log('URLFixer - Navigating to:', correctPath);
         
-        // Use immediate navigation with replace to avoid history issues
-        console.log('URLFixer - Executing navigation now');
-        navigate(correctPath, { replace: true });
+        // Use a small timeout to ensure React Router is ready
+        setTimeout(() => {
+          console.log('URLFixer - Executing navigation now');
+          try {
+            navigate(correctPath, { replace: true });
+            console.log('URLFixer - Navigation completed successfully');
+          } catch (error) {
+            console.error('URLFixer - Navigation failed:', error);
+            // Fallback: try window.location
+            window.location.replace(correctPath);
+          }
+        }, 50);
       }
     }
   }, [location.pathname, navigate]);
