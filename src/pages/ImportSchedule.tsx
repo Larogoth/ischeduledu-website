@@ -528,13 +528,15 @@ const ImportSchedule = () => {
     return;
   }
   
-  const fixedData = fixBase64Padding(encodedData);
-  
-  // Include version and compression parameters in the app URL
-  const appURL = `ischeduled://import?data=${fixedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
-  
-  console.log('Opening app with URL:', appURL);
+  console.log('Raw data for app:', encodedData);
   console.log('Version:', version, 'Compressed:', isCompressed);
+  
+  // Don't URL-encode the data - iOS handles URL-safe base64 directly
+  // Just pass the clean data as-is
+  const appURL = `ischeduled://import?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+  
+  console.log('Final app URL:', appURL);
+  console.log('Data length:', encodedData.length);
   
   setAppStatus('checking');
   
