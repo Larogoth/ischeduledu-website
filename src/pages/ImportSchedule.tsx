@@ -274,19 +274,54 @@ const ImportSchedule = () => {
   };
 
   // Enhanced data extraction function with version and compression support
-  const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
-    console.log('=== ENHANCED DATA EXTRACTION ===');
-    console.log('Full URL:', window.location.href);
+  // Enhanced data extraction function that handles malformed URLs
+// Enhanced data extraction function with version and compression support
+const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
+  console.log('=== ENHANCED DATA EXTRACTION ===');
+  console.log('Full URL:', window.location.href);
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  let data = urlParams.get('data');
+  let version = urlParams.get('v') || '1';
+  let isCompressed = urlParams.get('c') === '1';
+  
+  // Handle malformed URLs where data parameter includes query string
+  if (data && (data.includes('?v=') || data.includes('&v='))) {
+    console.log('🔧 Detected malformed URL with query string in data parameter');
+    console.log('Original data:', data);
     
-    const urlParams = new URLSearchParams(window.location.search);
-    const data = urlParams.get('data');
-    const version = urlParams.get('v') || '1'; // Default to v1 if not specified
-    const isCompressed = urlParams.get('c') === '1';
-    
-    console.log('Extracted parameters:', { data: data?.substring(0, 50) + '...', version, isCompressed });
-    
-    return { data, version, isCompressed };
-  };
+    // Extract the actual data by removing the query string part
+    const queryIndex = data.indexOf('?');
+    if (queryIndex !== -1) {
+      const actualData = data.substring(0, queryIndex);
+      const queryString = data.substring(queryIndex + 1);
+      
+      console.log('Extracted actual data:', actualData);
+      console.log('Extracted query string:', queryString);
+      
+      // Parse the malformed query string (split by ? instead of &)
+      const malformedParams = queryString.split('?');
+      for (const param of malformedParams) {
+        if (param.startsWith('v=')) {
+          version = param.substring(2);
+        } else if (param.startsWith('c=')) {
+          isCompressed = param.substring(2) === '1';
+        }
+      }
+      
+      data = actualData;
+      console.log('✅ Fixed malformed URL - Version:', version, 'Compressed:', isCompressed);
+    }
+  }
+  
+  console.log('Final extracted parameters:', { 
+    data: data?.substring(0, 50) + '...', 
+    version, 
+    isCompressed 
+  });
+  
+  return { data, version, isCompressed };
+};
 
   // Convert URL-safe base64 to binary data
   const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
