@@ -117,80 +117,125 @@ const ImportSchedule = () => {
     };
   };
 
+  // Enhanced data extraction function
+  const extractDataParameter = (): string | null => {
+    console.log('=== ENHANCED DATA EXTRACTION ===');
+    
+    // Method 1: React Router searchParams
+    const reactRouterData = searchParams.get('data');
+    console.log('React Router searchParams.get("data"):', reactRouterData);
+    
+    // Method 2: URLSearchParams from location.search
+    const locationSearchData = new URLSearchParams(location.search).get('data');
+    console.log('URLSearchParams from location.search:', locationSearchData);
+    
+    // Method 3: URLSearchParams from window.location.search
+    const windowSearchData = new URLSearchParams(window.location.search).get('data');
+    console.log('URLSearchParams from window.location.search:', windowSearchData);
+    
+    // Method 4: Manual regex extraction from full URL
+    const fullUrl = window.location.href;
+    const regexMatch = fullUrl.match(/[?&]data=([^&]*)/);
+    const regexData = regexMatch ? regexMatch[1] : null;
+    console.log('Regex extraction from full URL:', regexData);
+    
+    // Method 5: Manual regex extraction from hash (in case it's there)
+    const hashMatch = window.location.hash.match(/[?&]data=([^&]*)/);
+    const hashData = hashMatch ? hashMatch[1] : null;
+    console.log('Regex extraction from hash:', hashData);
+    
+    // Method 6: Check for data in pathname (malformed URLs)
+    const pathname = window.location.pathname;
+    let pathnameData = null;
+    if (pathname.includes('data=')) {
+      const dataIndex = pathname.indexOf('data=');
+      const dataStart = dataIndex + 5; // 'data='.length
+      const dataEnd = pathname.indexOf('/', dataStart);
+      pathnameData = dataEnd === -1 ? pathname.substring(dataStart) : pathname.substring(dataStart, dataEnd);
+    }
+    console.log('Data extraction from pathname:', pathnameData);
+    
+    // Return the first non-null value
+    const methods = [
+      { name: 'React Router searchParams', value: reactRouterData },
+      { name: 'URLSearchParams from location.search', value: locationSearchData },
+      { name: 'URLSearchParams from window.location.search', value: windowSearchData },
+      { name: 'Regex extraction from full URL', value: regexData },
+      { name: 'Regex extraction from hash', value: hashData },
+      { name: 'Data extraction from pathname', value: pathnameData }
+    ];
+    
+    for (const method of methods) {
+      if (method.value) {
+        console.log(`SUCCESS: Using data from ${method.name}`);
+        console.log(`Data length: ${method.value.length}`);
+        console.log(`Data preview: ${method.value.substring(0, 50)}...`);
+        return method.value;
+      }
+    }
+    
+    console.log('ERROR: No data parameter found using any method');
+    return null;
+  };
+
   useEffect(() => {
     console.log('=== ImportSchedule useEffect TRIGGERED ===');
-    console.log('Effect dependencies - scheduleId:', scheduleId, 'searchParams keys:', Array.from(searchParams.keys()));
+    console.log('Effect dependencies - scheduleId:', scheduleId);
+    console.log('Current URL:', window.location.href);
+    console.log('Location object:', location);
     
     const loadScheduleData = () => {
       try {
-        console.log('=== DEBUGGING URL PARSING ===');
-        console.log('Current URL:', window.location.href);
-        console.log('Location pathname:', location.pathname);
-        console.log('Location search:', location.search);
-        console.log('Location hash:', location.hash);
-        console.log('All search params:', Object.fromEntries(searchParams.entries()));
+        console.log('=== STARTING DATA LOAD PROCESS ===');
         
-        // Multiple methods to extract the data parameter
-        const methods = [
-          { name: 'searchParams.get', value: searchParams.get('data') },
-          { name: 'URLSearchParams from location.search', value: new URLSearchParams(location.search).get('data') },
-          { name: 'URLSearchParams from window.location.search', value: new URLSearchParams(window.location.search).get('data') },
-          { name: 'Manual regex extraction', value: window.location.href.match(/[?&]data=([^&]*)/)?.[1] }
-        ];
-        
-        methods.forEach(method => {
-          console.log(`${method.name}:`, method.value);
-        });
-        
-        // Try each method until we find data
-        let encodedData = null;
-        for (const method of methods) {
-          if (method.value) {
-            encodedData = method.value;
-            console.log(`Using data from: ${method.name}`);
-            break;
-          }
-        }
+        // Use enhanced data extraction
+        const encodedData = extractDataParameter();
         
         if (encodedData) {
-          console.log('Found encoded data:', encodedData);
-          const decodedData = JSON.parse(atob(encodedData));
-          console.log('Decoded data:', decodedData);
+          console.log('Found encoded data, attempting to decode...');
           
-          // Check if this is iOS app format or web format
-          if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
-            // iOS app format
-            console.log('Detected iOS app format:', decodedData);
-            const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
-            setScheduleData(transformedData);
-          } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
-            // Web format
-            console.log('Detected web format:', decodedData);
-            setScheduleData(decodedData as ScheduleData);
-          } else {
-            console.error('Unknown data format:', decodedData);
-            setError('Unsupported schedule data format');
+          try {
+            const decodedData = JSON.parse(atob(encodedData));
+            console.log('Successfully decoded data:', decodedData);
+            
+            // Check if this is iOS app format or web format
+            if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
+              // iOS app format
+              console.log('Detected iOS app format');
+              const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
+              setScheduleData(transformedData);
+            } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
+              // Web format
+              console.log('Detected web format');
+              setScheduleData(decodedData as ScheduleData);
+            } else {
+              console.error('Unknown data format:', decodedData);
+              setError('Unsupported schedule data format. Please ensure you\'re using a valid iSchedulEDU share link.');
+            }
+          } catch (decodeError) {
+            console.error('Failed to decode data:', decodeError);
+            setError('Invalid schedule data format. The shared link may be corrupted.');
           }
         } else if (scheduleId) {
           // For future implementation with specific schedule IDs
           console.log('Attempting to load schedule by ID:', scheduleId);
           setError('Schedule ID lookup not yet implemented');
         } else {
-          console.error('No schedule data found - Full debugging info above');
-          setError('No schedule data found in URL. Please check that the link is complete and try again.');
+          console.error('No schedule data found');
+          setError('No schedule data found in URL. Please check that the share link is complete and try again.');
         }
       } catch (err) {
-        console.error('Error parsing schedule data:', err);
-        setError('Invalid schedule data format');
+        console.error('Error in loadScheduleData:', err);
+        setError('An error occurred while loading the schedule data.');
       } finally {
         setIsLoading(false);
       }
     };
 
-    // Add a small delay to ensure all URL parsing is complete
+    // Add a small delay to ensure all URL processing is complete
     const timer = setTimeout(loadScheduleData, 100);
     return () => clearTimeout(timer);
-  }, [scheduleId, searchParams, location.search, location.pathname]);
+  }, [scheduleId, location.pathname, location.search, location.hash]);
 
   const checkAppInstallation = () => {
     if (!isMobile) return;
@@ -228,7 +273,14 @@ const ImportSchedule = () => {
   };
 
   const handleOpenInApp = () => {
-    const appUrl = `ischeduled://import?data=${searchParams.get('data')}`;
+    const encodedData = extractDataParameter();
+    if (!encodedData) {
+      console.error('No data parameter found for app opening');
+      return;
+    }
+    
+    const appUrl = `ischeduled://import?data=${encodedData}`;
+    console.log('Opening app with URL:', appUrl);
     
     if (appStatus === 'installed') {
       // Direct open since we know the app is there
@@ -298,7 +350,7 @@ const ImportSchedule = () => {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="w-6 h-6 text-red-600" />
+                  <AlertCircle className="w-6 h-6 text-red-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Schedule</h3>
                 <p className="text-gray-600 mb-4">{error}</p>
