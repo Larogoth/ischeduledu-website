@@ -291,54 +291,53 @@ const ImportSchedule = () => {
 
   // Enhanced data extraction function with version and compression support
   // Enhanced data extraction function that handles malformed URLs
-// Enhanced data extraction function that handles malformed URLs
-const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
-  console.log('=== ENHANCED DATA EXTRACTION ===');
-  console.log('Full URL:', window.location.href);
-  console.log('Search params:', window.location.search);
-  
-  const urlParams = new URLSearchParams(window.location.search);
-  let data = urlParams.get('data');
-  let version = urlParams.get('v') || '1';
-  let isCompressed = urlParams.get('c') === '1';
-  
-  console.log('Initial parsing results:', { data: data?.substring(0, 50) + '...', version, isCompressed });
-  
-  // Handle malformed URLs where data parameter includes query string
-  if (data && data.includes('?v=')) {
-    console.log('🔧 Detected malformed URL with query string in data parameter');
-    console.log('Original malformed data:', data);
+  const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
+    console.log('=== ENHANCED DATA EXTRACTION ===');
+    console.log('Full URL:', window.location.href);
+    console.log('Search params:', window.location.search);
     
-    // Extract version using regex
-    const versionMatch = data.match(/\?v=(\d+)/);
-    if (versionMatch) {
-      version = versionMatch[1];
-      console.log('✅ Extracted version:', version);
+    const urlParams = new URLSearchParams(window.location.search);
+    let data = urlParams.get('data');
+    let version = urlParams.get('v') || '1';
+    let isCompressed = urlParams.get('c') === '1';
+    
+    console.log('Initial parsing results:', { data: data?.substring(0, 50) + '...', version, isCompressed });
+    
+    // Handle malformed URLs where data parameter includes query string
+    if (data && data.includes('?v=')) {
+      console.log('🔧 Detected malformed URL with query string in data parameter');
+      console.log('Original malformed data:', data);
+      
+      // Extract version using regex
+      const versionMatch = data.match(/\?v=(\d+)/);
+      if (versionMatch) {
+        version = versionMatch[1];
+        console.log('✅ Extracted version:', version);
+      }
+      
+      // Extract compression using regex (looking for ?c= or ?v=3?c=)
+      const compressionMatch = data.match(/\?c=(\d+)/);
+      if (compressionMatch) {
+        isCompressed = compressionMatch[1] === '1';
+        console.log('✅ Extracted compression:', isCompressed);
+      }
+      
+      // Clean the data by removing everything from the first ?v= onwards
+      const cleanData = data.split('?v=')[0];
+      data = cleanData;
+      console.log('✅ Cleaned data:', data.substring(0, 50) + '...');
+      console.log('✅ Cleaned data length:', data.length);
     }
     
-    // Extract compression using regex (looking for ?c= or ?v=3?c=)
-    const compressionMatch = data.match(/\?c=(\d+)/);
-    if (compressionMatch) {
-      isCompressed = compressionMatch[1] === '1';
-      console.log('✅ Extracted compression:', isCompressed);
-    }
+    console.log('Final extracted parameters:', { 
+      data: data?.substring(0, 50) + '...', 
+      dataLength: data?.length,
+      version, 
+      isCompressed 
+    });
     
-    // Clean the data by removing everything from the first ?v= onwards
-    const cleanData = data.split('?v=')[0];
-    data = cleanData;
-    console.log('✅ Cleaned data:', data.substring(0, 50) + '...');
-    console.log('✅ Cleaned data length:', data.length);
-  }
-  
-  console.log('Final extracted parameters:', { 
-    data: data?.substring(0, 50) + '...', 
-    dataLength: data?.length,
-    version, 
-    isCompressed 
-  });
-  
-  return { data, version, isCompressed };
-};
+    return { data, version, isCompressed };
+  };
 
   // Convert URL-safe base64 to binary data
   const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
@@ -371,135 +370,134 @@ const extractDataParameters = (): { data: string | null; version: string; isComp
   };
   
   // Handle v3 format with gzip compression
-// Handle v3 format with gzip compression
-const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
-  try {
-    console.log('Processing v3 format, compressed:', isCompressed);
-    console.log('Input data length:', encodedData.length);
-    console.log('Input data sample:', encodedData.substring(0, 100));
-    
-    // Decode URL-safe base64
-    const binaryData = decodeUrlSafeBase64(encodedData);
-    console.log('Decoded binary data length:', binaryData.length);
-    console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
-    
-    let jsonData: string;
-    
-    if (isCompressed) {
-      console.log('🔍 Attempting decompression...');
-      
-      // First, try to decode as uncompressed JSON in case the compression flag is wrong
-      try {
-        console.log('🔧 Trying as uncompressed JSON first (despite c=1 flag)...');
-        const testJsonData = new TextDecoder().decode(binaryData);
-        console.log('Test JSON data:', testJsonData.substring(0, 200));
-        
-        // Try to parse as JSON to see if it's valid
-        const testParsed = JSON.parse(testJsonData);
-        console.log('✅ Successfully parsed as uncompressed JSON despite c=1 flag');
-        jsonData = testJsonData;
-      } catch (uncompressedError) {
-        console.log('❌ Not valid uncompressed JSON, trying actual decompression...');
-        
-        // Try different decompression methods
-        let decompressedData: Uint8Array | null = null;
-        let lastError: any = null;
-        
-        // Method 1: Try inflateRaw (for raw deflate - most likely for iOS COMPRESSION_ZLIB)
-        try {
-          console.log('🔧 Trying inflateRaw...');
-          decompressedData = pako.inflateRaw(binaryData);
-          console.log('✅ Successfully decompressed with inflateRaw');
-        } catch (error) {
-          console.log('❌ inflateRaw failed:', error.message || error);
-          lastError = error;
-        }
-        
-        // Method 2: Try inflate (for zlib)
-        if (!decompressedData) {
-          try {
-            console.log('🔧 Trying inflate...');
-            decompressedData = pako.inflate(binaryData);
-            console.log('✅ Successfully decompressed with inflate');
-          } catch (error) {
-            console.log('❌ inflate failed:', error.message || error);
-            lastError = error;
-          }
-        }
-        
-        // Method 3: Try ungzip (for gzip)
-        if (!decompressedData) {
-          try {
-            console.log('🔧 Trying ungzip...');
-            decompressedData = pako.ungzip(binaryData);
-            console.log('✅ Successfully decompressed with ungzip');
-          } catch (error) {
-            console.log('❌ ungzip failed:', error.message || error);
-            lastError = error;
-          }
-        }
-        
-        if (!decompressedData) {
-          // If decompression failed, try treating as uncompressed anyway
-          console.log('🔧 All decompression methods failed, trying as uncompressed data...');
-          try {
-            jsonData = new TextDecoder().decode(binaryData);
-            console.log('✅ Using as uncompressed data after decompression failures');
-          } catch (decodeError) {
-            const errorMsg = lastError?.message || lastError?.toString() || 'Unknown decompression error';
-            throw new Error(`All decompression methods failed: ${errorMsg}`);
-          }
-        } else {
-          jsonData = new TextDecoder().decode(decompressedData);
-          console.log('✅ Successfully decoded decompressed data');
-        }
-      }
-    } else {
-      // Not compressed, convert binary to string
-      jsonData = new TextDecoder().decode(binaryData);
-      console.log('✅ Decoded uncompressed data');
-    }
-    
-    console.log('JSON data length:', jsonData.length);
-    console.log('JSON preview:', jsonData.substring(0, 200) + '...');
-    
-    // Validate that we have valid JSON
-    if (!jsonData || jsonData.length === 0) {
-      throw new Error('Decompressed data is empty');
-    }
-    
-    // Parse the minimal format JSON
-    let shareableSchedule: ShareableSchedule;
+  const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
     try {
-      shareableSchedule = JSON.parse(jsonData);
-      console.log('✅ Successfully parsed JSON');
-      console.log('Parsed schedule:', shareableSchedule);
-    } catch (parseError) {
-      console.error('❌ JSON parsing failed:', parseError);
-      console.error('JSON data that failed to parse (first 500 chars):', jsonData.substring(0, 500));
-      throw new Error(`JSON parsing failed: ${parseError.message}`);
+      console.log('Processing v3 format, compressed:', isCompressed);
+      console.log('Input data length:', encodedData.length);
+      console.log('Input data sample:', encodedData.substring(0, 100));
+      
+      // Decode URL-safe base64
+      const binaryData = decodeUrlSafeBase64(encodedData);
+      console.log('Decoded binary data length:', binaryData.length);
+      console.log('Binary data first 20 bytes:', Array.from(binaryData.slice(0, 20)));
+      
+      let jsonData: string;
+      
+      if (isCompressed) {
+        console.log('🔍 Attempting decompression...');
+        
+        // First, try to decode as uncompressed JSON in case the compression flag is wrong
+        try {
+          console.log('🔧 Trying as uncompressed JSON first (despite c=1 flag)...');
+          const testJsonData = new TextDecoder().decode(binaryData);
+          console.log('Test JSON data:', testJsonData.substring(0, 200));
+          
+          // Try to parse as JSON to see if it's valid
+          const testParsed = JSON.parse(testJsonData);
+          console.log('✅ Successfully parsed as uncompressed JSON despite c=1 flag');
+          jsonData = testJsonData;
+        } catch (uncompressedError) {
+          console.log('❌ Not valid uncompressed JSON, trying actual decompression...');
+          
+          // Try different decompression methods
+          let decompressedData: Uint8Array | null = null;
+          let lastError: any = null;
+          
+          // Method 1: Try inflateRaw (for raw deflate - most likely for iOS COMPRESSION_ZLIB)
+          try {
+            console.log('🔧 Trying inflateRaw...');
+            decompressedData = pako.inflateRaw(binaryData);
+            console.log('✅ Successfully decompressed with inflateRaw');
+          } catch (error) {
+            console.log('❌ inflateRaw failed:', error.message || error);
+            lastError = error;
+          }
+          
+          // Method 2: Try inflate (for zlib)
+          if (!decompressedData) {
+            try {
+              console.log('🔧 Trying inflate...');
+              decompressedData = pako.inflate(binaryData);
+              console.log('✅ Successfully decompressed with inflate');
+            } catch (error) {
+              console.log('❌ inflate failed:', error.message || error);
+              lastError = error;
+            }
+          }
+          
+          // Method 3: Try ungzip (for gzip)
+          if (!decompressedData) {
+            try {
+              console.log('🔧 Trying ungzip...');
+              decompressedData = pako.ungzip(binaryData);
+              console.log('✅ Successfully decompressed with ungzip');
+            } catch (error) {
+              console.log('❌ ungzip failed:', error.message || error);
+              lastError = error;
+            }
+          }
+          
+          if (!decompressedData) {
+            // If decompression failed, try treating as uncompressed anyway
+            console.log('🔧 All decompression methods failed, trying as uncompressed data...');
+            try {
+              jsonData = new TextDecoder().decode(binaryData);
+              console.log('✅ Using as uncompressed data after decompression failures');
+            } catch (decodeError) {
+              const errorMsg = lastError?.message || lastError?.toString() || 'Unknown decompression error';
+              throw new Error(`All decompression methods failed: ${errorMsg}`);
+            }
+          } else {
+            jsonData = new TextDecoder().decode(decompressedData);
+            console.log('✅ Successfully decoded decompressed data');
+          }
+        }
+      } else {
+        // Not compressed, convert binary to string
+        jsonData = new TextDecoder().decode(binaryData);
+        console.log('✅ Decoded uncompressed data');
+      }
+      
+      console.log('JSON data length:', jsonData.length);
+      console.log('JSON preview:', jsonData.substring(0, 200) + '...');
+      
+      // Validate that we have valid JSON
+      if (!jsonData || jsonData.length === 0) {
+        throw new Error('Decompressed data is empty');
+      }
+      
+      // Parse the minimal format JSON
+      let shareableSchedule: ShareableSchedule;
+      try {
+        shareableSchedule = JSON.parse(jsonData);
+        console.log('✅ Successfully parsed JSON');
+        console.log('Parsed schedule:', shareableSchedule);
+      } catch (parseError) {
+        console.error('❌ JSON parsing failed:', parseError);
+        console.error('JSON data that failed to parse (first 500 chars):', jsonData.substring(0, 500));
+        throw new Error(`JSON parsing failed: ${parseError.message}`);
+      }
+      
+      // Validate the parsed data structure
+      if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
+        console.error('❌ Invalid schedule data structure:', shareableSchedule);
+        throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
+      }
+      
+      // Convert from minimal format to full schedule object
+      const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
+      
+      console.log('✅ Converted to full schedule:', fullSchedule.name);
+      return fullSchedule;
+      
+    } catch (error) {
+      console.error('❌ V3 format processing error:', error);
+      
+      // Re-throw with more context
+      const errorMessage = error?.message || error?.toString() || 'Unknown error';
+      throw new Error(`V3 format processing failed: ${errorMessage}`);
     }
-    
-    // Validate the parsed data structure
-    if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) {
-      console.error('❌ Invalid schedule data structure:', shareableSchedule);
-      throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
-    }
-    
-    // Convert from minimal format to full schedule object
-    const fullSchedule = convertMinimalToFullSchedule(shareableSchedule);
-    
-    console.log('✅ Converted to full schedule:', fullSchedule.name);
-    return fullSchedule;
-    
-  } catch (error) {
-    console.error('❌ V3 format processing error:', error);
-    
-    // Re-throw with more context
-    const errorMessage = error?.message || error?.toString() || 'Unknown error';
-    throw new Error(`V3 format processing failed: ${errorMessage}`);
-  }
-};
+  };
 
   // Handle v2 format (URL-safe base64 without compression)
   const handleV2Format = (encodedData: string): any => {
@@ -748,12 +746,12 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                 alt="iSchedulEDU Logo" 
                 className="w-full h-full object-cover"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center z-10">
                 <Sparkles className="w-3 h-3 text-white" />
               </div>
             </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
+          <h1 className="text-4xl font-bold font-euclid bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 bg-clip-text text-transparent mb-3">
             iSchedulEDU
           </h1>
           <p className="text-xl text-gray-600 font-medium">Teacher Schedule Management</p>
@@ -853,15 +851,15 @@ const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
                           
                           {/* Mobile Layout */}
                           <div className="md:hidden pl-4">
-                            <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-blue-600 transition-colors break-words">
+                            <h5 className="font-bold text-gray-900 text-base mb-3 group-hover:text-blue-600 transition-colors leading-tight">
                               {event.name}
                             </h5>
                             <div className="space-y-2">
                               <div className="flex items-center gap-2 text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
                                 <Clock className="w-4 h-4 flex-shrink-0" />
                                 <div className="text-sm font-medium">
-                                  <div>{event.startTime} - {event.endTime}</div>
-                                  <div className="text-xs text-gray-500">{event.duration}</div>
+                                  <div className="leading-tight">{event.startTime} - {event.endTime}</div>
+                                  <div className="text-xs text-gray-500 leading-tight">{event.duration}</div>
                                 </div>
                               </div>
                             </div>
