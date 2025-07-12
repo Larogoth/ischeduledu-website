@@ -647,7 +647,17 @@ const ImportSchedule = () => {
             {/* Generated with iSchedulEDU Banner */}
             <div className="mb-6">
               <div className="bg-gradient-to-r from-cyan-500/10 via-[#0FA0CE]/10 to-teal-500/10 border border-cyan-200/50 rounded-xl p-4 backdrop-blur-sm">
-                <div className="flex items-center justify-center gap-3 text-center">
+                {/* Mobile view - simple text */}
+                <div className="md:hidden flex items-center justify-center gap-2 text-center">
+                  <Sparkles className="w-4 h-4 text-cyan-600" />
+                  <span className="text-gray-700 font-medium">Generated with</span>
+                  <span className="font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
+                    iSchedulEDU
+                  </span>
+                </div>
+                
+                {/* Tablet and desktop view - full layout */}
+                <div className="hidden md:flex items-center justify-center gap-3 text-center">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-cyan-600" />
                     <span className="text-gray-700 font-medium">
