@@ -41,38 +41,32 @@ const ImportSchedule = () => {
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
   // Convert various date formats to readable time
-  const parseDate = (dateValue: any): Date => {
-    console.log('Parsing date value:', dateValue, 'Type:', typeof dateValue);
-    
-    if (typeof dateValue === 'string') {
-      // ISO string format
-      const date = new Date(dateValue);
-      if (!isNaN(date.getTime())) {
-        return date;
-      }
-    } else if (typeof dateValue === 'number') {
-      // Check if it's Swift TimeInterval (seconds since 2001-01-01)
-      if (dateValue > 0 && dateValue < 1000000000) {
-        // Likely Swift TimeInterval
-        const swiftReferenceOffset = 978307200; // Seconds between Jan 1, 1970 and Jan 1, 2001
-        const unixTimestamp = dateValue + swiftReferenceOffset;
-        return new Date(unixTimestamp * 1000);
-      } else if (dateValue > 1000000000) {
-        // Likely Unix timestamp in seconds or milliseconds
-        if (dateValue > 10000000000) {
-          // Milliseconds
-          return new Date(dateValue);
-        } else {
-          // Seconds
-          return new Date(dateValue * 1000);
-        }
-      }
+const parseDate = (dateValue: any): Date => {
+  console.log('Parsing date value:', dateValue, 'Type:', typeof dateValue);
+  
+  if (typeof dateValue === 'string') {
+    // ISO string format
+    const date = new Date(dateValue);
+    if (!isNaN(date.getTime())) {
+      return date;
     }
-    
-    // Fallback to current time if parsing fails
-    console.warn('Failed to parse date value, using current time:', dateValue);
-    return new Date();
-  };
+  } else if (typeof dateValue === 'number') {
+    // Unix timestamp (seconds since 1970) - this is what we're now using consistently
+    if (dateValue > 1000000000) {
+      // This is a Unix timestamp in seconds
+      return new Date(dateValue * 1000);
+    } else if (dateValue > 0) {
+      // This might be a Swift TimeInterval (seconds since 2001) - legacy support
+      const swiftReferenceOffset = 978307200;
+      const unixTimestamp = dateValue + swiftReferenceOffset;
+      return new Date(unixTimestamp * 1000);
+    }
+  }
+  
+  // Fallback to current time if parsing fails
+  console.warn('Failed to parse date value, using current time:', dateValue);
+  return new Date();
+};
 
   const formatTimeFromDate = (date: Date): string => {
     return date.toLocaleTimeString('en-US', { 
