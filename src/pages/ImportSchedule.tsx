@@ -275,42 +275,106 @@ const ImportSchedule = () => {
 
   // Enhanced data extraction function with version and compression support
   // Enhanced data extraction function that handles malformed URLs
-// Enhanced data extraction function with version and compression support
+// Enhanced data extraction function that handles URL encoding issues
 const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
   console.log('=== ENHANCED DATA EXTRACTION ===');
   console.log('Full URL:', window.location.href);
+  console.log('Search params:', window.location.search);
   
-  const urlParams = new URLSearchParams(window.location.search);
-  let data = urlParams.get('data');
-  let version = urlParams.get('v') || '1';
-  let isCompressed = urlParams.get('c') === '1';
-  
-  // Handle malformed URLs where data parameter includes query string
-  if (data && (data.includes('?v=') || data.includes('&v='))) {
-    console.log('🔧 Detected malformed URL with query string in data parameter');
-    console.log('Original data:', data);
+  // Try multiple methods to extract parameters
+  const methods = [
+    // Method 1: Standard URLSearchParams
+    () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return {
+        data: urlParams.get('data'),
+        version: urlParams.get('v') || '1',
+        isCompressed: urlParams.get('c') === '1'
+      };
+    },
     
-    // Extract the actual data by removing the query string part
-    const queryIndex = data.indexOf('?');
-    if (queryIndex !== -1) {
-      const actualData = data.substring(0, queryIndex);
-      const queryString = data.substring(queryIndex + 1);
+    // Method 2: Manual parsing of the full URL
+    () => {
+      const url = window.location.href;
+      const dataMatch = url.match(/[?&]data=([^&]*)/);
+      const versionMatch = url.match(/[?&]v=([^&]*)/);
+      const compressionMatch = url.match(/[?&]c=([^&]*)/);
       
-      console.log('Extracted actual data:', actualData);
-      console.log('Extracted query string:', queryString);
+      return {
+        data: dataMatch ? decodeURIComponent(dataMatch[1]) : null,
+        version: versionMatch ? decodeURIComponent(versionMatch[1]) : '1',
+        isCompressed: compressionMatch ? decodeURIComponent(compressionMatch[1]) === '1' : false
+      };
+    },
+    
+    // Method 3: Handle corrupted URLs where & became other characters
+    () => {
+      const search = window.location.search;
+      let data = null;
+      let version = '1';
+      let isCompressed = false;
       
-      // Parse the malformed query string (split by ? instead of &)
-      const malformedParams = queryString.split('?');
-      for (const param of malformedParams) {
-        if (param.startsWith('v=')) {
-          version = param.substring(2);
-        } else if (param.startsWith('c=')) {
-          isCompressed = param.substring(2) === '1';
+      // Look for data parameter
+      const dataMatch = search.match(/[?&]data=([^&?]*)/);
+      if (dataMatch) {
+        data = decodeURIComponent(dataMatch[1]);
+        
+        // Check if version and compression info got appended to data
+        const versionMatch = data.match(/(.+?)v=(\d+)/);
+        if (versionMatch) {
+          data = versionMatch[1];
+          version = versionMatch[2];
+          
+          // Look for compression after version
+          const compressionMatch = data.match(/(.+?)[?&]c=(\d+)/);
+          if (compressionMatch) {
+            data = compressionMatch[1];
+            isCompressed = compressionMatch[2] === '1';
+          }
         }
       }
       
-      data = actualData;
-      console.log('✅ Fixed malformed URL - Version:', version, 'Compressed:', isCompressed);
+      return { data, version, isCompressed };
+    }
+  ];
+  
+  // Try each method until we get valid results
+  for (let i = 0; i < methods.length; i++) {
+    try {
+      const result = methods[i]();
+      console.log(`Method ${i + 1} result:`, result);
+      
+      if (result.data && result.data.length > 10) {
+        console.log(`✅ Using method ${i + 1} results`);
+        return result;
+      }
+    } catch (error) {
+      console.log(`Method ${i + 1} failed:`, error);
+    }
+  }
+  
+  // Fallback: Try to extract from the raw URL string
+  console.log('🔧 Using fallback method');
+  const rawUrl = window.location.href;
+  
+  // Extract everything between data= and the next parameter or end
+  const dataMatch = rawUrl.match(/data=([^&]*)/);
+  let data = dataMatch ? decodeURIComponent(dataMatch[1]) : null;
+  
+  // Look for version in the URL
+  const versionMatch = rawUrl.match(/v=(\d+)/);
+  let version = versionMatch ? versionMatch[1] : '1';
+  
+  // Look for compression in the URL
+  const compressionMatch = rawUrl.match(/c=(\d+)/);
+  let isCompressed = compressionMatch ? compressionMatch[1] === '1' : false;
+  
+  // If data contains version/compression info, clean it
+  if (data && (data.includes('v=') || data.includes('c='))) {
+    console.log('🔧 Cleaning corrupted data parameter');
+    const cleanMatch = data.match(/^([^v]+)/);
+    if (cleanMatch) {
+      data = cleanMatch[1];
     }
   }
   
