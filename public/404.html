@@ -16,51 +16,40 @@
         var search = location.search;
         var hash = location.hash;
         
+        console.log('404.html redirect script - Starting redirect process');
         console.log('404.html redirect script - Original URL:', location.href);
         console.log('404.html redirect script - Pathname:', pathName);
         console.log('404.html redirect script - Search:', search);
+        console.log('404.html redirect script - Hash:', hash);
         
         // Handle the specific case where Universal Link becomes /data=.../import
         if (pathName.startsWith('/data=') && pathName.endsWith('/import')) {
-          console.log('404.html redirect script - Detected Universal Link pattern /data=.../import');
+          console.log('404.html redirect script - MATCHED Universal Link pattern /data=.../import');
+          console.log('404.html redirect script - Full pathname:', pathName);
           
           // Extract the data parameter from the pathname
           var dataParam = pathName.substring(6); // Remove '/data=' prefix
-          dataParam = dataParam.substring(0, dataParam.length - 7); // Remove '/import' suffix
+          console.log('404.html redirect script - After removing /data= prefix:', dataParam);
           
-          console.log('404.html redirect script - Extracted data param:', dataParam);
+          dataParam = dataParam.substring(0, dataParam.length - 7); // Remove '/import' suffix
+          console.log('404.html redirect script - After removing /import suffix:', dataParam);
           
           // Reconstruct the correct URL - use replace to avoid history issues
           var correctUrl = location.protocol + '//' + location.hostname + 
                           (location.port ? ':' + location.port : '') + 
                           '/import?data=' + dataParam;
           
-          console.log('404.html redirect script - Redirecting to:', correctUrl);
-          window.location.replace(correctUrl);
+          console.log('404.html redirect script - Constructed correct URL:', correctUrl);
+          console.log('404.html redirect script - About to redirect...');
+          
+          // Use setTimeout to ensure logs are visible before redirect
+          setTimeout(function() {
+            window.location.replace(correctUrl);
+          }, 100);
           return;
         }
         
-        // Handle the alternative case where query parameters got mixed into the pathname
-        // This handles cases where the URL structure gets mangled differently
-        if (pathName.includes('data=') && pathName.includes('/import')) {
-          console.log('404.html redirect script - Detected malformed Universal Link');
-          
-          // Extract the data parameter from the pathname
-          var dataMatch = pathName.match(/data=([^\/]+)/);
-          if (dataMatch) {
-            var dataParam = dataMatch[1];
-            console.log('404.html redirect script - Extracted data param:', dataParam);
-            
-            // Reconstruct the correct URL - use replace to avoid history issues
-            var correctUrl = location.protocol + '//' + location.hostname + 
-                            (location.port ? ':' + location.port : '') + 
-                            '/import?data=' + dataParam;
-            
-            console.log('404.html redirect script - Redirecting to:', correctUrl);
-            window.location.replace(correctUrl);
-            return;
-          }
-        }
+        console.log('404.html redirect script - No Universal Link pattern matched, proceeding with normal GitHub Pages SPA routing');
         
         // Handle normal GitHub Pages SPA routing
         var segmentCount = 0;
@@ -83,7 +72,7 @@
           redirectUrl += hash;
         }
 
-        console.log('404.html redirect script - Final redirect URL:', redirectUrl);
+        console.log('404.html redirect script - Normal redirect URL:', redirectUrl);
         window.location.replace(redirectUrl);
       })();
     </script>
