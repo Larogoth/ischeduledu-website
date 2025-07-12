@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
@@ -30,6 +30,7 @@ const RouteDebugger = () => {
 // Component to handle malformed Universal Link URLs
 const URLFixer = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const pathname = location.pathname;
@@ -44,16 +45,15 @@ const URLFixer = () => {
         const dataParam = dataMatch[1];
         console.log('URLFixer - Extracted data param:', dataParam);
         
-        // Construct the correct URL and redirect
+        // Construct the correct URL and navigate
         const correctPath = `/import?data=${dataParam}`;
-        console.log('URLFixer - Redirecting to:', correctPath);
+        console.log('URLFixer - Navigating to:', correctPath);
         
-        // Use window.location to ensure a clean redirect
-        window.history.replaceState(null, '', correctPath);
-        window.location.reload();
+        // Use React Router's navigate for clean navigation
+        navigate(correctPath, { replace: true });
       }
     }
-  }, [location.pathname]);
+  }, [location.pathname, navigate]);
   
   return null;
 };
