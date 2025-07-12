@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, Users, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ScheduleData {
@@ -38,6 +38,13 @@ interface IOSScheduleData {
   events: IOSScheduleEvent[];
 }
 
+interface ProcessedEvent {
+  name: string;
+  startTime: string;
+  endTime: string;
+  color?: string;
+}
+
 const ImportSchedule = () => {
   console.log('=== ImportSchedule COMPONENT MOUNTED ===');
   console.log('Component render timestamp:', new Date().toISOString());
@@ -47,25 +54,21 @@ const ImportSchedule = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
   const [scheduleData, setScheduleData] = useState<ScheduleData | null>(null);
+  const [processedEvents, setProcessedEvents] = useState<ProcessedEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
   const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
 
   // Convert Swift TimeInterval to readable time
-  // Swift TimeInterval is seconds since January 1, 2001 00:00:00 UTC
   const formatTimeFromTimestamp = (timestamp: number): string => {
     console.log('Original Swift TimeInterval:', timestamp);
     
-    // Swift's reference date: January 1, 2001 00:00:00 UTC
-    // Unix epoch: January 1, 1970 00:00:00 UTC
-    // Difference: 31 years = 978307200 seconds
     const swiftReferenceOffset = 978307200;
     const unixTimestamp = timestamp + swiftReferenceOffset;
     
     console.log('Converted to Unix timestamp:', unixTimestamp);
     
-    // Convert to milliseconds for JavaScript Date
     const date = new Date(unixTimestamp * 1000);
     console.log('Converted date:', date);
     
@@ -76,11 +79,32 @@ const ImportSchedule = () => {
     });
   };
 
+  // Convert RGB color data to CSS color
+  const formatColor = (colorData?: { red: number; green: number; blue: number }): string => {
+    if (!colorData) return 'hsl(var(--primary))';
+    
+    const r = Math.round(colorData.red * 255);
+    const g = Math.round(colorData.green * 255);
+    const b = Math.round(colorData.blue * 255);
+    
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
   // Transform iOS schedule data to web format
   const transformIOSScheduleData = (iosData: IOSScheduleData): ScheduleData => {
     console.log('Transforming iOS data:', iosData);
     const events = iosData.events || [];
     const subjects = events.map(event => event.name);
+    
+    // Process events with colors and times
+    const processed: ProcessedEvent[] = events.map(event => ({
+      name: event.name,
+      startTime: formatTimeFromTimestamp(event.startTime),
+      endTime: formatTimeFromTimestamp(event.endTime),
+      color: formatColor(event.colorData)
+    }));
+    
+    setProcessedEvents(processed);
     
     // Calculate time range from events
     let earliestStart = Infinity;
@@ -112,7 +136,7 @@ const ImportSchedule = () => {
       periods: events.length,
       startTime: startTime,
       endTime: endTime,
-      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], // Default school days
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       notifications: events.some(event => event.enableAlert)
     };
   };
@@ -121,41 +145,34 @@ const ImportSchedule = () => {
   const extractDataParameter = (): string | null => {
     console.log('=== ENHANCED DATA EXTRACTION ===');
     
-    // Method 1: React Router searchParams
     const reactRouterData = searchParams.get('data');
     console.log('React Router searchParams.get("data"):', reactRouterData);
     
-    // Method 2: URLSearchParams from location.search
     const locationSearchData = new URLSearchParams(location.search).get('data');
     console.log('URLSearchParams from location.search:', locationSearchData);
     
-    // Method 3: URLSearchParams from window.location.search
     const windowSearchData = new URLSearchParams(window.location.search).get('data');
     console.log('URLSearchParams from window.location.search:', windowSearchData);
     
-    // Method 4: Manual regex extraction from full URL
     const fullUrl = window.location.href;
     const regexMatch = fullUrl.match(/[?&]data=([^&]*)/);
     const regexData = regexMatch ? regexMatch[1] : null;
     console.log('Regex extraction from full URL:', regexData);
     
-    // Method 5: Manual regex extraction from hash (in case it's there)
     const hashMatch = window.location.hash.match(/[?&]data=([^&]*)/);
     const hashData = hashMatch ? hashMatch[1] : null;
     console.log('Regex extraction from hash:', hashData);
     
-    // Method 6: Check for data in pathname (malformed URLs)
     const pathname = window.location.pathname;
     let pathnameData = null;
     if (pathname.includes('data=')) {
       const dataIndex = pathname.indexOf('data=');
-      const dataStart = dataIndex + 5; // 'data='.length
+      const dataStart = dataIndex + 5;
       const dataEnd = pathname.indexOf('/', dataStart);
       pathnameData = dataEnd === -1 ? pathname.substring(dataStart) : pathname.substring(dataStart, dataEnd);
     }
     console.log('Data extraction from pathname:', pathnameData);
     
-    // Return the first non-null value
     const methods = [
       { name: 'React Router searchParams', value: reactRouterData },
       { name: 'URLSearchParams from location.search', value: locationSearchData },
@@ -188,7 +205,6 @@ const ImportSchedule = () => {
       try {
         console.log('=== STARTING DATA LOAD PROCESS ===');
         
-        // Use enhanced data extraction
         const encodedData = extractDataParameter();
         
         if (encodedData) {
@@ -198,14 +214,11 @@ const ImportSchedule = () => {
             const decodedData = JSON.parse(atob(encodedData));
             console.log('Successfully decoded data:', decodedData);
             
-            // Check if this is iOS app format or web format
             if (decodedData.scheduleType !== undefined || decodedData.events !== undefined) {
-              // iOS app format
               console.log('Detected iOS app format');
               const transformedData = transformIOSScheduleData(decodedData as IOSScheduleData);
               setScheduleData(transformedData);
             } else if (decodedData.type !== undefined && decodedData.subjects !== undefined) {
-              // Web format
               console.log('Detected web format');
               setScheduleData(decodedData as ScheduleData);
             } else {
@@ -217,7 +230,6 @@ const ImportSchedule = () => {
             setError('Invalid schedule data format. The shared link may be corrupted.');
           }
         } else if (scheduleId) {
-          // For future implementation with specific schedule IDs
           console.log('Attempting to load schedule by ID:', scheduleId);
           setError('Schedule ID lookup not yet implemented');
         } else {
@@ -232,7 +244,6 @@ const ImportSchedule = () => {
       }
     };
 
-    // Add a small delay to ensure all URL processing is complete
     const timer = setTimeout(loadScheduleData, 100);
     return () => clearTimeout(timer);
   }, [scheduleId, location.pathname, location.search, location.hash]);
@@ -242,19 +253,16 @@ const ImportSchedule = () => {
     
     setAppStatus('checking');
     
-    // Create a hidden iframe to test the custom URL scheme
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = 'ischeduled://test';
     document.body.appendChild(iframe);
     
-    // Set a timeout to detect if the app opened
     const timeout = setTimeout(() => {
       setAppStatus('not-installed');
       document.body.removeChild(iframe);
     }, 2500);
     
-    // If the page becomes hidden (app opened), we assume the app is installed
     const handleVisibilityChange = () => {
       if (document.hidden) {
         clearTimeout(timeout);
@@ -266,7 +274,6 @@ const ImportSchedule = () => {
     
     document.addEventListener('visibilitychange', handleVisibilityChange);
     
-    // Fallback: assume not installed after timeout
     setTimeout(() => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, 3000);
@@ -283,21 +290,16 @@ const ImportSchedule = () => {
     console.log('Opening app with URL:', appUrl);
     
     if (appStatus === 'installed') {
-      // Direct open since we know the app is there
       window.location.href = appUrl;
     } else {
-      // Try to open and detect
       setAppStatus('checking');
       const startTime = Date.now();
       
-      // Try to open the app
       window.location.href = appUrl;
       
-      // Check if we're still on the page after a delay
       setTimeout(() => {
         const timeElapsed = Date.now() - startTime;
         
-        // If we're still here and enough time has passed, show App Store option
         if (timeElapsed > 2000 && !document.hidden) {
           setAppStatus('not-installed');
           setShowAppStoreRedirect(true);
@@ -368,58 +370,45 @@ const ImportSchedule = () => {
         ) : scheduleData ? (
           <>
             {/* Schedule Preview */}
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
+            <Card className="mb-6 shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg">
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <Calendar className="w-6 h-6" />
                   {scheduleData.name}
                 </CardTitle>
-                <CardDescription>
-                  Schedule preview - Import to your iSchedulEDU app
+                <CardDescription className="text-blue-100 flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  {scheduleData.startTime} - {scheduleData.endTime}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <div>
-                      <label className="text-sm font-medium text-gray-700">Schedule Type</label>
-                      <p className="text-gray-900">{scheduleData.type}</p>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-700">Time Range</label>
-                      <div className="flex items-center gap-2 text-gray-900">
-                        <Clock className="w-4 h-4" />
-                        {scheduleData.startTime} - {scheduleData.endTime}
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-700">Periods</label>
-                      <p className="text-gray-900">{scheduleData.periods} periods</p>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div>
-                      <label className="text-sm font-medium text-gray-700">Days</label>
-                      <div className="flex flex-wrap gap-1">
-                        {scheduleData.days.map((day) => (
-                          <Badge key={day} variant="secondary">{day}</Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-700">Subjects</label>
-                      <div className="flex flex-wrap gap-1">
-                        {scheduleData.subjects.slice(0, 3).map((subject) => (
-                          <Badge key={subject} variant="outline">{subject}</Badge>
-                        ))}
-                        {scheduleData.subjects.length > 3 && (
-                          <Badge variant="outline">+{scheduleData.subjects.length - 3} more</Badge>
-                        )}
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-700">Notifications</label>
-                      <p className="text-gray-900">{scheduleData.notifications ? 'Enabled' : 'Disabled'}</p>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
+                      Schedule Events
+                    </h4>
+                    <div className="space-y-3">
+                      {processedEvents.map((event, index) => (
+                        <div 
+                          key={index} 
+                          className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border-l-4 hover:shadow-md transition-shadow"
+                          style={{ borderLeftColor: event.color }}
+                        >
+                          <div className="flex-1">
+                            <h5 className="font-semibold text-gray-900 text-lg">
+                              {event.name}
+                            </h5>
+                          </div>
+                          <div className="text-right">
+                            <div className="flex items-center gap-2 text-gray-600">
+                              <Clock className="w-4 h-4" />
+                              <span className="font-medium">
+                                {event.startTime} - {event.endTime}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
