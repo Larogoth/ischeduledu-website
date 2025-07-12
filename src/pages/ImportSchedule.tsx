@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, Sparkles, GraduationCap } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, Sparkles } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
+import AppName from "@/components/AppName";
 
 interface ScheduleData {
   name: string;
@@ -483,11 +484,11 @@ const ImportSchedule = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#E6F3FF] via-blue-50 to-[#E6F3FF] flex items-center justify-center p-4">
         <div className="text-center">
           <div className="relative">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
-            <Sparkles className="w-4 h-4 text-blue-500 absolute -top-1 -right-1 animate-pulse" />
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-[#0FA0CE] mx-auto mb-4"></div>
+            <Sparkles className="w-4 h-4 text-[#0FA0CE] absolute -top-1 -right-1 animate-pulse" />
           </div>
           <p className="text-gray-700 font-medium">Loading your schedule...</p>
         </div>
@@ -496,26 +497,30 @@ const ImportSchedule = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#E6F3FF] via-blue-50 to-[#E6F3FF] relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-indigo-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#0FA0CE]/10 to-blue-200/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-200/10 to-[#0FA0CE]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
         {/* Enhanced Header */}
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-              <GraduationCap className="w-10 h-10 text-white" />
+            <div className="w-20 h-20 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+              <img
+                src="/lovable-uploads/ischededu-app-logo-teacher-scheduling-software.png"
+                alt="iSchedulEDU Logo"
+                className="w-12 h-12 object-contain"
+              />
             </div>
             <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-white" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-            iSchedulEDU
+          <h1 className="text-4xl font-bold mb-3">
+            <AppName size="xl" className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 bg-clip-text text-transparent" />
           </h1>
           <p className="text-xl text-gray-600 font-medium">Teacher Schedule Management</p>
           <p className="text-gray-500 mt-2">Import your shared schedule seamlessly</p>
@@ -542,7 +547,7 @@ const ImportSchedule = () => {
                   <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
                     Try Again
                   </Button>
-                  <Button onClick={() => window.location.href = '/'} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                  <Button onClick={() => window.location.href = '/'} className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0FA0CE]/90 hover:to-blue-700">
                     Go to Home
                   </Button>
                 </div>
@@ -553,8 +558,8 @@ const ImportSchedule = () => {
           <>
             {/* Enhanced Schedule Preview */}
             <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/80 backdrop-blur-sm">
-              <CardHeader className="bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 text-white p-8 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+              <CardHeader className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0FA0CE]/20 to-blue-600/20"></div>
                 <div className="relative z-10">
                   <CardTitle className="flex items-center gap-4 text-2xl font-bold mb-2">
                     <Calendar className="w-8 h-8" />
@@ -566,20 +571,24 @@ const ImportSchedule = () => {
                   </CardDescription>
                 </div>
                 <div className="absolute top-4 right-4 opacity-20">
-                  <GraduationCap className="w-16 h-16" />
+                  <img
+                    src="/lovable-uploads/ischededu-app-logo-teacher-scheduling-software.png"
+                    alt="iSchedulEDU Logo"
+                    className="w-16 h-16 object-contain"
+                  />
                 </div>
               </CardHeader>
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div>
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-lg flex items-center justify-center">
                         <Calendar className="w-4 h-4 text-white" />
                       </div>
                       <h4 className="text-xl font-bold text-gray-900">
                         Schedule Events
                       </h4>
-                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white border-0">
+                      <Badge className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white border-0">
                         {processedEvents.length} {processedEvents.length === 1 ? 'Event' : 'Events'}
                       </Badge>
                     </div>
@@ -595,7 +604,7 @@ const ImportSchedule = () => {
                           ></div>
                           <div className="flex items-center justify-between">
                             <div className="flex-1 pl-4">
-                              <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-blue-600 transition-colors">
+                              <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-[#0FA0CE] transition-colors">
                                 {event.name}
                               </h5>
                             </div>
@@ -609,7 +618,7 @@ const ImportSchedule = () => {
                             </div>
                           </div>
                           {/* Subtle gradient overlay on hover */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 to-purple-50/0 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#0FA0CE]/0 to-blue-50/0 group-hover:from-[#0FA0CE]/5 group-hover:to-blue-50/10 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                       ))}
                     </div>
@@ -652,7 +661,7 @@ const ImportSchedule = () => {
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
                       <div className="relative inline-block mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-2xl flex items-center justify-center mx-auto">
                           <Smartphone className="w-8 h-8 text-white" />
                         </div>
                         <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
@@ -668,7 +677,7 @@ const ImportSchedule = () => {
                           </p>
                           <Button 
                             onClick={handleOpenInApp} 
-                            className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            className="w-full max-w-sm bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0FA0CE]/90 hover:to-blue-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                           >
                             <ExternalLink className="w-6 h-6 mr-3" />
                             Import to iSchedulEDU
@@ -683,7 +692,7 @@ const ImportSchedule = () => {
                           <div className="space-y-3">
                             <Button 
                               onClick={handleDownloadApp} 
-                              className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                              className="w-full max-w-sm bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0FA0CE]/90 hover:to-blue-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                               <Download className="w-6 h-6 mr-3" />
                               Download iSchedulEDU
@@ -706,7 +715,7 @@ const ImportSchedule = () => {
                           <div className="space-y-3">
                             <Button 
                               onClick={handleOpenInApp} 
-                              className="w-full max-w-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                              className="w-full max-w-sm bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0FA0CE]/90 hover:to-blue-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                               <ExternalLink className="w-6 h-6 mr-3" />
                               Open in App
@@ -730,7 +739,7 @@ const ImportSchedule = () => {
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
                       <div className="relative inline-block mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-2xl flex items-center justify-center mx-auto">
                           <Download className="w-8 h-8 text-white" />
                         </div>
                         <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
@@ -744,7 +753,7 @@ const ImportSchedule = () => {
                       <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button 
                           onClick={handleDownloadApp} 
-                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                          className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0FA0CE]/90 hover:to-blue-700 text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                           <Smartphone className="w-5 h-5 mr-2" />
                           Download for iOS
@@ -773,9 +782,13 @@ const ImportSchedule = () => {
         {/* Enhanced Footer */}
         <div className="text-center mt-12 pt-8 border-t border-gray-200/50">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <GraduationCap className="w-5 h-5 text-blue-600" />
+            <img
+              src="/lovable-uploads/ischededu-app-logo-teacher-scheduling-software.png"
+              alt="iSchedulEDU Logo"
+              className="w-5 h-5 object-contain"
+            />
             <p className="text-gray-600 font-medium">
-              iSchedulEDU - Teacher Schedule Management
+              <AppName className="text-[#0FA0CE]" /> - Teacher Schedule Management
             </p>
           </div>
           <p className="text-sm text-gray-500">
