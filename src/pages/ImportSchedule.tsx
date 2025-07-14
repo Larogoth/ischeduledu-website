@@ -487,7 +487,7 @@ const ImportSchedule = () => {
     
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
-    iframe.src = 'ischeduled://';
+    iframe.src = 'ischeduled://test';
     document.body.appendChild(iframe);
     
     const timeout = setTimeout(() => {
