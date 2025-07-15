@@ -1,4 +1,3 @@
-
 import TestimonialCard from "@/components/TestimonialCard";
 import WhyTeachersChoose from "@/components/WhyTeachersChoose";
 import Header from "@/components/home/Header";
@@ -7,7 +6,6 @@ import Screenshots from "@/components/home/Screenshots";
 import Footer from "@/components/home/Footer";
 import GenerationProcess from "@/components/home/GenerationProcess";
 import StickyNavigation from "@/components/home/StickyNavigation";
-import FloatingCTA from "@/components/home/FloatingCTA";
 import BenefitsSection from "@/components/home/BenefitsSection";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect } from "react";
@@ -37,7 +35,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] pt-14 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] pt-14 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 rounded-full blur-3xl -translate-x-1/2"></div>
       <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl translate-x-1/2"></div>
@@ -179,8 +177,7 @@ const Index = () => {
 
       <Screenshots />
       <Footer />
-      <FloatingCTA />
-    </div>
+    </main>
   );
 };
 
