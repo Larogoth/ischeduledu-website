@@ -44,20 +44,20 @@ const Screenshots = () => {
   };
 
   return (
-    <section aria-labelledby="screenshots-title" className="py-20 bg-gradient-to-b from-white to-[#F5F9FF] relative overflow-hidden">
+    <section aria-labelledby="screenshots-title" className="py-20 bg-gradient-to-b from-[#F8FBFF] to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/20 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <span>📱 App Preview</span>
           </div>
-          <h2 id="screenshots-title" className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <h2 id="screenshots-title" className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             See iSchedulEDU in Action
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
             Experience the intuitive interface that makes schedule management effortless for teachers
           </p>
         </div>
@@ -68,22 +68,22 @@ const Screenshots = () => {
             {/* Navigation buttons */}
             <button
               onClick={prevSlide}
-              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110"
+              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-background/80 hover:bg-background rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 border border-border"
               aria-label="Previous screenshot"
             >
-              <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+              <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
             </button>
             
             <button
               onClick={nextSlide}
-              className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110"
+              className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-background/80 hover:bg-background rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 border border-border"
               aria-label="Next screenshot"
             >
-              <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
+              <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
             </button>
 
             {/* Main screenshot display - mobile optimized */}
-            <div className="relative bg-white rounded-3xl p-4 md:p-8 shadow-2xl border border-gray-100">
+            <div className="relative bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-4 md:p-8 shadow-2xl border border-gray-100 dark:border-gray-700">
               <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-12">
                 {/* Screenshot - smaller on mobile */}
                 <div className="flex-1 flex justify-center">
@@ -101,25 +101,25 @@ const Screenshots = () => {
 
                 {/* Feature description - more compact on mobile */}
                 <div className="flex-1 text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 text-[#0FA0CE] px-3 md:px-4 py-2 rounded-full mb-4 md:mb-6">
+                  <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 dark:from-[#0FA0CE]/20 dark:to-blue-500/20 text-[#0FA0CE] px-3 md:px-4 py-2 rounded-full mb-4 md:mb-6">
                     <div className="w-4 h-4 md:w-6 md:h-6">
                       {screenshots[activeIndex].icon}
                     </div>
                     <span className="font-semibold text-sm md:text-base">{screenshots[activeIndex].title}</span>
                   </div>
                   
-                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 md:mb-4">
                     {screenshots[activeIndex].title}
                   </h3>
                   
-                  <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 md:mb-8">
+                  <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 md:mb-8">
                     {screenshots[activeIndex].description}
                   </p>
 
                   {/* Feature availability note - no CTA button */}
-                  <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4">
-                    <p className="text-sm text-gray-700">
-                      <span className="font-semibold text-green-600">✓</span> Available in your free trial
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/30 dark:to-blue-900/30 border border-green-200 dark:border-green-800 rounded-xl p-4">
+                    <p className="text-sm text-foreground/80">
+                      <span className="font-semibold text-green-600 dark:text-green-400">✓</span> Available in your free trial
                     </p>
                   </div>
                 </div>
@@ -135,7 +135,7 @@ const Screenshots = () => {
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === activeIndex 
                       ? 'bg-[#0FA0CE] scale-125' 
-                      : 'bg-gray-300 hover:bg-gray-400'
+                      : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
                   }`}
                   aria-label={`Go to screenshot ${index + 1}`}
                 />
@@ -146,11 +146,11 @@ const Screenshots = () => {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 dark:from-[#0FA0CE]/20 dark:to-blue-500/20 rounded-2xl p-8 max-w-4xl mx-auto border border-[#0FA0CE]/20">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
               Ready to Transform Your Schedule Management?
             </h3>
-            <p className="text-lg text-gray-700 mb-6">
+            <p className="text-lg text-foreground/80 mb-6">
               Join hundreds of teachers who've already simplified their daily scheduling with iSchedulEDU
             </p>
             <a 
@@ -162,7 +162,7 @@ const Screenshots = () => {
               <img 
                 src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
                 alt="Download iSchedulEDU on the App Store" 
-                className="w-[280px] h-[94px] object-contain"
+                className="w-[280px] h-[94px] object-contain dark:invert"
                 width="280"
                 height="94"
               />

@@ -2,10 +2,10 @@ import { Clock, Users, Lightbulb, Rocket } from "lucide-react";
 
 const StorySection = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#F8FBFF] relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-b from-[#F0F8FF] to-[#F8FBFF] dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-10 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-10 right-1/4 w-24 h-24 bg-[#0FA0CE]/10 rounded-full blur-xl"></div>
+      <div className="absolute top-10 left-1/4 w-32 h-32 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-10 right-1/4 w-24 h-24 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/20 rounded-full blur-xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Story Section */}
@@ -14,25 +14,25 @@ const StorySection = () => {
             <span>👨‍🏫 The Story Behind iSchedulEDU</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-foreground">
             Built by a Teacher, for Teachers
           </h2>
           
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 text-left">
+          <div className="bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-700 text-left">
             <div className="flex items-start gap-6 mb-8">
               <div className="w-16 h-16 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                 <Users className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">From Classroom Chaos to Digital Solution</h3>
-                <p className="text-lg text-gray-700 leading-relaxed">
+                <h3 className="text-2xl font-bold text-foreground mb-4">From Classroom Chaos to Digital Solution</h3>
+                <p className="text-lg text-foreground/80 leading-relaxed">
                   "As an elementary math teacher, I became the go-to person in my grade level whenever our schedule would deviate from our regular routine. I'd have to work around schedule changes for things like MAP testing, 4-H events, grade-level parties, RTI days, and assemblies. I had been wanting to create an app of my own for a while but never could come up with the right idea. One day I got the idea to see if I could automate the process of generating schedules with evenly distributed times and began the journey to what is now iSchedulEDU. What started as a personal solution has now helped hundreds of teachers handle their own schedule emergencies with confidence."
                 </p>
               </div>
             </div>
             
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full font-semibold">
+              <div className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-4 py-2 rounded-full font-semibold">
                 <span>✓</span>
                 <span>Teacher-tested since day one</span>
               </div>
@@ -43,10 +43,10 @@ const StorySection = () => {
         {/* How It Works Section */}
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               How iSchedulEDU Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
               Plan ahead for announced events or handle last-minute emergencies with equal ease
             </p>
           </div>
@@ -62,8 +62,8 @@ const StorySection = () => {
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Set Your Parameters</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
+              <p className="text-foreground/70 leading-relaxed">
                 Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
               </p>
             </div>
@@ -78,8 +78,8 @@ const StorySection = () => {
                   <span className="text-white font-bold text-sm">2</span>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Create & Customize</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
+              <p className="text-foreground/70 leading-relaxed">
               Auto-generate evenly distributed schedules, or customize times for any scenario.              </p>
             </div>
 
@@ -93,8 +93,8 @@ const StorySection = () => {
                   <span className="text-white font-bold text-sm">3</span>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Share & Save</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
+              <p className="text-foreground/70 leading-relaxed">
                 Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
               </p>
             </div>

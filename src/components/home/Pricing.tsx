@@ -27,10 +27,10 @@ const FeatureSection = ({ icon: Icon, title, items }: {
 
 const Pricing = () => {
   return (
-    <section aria-labelledby="pricing-title" className="py-16 bg-gradient-to-b from-background to-[#F5F9FF] dark:to-blue-950/30 relative overflow-hidden">
+    <section aria-labelledby="pricing-title" className="py-16 bg-gradient-to-b from-[#F5F9FF] to-[#F0F8FF] dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/5 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-xl"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/15 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 dark:bg-blue-500/15 rounded-full blur-xl"></div>
       
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="mb-8">
@@ -48,7 +48,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto bg-background rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden mb-16">
+        <div className="max-w-6xl mx-auto bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden mb-16">
           {/* Enhanced gradient overlay */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
           
