@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Quote, Star, User } from "lucide-react";
+import { Quote, Star, User, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { isEnglish, translateText } from "@/utils/translation";
 
@@ -18,6 +18,7 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
   const [translatedContent, setTranslatedContent] = useState<string>("");
   const [isTranslated, setIsTranslated] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const needsTranslation = !isEnglish(title) || !isEnglish(content);
 
@@ -48,6 +49,9 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
 
   const displayTitle = isTranslated && translatedTitle ? translatedTitle : title;
   const displayContent = isTranslated && translatedContent ? translatedContent : content;
+
+  // Check if content is long enough to need expansion (roughly 4 lines of text)
+  const isLongContent = displayContent.length > 200;
 
   return (
     <Card className="h-full bg-white border border-gray-200 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -80,12 +84,39 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
           </div>
         )}
         
-        <h3 className="text-lg font-bold mb-3 text-gray-900 line-clamp-2">{displayTitle}</h3>
-        <blockquote className="text-gray-700 mb-6 leading-relaxed text-sm line-clamp-4">
+        <h3 className={`text-lg font-bold mb-3 text-gray-900 ${isExpanded ? '' : 'line-clamp-2'}`}>
+          {displayTitle}
+        </h3>
+        
+        <blockquote className={`text-gray-700 mb-4 leading-relaxed text-sm ${
+          isExpanded ? '' : 'line-clamp-4'
+        }`}>
           "{displayContent}"
         </blockquote>
         
-        <footer className="border-t border-gray-100 pt-4">
+        {/* Expand/Collapse button for long content */}
+        {isLongContent && (
+          <Button
+            onClick={() => setIsExpanded(!isExpanded)}
+            variant="ghost"
+            size="sm"
+            className="text-[#0FA0CE] hover:text-[#0FA0CE]/80 hover:bg-[#0FA0CE]/10 mb-4 p-2 h-8"
+          >
+            {isExpanded ? (
+              <>
+                <ChevronUp className="w-3 h-3 mr-1" />
+                Show Less
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-3 h-3 mr-1" />
+                Read More
+              </>
+            )}
+          </Button>
+        )}
+        
+        <footer className="border-t border-gray-100 pt-4 mt-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
