@@ -743,7 +743,7 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                       
                       <h3 className="text-3xl font-bold text-gray-900 mb-4">Get iSchedulEDU</h3>
                       <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
-                        Join thousands of teachers who trust iSchedulEDU for seamless schedule management.
+                        Join teachers worldwide who trust iSchedulEDU for seamless schedule management.
                       </p>
 
                       {/* Social Proof */}
@@ -775,6 +775,12 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                           <span className="font-medium text-gray-800">Smart notifications & alarms</span>
                         </div>
                         <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
+                          <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                            <Download className="w-4 h-4 text-green-600" />
+                          </div>
+                          <span className="font-medium text-gray-800">QR code & PDF sharing</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
                           <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
                             <Heart className="w-4 h-4 text-pink-600" />
                           </div>
@@ -799,30 +805,49 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                         </a>
                         
                         <div className="text-center">
-                          <p className="text-sm text-green-600 font-semibold">✓ Free Download</p>
-                          <p className="text-xs text-gray-500">No subscription required</p>
+                          <p className="text-sm text-green-600 font-semibold">✓ Free Download • 4 Free Sessions</p>
+                          <p className="text-xs text-gray-500">One-time $4.99 purchase for unlimited access</p>
                         </div>
                       </div>
 
                       {/* Share Option */}
                       <div className="mt-8 pt-6 border-t border-gray-200">
+                        <h4 className="text-sm font-semibold text-gray-700 mb-3 text-center">Share This Schedule</h4>
                         <Button 
                           onClick={copyShareLink}
                           variant="outline"
-                          className="w-full max-w-sm flex items-center gap-2 py-3 border-2 hover:bg-gray-50"
+                          className="w-full max-w-sm flex items-center gap-2 py-3 border-2 hover:bg-gray-50 mb-4"
                         >
                           {shareUrlCopied ? (
                             <>
                               <CheckCircle className="w-4 h-4 text-green-600" />
-                              Link Copied!
+                              Copied to Clipboard!
                             </>
                           ) : (
                             <>
                               <Copy className="w-4 h-4" />
-                              Share This Schedule
+                              Copy Share Message
                             </>
                           )}
                         </Button>
+                        <p className="text-xs text-gray-500 text-center">
+                          Copies a formatted message with schedule link and App Store link
+                        </p>
+                        
+                        {/* Learn More CTA */}
+                        <div className="mt-6 pt-4 border-t border-gray-100">
+                          <p className="text-sm text-gray-600 mb-3 text-center">
+                            Want to learn more about iSchedulEDU's features?
+                          </p>
+                          <a 
+                            href="https://ischeduledu.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-600 hover:text-cyan-700 font-medium text-sm underline text-center block"
+                          >
+                            Visit our website →
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -892,6 +917,26 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                             <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and AlarmKit integration.</p>
                           </div>
                         </div>
+                        
+                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
+                          <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                            <Download className="w-6 h-6 text-green-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-gray-900 mb-2">Multiple Sharing Options</h4>
+                            <p className="text-gray-600 text-sm">Share schedules via QR codes, PDFs, text, or web links - all generated in-app.</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
+                          <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                            <Heart className="w-6 h-6 text-orange-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-gray-900 mb-2">One-Time Purchase</h4>
+                            <p className="text-gray-600 text-sm">Free to try with 4 sessions, then just $4.99 for unlimited access. No subscriptions!</p>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Call to Action */}
@@ -930,11 +975,26 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                       </div>
                       
                       <div className="mt-6">
-                        <p className="text-sm text-green-600 font-semibold">✓ Free Download • No Subscription</p>
+                        <p className="text-sm text-green-600 font-semibold">✓ Free Download • 4 Free Sessions • $4.99 One-Time Purchase</p>
                         <p className="text-xs text-gray-500 mt-2 italic leading-relaxed">
                           Users with iSchedulEDU can tap shared links to import directly into the app.<br />
                           Others will be guided to download the app first.
                         </p>
+                        
+                        {/* Learn More Link for Desktop */}
+                        <div className="mt-4 pt-3 border-t border-gray-200">
+                          <p className="text-sm text-gray-600 mb-2">
+                            Want to explore all of iSchedulEDU's powerful features?
+                          </p>
+                          <a 
+                            href="https://ischeduledu.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-600 hover:text-cyan-700 font-medium underline"
+                          >
+                            Learn more on our website →
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
