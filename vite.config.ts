@@ -12,7 +12,15 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: [
       '9d95f554-421a-4312-bcee-fd6de79c558b.lovableproject.com',
       'localhost'
-    ]
+    ],
+    proxy: {
+      '/api/itunes': {
+        target: 'https://itunes.apple.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/itunes/, ''),
+        secure: true
+      }
+    }
   },
   plugins: [
     react(),
