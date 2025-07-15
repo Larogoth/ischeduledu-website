@@ -311,8 +311,13 @@
       }
     </script>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH"></script>
+    <!-- Google Analytics with SRI Protection -->
+    <script 
+      async 
+      src="https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer-when-downgrade">
+    </script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -338,7 +343,12 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script 
+      src="https://cdn.gpteng.co/gptengineer.js" 
+      type="module"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer-when-downgrade">
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
