@@ -46,21 +46,94 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
         </div>
         
         {/* Mobile Carousel */}
-        <div className="md:hidden">
-          <div className="relative">
-            <div className="overflow-hidden">
+        <div className="block md:hidden px-4">
+          <div className="relative w-full max-w-md mx-auto">
+            <div className="overflow-hidden rounded-lg">
               <div 
-                className="flex gap-3 transition-transform duration-300 ease-in-out"
-                style={{ transform: `translateX(-${currentIndex * 87}%)` }}
+                className="flex gap-4 transition-transform duration-500 ease-out"
+                style={{ 
+                  transform: `translateX(calc(-${currentIndex} * (85% + 1rem)))`,
+                }}
               >
                 {reviews.map((review, index) => (
                   <div 
                     key={review.id} 
-                    className={`w-[87%] flex-shrink-0 pl-4 pr-1 transition-all duration-300 ${
+                    className="flex-shrink-0 transition-all duration-300"
+                    style={{ width: '85%' }}
+                  >
+                    <div className={`transition-all duration-300 ${
                       index === currentIndex 
                         ? 'opacity-100 scale-100' 
-                        : 'opacity-60 scale-95'
-                    }`}
+                        : 'opacity-50 scale-95'
+                    }`}>
+                      <TestimonialCardB
+                        title={review.title}
+                        name={review.name}
+                        content={review.content}
+                        stars={review.stars}
+                        isAppStoreReview={review.isAppStoreReview}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Mobile Navigation */}
+            {reviews.length > 1 && (
+              <>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  onClick={goToPrev}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  onClick={goToNext}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </>
+            )}
+          </div>
+          
+          {/* Mobile Dots */}
+          <div className="flex justify-center gap-2 mt-6">
+            {reviews.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? "bg-[#0FA0CE] scale-125" : "bg-gray-300"
+                }`}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
+          </div>
+          
+          <p className="text-center text-sm text-foreground/60 mt-4">
+            {currentIndex + 1} of {reviews.length} reviews
+          </p>
+        </div>
+        
+        {/* Desktop Carousel */}
+        <div className="hidden md:block">
+          <div className="relative max-w-6xl mx-auto">
+            <div className="overflow-hidden rounded-lg">
+              <div 
+                className="flex gap-6 lg:gap-8 transition-transform duration-500 ease-out"
+                style={{ 
+                  transform: `translateX(calc(-${currentIndex} * (33.333% + 1.5rem)))`, // Show 3 at a time
+                }}
+              >
+                {reviews.map((review, index) => (
+                  <div 
+                    key={review.id} 
+                    className="flex-shrink-0 w-1/3"
                   >
                     <TestimonialCardB
                       title={review.title}
@@ -74,56 +147,45 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
               </div>
             </div>
             
-            {/* Navigation Buttons */}
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg border-gray-200"
-              onClick={goToPrev}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg border-gray-200"
-              onClick={goToNext}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+            {/* Desktop Navigation */}
+            {reviews.length > 3 && (
+              <>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  onClick={goToPrev}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  onClick={goToNext}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </>
+            )}
           </div>
           
-          {/* Dots indicator */}
-          <div className="flex justify-center gap-2 mt-6">
+          {/* Desktop Dots */}
+          <div className="flex justify-center gap-2 mt-8">
             {reviews.map((_, index) => (
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-[#0FA0CE] scale-125" : "bg-gray-300"
+                  index === currentIndex ? "bg-[#0FA0CE]" : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 onClick={() => goToSlide(index)}
               />
             ))}
           </div>
           
-          {/* Review counter */}
           <p className="text-center text-sm text-foreground/60 mt-4">
-            {currentIndex + 1} of {reviews.length} reviews
+            Showing {Math.min(3, reviews.length - currentIndex)} of {reviews.length} reviews
           </p>
-        </div>
-        
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {reviews.slice(0, 6).map((review) => (
-            <TestimonialCardB
-              key={review.id}
-              title={review.title}
-              name={review.name}
-              content={review.content}
-              stars={review.stars}
-              isAppStoreReview={review.isAppStoreReview}
-            />
-          ))}
         </div>
       </div>
     </section>
