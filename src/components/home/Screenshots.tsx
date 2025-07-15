@@ -62,82 +62,72 @@ const Screenshots = () => {
           </p>
         </div>
 
-        {/* Enhanced carousel */}
+        {/* Enhanced carousel - optimized for mobile */}
         <div className="max-w-6xl mx-auto">
           <div className="relative">
             {/* Navigation buttons */}
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110"
+              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110"
               aria-label="Previous screenshot"
             >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
+              <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
             </button>
             
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110"
+              className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110"
               aria-label="Next screenshot"
             >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
+              <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-gray-700" />
             </button>
 
-            {/* Main screenshot display */}
-            <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
-              <div className="flex flex-col lg:flex-row items-center gap-12">
-                {/* Screenshot */}
+            {/* Main screenshot display - mobile optimized */}
+            <div className="relative bg-white rounded-3xl p-4 md:p-8 shadow-2xl border border-gray-100">
+              <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-12">
+                {/* Screenshot - smaller on mobile */}
                 <div className="flex-1 flex justify-center">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0FA0CE]/20 to-blue-500/20 rounded-3xl blur-xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0FA0CE]/20 to-blue-500/20 rounded-2xl md:rounded-3xl blur-xl"></div>
                     <img
                       src={screenshots[activeIndex].src}
                       alt={screenshots[activeIndex].alt}
-                      className="relative z-10 w-64 h-auto rounded-2xl shadow-xl transform hover:scale-105 transition-transform duration-300"
-                      width="256"
-                      height="555"
+                      className="relative z-10 w-48 md:w-64 h-auto rounded-xl md:rounded-2xl shadow-xl transform hover:scale-105 transition-transform duration-300"
+                      width="192"
+                      height="416"
                     />
                   </div>
                 </div>
 
-                {/* Feature description */}
+                {/* Feature description - more compact on mobile */}
                 <div className="flex-1 text-center lg:text-left">
-                  <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 text-[#0FA0CE] px-4 py-2 rounded-full mb-6">
-                    {screenshots[activeIndex].icon}
-                    <span className="font-semibold">{screenshots[activeIndex].title}</span>
+                  <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 text-[#0FA0CE] px-3 md:px-4 py-2 rounded-full mb-4 md:mb-6">
+                    <div className="w-4 h-4 md:w-6 md:h-6">
+                      {screenshots[activeIndex].icon}
+                    </div>
+                    <span className="font-semibold text-sm md:text-base">{screenshots[activeIndex].title}</span>
                   </div>
                   
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
                     {screenshots[activeIndex].title}
                   </h3>
                   
-                  <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 md:mb-8">
                     {screenshots[activeIndex].description}
                   </p>
 
-                  {/* CTA for this feature */}
-                  <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4">
-                      <p className="text-sm text-gray-700">
-                        <span className="font-semibold text-green-600">✓</span> Available in your free trial
-                      </p>
-                    </div>
-                    
-                    <a 
-                      href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                    >
-                      <span>Try This Feature</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </a>
+                  {/* Feature availability note - no CTA button */}
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4">
+                    <p className="text-sm text-gray-700">
+                      <span className="font-semibold text-green-600">✓</span> Available in your free trial
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Dots indicator */}
-            <div className="flex justify-center mt-8 space-x-2">
+            <div className="flex justify-center mt-6 md:mt-8 space-x-2">
               {screenshots.map((_, index) => (
                 <button
                   key={index}
@@ -152,25 +142,6 @@ const Screenshots = () => {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Feature grid for mobile */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:hidden">
-          {screenshots.map((screenshot, index) => (
-            <div
-              key={index}
-              className="transform hover:scale-105 transition-transform duration-300 hover:shadow-2xl rounded-xl"
-            >
-              <img
-                src={screenshot.src}
-                alt={screenshot.alt}
-                className="w-full rounded-xl shadow-lg"
-                loading="lazy"
-                width="180"
-                height="400"
-              />
-            </div>
-          ))}
         </div>
 
         {/* Bottom CTA */}
