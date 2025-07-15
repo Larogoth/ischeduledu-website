@@ -943,44 +943,62 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                       </div>
 
                       {/* Call to Action */}
-                      <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        <a 
-                          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => trackAppStoreClick('desktop_main_cta')}
-                          className="hover:scale-105 transition-transform duration-200"
-                        >
-                          <img 
-                            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                            alt="Download on the App Store"
-                            className="h-20 shadow-lg rounded-lg"
-                          />
-                        </a>
+                      <div className="space-y-8">
+                        {/* Primary CTA */}
+                        <div className="text-center">
+                          <a 
+                            href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => trackAppStoreClick('desktop_main_cta')}
+                            className="inline-block hover:scale-105 transition-transform duration-200"
+                          >
+                            <img 
+                              src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                              alt="Download on the App Store"
+                              className="h-20 shadow-lg rounded-lg mx-auto"
+                            />
+                          </a>
+                        </div>
                         
-                        <Button 
-                          variant="outline" 
-                          onClick={copyShareLink}
-                          className="py-4 px-8 rounded-xl border-2 hover:bg-gray-50 flex items-center gap-3 text-lg"
-                        >
-                          {shareUrlCopied ? (
-                            <>
-                              <CheckCircle className="w-5 h-5 text-green-600" />
-                              Copied to Clipboard!
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-5 h-5" />
-                              Copy Share Message
-                            </>
-                          )}
-                        </Button>
-                        <p className="text-sm text-gray-500 mt-3 text-center">
-                          Copies a formatted message with schedule link and App Store link
-                        </p>
-                        <p className="text-xs text-gray-400 text-center mt-1">
-                          Perfect for iMessage, email, Slack, or any messaging app
-                        </p>
+                        {/* Share Section */}
+                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 border border-gray-200">
+                          <div className="text-center max-w-md mx-auto">
+                            <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                              Share This Schedule
+                            </h4>
+                            <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                              Copy a formatted message to share with colleagues via any platform
+                            </p>
+                            
+                            <Button 
+                              variant="outline" 
+                              onClick={copyShareLink}
+                              className="py-3 px-6 rounded-xl border-2 hover:bg-white flex items-center gap-3 mx-auto mb-4"
+                            >
+                              {shareUrlCopied ? (
+                                <>
+                                  <CheckCircle className="w-5 h-5 text-green-600" />
+                                  Copied to Clipboard!
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-5 h-5" />
+                                  Copy Share Message
+                                </>
+                              )}
+                            </Button>
+                            
+                            <div className="space-y-2">
+                              <p className="text-sm text-gray-500">
+                                Includes schedule link and App Store link
+                              </p>
+                              <p className="text-xs text-gray-400">
+                                Perfect for iMessage, email, Slack, or any messaging app
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       
                       <div className="mt-6">
