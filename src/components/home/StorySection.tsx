@@ -80,7 +80,7 @@ const StorySection = () => {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Create & Customize</h3>
               <p className="text-gray-600 leading-relaxed">
-                Generate balanced schedules instantly or create custom ones for specific events. Perfect time distribution every time.
+                Auto-generate evenly distributed schedules, or customize times for any scenario.
               </p>
             </div>
 
