@@ -833,6 +833,9 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                         <p className="text-xs text-gray-500 text-center">
                           Copies a formatted message with schedule link and App Store link
                         </p>
+                        <p className="text-xs text-gray-400 text-center mt-1">
+                          Perfect for iMessage, email, Slack, or any messaging app
+                        </p>
                         
                         {/* Learn More CTA */}
                         <div className="mt-6 pt-4 border-t border-gray-100">
@@ -963,15 +966,21 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                           {shareUrlCopied ? (
                             <>
                               <CheckCircle className="w-5 h-5 text-green-600" />
-                              Link Copied!
+                              Copied to Clipboard!
                             </>
                           ) : (
                             <>
                               <Copy className="w-5 h-5" />
-                              Copy Link for Mobile
+                              Copy Share Message
                             </>
                           )}
                         </Button>
+                        <p className="text-sm text-gray-500 mt-3 text-center">
+                          Copies a formatted message with schedule link and App Store link
+                        </p>
+                        <p className="text-xs text-gray-400 text-center mt-1">
+                          Perfect for iMessage, email, Slack, or any messaging app
+                        </p>
                       </div>
                       
                       <div className="mt-6">
