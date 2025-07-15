@@ -57,7 +57,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToPrev}
                 style={{ minWidth: 36, minHeight: 36 }}
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-4 w-4 text-gray-700 dark:text-gray-100" />
               </Button>
             )}
             {/* Carousel Container with preview */}
@@ -100,7 +100,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToNext}
                 style={{ minWidth: 36, minHeight: 36 }}
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 text-gray-700 dark:text-gray-100" />
               </Button>
             )}
           </div>
@@ -133,7 +133,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToPrev}
                 style={{ minWidth: 40, minHeight: 40 }}
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5 text-gray-700 dark:text-gray-100" />
               </Button>
             )}
             {/* Carousel Container with preview - Shows 2.2 cards */}
@@ -176,7 +176,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToNext}
                 style={{ minWidth: 40, minHeight: 40 }}
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-5 w-5 text-gray-700 dark:text-gray-100" />
               </Button>
             )}
           </div>

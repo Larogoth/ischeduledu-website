@@ -64,26 +64,17 @@ const Screenshots = () => {
 
         {/* Enhanced carousel - optimized for mobile */}
         <div className="max-w-6xl mx-auto">
-          <div className="relative">
-            {/* Navigation buttons */}
+          <div className="flex items-center justify-center w-full">
+            {/* Left Arrow */}
             <button
               onClick={prevSlide}
-              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-background/80 hover:bg-background rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 border border-border"
+              className="z-20 bg-background/80 hover:bg-background rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 border border-border mr-2"
               aria-label="Previous screenshot"
             >
               <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
             </button>
-            
-            <button
-              onClick={nextSlide}
-              className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-background/80 hover:bg-background rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 border border-border"
-              aria-label="Next screenshot"
-            >
-              <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
-            </button>
-
             {/* Main screenshot display - mobile optimized */}
-            <div className="relative bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-4 md:p-8 shadow-2xl border border-gray-100 dark:border-gray-700">
+            <div className="relative bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-4 md:p-8 shadow-2xl border border-gray-100 dark:border-gray-700 flex-1">
               <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-12">
                 {/* Screenshot - smaller on mobile */}
                 <div className="flex-1 flex justify-center">
@@ -98,24 +89,21 @@ const Screenshots = () => {
                     />
                   </div>
                 </div>
-
                 {/* Feature description - more compact on mobile */}
                 <div className="flex-1 text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 dark:from-[#0FA0CE]/20 dark:to-blue-500/20 text-[#0FA0CE] px-3 md:px-4 py-2 rounded-full mb-4 md:mb-6">
-                    <div className="w-4 h-4 md:w-6 md:h-6">
+                  <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 dark:from-[#0FA0CE]/20 dark:to-blue-500/20 text-[#0FA0CE] px-3 md:px-4 py-2 rounded-full mb-4 md:mb-6 h-8 md:h-10">
+                    <div className="flex items-center justify-center h-full w-6 md:w-8">
+                      {/* Icon size is always w-6 h-6 for visual balance */}
                       {screenshots[activeIndex].icon}
                     </div>
                     <span className="font-semibold text-sm md:text-base">{screenshots[activeIndex].title}</span>
                   </div>
-                  
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 md:mb-4">
                     {screenshots[activeIndex].title}
                   </h3>
-                  
                   <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 md:mb-8">
                     {screenshots[activeIndex].description}
                   </p>
-
                   {/* Feature availability note - no CTA button */}
                   <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/30 dark:to-blue-900/30 border border-green-200 dark:border-green-800 rounded-xl p-4">
                     <p className="text-sm text-foreground/80">
@@ -125,22 +113,29 @@ const Screenshots = () => {
                 </div>
               </div>
             </div>
-
-            {/* Dots indicator */}
-            <div className="flex justify-center mt-6 md:mt-8 space-x-2">
-              {screenshots.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === activeIndex 
-                      ? 'bg-[#0FA0CE] scale-125' 
-                      : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                  }`}
-                  aria-label={`Go to screenshot ${index + 1}`}
-                />
-              ))}
-            </div>
+            {/* Right Arrow */}
+            <button
+              onClick={nextSlide}
+              className="z-20 bg-background/80 hover:bg-background rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 border border-border ml-2"
+              aria-label="Next screenshot"
+            >
+              <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
+            </button>
+          </div>
+          {/* Dots indicator */}
+          <div className="flex justify-center mt-6 md:mt-8 space-x-2">
+            {screenshots.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === activeIndex 
+                    ? 'bg-[#0FA0CE] scale-125' 
+                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                }`}
+                aria-label={`Go to screenshot ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
 
