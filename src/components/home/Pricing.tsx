@@ -48,7 +48,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden mb-16">
           {/* Enhanced gradient overlay */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
           
@@ -123,6 +123,67 @@ const Pricing = () => {
                   As a fellow educator, I believe in <strong>simple, affordable pricing</strong>. One purchase, lifetime access - no monthly fees!
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Final CTA Section - Conversion Climax */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+            {/* Background pattern */}
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+            
+            <div className="relative z-10 text-center">
+              <div className="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <span>🚨 Emergency Ready</span>
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-bold mb-6">
+                Don't Get Caught Unprepared Again
+              </h3>
+              
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
+                The next time your principal announces a last-minute schedule change, you'll be the teacher who has it handled in 2 minutes while others are still scrambling.
+              </p>
+              
+              <div className="bg-white/10 rounded-2xl p-6 mb-8 max-w-2xl mx-auto">
+                <p className="text-lg font-semibold mb-4">Join hundreds of prepared teachers:</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold">5.0★</div>
+                    <div className="text-sm text-blue-200">App Store</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">2 min</div>
+                    <div className="text-sm text-blue-200">Setup</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">$4.99</div>
+                    <div className="text-sm text-blue-200">One-time</div>
+                  </div>
+                </div>
+              </div>
+              
+              <a 
+                href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+              >
+                <img 
+                  src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1718150400" 
+                  alt="Download iSchedulEDU on the App Store" 
+                  className="w-[300px] h-[100px] object-contain"
+                  width="300"
+                  height="100"
+                />
+              </a>
+              
+              <p className="text-sm text-blue-200 mt-4">
+                Start with 4 free sessions • No credit card required
+              </p>
             </div>
           </div>
         </div>
