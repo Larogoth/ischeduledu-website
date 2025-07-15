@@ -54,7 +54,7 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
   const isLongContent = displayContent.length > 200;
 
   return (
-    <Card className="h-full bg-white border border-gray-200 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-4">
           <Quote className="h-6 w-6 text-[#0FA0CE] opacity-60" />
@@ -63,7 +63,7 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
               <Star
                 key={index}
                 className={`h-4 w-4 ${
-                  index < stars ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                  index < stars ? "fill-yellow-400 text-yellow-400" : "text-gray-300 dark:text-gray-600"
                 }`}
               />
             ))}
@@ -84,13 +84,13 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
           </div>
         )}
         
-        <h3 className={`text-lg font-bold mb-3 text-gray-900 ${isExpanded ? '' : 'line-clamp-2'}`}>
+        <h3 className={`text-lg font-bold mb-3 text-gray-900 dark:text-gray-100 ${isExpanded ? '' : 'line-clamp-2'}`}>
           {displayTitle}
         </h3>
         
-        <blockquote className={`text-gray-700 mb-4 leading-relaxed text-sm ${
+        <blockquote className={`mb-4 leading-relaxed text-sm ${
           isExpanded ? '' : 'line-clamp-4'
-        }`}>
+        } text-gray-700 dark:text-gray-300`}>
           "{displayContent}"
         </blockquote>
         
@@ -100,7 +100,7 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
             onClick={() => setIsExpanded(!isExpanded)}
             variant="ghost"
             size="sm"
-            className="text-[#0FA0CE] hover:text-[#0FA0CE]/80 hover:bg-[#0FA0CE]/10 mb-4 p-2 h-8"
+            className="text-[#0FA0CE] hover:text-[#0FA0CE]/80 hover:bg-[#0FA0CE]/10 dark:hover:bg-[#0FA0CE]/20 mb-4 p-2 h-8"
           >
             {isExpanded ? (
               <>
@@ -116,13 +116,13 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
           </Button>
         )}
         
-        <footer className="border-t border-gray-100 pt-4 mt-auto">
+        <footer className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-gray-500" />
+              <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-gray-500 dark:text-gray-300" />
               </div>
-              <p className="text-sm font-medium text-gray-900">{name}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{name}</p>
             </div>
             {isAppStoreReview && (
               <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold">
