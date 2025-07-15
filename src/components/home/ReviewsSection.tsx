@@ -11,20 +11,20 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
   if (reviews.length === 0) return null;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
             <span>⭐ Real App Store Reviews</span>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-foreground mb-4">
             What Teachers Are Saying
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-foreground/70">
             Don't just take our word for it - hear from educators using iSchedulEDU daily
           </p>
           {import.meta.env.DEV && isLoadingReviews && (
-            <span className="text-sm text-gray-400 block mt-2">(Loading reviews...)</span>
+            <span className="text-sm text-foreground/40 block mt-2">(Loading reviews...)</span>
           )}
         </div>
         

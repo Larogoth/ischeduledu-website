@@ -97,25 +97,39 @@ const RouteDebugger = () => {
   return null;
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <GithubPagesRouter />
-        <RouteDebugger />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/import" element={<ImportSchedule />} />
-          <Route path="/import/:scheduleId" element={<ImportSchedule />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Check for system/stored theme preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme")
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+
+    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+      document.documentElement.classList.add("dark")
+    }
+  }, [])
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <div className="min-h-screen bg-background text-foreground">
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <GithubPagesRouter />
+            <RouteDebugger />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/import" element={<ImportSchedule />} />
+              <Route path="/import/:scheduleId" element={<ImportSchedule />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

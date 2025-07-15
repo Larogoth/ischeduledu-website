@@ -50,19 +50,19 @@ const GenerationProcess = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#F5F9FF]">
+    <section className="py-20 bg-gradient-to-b from-background to-[#F5F9FF] dark:to-blue-950/30">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
+        <h2 className="text-4xl font-bold text-center mb-4 text-foreground">
           Two Ways to Create Your Perfect Schedule
         </h2>
-        <p className="text-xl text-gray-700 text-center mb-16 max-w-2xl mx-auto">
+        <p className="text-xl text-foreground/70 text-center mb-16 max-w-2xl mx-auto">
           Choose between quick auto-generation or full custom creation
         </p>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Auto-Generation Process */}
           <div>
-            <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
+            <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
               Quick Schedule Generation
             </h3>
             <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
@@ -71,7 +71,7 @@ const GenerationProcess = () => {
                   {steps.map((step, index) => (
                     <CarouselItem key={index}>
                       <div className="p-1">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="bg-background rounded-xl shadow-lg overflow-hidden border border-border">
                           <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
@@ -81,10 +81,10 @@ const GenerationProcess = () => {
                             />
                           </div>
                           <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                            <h3 className="text-xl font-semibold mb-2 text-foreground">
                               {step.title}
                             </h3>
-                            <p className="text-gray-600">
+                            <p className="text-foreground/70">
                               {step.description}
                             </p>
                           </div>
@@ -101,7 +101,7 @@ const GenerationProcess = () => {
 
           {/* Custom Creation Process */}
           <div>
-            <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
+            <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
               Custom Schedule Creation
             </h3>
             <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
@@ -110,7 +110,7 @@ const GenerationProcess = () => {
                   {customSteps.map((step, index) => (
                     <CarouselItem key={index}>
                       <div className="p-1">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="bg-background rounded-xl shadow-lg overflow-hidden border border-border">
                           <div className="max-w-[180px] md:max-w-[260px] mx-auto">
                             <img
                               src={step.image}
@@ -120,10 +120,10 @@ const GenerationProcess = () => {
                             />
                           </div>
                           <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                            <h3 className="text-xl font-semibold mb-2 text-foreground">
                               {step.title}
                             </h3>
-                            <p className="text-gray-600">
+                            <p className="text-foreground/70">
                               {step.description}
                             </p>
                           </div>

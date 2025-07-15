@@ -7,18 +7,18 @@ const FeatureSection = ({ icon: Icon, title, items }: {
   title: string;
   items: string[];
 }) => (
-  <div className="text-left space-y-4 p-6 bg-gradient-to-br from-white to-blue-50/50 rounded-xl border border-blue-100 hover:border-[#0FA0CE]/30 transition-all duration-300 hover:shadow-lg">
+  <div className="text-left space-y-4 p-6 bg-gradient-to-br from-background to-blue-50/50 dark:to-blue-950/50 rounded-xl border border-blue-100 dark:border-blue-900/30 hover:border-[#0FA0CE]/30 transition-all duration-300 hover:shadow-lg">
     <div className="flex items-center gap-3">
       <div className="p-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-lg">
         <Icon className="h-5 w-5 text-white" />
       </div>
-      <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+      <h3 className="text-lg font-semibold text-foreground">{title}</h3>
     </div>
     <ul className="space-y-2">
       {items.map((item, index) => (
         <li key={index} className="flex items-start gap-2">
-          <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
-          <span className="text-gray-700 text-sm leading-relaxed">{item}</span>
+          <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+          <span className="text-foreground/70 text-sm leading-relaxed">{item}</span>
         </li>
       ))}
     </ul>
@@ -27,10 +27,10 @@ const FeatureSection = ({ icon: Icon, title, items }: {
 
 const Pricing = () => {
   return (
-    <section aria-labelledby="pricing-title" className="py-16 bg-gradient-to-b from-white to-[#F5F9FF] relative overflow-hidden">
+    <section aria-labelledby="pricing-title" className="py-16 bg-gradient-to-b from-background to-[#F5F9FF] dark:to-blue-950/30 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/5 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-xl"></div>
       
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="mb-8">
@@ -39,16 +39,16 @@ const Pricing = () => {
             <span>Built by a Teacher</span>
           </div>
           
-          <h2 id="pricing-title" className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <h2 id="pricing-title" className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Transform Your School Day with <AppName size="xl" className="inline text-[#0FA0CE]" />
           </h2>
           
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
             Plan custom schedules for announced events or handle unexpected changes instantly!
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden mb-16">
+        <div className="max-w-6xl mx-auto bg-background rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden mb-16">
           {/* Enhanced gradient overlay */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
           
@@ -58,8 +58,8 @@ const Pricing = () => {
                 <span>🎉 Start with 4 FREE Sessions</span>
               </div>
               <div className="space-y-2">
-                <p className="text-gray-700 font-semibold">Then just $4.99 one-time purchase</p>
-                <p className="text-sm text-gray-600">No subscriptions • No hidden fees • Lifetime access</p>
+                <p className="text-foreground/90 font-semibold">Then just $4.99 one-time purchase</p>
+                <p className="text-sm text-foreground/70">No subscriptions • No hidden fees • Lifetime access</p>
               </div>
             </div>
             
@@ -114,12 +114,12 @@ const Pricing = () => {
                 ]}
               />
 
-              <div className="md:col-span-2 lg:col-span-1 bg-gradient-to-br from-[#0FA0CE]/10 to-blue-600/10 rounded-xl p-6 border-2 border-[#0FA0CE]/30 relative">
+              <div className="md:col-span-2 lg:col-span-1 bg-gradient-to-br from-[#0FA0CE]/10 to-blue-600/10 dark:from-[#0FA0CE]/5 dark:to-blue-600/5 rounded-xl p-6 border-2 border-[#0FA0CE]/30 relative">
                 <div className="absolute -top-2 -right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold transform rotate-12">
                   NO SUBSCRIPTIONS
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-4">💡 Teacher's Promise</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">
+                <h3 className="text-lg font-bold text-foreground mb-4">💡 Teacher's Promise</h3>
+                <p className="text-sm text-foreground/70 leading-relaxed">
                   As a fellow educator, I believe in <strong>simple, affordable pricing</strong>. One purchase, lifetime access - no monthly fees!
                 </p>
               </div>
