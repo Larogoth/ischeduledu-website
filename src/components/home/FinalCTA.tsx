@@ -3,7 +3,7 @@ import { CheckCircle } from "lucide-react";
 
 const FinalCTA = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-[#0FA0CE] to-blue-600 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-black/10"></div>
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">

@@ -1,5 +1,5 @@
 
-import TestimonialCard from "@/components/TestimonialCard";
+
 import Header from "@/components/home/Header";
 import Pricing from "@/components/home/Pricing";
 import Screenshots from "@/components/home/Screenshots";

@@ -34,17 +34,35 @@ const MINIMUM_STARS = 4; // Only show reviews with 4 or more stars
 
 export const getTestimonials = async (): Promise<Testimonial[]> => {
   try {
+    console.log("🎯 Starting getTestimonials function...");
+    console.log("🎯 MINIMUM_STARS:", MINIMUM_STARS);
+    
     const appStoreReviews = await fetchAppStoreReviews();
+    console.log("📋 Raw app store reviews received:", appStoreReviews);
+    console.log("📋 Number of raw reviews:", appStoreReviews.length);
+    
     const processedAppStoreReviews = appStoreReviews
-      .filter(review => review.stars >= MINIMUM_STARS) // Filter reviews by minimum stars
+      .filter(review => {
+        const meetsMinimum = review.stars >= MINIMUM_STARS;
+        console.log(`⭐ Review "${review.title}" has ${review.stars} stars, meets minimum (${MINIMUM_STARS}):`, meetsMinimum);
+        return meetsMinimum;
+      })
       .map(review => ({
         ...review,
         isAppStoreReview: true
       }));
     
-    return processedAppStoreReviews.length > 0 ? processedAppStoreReviews : fallbackTestimonials;
+    console.log("✅ Filtered app store reviews (4+ stars):", processedAppStoreReviews);
+    console.log("📊 Number of filtered reviews:", processedAppStoreReviews.length);
+    
+    const result = processedAppStoreReviews.length > 0 ? processedAppStoreReviews : fallbackTestimonials;
+    console.log("🎯 Final result (using App Store or fallback):", processedAppStoreReviews.length > 0 ? "APP STORE REVIEWS" : "FALLBACK TESTIMONIALS");
+    console.log("📝 Final testimonials:", result);
+    
+    return result;
   } catch (error) {
-    console.error("Error getting testimonials:", error);
+    console.error("❌ Error getting testimonials:", error);
+    console.log("🔄 Falling back to hardcoded testimonials");
     return fallbackTestimonials;
   }
 };

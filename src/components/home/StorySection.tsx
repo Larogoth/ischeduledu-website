@@ -2,7 +2,7 @@ import { Clock, Users, Lightbulb, Rocket } from "lucide-react";
 
 const StorySection = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-[#F0F8FF] to-[#F8FBFF] dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-10 left-1/4 w-32 h-32 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-2xl"></div>
       <div className="absolute bottom-10 right-1/4 w-24 h-24 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/20 rounded-full blur-xl"></div>

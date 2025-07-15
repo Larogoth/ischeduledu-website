@@ -28,7 +28,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
   if (reviews.length === 0) return null;
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-white to-[#F5F9FF] dark:from-gray-900 dark:to-gray-800">
+    <section className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-16">
           <div className="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
@@ -57,7 +57,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToPrev}
                 style={{ minWidth: 36, minHeight: 36 }}
               >
-                <ChevronLeft className="h-4 w-4 text-[#0FA0CE] dark:text-[#0FA0CE]" />
+                <ChevronLeft className="h-4 w-4 text-foreground" />
               </Button>
             )}
             {/* Carousel Container with preview */}
@@ -100,7 +100,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToNext}
                 style={{ minWidth: 36, minHeight: 36 }}
               >
-                <ChevronRight className="h-4 w-4 text-[#0FA0CE] dark:text-[#0FA0CE]" />
+                <ChevronRight className="h-4 w-4 text-foreground" />
               </Button>
             )}
           </div>
@@ -133,7 +133,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToPrev}
                 style={{ minWidth: 40, minHeight: 40 }}
               >
-                <ChevronLeft className="h-5 w-5 text-[#0FA0CE] dark:text-[#0FA0CE]" />
+                <ChevronLeft className="h-5 w-5 text-foreground" />
               </Button>
             )}
             {/* Carousel Container with preview - Shows 2.2 cards */}
@@ -176,7 +176,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 onClick={goToNext}
                 style={{ minWidth: 40, minHeight: 40 }}
               >
-                <ChevronRight className="h-5 w-5 text-[#0FA0CE] dark:text-[#0FA0CE]" />
+                <ChevronRight className="h-5 w-5 text-foreground" />
               </Button>
             )}
           </div>
