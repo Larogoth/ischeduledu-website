@@ -485,34 +485,64 @@ const ImportSchedule = () => {
     
     setAppStatus('checking');
     
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = 'ischeduled://test';
-    document.body.appendChild(iframe);
+    // Try to detect app installation using a more reliable method
+    let appDetected = false;
     
-    const timeout = setTimeout(() => {
-      setAppStatus('not-installed');
-      if (document.body.contains(iframe)) {
-        document.body.removeChild(iframe);
+    // Method 1: Try opening app URL and detect if browser stays in focus
+    const detectTimeout = setTimeout(() => {
+      if (!appDetected) {
+        setAppStatus('not-installed');
       }
-    }, 2500);
+    }, 1500); // Reduced timeout for faster detection
     
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        clearTimeout(timeout);
+        appDetected = true;
+        clearTimeout(detectTimeout);
         setAppStatus('installed');
-        if (document.body.contains(iframe)) {
-          document.body.removeChild(iframe);
-        }
         document.removeEventListener('visibilitychange', handleVisibilityChange);
+        document.removeEventListener('pagehide', handlePageHide);
       }
     };
     
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    const handlePageHide = () => {
+      appDetected = true;
+      clearTimeout(detectTimeout);
+      setAppStatus('installed');
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('pagehide', handlePageHide);
+    };
     
+    // Listen for page visibility changes
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('pagehide', handlePageHide);
+    
+    // Try to open the app with a minimal URL scheme
+    const appUrl = 'ischeduled://';
+    
+    // Create a hidden iframe to test the URL scheme
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.style.width = '1px';
+    iframe.style.height = '1px';
+    document.body.appendChild(iframe);
+    
+    try {
+      iframe.src = appUrl;
+    } catch (e) {
+      // If iframe fails, app is definitely not installed
+      clearTimeout(detectTimeout);
+      setAppStatus('not-installed');
+    }
+    
+    // Clean up after detection
     setTimeout(() => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-    }, 3000);
+      document.removeEventListener('pagehide', handlePageHide);
+      if (document.body.contains(iframe)) {
+        document.body.removeChild(iframe);
+      }
+    }, 2000);
   };
 
   const fixBase64Padding = (base64String: string): string => {
@@ -601,7 +631,17 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
   } catch (error) {
     console.error('Failed to copy share link:', error);
     
-    // Fallback for older browsers
+    // Fallback for older browsers - recreate shareText for fallback
+    const { data: encodedData, version, isCompressed } = extractDataParameters();
+    const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+    const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+    const scheduleName = scheduleData?.name || "Schedule";
+    const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
+
+${correctUrl}
+
+Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850`;
+    
     const textArea = document.createElement('textarea');
     textArea.value = shareText;
     document.body.appendChild(textArea);
