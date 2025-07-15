@@ -33,7 +33,7 @@ const Header = () => {
         </h1>
         
         <p className="text-xl md:text-2xl lg:text-3xl text-gray-800 mb-8 max-w-4xl mx-auto leading-relaxed font-medium">
-          Create custom or abbreviated schedules for your school day 
+          Plan ahead with custom schedules or handle last-minute changes 
           <span className="text-[#0FA0CE] font-bold"> in under 2 minutes</span>
         </p>
 
@@ -65,10 +65,10 @@ const Header = () => {
         <div className="space-y-6 mb-12">
           <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-2xl p-6 max-w-2xl mx-auto">
             <p className="text-lg text-gray-800 font-semibold mb-2">
-              🚨 <span className="text-[#0FA0CE] font-bold">Emergency Ready:</span> Handle unexpected schedule changes instantly!
+              📅 <span className="text-[#0FA0CE] font-bold">Always Prepared:</span> Plan ahead or handle changes instantly!
             </p>
             <p className="text-sm text-gray-600">
-              Join teachers worldwide who never have to panic about schedule emergencies again
+              Create custom schedules for announced events or tackle last-minute emergencies with confidence
             </p>
           </div>
           

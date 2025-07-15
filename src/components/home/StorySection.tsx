@@ -47,7 +47,7 @@ const StorySection = () => {
               How iSchedulEDU Works
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Three simple steps to go from schedule chaos to organized relief
+              Plan ahead for announced events or handle last-minute emergencies with equal ease
             </p>
           </div>
 
@@ -62,9 +62,9 @@ const StorySection = () => {
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Set Your Times</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Set Your Parameters</h3>
               <p className="text-gray-600 leading-relaxed">
-                Enter your start time, end time, and any fixed events like lunch or assemblies. Takes under 30 seconds.
+                Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
               </p>
             </div>
 
@@ -78,9 +78,9 @@ const StorySection = () => {
                   <span className="text-white font-bold text-sm">2</span>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Generate Instantly</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Create & Customize</h3>
               <p className="text-gray-600 leading-relaxed">
-                Tap generate and watch as iSchedulEDU creates perfectly balanced class periods with equal time distribution.
+                Generate balanced schedules instantly or create custom ones for specific events. Perfect time distribution every time.
               </p>
             </div>
 

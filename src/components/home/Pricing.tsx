@@ -44,7 +44,7 @@ const Pricing = () => {
           </h2>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Be prepared for unexpected schedule changes with instant solutions!
+            Plan custom schedules for announced events or handle unexpected changes instantly!
           </p>
         </div>
 
@@ -66,10 +66,10 @@ const Pricing = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <FeatureSection
                 icon={Clock}
-                title="Quick Emergency Relief"
+                title="Fast & Flexible Scheduling"
                 items={[
-                  "Create schedules in under 2 minutes",
-                  "Instant solutions for unexpected changes",
+                  "Custom schedules for planned events",
+                  "Emergency solutions in under 2 minutes",
                   "More time for what matters: teaching"
                 ]}
               />
@@ -98,8 +98,8 @@ const Pricing = () => {
                 icon={Shuffle}
                 title="Handle Any Change"
                 items={[
-                  "Weather delays? No problem",
-                  "Special events handled instantly",
+                  "Plan ahead for announced events",
+                  "Last-minute changes handled instantly",
                   "Always stay flexible and prepared"
                 ]}
               />
