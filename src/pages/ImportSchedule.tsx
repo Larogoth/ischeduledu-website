@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, ExternalLink, GraduationCap, Copy, Sparkles } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, Star, Users, GraduationCap, Copy, Sparkles, Shield, Zap, Heart } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
 
@@ -52,8 +52,6 @@ const ImportSchedule = () => {
   const [processedEvents, setProcessedEvents] = useState<ProcessedEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [appStatus, setAppStatus] = useState<'unknown' | 'installed' | 'not-installed' | 'checking'>('unknown');
-  const [showAppStoreRedirect, setShowAppStoreRedirect] = useState(false);
   const [shareUrlCopied, setShareUrlCopied] = useState(false);
 
   // Convert TimeInterval (seconds since 2001-01-01) to JavaScript Date
@@ -480,185 +478,68 @@ const ImportSchedule = () => {
     return () => clearTimeout(timer);
   }, [scheduleId, location.pathname, location.search, location.hash]);
 
-  const checkAppInstallation = () => {
-    if (!isMobile) return;
-    
-    setAppStatus('checking');
-    
-    // Try to detect app installation using a more reliable method
-    let appDetected = false;
-    
-    // Method 1: Try opening app URL and detect if browser stays in focus
-    const detectTimeout = setTimeout(() => {
-      if (!appDetected) {
-        setAppStatus('not-installed');
-      }
-    }, 1500); // Reduced timeout for faster detection
-    
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        appDetected = true;
-        clearTimeout(detectTimeout);
-        setAppStatus('installed');
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
-        document.removeEventListener('pagehide', handlePageHide);
-      }
-    };
-    
-    const handlePageHide = () => {
-      appDetected = true;
-      clearTimeout(detectTimeout);
-      setAppStatus('installed');
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      document.removeEventListener('pagehide', handlePageHide);
-    };
-    
-    // Listen for page visibility changes
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    document.addEventListener('pagehide', handlePageHide);
-    
-    // Try to open the app with a minimal URL scheme
-    const appUrl = 'ischeduled://';
-    
-    // Create a hidden iframe to test the URL scheme
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.style.width = '1px';
-    iframe.style.height = '1px';
-    document.body.appendChild(iframe);
-    
+  // Track App Store clicks for analytics
+  const trackAppStoreClick = (location: string) => {
+    console.log('App Store click tracked:', location);
+    // Add your analytics here (Google Analytics, etc.)
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'app_store_click', {
+        event_category: 'conversion',
+        event_label: location
+      });
+    }
+  };
+
+  // Updated copy share link function that constructs the correct URL
+  const copyShareLink = async () => {
     try {
-      iframe.src = appUrl;
-    } catch (e) {
-      // If iframe fails, app is definitely not installed
-      clearTimeout(detectTimeout);
-      setAppStatus('not-installed');
-    }
-    
-    // Clean up after detection
-    setTimeout(() => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      document.removeEventListener('pagehide', handlePageHide);
-      if (document.body.contains(iframe)) {
-        document.body.removeChild(iframe);
-      }
-    }, 2000);
-  };
-
-  const fixBase64Padding = (base64String: string): string => {
-    const paddingNeeded = (4 - (base64String.length % 4)) % 4;
-    return base64String + '='.repeat(paddingNeeded);
-  };
-
-  const handleOpenInApp = () => {
-  // Use the cleaned parameters instead of the potentially malformed window.location.href
-  const { data: cleanData, version, isCompressed } = extractDataParameters();
-  
-  if (!cleanData) {
-    console.error('No data parameter found for app opening');
-    return;
-  }
-  
-  // Construct a properly formatted app URL with clean parameters
-  const appURL = `ischeduled://import?data=${cleanData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
-  
-  console.log('Constructing clean app URL:');
-  console.log('• Clean data:', cleanData.substring(0, 50) + '...');
-  console.log('• Version:', version);
-  console.log('• Compressed:', isCompressed);
-  console.log('• Final app URL:', appURL);
-  
-  setAppStatus('checking');
-  
-  const timeoutId = setTimeout(() => {
-    console.log('App did not open, showing App Store redirect');
-    setAppStatus('not-installed');
-    setShowAppStoreRedirect(true);
-  }, 2000);
-  
-  const handleVisibilityChange = () => {
-    if (document.hidden) {
-      clearTimeout(timeoutId);
-      setAppStatus('installed');
-    }
-  };
-  
-  document.addEventListener('visibilitychange', handleVisibilityChange);
-  
-  window.location.href = appURL;
-  
-  setTimeout(() => {
-    document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, 3000);
-};
-
-  const handleDownloadApp = () => {
-    window.open('https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850', '_blank');
-  };
-
-  const handleTryAgain = () => {
-    setShowAppStoreRedirect(false);
-    setAppStatus('unknown');
-    checkAppInstallation();
-  };
-
-  // Updated copy share link function to match iOS app format
-// Updated copy share link function that constructs the correct URL
-const copyShareLink = async () => {
-  try {
-    // Get the clean parameters
-    const { data: encodedData, version, isCompressed } = extractDataParameters();
-    
-    // Construct the correct URL manually
-    const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
-    const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
-    
-    const scheduleName = scheduleData?.name || "Schedule";
-    
-    // Format the message exactly like the iOS app
-    const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
+      // Get the clean parameters
+      const { data: encodedData, version, isCompressed } = extractDataParameters();
+      
+      // Construct the correct URL manually
+      const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+      const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+      
+      const scheduleName = scheduleData?.name || "Schedule";
+      
+      // Format the message exactly like the iOS app
+      const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
 
 ${correctUrl}
 
 Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850`;
 
-    console.log('Copying correct URL:', correctUrl);
-    console.log('Share text:', shareText);
+      console.log('Copying correct URL:', correctUrl);
+      console.log('Share text:', shareText);
 
-    await navigator.clipboard.writeText(shareText);
-    setShareUrlCopied(true);
-    setTimeout(() => setShareUrlCopied(false), 2000);
-  } catch (error) {
-    console.error('Failed to copy share link:', error);
-    
-    // Fallback for older browsers - recreate shareText for fallback
-    const { data: encodedData, version, isCompressed } = extractDataParameters();
-    const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
-    const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
-    const scheduleName = scheduleData?.name || "Schedule";
-    const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
+      await navigator.clipboard.writeText(shareText);
+      setShareUrlCopied(true);
+      setTimeout(() => setShareUrlCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy share link:', error);
+      
+      // Fallback for older browsers - recreate shareText for fallback
+      const { data: encodedData, version, isCompressed } = extractDataParameters();
+      const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+      const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
+      const scheduleName = scheduleData?.name || "Schedule";
+      const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
 
 ${correctUrl}
 
 Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850`;
-    
-    const textArea = document.createElement('textarea');
-    textArea.value = shareText;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
-    
-    setShareUrlCopied(true);
-    setTimeout(() => setShareUrlCopied(false), 2000);
-  }
-};
-
-  useEffect(() => {
-    if (isMobile && scheduleData) {
-      checkAppInstallation();
+      
+      const textArea = document.createElement('textarea');
+      textArea.value = shareText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      setShareUrlCopied(true);
+      setTimeout(() => setShareUrlCopied(false), 2000);
     }
-  }, [isMobile, scheduleData]);
+  };
 
   if (isLoading) {
     return (
@@ -835,203 +716,229 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
             </Card>
 
             <div className="space-y-6">
-              {isMobile && (
-                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
-                  <CardContent className="pt-6 pb-6">
-                    <div className="text-center">
-                      <h3 className="text-lg font-bold text-gray-900 mb-3">Share This Schedule</h3>
-                      <p className="text-gray-600 mb-4 text-sm">
-                        Share this schedule easily with others
-                      </p>
-                      <Button 
-                        onClick={copyShareLink}
-                        variant="outline"
-                        className="w-full max-w-sm flex items-center gap-2 py-3"
-                      >
-                        {shareUrlCopied ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 text-green-600" />
-                            Link Copied!
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4" />
-                            Copy Share Link
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {appStatus === 'checking' && (
-                <Alert>
-                  <AlertCircle className="h-4 w-4" />
-                  <AlertDescription>
-                    Checking if iSchedulEDU is installed...
-                  </AlertDescription>
-                </Alert>
-              )}
-              
-              {appStatus === 'installed' && (
-                <Alert className="border-green-200 bg-green-50">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <AlertDescription className="text-green-800">
-                    Great! iSchedulEDU is installed on your device.
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              {showAppStoreRedirect && (
-                <Alert className="border-orange-200 bg-orange-50">
-                  <AlertCircle className="h-4 w-4 text-orange-600" />
-                  <AlertDescription className="text-orange-800">
-                    It looks like iSchedulEDU isn't installed. Download the app to import this schedule directly.
-                  </AlertDescription>
-                </Alert>
-              )}
-
+              {/* Mobile App Download Card - Optimized for Conversion */}
               {isMobile ? (
-                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
+                <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden">
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
-                      <div className="relative inline-block mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto">
-                          <Smartphone className="w-8 h-8 text-white" />
+                      {/* Smart Banner Notice */}
+                      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="flex items-center justify-center gap-2 mb-2">
+                          <CheckCircle className="w-5 h-5 text-blue-600" />
+                          <span className="font-semibold text-blue-800">Already have iSchedulEDU?</span>
                         </div>
-                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
-                          <CheckCircle className="w-3 h-3 text-white" />
+                        <p className="text-sm text-blue-700">
+                          Look for the "Open in App" banner at the top of this page to import directly!
+                        </p>
+                      </div>
+
+                      <div className="relative inline-block mb-6">
+                        <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
+                          <Smartphone className="w-10 h-10 text-white" />
+                        </div>
+                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                          <Download className="w-4 h-4 text-white" />
                         </div>
                       </div>
                       
-                      {appStatus === 'installed' ? (
-                        <>
-                          <h3 className="text-2xl font-bold text-gray-900 mb-3">Ready to Import! 🎉</h3>
-                          <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
-                            Tap the button below to import this schedule directly into your iSchedulEDU app.
-                          </p>
-                          <Button 
-                            onClick={handleOpenInApp} 
-                            className="w-full max-w-sm bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                          >
-                            <ExternalLink className="w-6 h-6 mr-3" />
-                            Import to iSchedulEDU
-                          </Button>
-                        </>
-                      ) : appStatus === 'not-installed' || showAppStoreRedirect ? (
-                        <>
-                          <h3 className="text-2xl font-bold text-gray-900 mb-3">Get iSchedulEDU App</h3>
-                          <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
-                            Download iSchedulEDU to easily import and manage this schedule on your device.
-                          </p>
-                          <div className="space-y-3">
-                            <a 
-                              href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-block w-full max-w-sm"
-                            >
-                              <img 
-                                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                                alt="Download on the App Store"
-                                className="h-16 mx-auto hover:scale-105 transition-transform duration-200"
-                              />
-                            </a>
-                            <Button 
-                              onClick={handleTryAgain} 
-                              variant="outline" 
-                              className="w-full max-w-sm py-3 rounded-xl border-2 hover:bg-gray-50"
-                            >
-                              I Already Have the App
-                            </Button>
+                      <h3 className="text-3xl font-bold text-gray-900 mb-4">Get iSchedulEDU</h3>
+                      <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
+                        Join thousands of teachers who trust iSchedulEDU for seamless schedule management.
+                      </p>
+
+                      {/* Social Proof */}
+                      <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                        <div className="flex items-center justify-center gap-1 mb-2">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          ))}
+                          <span className="text-sm font-semibold text-gray-700 ml-2">5/5 Stars</span>
+                        </div>
+                        <div className="flex items-center justify-center gap-2 text-sm text-green-700">
+                          <Users className="w-4 h-4" />
+                          <span className="font-medium">Trusted by teachers worldwide</span>
+                        </div>
+                      </div>
+
+                      {/* Key Features */}
+                      <div className="mb-8 space-y-3">
+                        <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
+                          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <Zap className="w-4 h-4 text-blue-600" />
                           </div>
-                        </>
-                      ) : (
-                        <>
-                          <h3 className="text-2xl font-bold text-gray-900 mb-3">Import Schedule</h3>
-                          <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
-                            If you have iSchedulEDU installed, tap "Open in App" to import directly. Otherwise, download the app first.
-                          </p>
-                          <div className="space-y-3">
-                            <Button 
-                              onClick={handleOpenInApp} 
-                              className="w-full max-w-sm bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                            >
-                              <ExternalLink className="w-6 h-6 mr-3" />
-                              Open in App
-                            </Button>
-                            <a 
-                              href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-block w-full max-w-sm"
-                            >
-                              <img 
-                                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                                alt="Download on the App Store"
-                                className="h-12 mx-auto hover:scale-105 transition-transform duration-200 border-2 border-gray-200 rounded-lg p-2 bg-white/50 backdrop-blur-sm"
-                              />
-                            </a>
+                          <span className="font-medium text-gray-800">One-tap schedule importing</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
+                          <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <Shield className="w-4 h-4 text-purple-600" />
                           </div>
-                        </>
-                      )}
+                          <span className="font-medium text-gray-800">Smart notifications & alarms</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
+                          <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
+                            <Heart className="w-4 h-4 text-pink-600" />
+                          </div>
+                          <span className="font-medium text-gray-800">Works offline & ad-free</span>
+                        </div>
+                      </div>
+
+                      {/* Call to Action */}
+                      <div className="space-y-4">
+                        <a 
+                          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackAppStoreClick('mobile_main_cta')}
+                          className="inline-block w-full max-w-sm"
+                        >
+                          <img 
+                            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                            alt="Download on the App Store"
+                            className="h-16 mx-auto hover:scale-105 transition-transform duration-200 shadow-lg rounded-lg"
+                          />
+                        </a>
+                        
+                        <div className="text-center">
+                          <p className="text-sm text-green-600 font-semibold">✓ Free Download</p>
+                          <p className="text-xs text-gray-500">No subscription required</p>
+                        </div>
+                      </div>
+
+                      {/* Share Option */}
+                      <div className="mt-8 pt-6 border-t border-gray-200">
+                        <Button 
+                          onClick={copyShareLink}
+                          variant="outline"
+                          className="w-full max-w-sm flex items-center gap-2 py-3 border-2 hover:bg-gray-50"
+                        >
+                          {shareUrlCopied ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 text-green-600" />
+                              Link Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4" />
+                              Share This Schedule
+                            </>
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               ) : (
-                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm overflow-hidden">
-  <CardContent className="pt-8 pb-8">
-    <div className="text-center">
-      <div className="relative inline-block mb-6">
-        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto">
-          <Download className="w-8 h-8 text-white" />
-        </div>
-        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-          <Smartphone className="w-3 h-3 text-white" />
-        </div>
-      </div>
-      <h3 className="text-2xl font-bold text-gray-900 mb-3">Get iSchedulEDU Mobile App</h3>
-      <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-lg mx-auto">
-        This schedule is designed for mobile import. Download the iSchedulEDU app on your phone or tablet to import this schedule.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a 
-          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img 
-            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-            alt="Download on the App Store"
-            className="h-16 mx-auto hover:scale-105 transition-transform duration-200"
-          />
-        </a>
-        <Button 
-          variant="outline" 
-          onClick={copyShareLink}
-          className="py-4 px-8 rounded-xl border-2 hover:bg-gray-50 flex items-center gap-2"
-        >
-          {shareUrlCopied ? (
-            <>
-              <CheckCircle className="w-4 h-4 text-green-600" />
-              Link Copied!
-            </>
-          ) : (
-            <>
-              <Copy className="w-4 h-4" />
-              Copy Link for Mobile
-            </>
-          )}
-        </Button>
-      </div>
-      <p className="text-sm text-gray-500 mt-4 italic leading-relaxed">
-        Users with iSchedulEDU can tap the link to import directly into the app.<br />
-        Others will be directed to download the app first.
-      </p>
-    </div>
-  </CardContent>
-</Card>
+                /* Desktop/Tablet View - Focused on Mobile Download */
+                <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden">
+                  <CardContent className="pt-10 pb-10">
+                    <div className="text-center max-w-2xl mx-auto">
+                      <div className="relative inline-block mb-8">
+                        <div className="w-24 h-24 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto shadow-xl">
+                          <Smartphone className="w-12 h-12 text-white" />
+                        </div>
+                        <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                          <Download className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                      
+                      <h3 className="text-4xl font-bold text-gray-900 mb-4">Get iSchedulEDU on Mobile</h3>
+                      <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                        This schedule is designed for mobile import. Download the iSchedulEDU app on your iPhone or iPad to import and manage your schedules seamlessly.
+                      </p>
+
+                      {/* Enhanced Social Proof for Desktop */}
+                      <div className="grid md:grid-cols-3 gap-6 mb-10">
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
+                          <div className="flex items-center justify-center gap-1 mb-3">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                            ))}
+                          </div>
+                          <p className="font-bold text-gray-900 text-lg">5/5 Stars</p>
+                          <p className="text-sm text-gray-600">App Store Rating</p>
+                        </div>
+                        
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                          <Users className="w-8 h-8 text-green-600 mx-auto mb-3" />
+                          <p className="font-bold text-gray-900 text-lg">Teachers</p>
+                          <p className="text-sm text-gray-600">Worldwide</p>
+                        </div>
+                        
+                        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                          <Heart className="w-8 h-8 text-purple-600 mx-auto mb-3" />
+                          <p className="font-bold text-gray-900 text-lg">Ad-Free</p>
+                          <p className="text-sm text-gray-600">Clean Experience</p>
+                        </div>
+                      </div>
+
+                      {/* Feature Highlights */}
+                      <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
+                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
+                          <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <Zap className="w-6 h-6 text-blue-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-gray-900 mb-2">Instant Import</h4>
+                            <p className="text-gray-600 text-sm">Import shared schedules with a single tap using our Smart Banner technology.</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
+                          <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <Shield className="w-6 h-6 text-purple-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-gray-900 mb-2">Smart Notifications</h4>
+                            <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and AlarmKit integration.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Call to Action */}
+                      <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <a 
+                          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackAppStoreClick('desktop_main_cta')}
+                          className="hover:scale-105 transition-transform duration-200"
+                        >
+                          <img 
+                            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                            alt="Download on the App Store"
+                            className="h-20 shadow-lg rounded-lg"
+                          />
+                        </a>
+                        
+                        <Button 
+                          variant="outline" 
+                          onClick={copyShareLink}
+                          className="py-4 px-8 rounded-xl border-2 hover:bg-gray-50 flex items-center gap-3 text-lg"
+                        >
+                          {shareUrlCopied ? (
+                            <>
+                              <CheckCircle className="w-5 h-5 text-green-600" />
+                              Link Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-5 h-5" />
+                              Copy Link for Mobile
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                      
+                      <div className="mt-6">
+                        <p className="text-sm text-green-600 font-semibold">✓ Free Download • No Subscription</p>
+                        <p className="text-xs text-gray-500 mt-2 italic leading-relaxed">
+                          Users with iSchedulEDU can tap shared links to import directly into the app.<br />
+                          Others will be guided to download the app first.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               )}
             </div>
           </>
@@ -1053,4 +960,4 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
   );
 };
 
-export default ImportSchedule;
+export default ImportSchedule; 
