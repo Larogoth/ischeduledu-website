@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
+import { initializeSecurity } from "./utils/securityInit";
 
 const queryClient = new QueryClient();
 
@@ -98,8 +99,12 @@ const RouteDebugger = () => {
 };
 
 const App = () => {
-  // Check for system/stored theme preference
+  // Initialize security and theme
   useEffect(() => {
+    // Initialize security checks
+    initializeSecurity();
+    
+    // Check for system/stored theme preference
     const savedTheme = localStorage.getItem("theme")
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 
