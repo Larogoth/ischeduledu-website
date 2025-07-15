@@ -35,10 +35,10 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
             <span>⭐ Real App Store Reviews</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            What Teachers Are Saying
+            What Our Users Are Saying
           </h2>
           <p className="text-lg md:text-xl text-foreground/70">
-            Don't just take our word for it - hear from educators using iSchedulEDU daily
+            Don't just take our word for it - hear from real users of iSchedulEDU
           </p>
           {isLoadingReviews && (
             <span className="text-sm text-foreground/40 block mt-2">(Loading reviews...)</span>
