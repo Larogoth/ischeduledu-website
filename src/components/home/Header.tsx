@@ -68,7 +68,7 @@ const Header = () => {
               🚨 <span className="text-[#0FA0CE] font-bold">Emergency Ready:</span> Handle unexpected schedule changes instantly!
             </p>
             <p className="text-sm text-gray-600">
-              Join hundreds of teachers who never panic about schedule emergencies again
+              Join teachers worldwide who never have to panic about schedule emergencies again
             </p>
           </div>
           
@@ -98,7 +98,7 @@ const Header = () => {
               <div className="w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
               <div className="w-6 h-6 bg-purple-500 rounded-full border-2 border-white"></div>
             </div>
-            <span className="font-medium">Hundreds of Teachers Trust Us</span>
+            <span className="font-medium">Teachers Worldwide Trust Us</span>
           </div>
                       <div className="flex items-center gap-2">
               <div className="flex">
