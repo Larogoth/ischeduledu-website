@@ -789,67 +789,83 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                       </div>
 
                       {/* Call to Action */}
-                      <div className="space-y-4">
-                        <a 
-                          href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => trackAppStoreClick('mobile_main_cta')}
-                          className="inline-block w-full max-w-sm"
-                        >
-                          <img 
-                            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                            alt="Download on the App Store"
-                            className="h-16 mx-auto hover:scale-105 transition-transform duration-200 shadow-lg rounded-lg"
-                          />
-                        </a>
-                        
+                      <div className="space-y-6">
+                        {/* Primary Download Section */}
                         <div className="text-center">
-                          <p className="text-sm text-green-600 font-semibold">✓ Free Download • 4 Free Sessions</p>
-                          <p className="text-xs text-gray-500">One-time $4.99 purchase for unlimited access</p>
-                        </div>
-                      </div>
-
-                      {/* Share Option */}
-                      <div className="mt-8 pt-6 border-t border-gray-200">
-                        <h4 className="text-sm font-semibold text-gray-700 mb-3 text-center">Share This Schedule</h4>
-                        <Button 
-                          onClick={copyShareLink}
-                          variant="outline"
-                          className="w-full max-w-sm flex items-center gap-2 py-3 border-2 hover:bg-gray-50 mb-4"
-                        >
-                          {shareUrlCopied ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 text-green-600" />
-                              Copied to Clipboard!
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4" />
-                              Copy Share Message
-                            </>
-                          )}
-                        </Button>
-                        <p className="text-xs text-gray-500 text-center">
-                          Copies a formatted message with schedule link and App Store link
-                        </p>
-                        <p className="text-xs text-gray-400 text-center mt-1">
-                          Perfect for iMessage, email, Slack, or any messaging app
-                        </p>
-                        
-                        {/* Learn More CTA */}
-                        <div className="mt-6 pt-4 border-t border-gray-100">
-                          <p className="text-sm text-gray-600 mb-3 text-center">
-                            Want to learn more about iSchedulEDU's features?
-                          </p>
                           <a 
-                            href="https://ischeduledu.app"
+                            href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-cyan-600 hover:text-cyan-700 font-medium text-sm underline text-center block"
+                            onClick={() => trackAppStoreClick('mobile_main_cta')}
+                            className="inline-block w-full max-w-sm"
                           >
-                            Visit our website →
+                            <img 
+                              src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                              alt="Download on the App Store"
+                              className="h-16 mx-auto hover:scale-105 transition-transform duration-200 shadow-lg rounded-lg"
+                            />
                           </a>
+                          
+                          <div className="mt-4">
+                            <p className="text-sm text-green-600 font-semibold">✓ Free Download • 4 Free Sessions</p>
+                            <p className="text-xs text-gray-500">One-time $4.99 purchase for unlimited access</p>
+                          </div>
+                        </div>
+
+                        {/* Share Section */}
+                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border border-gray-200">
+                          <div className="text-center">
+                            <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                              Share This Schedule
+                            </h4>
+                            <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                              Copy a formatted message to share with colleagues via any platform
+                            </p>
+                            
+                            <Button 
+                              onClick={copyShareLink}
+                              variant="outline"
+                              className="w-full max-w-sm flex items-center gap-2 py-3 border-2 hover:bg-white mb-4"
+                            >
+                              {shareUrlCopied ? (
+                                <>
+                                  <CheckCircle className="w-4 h-4 text-green-600" />
+                                  Copied to Clipboard!
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-4 h-4" />
+                                  Copy Share Message
+                                </>
+                              )}
+                            </Button>
+                            
+                            <div className="space-y-2">
+                              <p className="text-sm text-gray-500">
+                                Includes schedule link and App Store link
+                              </p>
+                              <p className="text-xs text-gray-400">
+                                Perfect for iMessage, email, Slack, or any messaging app
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Learn More CTA */}
+                        <div className="bg-white/60 rounded-xl p-4 border border-gray-200">
+                          <div className="text-center">
+                            <p className="text-sm text-gray-600 mb-3">
+                              Want to learn more about iSchedulEDU's features?
+                            </p>
+                            <a 
+                              href="https://ischeduledu.app"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-cyan-600 hover:text-cyan-700 font-medium text-sm underline"
+                            >
+                              Visit our website →
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
