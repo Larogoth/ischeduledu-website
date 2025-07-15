@@ -48,16 +48,19 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto bg-white rounded-3xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden">
-          {/* Gradient overlay */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
+        <div className="max-w-6xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-[#0FA0CE]/20 relative overflow-hidden">
+          {/* Enhanced gradient overlay */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
           
           <div className="space-y-8">
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full text-lg font-bold mb-4 shadow-lg animate-pulse">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-bold mb-6 shadow-lg animate-pulse">
                 <span>🎉 Start with 4 FREE Sessions</span>
               </div>
-              <p className="text-gray-600">Then just $4.99 one-time purchase • No subscriptions</p>
+              <div className="space-y-2">
+                <p className="text-gray-700 font-semibold">Then just $4.99 one-time purchase</p>
+                <p className="text-sm text-gray-600">No subscriptions • No hidden fees • Lifetime access</p>
+              </div>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
