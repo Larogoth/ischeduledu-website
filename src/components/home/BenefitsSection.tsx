@@ -41,7 +41,7 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#F8FBFF] relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 rounded-full blur-2xl"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
