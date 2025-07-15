@@ -48,6 +48,29 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
         {/* Mobile Carousel */}
         <div className="block md:hidden px-4">
           <div className="relative w-full max-w-md mx-auto">
+            {/* Mobile Navigation - Positioned to not overlap main card */}
+            {reviews.length > 1 && (
+              <>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute left-1 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  onClick={goToPrev}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  onClick={goToNext}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </>
+            )}
+            
+            {/* Carousel Container with preview */}
             <div className="overflow-hidden rounded-lg">
               <div 
                 className="flex gap-4 transition-transform duration-500 ease-out"
@@ -78,28 +101,6 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 ))}
               </div>
             </div>
-            
-            {/* Mobile Navigation */}
-            {reviews.length > 1 && (
-              <>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
-                  onClick={goToPrev}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
-                  onClick={goToNext}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </>
-            )}
           </div>
           
           {/* Mobile Dots */}
@@ -122,38 +123,14 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
         
         {/* Desktop Carousel */}
         <div className="hidden md:block">
-          <div className="relative max-w-6xl mx-auto">
-            <div className="overflow-hidden rounded-lg">
-              <div 
-                className="flex gap-6 lg:gap-8 transition-transform duration-500 ease-out"
-                style={{ 
-                  transform: `translateX(calc(-${currentIndex} * (33.333% + 1.5rem)))`, // Show 3 at a time
-                }}
-              >
-                {reviews.map((review, index) => (
-                  <div 
-                    key={review.id} 
-                    className="flex-shrink-0 w-1/3"
-                  >
-                    <TestimonialCardB
-                      title={review.title}
-                      name={review.name}
-                      content={review.content}
-                      stars={review.stars}
-                      isAppStoreReview={review.isAppStoreReview}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Desktop Navigation */}
-            {reviews.length > 3 && (
+          <div className="relative max-w-6xl mx-auto px-4">
+            {/* Desktop Navigation - Positioned to not overlap main cards */}
+            {reviews.length > 2 && (
               <>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
                   onClick={goToPrev}
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -161,13 +138,46 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
                   onClick={goToNext}
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </>
             )}
+            
+            {/* Carousel Container with preview - Shows 2.2 cards */}
+            <div className="overflow-hidden rounded-lg">
+              <div 
+                className="flex gap-6 lg:gap-8 transition-transform duration-500 ease-out"
+                style={{ 
+                  transform: `translateX(calc(-${currentIndex} * (45% + 1.5rem)))`, // Show 2.2 cards with preview
+                }}
+              >
+                {reviews.map((review, index) => (
+                  <div 
+                    key={review.id} 
+                    className="flex-shrink-0 transition-all duration-300"
+                    style={{ width: '45%' }}
+                  >
+                    <div className={`transition-all duration-300 ${
+                      // Highlight main visible cards, dim preview
+                      (index >= currentIndex && index < currentIndex + 2)
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-70 scale-95'
+                    }`}>
+                      <TestimonialCardB
+                        title={review.title}
+                        name={review.name}
+                        content={review.content}
+                        stars={review.stars}
+                        isAppStoreReview={review.isAppStoreReview}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           
           {/* Desktop Dots */}
@@ -184,7 +194,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
           </div>
           
           <p className="text-center text-sm text-foreground/60 mt-4">
-            Showing {Math.min(3, reviews.length - currentIndex)} of {reviews.length} reviews
+            Showing {Math.min(2, reviews.length - currentIndex)} of {reviews.length} reviews
           </p>
         </div>
       </div>
