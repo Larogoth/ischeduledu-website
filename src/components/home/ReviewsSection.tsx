@@ -1,6 +1,5 @@
 
-import { useState, useEffect, useCallback } from "react";
-import useEmblaCarousel from "embla-carousel-react";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TestimonialCardB from "@/components/TestimonialCardB";
 import type { Testimonial } from "@/data/testimonials";
@@ -12,31 +11,19 @@ interface ReviewsSectionProps {
 }
 
 const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true,
-    align: "center",
-    containScroll: "trimSnaps"
-  });
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+  };
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
-  }, [emblaApi]);
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+  };
 
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-  }, [emblaApi, onSelect]);
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   if (reviews.length === 0) return null;
 
@@ -61,10 +48,20 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
         {/* Mobile Carousel */}
         <div className="md:hidden">
           <div className="relative">
-            <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex">
-                {reviews.map((review) => (
-                  <div key={review.id} className="flex-[0_0_100%] min-w-0 px-4">
+            <div className="overflow-hidden">
+              <div 
+                className="flex gap-3 transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(-${currentIndex * 87}%)` }}
+              >
+                {reviews.map((review, index) => (
+                  <div 
+                    key={review.id} 
+                    className={`w-[87%] flex-shrink-0 pl-4 pr-1 transition-all duration-300 ${
+                      index === currentIndex 
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-60 scale-95'
+                    }`}
+                  >
                     <TestimonialCardB
                       title={review.title}
                       name={review.name}
@@ -82,8 +79,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
               variant="outline"
               size="icon"
               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg border-gray-200"
-              onClick={scrollPrev}
-              disabled={prevBtnDisabled}
+              onClick={goToPrev}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -91,8 +87,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
               variant="outline"
               size="icon"
               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg border-gray-200"
-              onClick={scrollNext}
-              disabled={nextBtnDisabled}
+              onClick={goToNext}
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -104,16 +99,16 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === selectedIndex ? "bg-[#0FA0CE] scale-125" : "bg-gray-300"
+                  index === currentIndex ? "bg-[#0FA0CE] scale-125" : "bg-gray-300"
                 }`}
-                onClick={() => emblaApi?.scrollTo(index)}
+                onClick={() => goToSlide(index)}
               />
             ))}
           </div>
           
           {/* Review counter */}
           <p className="text-center text-sm text-foreground/60 mt-4">
-            {selectedIndex + 1} of {reviews.length} reviews
+            {currentIndex + 1} of {reviews.length} reviews
           </p>
         </div>
         
