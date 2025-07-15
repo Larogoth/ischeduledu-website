@@ -47,31 +47,21 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
         
         {/* Mobile Carousel */}
         <div className="block md:hidden px-4">
-          <div className="relative w-full max-w-md mx-auto">
-            {/* Mobile Navigation - Positioned to not overlap main card */}
+          <div className="flex items-center justify-center w-full max-w-md mx-auto relative">
+            {/* Left Arrow */}
             {reviews.length > 1 && (
-              <>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute left-1 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
-                  onClick={goToPrev}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
-                  onClick={goToNext}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </>
+              <Button
+                variant="outline"
+                size="icon"
+                className="z-20 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 hover:bg-white mr-2"
+                onClick={goToPrev}
+                style={{ minWidth: 36, minHeight: 36 }}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
             )}
-            
             {/* Carousel Container with preview */}
-            <div className="overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg flex-1">
               <div 
                 className="flex gap-4 transition-transform duration-500 ease-out"
                 style={{ 
@@ -101,8 +91,19 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 ))}
               </div>
             </div>
+            {/* Right Arrow */}
+            {reviews.length > 1 && (
+              <Button
+                variant="outline"
+                size="icon"
+                className="z-20 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 hover:bg-white ml-2"
+                onClick={goToNext}
+                style={{ minWidth: 36, minHeight: 36 }}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            )}
           </div>
-          
           {/* Mobile Dots */}
           <div className="flex justify-center gap-2 mt-6">
             {reviews.map((_, index) => (
@@ -115,7 +116,6 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
               />
             ))}
           </div>
-          
           <p className="text-center text-sm text-foreground/60 mt-4">
             {currentIndex + 1} of {reviews.length} reviews
           </p>
@@ -123,31 +123,21 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
         
         {/* Desktop Carousel */}
         <div className="hidden md:block">
-          <div className="relative max-w-6xl mx-auto px-4">
-            {/* Desktop Navigation - Positioned to not overlap main cards */}
+          <div className="flex items-center justify-center max-w-6xl mx-auto px-4 relative">
+            {/* Left Arrow */}
             {reviews.length > 2 && (
-              <>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
-                  onClick={goToPrev}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 z-20 hover:bg-white"
-                  onClick={goToNext}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </>
+              <Button
+                variant="outline"
+                size="icon"
+                className="z-20 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 hover:bg-white mr-4"
+                onClick={goToPrev}
+                style={{ minWidth: 40, minHeight: 40 }}
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
             )}
-            
             {/* Carousel Container with preview - Shows 2.2 cards */}
-            <div className="overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg flex-1">
               <div 
                 className="flex gap-6 lg:gap-8 transition-transform duration-500 ease-out"
                 style={{ 
@@ -161,7 +151,6 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                     style={{ width: '45%' }}
                   >
                     <div className={`transition-all duration-300 ${
-                      // Highlight main visible cards, dim preview
                       (index >= currentIndex && index < currentIndex + 2)
                         ? 'opacity-100 scale-100' 
                         : 'opacity-70 scale-95'
@@ -178,8 +167,19 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                 ))}
               </div>
             </div>
+            {/* Right Arrow */}
+            {reviews.length > 2 && (
+              <Button
+                variant="outline"
+                size="icon"
+                className="z-20 bg-white/95 backdrop-blur-sm shadow-lg border-gray-200 hover:bg-white ml-4"
+                onClick={goToNext}
+                style={{ minWidth: 40, minHeight: 40 }}
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            )}
           </div>
-          
           {/* Desktop Dots */}
           <div className="flex justify-center gap-2 mt-8">
             {reviews.map((_, index) => (
@@ -192,7 +192,6 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
               />
             ))}
           </div>
-          
           <p className="text-center text-sm text-foreground/60 mt-4">
             Showing {Math.min(2, reviews.length - currentIndex)} of {reviews.length} reviews
           </p>
