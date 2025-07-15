@@ -6,6 +6,52 @@
     <link rel="icon" type="image/png" href="/lovable-uploads/07298253-7ed5-44d1-90a3-8e480663108b.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    
+    <!-- Theme detection -->
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      (function() {
+        function getInitialTheme() {
+          // Check for stored theme
+          const storedTheme = localStorage.getItem('theme')
+          if (storedTheme) {
+            return storedTheme
+          }
+          
+          // Check system preference
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+
+        const theme = getInitialTheme()
+        
+        // Add dark class to html if needed
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark')
+        }
+        
+        // Store the initial theme
+        localStorage.setItem('theme', theme)
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+              document.documentElement.classList.add('dark')
+            } else {
+              document.documentElement.classList.remove('dark')
+            }
+          }
+        })
+      })()
+    </script>
+
     <!-- Primary Meta Tags -->
     <title>iSchedulEDU - School Schedule Generator App | Create Schedules in 2 Minutes</title>
     <meta name="title" content="iSchedulEDU - School Schedule Generator App | Create Schedules in 2 Minutes">
@@ -44,7 +90,7 @@
       }
     </style>
     
-    <!-- Enhanced SEO tags -->
+    <!-- Additional SEO Meta Tags -->
     <meta name="author" content="iSchedulEDU">
     <meta name="application-name" content="iSchedulEDU">
     <meta name="theme-color" content="#0FA0CE">
@@ -64,12 +110,6 @@
     <meta name="target" content="all">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    
-    <!-- Performance optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -99,6 +139,33 @@
     <meta name="bingbot" content="index, follow">
     <link rel="canonical" href="https://ischeduledu.app/">
     
+    <!-- Enhanced SEO tags -->
+    <meta name="author" content="iSchedulEDU">
+    <meta name="application-name" content="iSchedulEDU">
+    <meta name="theme-color" content="#0FA0CE">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="iSchedulEDU">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="copyright" content="iSchedulEDU">
+    <meta name="rating" content="General">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="English">
+    <meta name="distribution" content="global">
+    <meta name="audience" content="teachers, educators, school administrators">
+    <meta name="category" content="Education">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="all">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    
+    <!-- Performance optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    
     <!-- Geo tags for local SEO -->
     <meta name="geo.region" content="US">
     <meta name="geo.placename" content="United States">
@@ -114,7 +181,7 @@
         "applicationCategory": "EducationalApplication",
         "applicationSubCategory": "SchedulingApplication",
         "operatingSystem": ["iOS", "iPadOS"],
-        "description": "Simplify your school scheduling with iSchedulEDU. Create custom schedules, manage A/B rotations, set up notifications, and share via QR codes. The perfect scheduling solution for teachers and school administrators.",
+        "description": "Create custom school schedules in under 2 minutes with iSchedulEDU. Handle A/B rotations, early dismissals, delays, and emergency schedule changes instantly. Trusted by teachers worldwide. Free to start - download now!",
         "url": "https://ischeduledu.app",
         "screenshot": "https://ischeduledu.app/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png",
         "offers": {
