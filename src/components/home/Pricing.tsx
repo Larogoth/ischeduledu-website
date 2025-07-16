@@ -27,7 +27,7 @@ const FeatureSection = ({ icon: Icon, title, items }: {
 
 const Pricing = () => {
   return (
-    <section aria-labelledby="pricing-title" className="py-16 bg-gradient-to-b from-[#F5F9FF] to-[#F0F8FF] dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <section aria-labelledby="pricing-title" className="py-16 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/15 rounded-full blur-2xl"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-500/10 dark:bg-blue-500/15 rounded-full blur-xl"></div>
