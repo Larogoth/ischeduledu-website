@@ -63,13 +63,25 @@ const Header = () => {
 
         {/* Enhanced CTA with urgency */}
         <div className="space-y-6 mb-12">
-          <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border border-orange-200 dark:border-orange-900/30 rounded-2xl p-6 max-w-2xl mx-auto">
-            <p className="text-lg text-foreground/90 font-semibold mb-2">
-              📅 <span className="text-[#0FA0CE] font-bold">Always Prepared:</span> Plan ahead or handle changes instantly!
-            </p>
-            <p className="text-sm text-foreground/70">
-              Create custom schedules for announced events or tackle last-minute emergencies with confidence
-            </p>
+          <div className="bg-gradient-to-r from-[#0FA0CE] via-blue-600 to-indigo-700 dark:from-[#0FA0CE] dark:via-blue-600 dark:to-indigo-800 rounded-3xl p-8 md:p-10 max-w-4xl mx-auto shadow-2xl border-0 relative overflow-hidden transform hover:scale-105 transition-all duration-300">
+            {/* Animated background pattern */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/5 to-white/10 dark:from-white/5 dark:via-white/3 dark:to-white/5"></div>
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500"></div>
+            <div className="absolute -top-10 -right-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+            <div className="absolute -bottom-8 -left-8 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-1000"></div>
+            
+            <div className="relative z-10 text-center">
+              <div className="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <span>🚨 Emergency Ready</span>
+              </div>
+              
+              <p className="text-xl md:text-2xl text-white font-bold mb-3">
+                📅 <span className="text-yellow-300 font-bold">Always Prepared:</span> Plan ahead or handle changes instantly!
+              </p>
+              <p className="text-lg text-white/90 max-w-3xl mx-auto">
+                Create custom schedules for announced events or tackle last-minute emergencies with confidence
+              </p>
+            </div>
           </div>
           
           <a 
