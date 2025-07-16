@@ -66,7 +66,7 @@ const Header = () => {
           <div className="bg-gradient-to-r from-[#0FA0CE] via-blue-600 to-indigo-700 dark:from-[#0FA0CE] dark:via-blue-600 dark:to-indigo-800 rounded-3xl p-8 md:p-10 max-w-4xl mx-auto shadow-2xl border-0 relative overflow-hidden transform hover:scale-105 transition-all duration-300">
             {/* Animated background pattern */}
             <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/5 to-white/10 dark:from-white/5 dark:via-white/3 dark:to-white/5"></div>
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500"></div>
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#0FA0CE] via-blue-500 to-indigo-600"></div>
             <div className="absolute -top-10 -right-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
             <div className="absolute -bottom-8 -left-8 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-1000"></div>
             
