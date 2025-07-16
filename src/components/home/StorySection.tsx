@@ -19,15 +19,31 @@ const StorySection = () => {
           </h2>
           
           <div className="bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-700 text-left">
-            <div className="flex items-start gap-6 mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <div className="flex flex-col md:flex-row items-start gap-6 mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#0FA0CE] to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 mx-auto md:mx-0">
                 <Users className="w-8 h-8 text-white" />
               </div>
-              <div>
+              <div className="text-center md:text-left">
                 <h3 className="text-2xl font-bold text-foreground mb-4">From Classroom Chaos to Digital Solution</h3>
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  "As an elementary math teacher, I became the go-to person in my grade level whenever our schedule would deviate from our regular routine. I'd have to work around schedule changes for things like MAP testing, 4-H events, grade-level parties, RTI days, and assemblies. I had been wanting to create an app of my own for a while but never could come up with the right idea. One day I got the idea to see if I could automate the process of generating schedules with evenly distributed times and began the journey to what is now iSchedulEDU. What started as a personal solution has now helped hundreds of teachers handle their own schedule emergencies with confidence."
-                </p>
+                
+                {/* Break up the long text into digestible paragraphs */}
+                <div className="space-y-4 text-foreground/80">
+                  <p className="text-lg leading-relaxed">
+                    "As an elementary math teacher, I became the go-to person in my grade level whenever our schedule would deviate from our regular routine."
+                  </p>
+                  
+                  <p className="text-lg leading-relaxed">
+                    "I'd have to work around schedule changes for things like MAP testing, 4-H events, grade-level parties, RTI days, and assemblies."
+                  </p>
+                  
+                  <p className="text-lg leading-relaxed">
+                    "I had been wanting to create an app of my own for a while but never could come up with the right idea. One day I got the idea to see if I could automate the process of generating schedules with evenly distributed times and began the journey to what is now iSchedulEDU."
+                  </p>
+                  
+                  <p className="text-lg leading-relaxed">
+                    "What started as a personal solution has now helped hundreds of teachers handle their own schedule emergencies with confidence."
+                  </p>
+                </div>
               </div>
             </div>
             
@@ -54,12 +70,12 @@ const StorySection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="text-center group">
-              <div className="relative mb-8">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+                  1
+                </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
                   <Clock className="w-10 h-10 text-white" />
-                </div>
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white font-bold text-sm">1</span>
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
@@ -70,12 +86,12 @@ const StorySection = () => {
 
             {/* Step 2 */}
             <div className="text-center group">
-              <div className="relative mb-8">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+                  2
+                </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
                   <Lightbulb className="w-10 h-10 text-white" />
-                </div>
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white font-bold text-sm">2</span>
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
@@ -85,12 +101,12 @@ const StorySection = () => {
 
             {/* Step 3 */}
             <div className="text-center group">
-              <div className="relative mb-8">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+                  3
+                </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
                   <Rocket className="w-10 h-10 text-white" />
-                </div>
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white font-bold text-sm">3</span>
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
