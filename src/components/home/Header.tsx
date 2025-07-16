@@ -63,13 +63,19 @@ const Header = () => {
 
         {/* Enhanced CTA with urgency */}
         <div className="space-y-6 mb-12">
-          <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border border-orange-200 dark:border-orange-900/30 rounded-2xl p-6 max-w-2xl mx-auto">
-            <p className="text-lg text-foreground/90 font-semibold mb-2">
-              📅 <span className="text-[#0FA0CE] font-bold">Always Prepared:</span> Plan ahead or handle changes instantly!
-            </p>
-            <p className="text-sm text-foreground/70">
-              Create custom schedules for announced events or tackle last-minute emergencies with confidence
-            </p>
+          <div className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-2xl p-6 max-w-2xl mx-auto shadow-xl border-0 relative overflow-hidden">
+            {/* Background pattern */}
+            <div className="absolute inset-0 bg-white/10 dark:bg-white/5"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+            
+            <div className="relative z-10">
+              <p className="text-lg text-white font-semibold mb-2">
+                📅 <span className="text-yellow-300 font-bold">Always Prepared:</span> Plan ahead or handle changes instantly!
+              </p>
+              <p className="text-sm text-white/90">
+                Create custom schedules for announced events or tackle last-minute emergencies with confidence
+              </p>
+            </div>
           </div>
           
           <a 
