@@ -28,7 +28,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
   if (reviews.length === 0) return null;
 
   return (
-    <section className="py-12 md:py-20">
+    <section className="py-12 md:py-20 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-16">
           <div className="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
