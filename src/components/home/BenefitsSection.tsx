@@ -81,44 +81,38 @@ const BenefitsSection = () => {
 
         {/* Enhanced CTA section */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto shadow-2xl border-0 relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 bg-white/10 dark:bg-white/5"></div>
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+          <div className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 rounded-3xl p-8 max-w-4xl mx-auto border border-[#0FA0CE]/20">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Ready to Experience the Difference?
+            </h3>
+            <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+              Join hundreds of teachers who've already simplified their daily scheduling with iSchedulEDU
+            </p>
             
-            <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Ready to Experience the Difference?
-              </h3>
-              <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
-                Join hundreds of teachers who've already simplified their daily scheduling with iSchedulEDU
-              </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+              >
+                <img 
+                  src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" 
+                  alt="Download iSchedulEDU on the App Store" 
+                  className="w-[280px] h-[94px] object-contain"
+                  width="280"
+                  height="94"
+                />
+              </a>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a 
-                  href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-block transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
-                >
-                  <img 
-                    src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1718150400" 
-                    alt="Download iSchedulEDU on the App Store" 
-                    className="w-[280px] h-[94px] object-contain"
-                    width="280"
-                    height="94"
-                  />
-                </a>
-                
-                <div className="text-center sm:text-left">
-                  <div className="flex items-center gap-2 text-sm text-white/90 mb-2">
-                    <CheckCircle className="w-4 h-4 text-green-300" />
-                    <span>Free to start</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-white/90">
-                    <Star className="w-4 h-4 text-yellow-300 fill-current" />
-                    <span>5★ App Store Rating</span>
-                  </div>
+              <div className="text-center sm:text-left">
+                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>Free to start</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                  <span>5★ App Store Rating</span>
                 </div>
               </div>
             </div>
