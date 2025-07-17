@@ -69,21 +69,21 @@ const StorySection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-0">
             {/* Step 1 */}
             <div className="relative group">
-              <div className="absolute -top-6 -left-6 z-10">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-900">
+              <div className="absolute -top-4 -left-4 z-10">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg shadow-lg">
                   1
                 </div>
               </div>
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-8">
-                <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <Clock className="w-10 h-10 text-white" />
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-6 w-full max-w-[280px] md:max-w-none mx-auto">
+                <CardContent className="p-4 md:p-6 aspect-[1.618/1] flex flex-col justify-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
-                  <p className="text-foreground/70 leading-relaxed">
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Set Your Parameters</h3>
+                  <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
                     Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
                   </p>
                 </CardContent>
@@ -92,18 +92,18 @@ const StorySection = () => {
 
             {/* Step 2 */}
             <div className="relative group">
-              <div className="absolute -top-6 -left-6 z-10">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-900">
+              <div className="absolute -top-4 -left-4 z-10">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg shadow-lg">
                   2
                 </div>
               </div>
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-8">
-                <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <Lightbulb className="w-10 h-10 text-white" />
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-6 w-full max-w-[280px] md:max-w-none mx-auto">
+                <CardContent className="p-4 md:p-6 aspect-[1.618/1] flex flex-col justify-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
-                  <p className="text-foreground/70 leading-relaxed">
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Create & Customize</h3>
+                  <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
                     Auto-generate evenly distributed schedules, or customize times for any scenario.
                   </p>
                 </CardContent>
@@ -112,18 +112,18 @@ const StorySection = () => {
 
             {/* Step 3 */}
             <div className="relative group">
-              <div className="absolute -top-6 -left-6 z-10">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-900">
+              <div className="absolute -top-4 -left-4 z-10">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg shadow-lg">
                   3
                 </div>
               </div>
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-8">
-                <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <Rocket className="w-10 h-10 text-white" />
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-6 w-full max-w-[280px] md:max-w-none mx-auto">
+                <CardContent className="p-4 md:p-6 aspect-[1.618/1] flex flex-col justify-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <Rocket className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
-                  <p className="text-foreground/70 leading-relaxed">
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Share & Save</h3>
+                  <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
                     Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
                   </p>
                 </CardContent>
