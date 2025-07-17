@@ -54,7 +54,7 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
   const isLongContent = displayContent.length > 200;
 
   return (
-    <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative">
+    <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-4">
           <Quote className="h-6 w-6 text-[#0FA0CE] opacity-60" />
@@ -125,9 +125,9 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
           </div>
         </footer>
         
-        {/* App Store badge positioned at bottom right */}
+        {/* App Store badge on its own line at bottom right */}
         {isAppStoreReview && (
-          <div className="absolute bottom-4 right-4">
+          <div className="flex justify-end mt-3">
             <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold">
               App Store
             </span>
