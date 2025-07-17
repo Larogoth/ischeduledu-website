@@ -71,71 +71,63 @@ const StorySection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
-            <div className="text-center group">
-              <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+            <div className="relative group">
+              <div className="absolute -top-6 -left-6 z-10">
+                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-900">
                   1
                 </div>
-                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                      <Clock className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
-                    <p className="text-foreground/70 leading-relaxed">
-                      Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
-                    </p>
-                  </CardContent>
-                </Card>
               </div>
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-8">
+                <CardContent className="p-6">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
+                  <p className="text-foreground/70 leading-relaxed">
+                    Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Step 2 */}
-            <div className="text-center group">
-              <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+            <div className="relative group">
+              <div className="absolute -top-6 -left-6 z-10">
+                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-900">
                   2
                 </div>
-                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                      <Lightbulb className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
-                    <p className="text-foreground/70 leading-relaxed">
-                      Auto-generate evenly distributed schedules, or customize times for any scenario.
-                    </p>
-                  </CardContent>
-                </Card>
               </div>
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-8">
+                <CardContent className="p-6">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <Lightbulb className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
+                  <p className="text-foreground/70 leading-relaxed">
+                    Auto-generate evenly distributed schedules, or customize times for any scenario.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Step 3 */}
-            <div className="text-center group">
-              <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+            <div className="relative group">
+              <div className="absolute -top-6 -left-6 z-10">
+                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-900">
                   3
                 </div>
-                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                      <Rocket className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
-                    <p className="text-foreground/70 leading-relaxed">
-                      Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
-                    </p>
-                  </CardContent>
-                </Card>
               </div>
-            </div>
-          </div>
-
-          {/* Process Arrow for Desktop */}
-          <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="flex items-center gap-4">
-              <div className="w-8 h-0.5 bg-gradient-to-r from-[#0FA0CE] to-blue-600"></div>
-              <div className="w-8 h-0.5 bg-gradient-to-r from-purple-500 to-pink-600"></div>
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 pt-8">
+                <CardContent className="p-6">
+                  <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <Rocket className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
+                  <p className="text-foreground/70 leading-relaxed">
+                    Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
