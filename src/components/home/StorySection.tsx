@@ -72,7 +72,7 @@ const StorySection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-0">
             {/* Step 1 */}
             <div className="relative group">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute -top-6 -left-6 z-10">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                   1
                 </div>
@@ -92,7 +92,7 @@ const StorySection = () => {
 
             {/* Step 2 */}
             <div className="relative group">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute -top-6 -left-6 z-10">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                   2
                 </div>
@@ -112,7 +112,7 @@ const StorySection = () => {
 
             {/* Step 3 */}
             <div className="relative group">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute -top-6 -left-6 z-10">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                   3
                 </div>
