@@ -482,8 +482,8 @@ const ImportSchedule = () => {
   const trackAppStoreClick = (location: string) => {
     console.log('App Store click tracked:', location);
     // Add your analytics here (Google Analytics, etc.)
-    if (typeof window !== 'undefined' && 'gtag' in window && typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'app_store_click', {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'app_store_click', {
         event_category: 'conversion',
         event_label: location
       });
@@ -1063,4 +1063,4 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
   );
 };
 
-export default ImportSchedule;
+export default ImportSchedule; 
