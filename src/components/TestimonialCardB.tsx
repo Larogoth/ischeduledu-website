@@ -117,19 +117,19 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
         )}
         
         <footer className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-gray-500 dark:text-gray-300" />
-              </div>
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{name}</p>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center">
+              <User className="w-4 h-4 text-gray-500 dark:text-gray-300" />
             </div>
-            {isAppStoreReview && (
+            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{name}</p>
+          </div>
+          {isAppStoreReview && (
+            <div className="flex justify-center">
               <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold">
                 App Store
               </span>
-            )}
-          </div>
+            </div>
+          )}
         </footer>
       </CardContent>
     </Card>
