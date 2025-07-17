@@ -128,7 +128,8 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
         {/* App Store badge on its own line at bottom right */}
         {isAppStoreReview && (
           <div className="flex justify-end mt-3">
-            <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold">
+            <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+              <Star className="w-3 h-3 fill-current" />
               App Store
             </span>
           </div>

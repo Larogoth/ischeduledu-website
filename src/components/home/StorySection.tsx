@@ -1,3 +1,4 @@
+
 import { Clock, Users, Lightbulb, Rocket } from "lucide-react";
 
 const StorySection = () => {
@@ -71,7 +72,7 @@ const StorySection = () => {
             {/* Step 1 */}
             <div className="text-center group">
               <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-white to-gray-50 dark:from-gray-700 dark:to-gray-600 border-2 border-[#0FA0CE] rounded-full text-[#0FA0CE] font-bold text-lg mb-4 shadow-lg">
                   1
                 </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
@@ -87,7 +88,7 @@ const StorySection = () => {
             {/* Step 2 */}
             <div className="text-center group">
               <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-white to-gray-50 dark:from-gray-700 dark:to-gray-600 border-2 border-[#0FA0CE] rounded-full text-[#0FA0CE] font-bold text-lg mb-4 shadow-lg">
                   2
                 </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
@@ -102,7 +103,7 @@ const StorySection = () => {
             {/* Step 3 */}
             <div className="text-center group">
               <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-white to-gray-50 dark:from-gray-700 dark:to-gray-600 border-2 border-[#0FA0CE] rounded-full text-[#0FA0CE] font-bold text-lg mb-4 shadow-lg">
                   3
                 </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
