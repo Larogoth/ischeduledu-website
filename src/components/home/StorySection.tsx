@@ -1,6 +1,6 @@
 
-
 import { Clock, Users, Lightbulb, Rocket } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const StorySection = () => {
   return (
@@ -76,14 +76,18 @@ const StorySection = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
                   1
                 </div>
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Clock className="w-10 h-10 text-white" />
-                </div>
+                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="w-10 h-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
+                    <p className="text-foreground/70 leading-relaxed">
+                      Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">Set Your Parameters</h3>
-              <p className="text-foreground/70 leading-relaxed">
-                Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
-              </p>
             </div>
 
             {/* Step 2 */}
@@ -92,13 +96,18 @@ const StorySection = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
                   2
                 </div>
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Lightbulb className="w-10 h-10 text-white" />
-                </div>
+                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <Lightbulb className="w-10 h-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
+                    <p className="text-foreground/70 leading-relaxed">
+                      Auto-generate evenly distributed schedules, or customize times for any scenario.
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">Create & Customize</h3>
-              <p className="text-foreground/70 leading-relaxed">
-              Auto-generate evenly distributed schedules, or customize times for any scenario.              </p>
             </div>
 
             {/* Step 3 */}
@@ -107,14 +116,18 @@ const StorySection = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-white font-bold text-lg mb-4 shadow-lg">
                   3
                 </div>
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Rocket className="w-10 h-10 text-white" />
-                </div>
+                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <Rocket className="w-10 h-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
+                    <p className="text-foreground/70 leading-relaxed">
+                      Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">Share & Save</h3>
-              <p className="text-foreground/70 leading-relaxed">
-                Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
-              </p>
             </div>
           </div>
 
@@ -131,5 +144,4 @@ const StorySection = () => {
   );
 };
 
-export default StorySection; 
-
+export default StorySection;
