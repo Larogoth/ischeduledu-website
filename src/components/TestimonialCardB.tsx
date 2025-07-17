@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Quote, Star, User, ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { isEnglish, translateText } from "@/utils/translation";
 
 interface TestimonialCardBProps {
@@ -19,6 +19,8 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
   const [isTranslated, setIsTranslated] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [needsExpansion, setNeedsExpansion] = useState(false);
+  const contentRef = useRef<HTMLQuoteElement>(null);
 
   const needsTranslation = !isEnglish(title) || !isEnglish(content);
 
@@ -50,8 +52,14 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
   const displayTitle = isTranslated && translatedTitle ? translatedTitle : title;
   const displayContent = isTranslated && translatedContent ? translatedContent : content;
 
-  // Check if content is long enough to need expansion (roughly 4 lines of text)
-  const isLongContent = displayContent.length > 200;
+  // Check if content is being truncated by measuring scrollHeight vs clientHeight
+  useEffect(() => {
+    if (contentRef.current && !isExpanded) {
+      const element = contentRef.current;
+      const isOverflowing = element.scrollHeight > element.clientHeight;
+      setNeedsExpansion(isOverflowing);
+    }
+  }, [displayContent, isExpanded]);
 
   return (
     <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-[#0FA0CE]/40 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -88,14 +96,17 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
           {displayTitle}
         </h3>
         
-        <blockquote className={`mb-4 leading-relaxed text-sm ${
-          isExpanded ? '' : 'line-clamp-4'
-        } text-gray-700 dark:text-gray-300`}>
+        <blockquote 
+          ref={contentRef}
+          className={`mb-4 leading-relaxed text-sm ${
+            isExpanded ? '' : 'line-clamp-4'
+          } text-gray-700 dark:text-gray-300`}
+        >
           "{displayContent}"
         </blockquote>
         
         {/* Expand/Collapse button for long content */}
-        {isLongContent && (
+        {needsExpansion && (
           <Button
             onClick={() => setIsExpanded(!isExpanded)}
             variant="ghost"
