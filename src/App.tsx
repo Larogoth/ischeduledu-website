@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,7 +9,9 @@ import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
+import SmartAppBanner from "./components/SmartAppBanner";
 import { initializeSecurity } from "./utils/securityInit";
+import { universalLinkHandler } from "./utils/universalLinks";
 
 const queryClient = new QueryClient();
 
@@ -68,7 +71,7 @@ const GithubPagesRouter = () => {
   return null;
 };
 
-// Debug component to log route changes
+// Enhanced debug component with Universal Link testing
 const RouteDebugger = () => {
   const location = useLocation();
   
@@ -91,6 +94,12 @@ const RouteDebugger = () => {
       if (dataParam) {
         console.log('Data parameter length:', dataParam.length);
         console.log('Data parameter preview:', dataParam.substring(0, 50) + '...');
+        
+        // Test Universal Link detection when import data is present
+        console.log('=== UNIVERSAL LINK DEBUG ===');
+        universalLinkHandler.detectAppInstallation().then(installed => {
+          console.log('App installation detected:', installed);
+        });
       }
     }
   }, [location]);
@@ -111,12 +120,31 @@ const App = () => {
     if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
       document.documentElement.classList.add("dark")
     }
+
+    // Validate AASA files for both domains
+    const validateUniversalLinks = async () => {
+      console.log('=== UNIVERSAL LINK VALIDATION ===');
+      
+      const domains = ['https://ischeduledu.app', 'https://ischeduledu.netlify.app'];
+      
+      for (const domain of domains) {
+        try {
+          const isValid = await universalLinkHandler.validateAASA(domain);
+          console.log(`AASA validation for ${domain}:`, isValid);
+        } catch (error) {
+          console.error(`AASA validation error for ${domain}:`, error);
+        }
+      }
+    };
+
+    validateUniversalLinks();
   }, [])
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-gradient-to-b from-[#0FA0CE] via-[#1a2233] to-[#101624] dark:from-[#0FA0CE] dark:via-[#1a2233] dark:to-[#101624] text-foreground">
+          <SmartAppBanner />
           <Toaster />
           <Sonner />
           <BrowserRouter>

@@ -1,11 +1,29 @@
+
 {
   "applinks": {
     "apps": [],
     "details": [
       {
         "appID": "CK3F2F6ZW3.com.BretMay.iSchedulED",
-        "paths": ["/import", "/import/*"]
+        "paths": [
+          "/import",
+          "/import/*",
+          "/import?*",
+          "/*"
+        ],
+        "components": [
+          {
+            "/": "/import",
+            "?": { "data": "*" }
+          },
+          {
+            "/": "/import/*"
+          }
+        ]
       }
     ]
+  },
+  "webcredentials": {
+    "apps": ["CK3F2F6ZW3.com.BretMay.iSchedulED"]
   }
 }
