@@ -1,4 +1,5 @@
 
+
 import Header from "@/components/home/Header";
 import Pricing from "@/components/home/Pricing";
 import Screenshots from "@/components/home/Screenshots";
@@ -6,7 +7,6 @@ import Footer from "@/components/home/Footer";
 import StorySection from "@/components/home/StorySection";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import ReviewsSection from "@/components/home/ReviewsSection";
-import FloatingCTA from "@/components/home/FloatingCTA";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect } from "react";
 import type { Testimonial } from "@/data/testimonials";
@@ -57,9 +57,6 @@ const Index = () => {
       
       {/* 6. Footer */}
       <Footer />
-
-      {/* Floating CTA - Activated for better conversions */}
-      <FloatingCTA />
     </main>
   );
 };
