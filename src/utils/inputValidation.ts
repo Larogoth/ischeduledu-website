@@ -13,10 +13,12 @@ export interface ScheduleValidationSchema {
 export const DEFAULT_VALIDATION_SCHEMA: ScheduleValidationSchema = {
   maxScheduleNameLength: 500,
   maxEventNameLength: 200,
-  maxEventsCount: 100,
-  maxUrlParamSize: 2000000, // Increased to 2MB for large schedules
+  maxEventsCount: 50,
+  maxUrlParamSize: 100000, // 100KB
   allowedTimeFormats: [
-    /.*/ // Allow any format - let the app handle time parsing
+    /^\d{1,2}:\d{2}\s?(AM|PM)$/i,
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/,
+    /^\d+$/ // Unix timestamp
   ]
 };
 
@@ -27,7 +29,7 @@ export const encodeHtml = (text: string): string => {
   return div.innerHTML;
 };
 
-// Real schedule validation that matches iOS app structure
+// Enhanced schedule data validation
 export const validateScheduleData = (data: any, schema: ScheduleValidationSchema = DEFAULT_VALIDATION_SCHEMA): {
   isValid: boolean;
   sanitizedData: any;
@@ -37,101 +39,87 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   let sanitizedData = { ...data };
 
   try {
-    console.log('Validating schedule data:', data);
-
-    // Check if we have a valid data structure
-    if (!data || typeof data !== 'object') {
-      errors.push('Invalid data structure');
-      return { isValid: false, sanitizedData: {}, errors };
+    // Validate schedule name
+    if (data.name) {
+      if (typeof data.name !== 'string') {
+        errors.push('Schedule name must be a string');
+        sanitizedData.name = 'Untitled Schedule';
+      } else if (data.name.length > schema.maxScheduleNameLength) {
+        errors.push(`Schedule name too long (max ${schema.maxScheduleNameLength} characters)`);
+        sanitizedData.name = sanitizeInput(data.name.substring(0, schema.maxScheduleNameLength));
+      } else {
+        sanitizedData.name = sanitizeInput(data.name);
+      }
     }
 
-    // Handle schedule name - iOS app likely uses 'name' field
-    if (data.name && typeof data.name === 'string') {
-      sanitizedData.name = data.name.trim();
-    } else {
-      sanitizedData.name = 'Imported Schedule';
+    // Validate schedule type
+    const allowedTypes = ['custom', 'generated', 'imported'];
+    if (data.type && !allowedTypes.includes(data.type)) {
+      sanitizedData.type = 'custom';
+    }
+    if (data.scheduleType && !allowedTypes.includes(data.scheduleType)) {
+      sanitizedData.scheduleType = 'custom';
     }
 
-    // Handle schedule start/end times if they exist
-    if (data.startTime) {
-      sanitizedData.startTime = data.startTime;
-    }
-    if (data.endTime) {
-      sanitizedData.endTime = data.endTime;
-    }
-
-    // Handle schedule type
-    sanitizedData.type = data.type || 'imported';
-
-    // Handle version and compression info
-    if (typeof data.version === 'number') {
-      sanitizedData.version = data.version;
-    }
-    if (typeof data.compressed === 'boolean') {
-      sanitizedData.compressed = data.compressed;
-    }
-
-    // Handle events - look for events array
+    // Validate events array
     if (data.events && Array.isArray(data.events)) {
+      if (data.events.length > schema.maxEventsCount) {
+        errors.push(`Too many events (max ${schema.maxEventsCount})`);
+        sanitizedData.events = data.events.slice(0, schema.maxEventsCount);
+      }
+
       sanitizedData.events = data.events.map((event: any, index: number) => {
-        const sanitizedEvent: any = {};
+        const sanitizedEvent = { ...event };
 
-        // Event name
-        if (event.name && typeof event.name === 'string') {
-          sanitizedEvent.name = event.name.trim();
-        } else {
-          sanitizedEvent.name = `Event ${index + 1}`;
+        // Validate event name
+        if (event.name) {
+          if (typeof event.name !== 'string') {
+            sanitizedEvent.name = `Event ${index + 1}`;
+          } else if (event.name.length > schema.maxEventNameLength) {
+            sanitizedEvent.name = sanitizeInput(event.name.substring(0, schema.maxEventNameLength));
+          } else {
+            sanitizedEvent.name = sanitizeInput(event.name);
+          }
         }
 
-        // Event start time
-        if (event.startTime) {
-          sanitizedEvent.startTime = event.startTime;
-        } else if (event.start) {
-          sanitizedEvent.startTime = event.start;
-        }
-
-        // Event end time  
-        if (event.endTime) {
-          sanitizedEvent.endTime = event.endTime;
-        } else if (event.end) {
-          sanitizedEvent.endTime = event.end;
-        }
-
-        // Event color
-        if (event.colorData) {
-          sanitizedEvent.colorData = event.colorData;
-        } else if (event.color) {
-          sanitizedEvent.colorData = event.color;
-        } else {
-          // Default blue color
-          sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 };
-        }
-
-        // Keep any other event properties
-        Object.keys(event).forEach(key => {
-          if (!sanitizedEvent.hasOwnProperty(key)) {
-            sanitizedEvent[key] = event[key];
+        // Validate time fields
+        ['startTime', 'endTime', 'start', 'end'].forEach(timeField => {
+          if (event[timeField]) {
+            const timeValue = event[timeField];
+            if (typeof timeValue === 'string') {
+              const isValidFormat = schema.allowedTimeFormats.some(format => format.test(timeValue));
+              if (!isValidFormat) {
+                console.warn(`Invalid time format for ${timeField}:`, timeValue);
+              }
+            }
           }
         });
 
+        // Validate color data
+        if (event.colorData && typeof event.colorData === 'object') {
+          const { red, green, blue } = event.colorData;
+          if (typeof red === 'number' && typeof green === 'number' && typeof blue === 'number') {
+            if (red < 0 || red > 1 || green < 0 || green > 1 || blue < 0 || blue > 1) {
+              sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 }; // Default blue
+            }
+          }
+        }
+
         return sanitizedEvent;
       });
-    } else {
-      sanitizedData.events = [];
     }
 
-    // Preserve other top-level properties
-    Object.keys(data).forEach(key => {
-      if (!sanitizedData.hasOwnProperty(key)) {
-        sanitizedData[key] = data[key];
-      }
-    });
-
-    console.log('Validation completed successfully:', sanitizedData);
+    // Validate setEvents (legacy support)
+    if (data.setEvents && Array.isArray(data.setEvents)) {
+      sanitizedData.setEvents = sanitizedData.events || data.setEvents.map((event: any, index: number) => ({
+        ...event,
+        name: event.name ? sanitizeInput(event.name.substring(0, schema.maxEventNameLength)) : `Event ${index + 1}`
+      }));
+    }
 
   } catch (error) {
+    errors.push('Failed to validate schedule data structure');
     console.error('Schedule validation error:', error);
-    errors.push('Failed to process schedule data');
   }
 
   return {
@@ -141,7 +129,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   };
 };
 
-// Proper URL parameter validation for base64 data
+// Enhanced URL parameter validation
 export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VALIDATION_SCHEMA.maxUrlParamSize): {
   isValid: boolean;
   error?: string;
@@ -154,27 +142,21 @@ export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VA
     return { isValid: false, error: `Parameter too large (max ${maxSize} bytes)` };
   }
 
-  // Only block really dangerous scripts
-  const dangerousPatterns = [
-    /<script[^>]*>.*?<\/script>/gi,
-    /javascript:\s*[^;]+/gi,
-    /<iframe[^>]*>/gi,
-    /eval\s*\(/gi
+  // Check for malicious patterns in encoded data
+  const suspiciousPatterns = [
+    /<script/i,
+    /javascript:/i,
+    /vbscript:/i,
+    /data:text\/html/i,
+    /eval\(/i,
+    /Function\(/i,
+    /setTimeout\(/i,
+    /setInterval\(/i
   ];
 
-  const hasDangerousContent = dangerousPatterns.some(pattern => pattern.test(param));
-  if (hasDangerousContent) {
-    console.warn('Dangerous content detected in parameter');
-    return { isValid: false, error: 'Dangerous content detected' };
-  }
-
-  // Validate base64 format - allow URL-safe base64 characters
-  if (param.length > 10) {
-    const urlSafeBase64Pattern = /^[A-Za-z0-9+/\-_=]*$/;
-    if (!urlSafeBase64Pattern.test(param)) {
-      console.warn('Invalid base64 characters detected in parameter:', param.substring(0, 50));
-      return { isValid: false, error: 'Invalid characters in data parameter' };
-    }
+  const hasSuspiciousContent = suspiciousPatterns.some(pattern => pattern.test(param));
+  if (hasSuspiciousContent) {
+    return { isValid: false, error: 'Suspicious content detected in parameter' };
   }
 
   return { isValid: true };
@@ -186,8 +168,11 @@ export const renderSafeText = (text: string | undefined, fallback: string = ''):
     return fallback;
   }
 
-  // Basic sanitization only
-  return text.replace(/[<>]/g, '');
+  // Sanitize input first
+  const sanitized = sanitizeInput(text);
+  
+  // Then HTML encode for safe rendering
+  return encodeHtml(sanitized);
 };
 
 // Validation for external API requests (translation)
@@ -204,8 +189,11 @@ export const validateTranslationInput = (text: string): {
     return { isValid: false, sanitizedText: '', error: 'Text too long for translation' };
   }
 
-  // Basic sanitization
-  const sanitizedText = text.replace(/[<>]/g, '');
+  const sanitizedText = sanitizeInput(text);
   
+  if (!validateFormInput(sanitizedText, 1000)) {
+    return { isValid: false, sanitizedText: '', error: 'Text contains invalid characters' };
+  }
+
   return { isValid: true, sanitizedText };
 };

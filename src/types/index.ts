@@ -4,10 +4,6 @@ export interface ScheduleData {
   type?: string;
   scheduleType?: string;
   userId?: string;
-  startTime?: string;
-  endTime?: string;
-  compressed?: boolean;
-  version?: number;
   events?: Event[];
   setEvents?: Event[];
 }

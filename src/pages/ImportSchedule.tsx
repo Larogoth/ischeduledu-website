@@ -1,155 +1,85 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 import { handleAsyncError } from '@/utils/errorHandling';
-import { validateScheduleData, validateUrlParameter } from '@/utils/inputValidation';
+import { validateScheduleData } from '@/utils/inputValidation';
 import { transformScheduleData } from '@/utils/transformers';
 import { ScheduleData } from '@/types';
 import { useScheduleStore } from '@/store/scheduleStore';
 
 const ImportSchedule = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { scheduleId } = useParams();
   const { setScheduleData } = useScheduleStore();
 
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Get data from URL query parameters
-    const urlParams = new URLSearchParams(location.search);
-    const dataParam = urlParams.get('data');
-    
-    console.log('ImportSchedule: URL search params:', location.search);
-    console.log('ImportSchedule: Data parameter found:', dataParam ? 'YES' : 'NO');
-    
-    if (dataParam) {
-      handleScheduleImport(dataParam);
+    if (scheduleId) {
+      handleScheduleImport(scheduleId);
     } else {
       setError("No schedule data found in the URL. Please use a valid share link from the iOS app.");
       setIsLoading(false);
     }
-  }, [location.search]);
+  }, [scheduleId]);
 
   const handleScheduleImport = async (encodedData: string): Promise<void> => {
     setIsLoading(true);
     setError(null);
 
     try {
-      console.log('=== SCHEDULE IMPORT DEBUG ===');
-      console.log('Starting schedule import process...');
-      console.log('Encoded data length:', encodedData.length);
-      console.log('Encoded data preview:', encodedData.substring(0, 100) + '...');
-
-      // Validate URL parameter
-      const paramValidation = validateUrlParameter(encodedData);
-      if (!paramValidation.isValid) {
-        console.error('URL parameter validation failed:', paramValidation.error);
-        setError(`Invalid share link: ${paramValidation.error}`);
-        setIsLoading(false);
-        return;
-      }
-
-      console.log('✓ URL parameter validation passed');
-
       // Decode the schedule data from the URL parameter
-      console.log('Attempting to decode base64 data...');
-      let decodedData: string;
-      try {
-        decodedData = atob(encodedData);
-        console.log('✓ Base64 decode successful');
-        console.log('Decoded data length:', decodedData.length);
-        console.log('Decoded data:', decodedData);
-      } catch (decodeError) {
-        console.error('❌ Base64 decode error:', decodeError);
-        setError('The share link appears to be corrupted. Please try copying the link again from the iOS app.');
-        setIsLoading(false);
-        return;
-      }
-      
-      // Parse JSON
-      console.log('Parsing JSON...');
-      let rawDataJson: any;
-      try {
-        rawDataJson = JSON.parse(decodedData);
-        console.log('✓ JSON parse successful');
-        console.log('Parsed JSON structure:', rawDataJson);
-        console.log('JSON keys:', Object.keys(rawDataJson));
-        
-        // Log specific fields we're looking for
-        console.log('Schedule name:', rawDataJson.name);
-        console.log('Schedule events:', rawDataJson.events);
-        console.log('Events count:', rawDataJson.events ? rawDataJson.events.length : 'No events array');
-        
-      } catch (parseError) {
-        console.error('❌ JSON parse error:', parseError);
-        setError('The schedule data format is invalid. Please check that the share link is complete.');
-        setIsLoading(false);
-        return;
-      }
+      const decodedData = atob(encodedData);
+      const rawDataJson = JSON.parse(decodedData);
       
       // Transform the data
-      console.log('Transforming schedule data...');
       const result = await handleAsyncError(
         () => Promise.resolve(transformScheduleData(rawDataJson)),
         'schedule_transform'
       );
 
       if (result.success === false) {
-        console.error('❌ Schedule transformation failed:', result.error.userMessage);
+        console.error('Schedule transformation failed:', result.error.userMessage);
         setError(result.error.userMessage);
         setIsLoading(false);
         return;
       }
 
       const transformedData = result.data;
-      console.log('✓ Transformation successful');
-      console.log('Transformed data:', transformedData);
 
-      // Validate the transformed data
-      console.log('Validating transformed data...');
+      // Apply final validation before importing
       const validationResult = validateScheduleData(transformedData);
       if (!validationResult.isValid) {
-        console.error('❌ Validation errors:', validationResult.errors);
         setError(`Schedule data validation failed: ${validationResult.errors.join(', ')}`);
         setIsLoading(false);
         return;
       }
 
-      console.log('✓ Validation successful');
+      // Use the sanitized data
       const finalData = validationResult.sanitizedData;
-      console.log('Final validated data:', finalData);
 
       // Persist to store and navigate
       setScheduleData(finalData);
       toast({
         title: "Success!",
-        description: `Schedule "${finalData.name}" imported successfully from your iOS app.`,
+        description: "Schedule imported successfully from your iOS app.",
       });
-      
-      console.log('✓ Import completed successfully, navigating to schedule page...');
       navigate('/schedule');
-      
     } catch (error) {
-      console.error('❌ Import error:', error);
-      if (error instanceof Error) {
-        setError(`Import failed: ${error.message}`);
-      } else {
-        setError('An unexpected error occurred during import. Please try again.');
-      }
+      console.error('Import error:', error);
+      setError(`Invalid schedule link. Please check that you're using a complete share link from the iOS app.`);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleRetry = () => {
-    const urlParams = new URLSearchParams(location.search);
-    const dataParam = urlParams.get('data');
-    if (dataParam) {
-      handleScheduleImport(dataParam);
+    if (scheduleId) {
+      handleScheduleImport(scheduleId);
     }
   };
 
@@ -163,7 +93,6 @@ const ImportSchedule = () => {
           {isLoading && (
             <div className="text-center py-8">
               <p className="text-gray-600">Importing your schedule...</p>
-              <p className="text-sm text-gray-500 mt-2">Processing data from iOS app...</p>
             </div>
           )}
 
