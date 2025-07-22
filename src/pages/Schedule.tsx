@@ -76,6 +76,12 @@ const Schedule = () => {
                 {scheduleData.endTime && (
                   <p><strong>End Time:</strong> {formatTime(scheduleData.endTime)}</p>
                 )}
+                {scheduleData.version && (
+                  <p><strong>Version:</strong> {scheduleData.version}</p>
+                )}
+                {scheduleData.compressed !== undefined && (
+                  <p><strong>Compressed:</strong> {scheduleData.compressed ? 'Yes' : 'No'}</p>
+                )}
               </div>
               
               <div>

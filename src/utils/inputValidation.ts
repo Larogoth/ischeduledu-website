@@ -1,3 +1,4 @@
+
 import { sanitizeInput, validateFormInput } from './security';
 
 // Enhanced validation schemas for schedule data
@@ -61,6 +62,14 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
 
     // Handle schedule type
     sanitizedData.type = data.type || 'imported';
+
+    // Handle version and compression info
+    if (typeof data.version === 'number') {
+      sanitizedData.version = data.version;
+    }
+    if (typeof data.compressed === 'boolean') {
+      sanitizedData.compressed = data.compressed;
+    }
 
     // Handle events - look for events array
     if (data.events && Array.isArray(data.events)) {
