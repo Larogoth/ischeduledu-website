@@ -43,21 +43,42 @@ const ImportSchedule = () => {
       console.log('Encoded data length:', encodedData.length);
       console.log('Encoded data preview:', encodedData.substring(0, 100) + '...');
 
-      // Validate URL parameter size and basic safety
+      // Validate URL parameter with more lenient validation
       const paramValidation = validateUrlParameter(encodedData);
       if (!paramValidation.isValid) {
-        setError(paramValidation.error || 'Invalid URL parameter');
+        console.error('URL parameter validation failed:', paramValidation.error);
+        setError(`Invalid share link: ${paramValidation.error}`);
         setIsLoading(false);
         return;
       }
 
+      console.log('URL parameter validation passed');
+
       // Decode the schedule data from the URL parameter
       console.log('Attempting to decode base64 data...');
-      const decodedData = atob(encodedData);
+      let decodedData: string;
+      try {
+        decodedData = atob(encodedData);
+      } catch (decodeError) {
+        console.error('Base64 decode error:', decodeError);
+        setError('The share link appears to be corrupted. Please try copying the link again from the iOS app.');
+        setIsLoading(false);
+        return;
+      }
+      
       console.log('Decoded data:', decodedData);
       
       console.log('Parsing JSON...');
-      const rawDataJson = JSON.parse(decodedData);
+      let rawDataJson: any;
+      try {
+        rawDataJson = JSON.parse(decodedData);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        setError('The schedule data format is invalid. Please check that the share link is complete.');
+        setIsLoading(false);
+        return;
+      }
+      
       console.log('Parsed JSON data:', rawDataJson);
       
       // Transform the data with minimal processing
@@ -103,15 +124,9 @@ const ImportSchedule = () => {
     } catch (error) {
       console.error('Import error:', error);
       if (error instanceof Error) {
-        if (error.message.includes('JSON')) {
-          setError('The schedule data format is invalid. Please check that the share link is complete.');
-        } else if (error.message.includes('base64') || error.message.includes('decode')) {
-          setError('Unable to read the schedule data. The share link may be corrupted.');
-        } else {
-          setError(`Import failed: ${error.message}`);
-        }
+        setError(`Import failed: ${error.message}`);
       } else {
-        setError('Invalid schedule link. Please check that you\'re using a complete share link from the iOS app.');
+        setError('An unexpected error occurred during import. Please try again.');
       }
     } finally {
       setIsLoading(false);

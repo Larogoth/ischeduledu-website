@@ -1,3 +1,4 @@
+
 import { sanitizeInput, validateFormInput } from './security';
 
 // Enhanced validation schemas for schedule data
@@ -13,7 +14,7 @@ export const DEFAULT_VALIDATION_SCHEMA: ScheduleValidationSchema = {
   maxScheduleNameLength: 500,
   maxEventNameLength: 200,
   maxEventsCount: 100,
-  maxUrlParamSize: 1000000, // Increased to 1MB for large schedules
+  maxUrlParamSize: 2000000, // Increased to 2MB for large schedules
   allowedTimeFormats: [
     /.*/ // Allow any format - let the app handle time parsing
   ]
@@ -26,7 +27,7 @@ export const encodeHtml = (text: string): string => {
   return div.innerHTML;
 };
 
-// Much more lenient schedule data validation
+// Very lenient schedule data validation - only check for basic structure
 export const validateScheduleData = (data: any, schema: ScheduleValidationSchema = DEFAULT_VALIDATION_SCHEMA): {
   isValid: boolean;
   sanitizedData: any;
@@ -121,7 +122,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   };
 };
 
-// Much more lenient URL parameter validation
+// Much more lenient URL parameter validation - only block obvious attacks
 export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VALIDATION_SCHEMA.maxUrlParamSize): {
   isValid: boolean;
   error?: string;
@@ -134,16 +135,27 @@ export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VA
     return { isValid: false, error: `Parameter too large (max ${maxSize} bytes)` };
   }
 
-  // Only block obviously malicious content
-  const dangerousPatterns = [
+  // Only block obviously dangerous scripts - be very specific
+  const reallyDangerousPatterns = [
     /<script[^>]*>.*?<\/script>/gi,
-    /javascript:\s*[^;]+/gi
+    /javascript:\s*[^;]+/gi,
+    /<iframe[^>]*>/gi,
+    /eval\s*\(/gi
   ];
 
-  const hasDangerousContent = dangerousPatterns.some(pattern => pattern.test(param));
+  const hasDangerousContent = reallyDangerousPatterns.some(pattern => pattern.test(param));
   if (hasDangerousContent) {
     console.warn('Dangerous content detected in parameter');
     return { isValid: false, error: 'Dangerous content detected' };
+  }
+
+  // Base64 validation - be permissive about valid base64 characters
+  if (param.length > 10) { // Only validate if it looks like it could be base64
+    const base64Pattern = /^[A-Za-z0-9+/=_-]*$/; // Allow URL-safe base64 too
+    if (!base64Pattern.test(param)) {
+      console.warn('Invalid base64 characters detected');
+      return { isValid: false, error: 'Invalid characters in data parameter' };
+    }
   }
 
   return { isValid: true };
