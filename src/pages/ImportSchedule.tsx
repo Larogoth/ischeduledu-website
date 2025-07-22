@@ -1,5 +1,6 @@
+
 import React, { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,16 +13,10 @@ import { validateScheduleData } from '@/utils/inputValidation';
 import { transformScheduleData } from '@/utils/transformers';
 import { ScheduleData } from '@/types';
 import { useScheduleStore } from '@/store/scheduleStore';
-import { useUser } from "@clerk/clerk-react";
-
-interface ImportScheduleProps {
-  // No props needed for this page
-}
 
 const ImportSchedule = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { setScheduleData } = useScheduleStore();
-  const { user } = useUser();
 
   const [scheduleName, setScheduleName] = useState<string>('');
   const [scheduleType, setScheduleType] = useState<string>('custom');
@@ -110,17 +105,17 @@ const ImportSchedule = () => {
       }
 
       // Set additional metadata
-      transformedData.name = scheduleName || transformedData.name || 'Untitled Schedule';
-      transformedData.type = scheduleType;
-      transformedData.userId = user?.id;
+      const finalData = validationResult.sanitizedData;
+      finalData.name = scheduleName || finalData.name || 'Untitled Schedule';
+      finalData.type = scheduleType;
 
       // Persist to store and navigate
-      setScheduleData(transformedData);
+      setScheduleData(finalData);
       toast({
         title: "Success!",
         description: "Schedule imported successfully.",
       })
-      router.push('/schedule');
+      navigate('/schedule');
     } catch (error) {
       setError(`An unexpected error occurred: ${(error as Error).message}`);
     } finally {
