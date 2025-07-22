@@ -39,11 +39,12 @@ const ImportSchedule = () => {
     setError(null);
 
     try {
+      console.log('=== SCHEDULE IMPORT DEBUG ===');
       console.log('Starting schedule import process...');
       console.log('Encoded data length:', encodedData.length);
       console.log('Encoded data preview:', encodedData.substring(0, 100) + '...');
 
-      // Validate URL parameter with more lenient validation
+      // Validate URL parameter
       const paramValidation = validateUrlParameter(encodedData);
       if (!paramValidation.isValid) {
         console.error('URL parameter validation failed:', paramValidation.error);
@@ -52,36 +53,45 @@ const ImportSchedule = () => {
         return;
       }
 
-      console.log('URL parameter validation passed');
+      console.log('✓ URL parameter validation passed');
 
       // Decode the schedule data from the URL parameter
       console.log('Attempting to decode base64 data...');
       let decodedData: string;
       try {
         decodedData = atob(encodedData);
+        console.log('✓ Base64 decode successful');
+        console.log('Decoded data length:', decodedData.length);
+        console.log('Decoded data:', decodedData);
       } catch (decodeError) {
-        console.error('Base64 decode error:', decodeError);
+        console.error('❌ Base64 decode error:', decodeError);
         setError('The share link appears to be corrupted. Please try copying the link again from the iOS app.');
         setIsLoading(false);
         return;
       }
       
-      console.log('Decoded data:', decodedData);
-      
+      // Parse JSON
       console.log('Parsing JSON...');
       let rawDataJson: any;
       try {
         rawDataJson = JSON.parse(decodedData);
+        console.log('✓ JSON parse successful');
+        console.log('Parsed JSON structure:', rawDataJson);
+        console.log('JSON keys:', Object.keys(rawDataJson));
+        
+        // Log specific fields we're looking for
+        console.log('Schedule name:', rawDataJson.name);
+        console.log('Schedule events:', rawDataJson.events);
+        console.log('Events count:', rawDataJson.events ? rawDataJson.events.length : 'No events array');
+        
       } catch (parseError) {
-        console.error('JSON parse error:', parseError);
+        console.error('❌ JSON parse error:', parseError);
         setError('The schedule data format is invalid. Please check that the share link is complete.');
         setIsLoading(false);
         return;
       }
       
-      console.log('Parsed JSON data:', rawDataJson);
-      
-      // Transform the data with minimal processing
+      // Transform the data
       console.log('Transforming schedule data...');
       const result = await handleAsyncError(
         () => Promise.resolve(transformScheduleData(rawDataJson)),
@@ -89,26 +99,27 @@ const ImportSchedule = () => {
       );
 
       if (result.success === false) {
-        console.error('Schedule transformation failed:', result.error.userMessage);
+        console.error('❌ Schedule transformation failed:', result.error.userMessage);
         setError(result.error.userMessage);
         setIsLoading(false);
         return;
       }
 
       const transformedData = result.data;
+      console.log('✓ Transformation successful');
       console.log('Transformed data:', transformedData);
 
-      // Apply very lenient validation
+      // Validate the transformed data
       console.log('Validating transformed data...');
       const validationResult = validateScheduleData(transformedData);
       if (!validationResult.isValid) {
-        console.error('Validation errors:', validationResult.errors);
+        console.error('❌ Validation errors:', validationResult.errors);
         setError(`Schedule data validation failed: ${validationResult.errors.join(', ')}`);
         setIsLoading(false);
         return;
       }
 
-      // Use the sanitized data
+      console.log('✓ Validation successful');
       const finalData = validationResult.sanitizedData;
       console.log('Final validated data:', finalData);
 
@@ -116,13 +127,14 @@ const ImportSchedule = () => {
       setScheduleData(finalData);
       toast({
         title: "Success!",
-        description: "Schedule imported successfully from your iOS app.",
+        description: `Schedule "${finalData.name}" imported successfully from your iOS app.`,
       });
       
-      console.log('Import completed successfully, navigating to schedule page...');
+      console.log('✓ Import completed successfully, navigating to schedule page...');
       navigate('/schedule');
+      
     } catch (error) {
-      console.error('Import error:', error);
+      console.error('❌ Import error:', error);
       if (error instanceof Error) {
         setError(`Import failed: ${error.message}`);
       } else {
@@ -151,6 +163,7 @@ const ImportSchedule = () => {
           {isLoading && (
             <div className="text-center py-8">
               <p className="text-gray-600">Importing your schedule...</p>
+              <p className="text-sm text-gray-500 mt-2">Processing data from iOS app...</p>
             </div>
           )}
 

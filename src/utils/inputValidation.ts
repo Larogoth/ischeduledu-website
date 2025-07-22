@@ -1,4 +1,3 @@
-
 import { sanitizeInput, validateFormInput } from './security';
 
 // Enhanced validation schemas for schedule data
@@ -27,7 +26,7 @@ export const encodeHtml = (text: string): string => {
   return div.innerHTML;
 };
 
-// Very lenient schedule data validation - only check for basic structure
+// Real schedule validation that matches iOS app structure
 export const validateScheduleData = (data: any, schema: ScheduleValidationSchema = DEFAULT_VALIDATION_SCHEMA): {
   isValid: boolean;
   sanitizedData: any;
@@ -39,61 +38,72 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   try {
     console.log('Validating schedule data:', data);
 
-    // Very basic validation - just ensure we have some kind of data structure
+    // Check if we have a valid data structure
     if (!data || typeof data !== 'object') {
       errors.push('Invalid data structure');
       return { isValid: false, sanitizedData: {}, errors };
     }
 
-    // Handle schedule name with multiple possible field names
-    if (data.name || data.scheduleName || data.title) {
-      sanitizedData.name = data.name || data.scheduleName || data.title || 'Imported Schedule';
+    // Handle schedule name - iOS app likely uses 'name' field
+    if (data.name && typeof data.name === 'string') {
+      sanitizedData.name = data.name.trim();
     } else {
       sanitizedData.name = 'Imported Schedule';
     }
 
+    // Handle schedule start/end times if they exist
+    if (data.startTime) {
+      sanitizedData.startTime = data.startTime;
+    }
+    if (data.endTime) {
+      sanitizedData.endTime = data.endTime;
+    }
+
     // Handle schedule type
-    sanitizedData.type = data.type || data.scheduleType || 'imported';
+    sanitizedData.type = data.type || 'imported';
 
-    // Handle events with multiple possible field names and be very permissive
-    const possibleEventFields = ['events', 'setEvents', 'scheduleEvents', 'items', 'classes'];
-    let eventsArray = [];
-    
-    for (const field of possibleEventFields) {
-      if (data[field] && Array.isArray(data[field])) {
-        eventsArray = data[field];
-        break;
-      }
-    }
+    // Handle events - look for events array
+    if (data.events && Array.isArray(data.events)) {
+      sanitizedData.events = data.events.map((event: any, index: number) => {
+        const sanitizedEvent: any = {};
 
-    // If no events found in standard fields, look for any array in the data
-    if (eventsArray.length === 0) {
-      for (const [key, value] of Object.entries(data)) {
-        if (Array.isArray(value) && value.length > 0) {
-          console.log(`Found potential events array in field: ${key}`);
-          eventsArray = value;
-          break;
-        }
-      }
-    }
-
-    console.log('Found events array:', eventsArray);
-
-    // Process events with minimal validation
-    if (Array.isArray(eventsArray)) {
-      sanitizedData.events = eventsArray.map((event: any, index: number) => {
-        // Very permissive event processing - keep all data
-        const sanitizedEvent = { ...event };
-
-        // Ensure we have some kind of name
-        if (!sanitizedEvent.name && !sanitizedEvent.title) {
+        // Event name
+        if (event.name && typeof event.name === 'string') {
+          sanitizedEvent.name = event.name.trim();
+        } else {
           sanitizedEvent.name = `Event ${index + 1}`;
         }
 
-        // Provide default color if none exists
-        if (!sanitizedEvent.colorData && !sanitizedEvent.color) {
+        // Event start time
+        if (event.startTime) {
+          sanitizedEvent.startTime = event.startTime;
+        } else if (event.start) {
+          sanitizedEvent.startTime = event.start;
+        }
+
+        // Event end time  
+        if (event.endTime) {
+          sanitizedEvent.endTime = event.endTime;
+        } else if (event.end) {
+          sanitizedEvent.endTime = event.end;
+        }
+
+        // Event color
+        if (event.colorData) {
+          sanitizedEvent.colorData = event.colorData;
+        } else if (event.color) {
+          sanitizedEvent.colorData = event.color;
+        } else {
+          // Default blue color
           sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 };
         }
+
+        // Keep any other event properties
+        Object.keys(event).forEach(key => {
+          if (!sanitizedEvent.hasOwnProperty(key)) {
+            sanitizedEvent[key] = event[key];
+          }
+        });
 
         return sanitizedEvent;
       });
@@ -101,7 +111,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
       sanitizedData.events = [];
     }
 
-    // Preserve all other fields from the original data
+    // Preserve other top-level properties
     Object.keys(data).forEach(key => {
       if (!sanitizedData.hasOwnProperty(key)) {
         sanitizedData[key] = data[key];
@@ -122,7 +132,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   };
 };
 
-// Fixed URL parameter validation to properly handle URL-safe base64
+// Proper URL parameter validation for base64 data
 export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VALIDATION_SCHEMA.maxUrlParamSize): {
   isValid: boolean;
   error?: string;
@@ -135,23 +145,22 @@ export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VA
     return { isValid: false, error: `Parameter too large (max ${maxSize} bytes)` };
   }
 
-  // Only block obviously dangerous scripts - be very specific
-  const reallyDangerousPatterns = [
+  // Only block really dangerous scripts
+  const dangerousPatterns = [
     /<script[^>]*>.*?<\/script>/gi,
     /javascript:\s*[^;]+/gi,
     /<iframe[^>]*>/gi,
     /eval\s*\(/gi
   ];
 
-  const hasDangerousContent = reallyDangerousPatterns.some(pattern => pattern.test(param));
+  const hasDangerousContent = dangerousPatterns.some(pattern => pattern.test(param));
   if (hasDangerousContent) {
     console.warn('Dangerous content detected in parameter');
     return { isValid: false, error: 'Dangerous content detected' };
   }
 
-  // Fixed: Proper URL-safe base64 validation (includes standard + URL-safe characters)
-  if (param.length > 10) { // Only validate if it looks like it could be base64
-    // URL-safe base64 uses: A-Z, a-z, 0-9, +, /, -, _, and = for padding
+  // Validate base64 format - allow URL-safe base64 characters
+  if (param.length > 10) {
     const urlSafeBase64Pattern = /^[A-Za-z0-9+/\-_=]*$/;
     if (!urlSafeBase64Pattern.test(param)) {
       console.warn('Invalid base64 characters detected in parameter:', param.substring(0, 50));

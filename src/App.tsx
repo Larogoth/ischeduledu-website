@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,7 @@ import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
+import Schedule from "./pages/Schedule";
 import { initializeSecurity } from "./utils/securityInit";
 
 const queryClient = new QueryClient();
@@ -128,6 +130,7 @@ const App = () => {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/import" element={<ImportSchedule />} />
               <Route path="/import/:scheduleId" element={<ImportSchedule />} />
+              <Route path="/schedule" element={<Schedule />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
