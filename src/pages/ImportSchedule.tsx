@@ -87,13 +87,15 @@ const ImportSchedule = () => {
         'schedule_transform'
       );
 
-      if (!result.success) {
+      if (result.success === false) {
+        // Only access result.error here
         console.error('Schedule transformation failed:', result.error.userMessage);
         setError(result.error.userMessage);
         setIsLoading(false);
         return;
       }
 
+      // Only access result.data here
       const transformedData = result.data;
 
       // Apply final validation before importing
