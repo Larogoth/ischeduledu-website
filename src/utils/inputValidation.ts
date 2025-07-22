@@ -122,7 +122,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   };
 };
 
-// Much more lenient URL parameter validation - only block obvious attacks
+// Fixed URL parameter validation to properly handle URL-safe base64
 export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VALIDATION_SCHEMA.maxUrlParamSize): {
   isValid: boolean;
   error?: string;
@@ -149,11 +149,12 @@ export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VA
     return { isValid: false, error: 'Dangerous content detected' };
   }
 
-  // Base64 validation - be permissive about valid base64 characters
+  // Fixed: Proper URL-safe base64 validation (includes standard + URL-safe characters)
   if (param.length > 10) { // Only validate if it looks like it could be base64
-    const base64Pattern = /^[A-Za-z0-9+/=_-]*$/; // Allow URL-safe base64 too
-    if (!base64Pattern.test(param)) {
-      console.warn('Invalid base64 characters detected');
+    // URL-safe base64 uses: A-Z, a-z, 0-9, +, /, -, _, and = for padding
+    const urlSafeBase64Pattern = /^[A-Za-z0-9+/\-_=]*$/;
+    if (!urlSafeBase64Pattern.test(param)) {
+      console.warn('Invalid base64 characters detected in parameter:', param.substring(0, 50));
       return { isValid: false, error: 'Invalid characters in data parameter' };
     }
   }
