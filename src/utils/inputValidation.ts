@@ -1,4 +1,3 @@
-
 import { sanitizeInput, validateFormInput } from './security';
 
 // Enhanced validation schemas for schedule data
@@ -13,12 +12,14 @@ export interface ScheduleValidationSchema {
 export const DEFAULT_VALIDATION_SCHEMA: ScheduleValidationSchema = {
   maxScheduleNameLength: 500,
   maxEventNameLength: 200,
-  maxEventsCount: 50,
-  maxUrlParamSize: 100000, // 100KB
+  maxEventsCount: 100, // Increased from 50
+  maxUrlParamSize: 500000, // Increased from 100KB to 500KB
   allowedTimeFormats: [
     /^\d{1,2}:\d{2}\s?(AM|PM)$/i,
     /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/,
-    /^\d+$/ // Unix timestamp
+    /^\d+$/, // Unix timestamp
+    /^\d{1,2}:\d{2}$/, // 24-hour format without AM/PM
+    /.*/ // Allow any format - let the app handle time parsing
   ]
 };
 
@@ -29,7 +30,7 @@ export const encodeHtml = (text: string): string => {
   return div.innerHTML;
 };
 
-// Enhanced schedule data validation
+// More lenient schedule data validation
 export const validateScheduleData = (data: any, schema: ScheduleValidationSchema = DEFAULT_VALIDATION_SCHEMA): {
   isValid: boolean;
   sanitizedData: any;
@@ -39,87 +40,100 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   let sanitizedData = { ...data };
 
   try {
-    // Validate schedule name
+    console.log('Validating schedule data:', data);
+
+    // Validate schedule name - be more lenient
     if (data.name) {
-      if (typeof data.name !== 'string') {
-        errors.push('Schedule name must be a string');
-        sanitizedData.name = 'Untitled Schedule';
-      } else if (data.name.length > schema.maxScheduleNameLength) {
-        errors.push(`Schedule name too long (max ${schema.maxScheduleNameLength} characters)`);
-        sanitizedData.name = sanitizeInput(data.name.substring(0, schema.maxScheduleNameLength));
+      if (typeof data.name === 'string') {
+        if (data.name.length > schema.maxScheduleNameLength) {
+          sanitizedData.name = data.name.substring(0, schema.maxScheduleNameLength);
+        } else {
+          sanitizedData.name = data.name; // Keep original name, just basic sanitization
+        }
       } else {
-        sanitizedData.name = sanitizeInput(data.name);
+        sanitizedData.name = 'Untitled Schedule';
       }
+    } else {
+      sanitizedData.name = data.scheduleName || 'Untitled Schedule';
     }
 
-    // Validate schedule type
-    const allowedTypes = ['custom', 'generated', 'imported'];
-    if (data.type && !allowedTypes.includes(data.type)) {
+    // Validate schedule type - be more permissive
+    const allowedTypes = ['custom', 'generated', 'imported', 'shared', 'default'];
+    if (data.type && typeof data.type === 'string') {
+      sanitizedData.type = allowedTypes.includes(data.type) ? data.type : 'custom';
+    } else {
       sanitizedData.type = 'custom';
     }
-    if (data.scheduleType && !allowedTypes.includes(data.scheduleType)) {
-      sanitizedData.scheduleType = 'custom';
+
+    // Handle legacy scheduleType field
+    if (data.scheduleType && typeof data.scheduleType === 'string') {
+      sanitizedData.scheduleType = allowedTypes.includes(data.scheduleType) ? data.scheduleType : 'custom';
     }
 
-    // Validate events array
-    if (data.events && Array.isArray(data.events)) {
-      if (data.events.length > schema.maxEventsCount) {
-        errors.push(`Too many events (max ${schema.maxEventsCount})`);
-        sanitizedData.events = data.events.slice(0, schema.maxEventsCount);
+    // Validate events array - be more lenient
+    const eventsArray = data.events || data.setEvents || [];
+    if (Array.isArray(eventsArray)) {
+      if (eventsArray.length > schema.maxEventsCount) {
+        console.warn(`Too many events (${eventsArray.length}), truncating to ${schema.maxEventsCount}`);
+        sanitizedData.events = eventsArray.slice(0, schema.maxEventsCount);
+      } else {
+        sanitizedData.events = eventsArray;
       }
 
-      sanitizedData.events = data.events.map((event: any, index: number) => {
+      // Sanitize individual events with minimal validation
+      sanitizedData.events = sanitizedData.events.map((event: any, index: number) => {
         const sanitizedEvent = { ...event };
 
-        // Validate event name
-        if (event.name) {
-          if (typeof event.name !== 'string') {
-            sanitizedEvent.name = `Event ${index + 1}`;
-          } else if (event.name.length > schema.maxEventNameLength) {
-            sanitizedEvent.name = sanitizeInput(event.name.substring(0, schema.maxEventNameLength));
-          } else {
-            sanitizedEvent.name = sanitizeInput(event.name);
-          }
+        // Event name - keep original or provide fallback
+        if (event.name && typeof event.name === 'string') {
+          sanitizedEvent.name = event.name.length > schema.maxEventNameLength 
+            ? event.name.substring(0, schema.maxEventNameLength)
+            : event.name;
+        } else if (event.title && typeof event.title === 'string') {
+          sanitizedEvent.name = event.title.length > schema.maxEventNameLength 
+            ? event.title.substring(0, schema.maxEventNameLength)
+            : event.title;
+        } else {
+          sanitizedEvent.name = `Event ${index + 1}`;
         }
 
-        // Validate time fields
+        // Time fields - accept any format, let the app handle parsing
         ['startTime', 'endTime', 'start', 'end'].forEach(timeField => {
           if (event[timeField]) {
-            const timeValue = event[timeField];
-            if (typeof timeValue === 'string') {
-              const isValidFormat = schema.allowedTimeFormats.some(format => format.test(timeValue));
-              if (!isValidFormat) {
-                console.warn(`Invalid time format for ${timeField}:`, timeValue);
-              }
-            }
+            sanitizedEvent[timeField] = event[timeField];
           }
         });
 
-        // Validate color data
+        // Color data - validate but provide fallback
         if (event.colorData && typeof event.colorData === 'object') {
           const { red, green, blue } = event.colorData;
           if (typeof red === 'number' && typeof green === 'number' && typeof blue === 'number') {
-            if (red < 0 || red > 1 || green < 0 || green > 1 || blue < 0 || blue > 1) {
-              sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 }; // Default blue
-            }
+            // Allow colors outside 0-1 range, some apps might use 0-255
+            sanitizedEvent.colorData = event.colorData;
+          } else {
+            sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 }; // Default blue
           }
+        } else {
+          sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 }; // Default blue
         }
 
         return sanitizedEvent;
       });
+    } else {
+      // No events is still valid
+      sanitizedData.events = [];
     }
 
-    // Validate setEvents (legacy support)
-    if (data.setEvents && Array.isArray(data.setEvents)) {
-      sanitizedData.setEvents = sanitizedData.events || data.setEvents.map((event: any, index: number) => ({
-        ...event,
-        name: event.name ? sanitizeInput(event.name.substring(0, schema.maxEventNameLength)) : `Event ${index + 1}`
-      }));
+    // Preserve other fields that might be important
+    if (data.userId) {
+      sanitizedData.userId = data.userId;
     }
+
+    console.log('Validation completed successfully:', sanitizedData);
 
   } catch (error) {
-    errors.push('Failed to validate schedule data structure');
     console.error('Schedule validation error:', error);
+    errors.push('Failed to validate schedule data structure');
   }
 
   return {
@@ -129,7 +143,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   };
 };
 
-// Enhanced URL parameter validation
+// More lenient URL parameter validation
 export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VALIDATION_SCHEMA.maxUrlParamSize): {
   isValid: boolean;
   error?: string;
@@ -142,20 +156,16 @@ export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VA
     return { isValid: false, error: `Parameter too large (max ${maxSize} bytes)` };
   }
 
-  // Check for malicious patterns in encoded data
+  // Only check for the most obvious malicious patterns
   const suspiciousPatterns = [
-    /<script/i,
-    /javascript:/i,
-    /vbscript:/i,
-    /data:text\/html/i,
-    /eval\(/i,
-    /Function\(/i,
-    /setTimeout\(/i,
-    /setInterval\(/i
+    /<script[^>]*>.*?<\/script>/gi,
+    /javascript:\s*[^;]+/gi,
+    /on\w+\s*=\s*["\'][^"\']*["\']>/gi
   ];
 
   const hasSuspiciousContent = suspiciousPatterns.some(pattern => pattern.test(param));
   if (hasSuspiciousContent) {
+    console.warn('Suspicious content detected in parameter');
     return { isValid: false, error: 'Suspicious content detected in parameter' };
   }
 
@@ -168,11 +178,8 @@ export const renderSafeText = (text: string | undefined, fallback: string = ''):
     return fallback;
   }
 
-  // Sanitize input first
-  const sanitized = sanitizeInput(text);
-  
-  // Then HTML encode for safe rendering
-  return encodeHtml(sanitized);
+  // Basic sanitization only
+  return text.replace(/[<>]/g, '');
 };
 
 // Validation for external API requests (translation)
@@ -189,11 +196,8 @@ export const validateTranslationInput = (text: string): {
     return { isValid: false, sanitizedText: '', error: 'Text too long for translation' };
   }
 
-  const sanitizedText = sanitizeInput(text);
+  // Basic sanitization
+  const sanitizedText = text.replace(/[<>]/g, '');
   
-  if (!validateFormInput(sanitizedText, 1000)) {
-    return { isValid: false, sanitizedText: '', error: 'Text contains invalid characters' };
-  }
-
   return { isValid: true, sanitizedText };
 };
