@@ -12,13 +12,9 @@ export interface ScheduleValidationSchema {
 export const DEFAULT_VALIDATION_SCHEMA: ScheduleValidationSchema = {
   maxScheduleNameLength: 500,
   maxEventNameLength: 200,
-  maxEventsCount: 100, // Increased from 50
-  maxUrlParamSize: 500000, // Increased from 100KB to 500KB
+  maxEventsCount: 100,
+  maxUrlParamSize: 1000000, // Increased to 1MB for large schedules
   allowedTimeFormats: [
-    /^\d{1,2}:\d{2}\s?(AM|PM)$/i,
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/,
-    /^\d+$/, // Unix timestamp
-    /^\d{1,2}:\d{2}$/, // 24-hour format without AM/PM
     /.*/ // Allow any format - let the app handle time parsing
   ]
 };
@@ -30,7 +26,7 @@ export const encodeHtml = (text: string): string => {
   return div.innerHTML;
 };
 
-// More lenient schedule data validation
+// Much more lenient schedule data validation
 export const validateScheduleData = (data: any, schema: ScheduleValidationSchema = DEFAULT_VALIDATION_SCHEMA): {
   isValid: boolean;
   sanitizedData: any;
@@ -42,98 +38,80 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   try {
     console.log('Validating schedule data:', data);
 
-    // Validate schedule name - be more lenient
-    if (data.name) {
-      if (typeof data.name === 'string') {
-        if (data.name.length > schema.maxScheduleNameLength) {
-          sanitizedData.name = data.name.substring(0, schema.maxScheduleNameLength);
-        } else {
-          sanitizedData.name = data.name; // Keep original name, just basic sanitization
+    // Very basic validation - just ensure we have some kind of data structure
+    if (!data || typeof data !== 'object') {
+      errors.push('Invalid data structure');
+      return { isValid: false, sanitizedData: {}, errors };
+    }
+
+    // Handle schedule name with multiple possible field names
+    if (data.name || data.scheduleName || data.title) {
+      sanitizedData.name = data.name || data.scheduleName || data.title || 'Imported Schedule';
+    } else {
+      sanitizedData.name = 'Imported Schedule';
+    }
+
+    // Handle schedule type
+    sanitizedData.type = data.type || data.scheduleType || 'imported';
+
+    // Handle events with multiple possible field names and be very permissive
+    const possibleEventFields = ['events', 'setEvents', 'scheduleEvents', 'items', 'classes'];
+    let eventsArray = [];
+    
+    for (const field of possibleEventFields) {
+      if (data[field] && Array.isArray(data[field])) {
+        eventsArray = data[field];
+        break;
+      }
+    }
+
+    // If no events found in standard fields, look for any array in the data
+    if (eventsArray.length === 0) {
+      for (const [key, value] of Object.entries(data)) {
+        if (Array.isArray(value) && value.length > 0) {
+          console.log(`Found potential events array in field: ${key}`);
+          eventsArray = value;
+          break;
         }
-      } else {
-        sanitizedData.name = 'Untitled Schedule';
       }
-    } else {
-      sanitizedData.name = data.scheduleName || 'Untitled Schedule';
     }
 
-    // Validate schedule type - be more permissive
-    const allowedTypes = ['custom', 'generated', 'imported', 'shared', 'default'];
-    if (data.type && typeof data.type === 'string') {
-      sanitizedData.type = allowedTypes.includes(data.type) ? data.type : 'custom';
-    } else {
-      sanitizedData.type = 'custom';
-    }
+    console.log('Found events array:', eventsArray);
 
-    // Handle legacy scheduleType field
-    if (data.scheduleType && typeof data.scheduleType === 'string') {
-      sanitizedData.scheduleType = allowedTypes.includes(data.scheduleType) ? data.scheduleType : 'custom';
-    }
-
-    // Validate events array - be more lenient
-    const eventsArray = data.events || data.setEvents || [];
+    // Process events with minimal validation
     if (Array.isArray(eventsArray)) {
-      if (eventsArray.length > schema.maxEventsCount) {
-        console.warn(`Too many events (${eventsArray.length}), truncating to ${schema.maxEventsCount}`);
-        sanitizedData.events = eventsArray.slice(0, schema.maxEventsCount);
-      } else {
-        sanitizedData.events = eventsArray;
-      }
-
-      // Sanitize individual events with minimal validation
-      sanitizedData.events = sanitizedData.events.map((event: any, index: number) => {
+      sanitizedData.events = eventsArray.map((event: any, index: number) => {
+        // Very permissive event processing - keep all data
         const sanitizedEvent = { ...event };
 
-        // Event name - keep original or provide fallback
-        if (event.name && typeof event.name === 'string') {
-          sanitizedEvent.name = event.name.length > schema.maxEventNameLength 
-            ? event.name.substring(0, schema.maxEventNameLength)
-            : event.name;
-        } else if (event.title && typeof event.title === 'string') {
-          sanitizedEvent.name = event.title.length > schema.maxEventNameLength 
-            ? event.title.substring(0, schema.maxEventNameLength)
-            : event.title;
-        } else {
+        // Ensure we have some kind of name
+        if (!sanitizedEvent.name && !sanitizedEvent.title) {
           sanitizedEvent.name = `Event ${index + 1}`;
         }
 
-        // Time fields - accept any format, let the app handle parsing
-        ['startTime', 'endTime', 'start', 'end'].forEach(timeField => {
-          if (event[timeField]) {
-            sanitizedEvent[timeField] = event[timeField];
-          }
-        });
-
-        // Color data - validate but provide fallback
-        if (event.colorData && typeof event.colorData === 'object') {
-          const { red, green, blue } = event.colorData;
-          if (typeof red === 'number' && typeof green === 'number' && typeof blue === 'number') {
-            // Allow colors outside 0-1 range, some apps might use 0-255
-            sanitizedEvent.colorData = event.colorData;
-          } else {
-            sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 }; // Default blue
-          }
-        } else {
-          sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 }; // Default blue
+        // Provide default color if none exists
+        if (!sanitizedEvent.colorData && !sanitizedEvent.color) {
+          sanitizedEvent.colorData = { red: 0.231, green: 0.510, blue: 0.965 };
         }
 
         return sanitizedEvent;
       });
     } else {
-      // No events is still valid
       sanitizedData.events = [];
     }
 
-    // Preserve other fields that might be important
-    if (data.userId) {
-      sanitizedData.userId = data.userId;
-    }
+    // Preserve all other fields from the original data
+    Object.keys(data).forEach(key => {
+      if (!sanitizedData.hasOwnProperty(key)) {
+        sanitizedData[key] = data[key];
+      }
+    });
 
     console.log('Validation completed successfully:', sanitizedData);
 
   } catch (error) {
     console.error('Schedule validation error:', error);
-    errors.push('Failed to validate schedule data structure');
+    errors.push('Failed to process schedule data');
   }
 
   return {
@@ -143,7 +121,7 @@ export const validateScheduleData = (data: any, schema: ScheduleValidationSchema
   };
 };
 
-// More lenient URL parameter validation
+// Much more lenient URL parameter validation
 export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VALIDATION_SCHEMA.maxUrlParamSize): {
   isValid: boolean;
   error?: string;
@@ -156,17 +134,16 @@ export const validateUrlParameter = (param: string, maxSize: number = DEFAULT_VA
     return { isValid: false, error: `Parameter too large (max ${maxSize} bytes)` };
   }
 
-  // Only check for the most obvious malicious patterns
-  const suspiciousPatterns = [
+  // Only block obviously malicious content
+  const dangerousPatterns = [
     /<script[^>]*>.*?<\/script>/gi,
-    /javascript:\s*[^;]+/gi,
-    /on\w+\s*=\s*["\'][^"\']*["\']>/gi
+    /javascript:\s*[^;]+/gi
   ];
 
-  const hasSuspiciousContent = suspiciousPatterns.some(pattern => pattern.test(param));
-  if (hasSuspiciousContent) {
-    console.warn('Suspicious content detected in parameter');
-    return { isValid: false, error: 'Suspicious content detected in parameter' };
+  const hasDangerousContent = dangerousPatterns.some(pattern => pattern.test(param));
+  if (hasDangerousContent) {
+    console.warn('Dangerous content detected in parameter');
+    return { isValid: false, error: 'Dangerous content detected' };
   }
 
   return { isValid: true };
