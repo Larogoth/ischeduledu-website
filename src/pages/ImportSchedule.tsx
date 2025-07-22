@@ -7,6 +7,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, Star, Users, GraduationCap, Copy, Sparkles, Shield, Zap, Heart } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
+import { validateScheduleData, validateUrlParameter, renderSafeText, DEFAULT_VALIDATION_SCHEMA } from '@/utils/inputValidation';
+import { logSafeError, createUserError, ErrorSeverity, handleAsyncError } from '@/utils/errorHandling';
 
 interface ScheduleData {
   name: string;
@@ -53,6 +55,7 @@ const ImportSchedule = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [shareUrlCopied, setShareUrlCopied] = useState(false);
+  const [validationWarnings, setValidationWarnings] = useState<string[]>([]);
 
   // Convert TimeInterval (seconds since 2001-01-01) to JavaScript Date
   const parseTimeInterval = (timeInterval: number): Date => {
@@ -158,25 +161,40 @@ const ImportSchedule = () => {
     console.log('=== TRANSFORMING SCHEDULE DATA ===');
     console.log('Raw data:', JSON.stringify(rawData, null, 2));
     
+    // Enhanced validation with security checks
+    const validationResult = validateScheduleData(rawData);
+    
+    if (!validationResult.isValid) {
+      logSafeError(
+        new Error(`Schedule validation failed: ${validationResult.errors.join(', ')}`),
+        'transformScheduleData',
+        ErrorSeverity.MEDIUM
+      );
+      setValidationWarnings(validationResult.errors);
+    }
+    
+    // Use sanitized data for processing
+    const sanitizedData = validationResult.sanitizedData;
+    
     let events: any[] = [];
     let scheduleName = '';
     let scheduleType = 'custom';
     
-    if (rawData.name) {
-      scheduleName = rawData.name;
+    if (sanitizedData.name) {
+      scheduleName = sanitizedData.name;
     }
     
-    if (rawData.scheduleType) {
-      scheduleType = rawData.scheduleType;
-    } else if (rawData.type) {
-      scheduleType = rawData.type;
+    if (sanitizedData.scheduleType) {
+      scheduleType = sanitizedData.scheduleType;
+    } else if (sanitizedData.type) {
+      scheduleType = sanitizedData.type;
     }
     
-    if (rawData.events && Array.isArray(rawData.events)) {
-      events = rawData.events;
+    if (sanitizedData.events && Array.isArray(sanitizedData.events)) {
+      events = sanitizedData.events;
       console.log('Found events array with', events.length, 'events');
-    } else if (rawData.setEvents && Array.isArray(rawData.setEvents)) {
-      events = rawData.setEvents;
+    } else if (sanitizedData.setEvents && Array.isArray(sanitizedData.setEvents)) {
+      events = sanitizedData.setEvents;
       console.log('Found setEvents array with', events.length, 'events');
     } else {
       console.warn('No events array found in data');
@@ -238,6 +256,7 @@ const ImportSchedule = () => {
         console.log(`Successfully processed event: ${eventName}, ${formatTimeFromDate(startTime)} - ${formatTimeFromDate(endTime)}, Duration: ${calculateDuration(startTime, endTime)}`);
       } catch (eventError) {
         console.error('Error processing event:', eventError, 'Event data:', event);
+        logSafeError(eventError, `transformScheduleData-event-${i}`, ErrorSeverity.LOW);
       }
     }
     
@@ -271,6 +290,23 @@ const ImportSchedule = () => {
     let data = urlParams.get('data');
     let version = urlParams.get('v') || '1';
     let isCompressed = urlParams.get('c') === '1';
+    
+    // Enhanced URL parameter validation
+    if (data) {
+      const paramValidation = validateUrlParameter(data);
+      if (!paramValidation.isValid) {
+        logSafeError(
+          new Error(`Invalid URL parameter: ${paramValidation.error}`),
+          'extractDataParameters',
+          ErrorSeverity.HIGH
+        );
+        throw createUserError(
+          new Error(paramValidation.error || 'Invalid URL parameter'),
+          'URL validation',
+          'The share link contains invalid data and cannot be processed.'
+        );
+      }
+    }
     
     console.log('Initial parsing results:', { data: data?.substring(0, 50) + '...', version, isCompressed });
     
@@ -441,34 +477,45 @@ const ImportSchedule = () => {
   useEffect(() => {
     console.log('=== ImportSchedule useEffect TRIGGERED ===');
     
-    const loadScheduleData = () => {
+    const loadScheduleData = async () => {
       try {
         console.log('=== STARTING DATA LOAD PROCESS ===');
         
-        const { data: encodedData, version, isCompressed } = extractDataParameters();
-        
-        if (encodedData) {
-          console.log('Found encoded data, attempting to decode...');
+        const result = await handleAsyncError(async () => {
+          const { data: encodedData, version, isCompressed } = extractDataParameters();
           
-          try {
+          if (encodedData) {
+            console.log('Found encoded data, attempting to decode...');
+            
             const decodedData = safeBase64Decode(encodedData, version, isCompressed);
             const transformedData = transformScheduleData(decodedData);
-            setScheduleData(transformedData);
+            return transformedData;
             
-          } catch (decodeError) {
-            console.error('Failed to decode data:', decodeError);
-            setError('Invalid schedule data format.');
+          } else if (scheduleId) {
+            console.log('Attempting to load schedule by ID:', scheduleId);
+            throw createUserError(
+              new Error('Schedule ID lookup not implemented'),
+              'loadScheduleData',
+              'Schedule ID lookup not yet implemented'
+            );
+          } else {
+            throw createUserError(
+              new Error('No schedule data found'),
+              'loadScheduleData',
+              'No schedule data found in URL. Please check that the share link is complete and try again.'
+            );
           }
-        } else if (scheduleId) {
-          console.log('Attempting to load schedule by ID:', scheduleId);
-          setError('Schedule ID lookup not yet implemented');
+        }, 'loadScheduleData');
+
+        if (result.success) {
+          setScheduleData(result.data);
         } else {
-          console.error('No schedule data found');
-          setError('No schedule data found in URL. Please check that the share link is complete and try again.');
+          setError(result.error.userMessage);
         }
       } catch (err) {
-        console.error('Error in loadScheduleData:', err);
-        setError(`An error occurred while loading the schedule data: ${err.message}`);
+        const safeError = createUserError(err, 'loadScheduleData');
+        setError(safeError.userMessage);
+        logSafeError(err, 'loadScheduleData', ErrorSeverity.HIGH);
       } finally {
         setIsLoading(false);
       }
@@ -503,7 +550,7 @@ const ImportSchedule = () => {
       const scheduleName = scheduleData?.name || "Schedule";
       
       // Format the message exactly like the iOS app
-      const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
+      const shareText = `📅 ${renderSafeText(scheduleName)} - Import into iSchedulEDU
 
 ${correctUrl}
 
@@ -523,7 +570,7 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
       const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
       const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
       const scheduleName = scheduleData?.name || "Schedule";
-      const shareText = `📅 ${scheduleName} - Import into iSchedulEDU
+      const shareText = `📅 ${renderSafeText(scheduleName)} - Import into iSchedulEDU
 
 ${correctUrl}
 
@@ -578,6 +625,21 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
           <p className="text-xl text-gray-600 font-medium">Teacher Schedule Management</p>
           <p className="text-gray-500 mt-2">Import your shared schedule seamlessly</p>
         </div>
+
+        {/* Validation warnings display */}
+        {validationWarnings.length > 0 && (
+          <Alert className="mb-6 border-yellow-200 bg-yellow-50">
+            <AlertCircle className="h-4 w-4 text-yellow-600" />
+            <AlertDescription className="text-yellow-800">
+              <strong>Data cleaned during import:</strong>
+              <ul className="mt-2 list-disc list-inside space-y-1">
+                {validationWarnings.map((warning, index) => (
+                  <li key={index} className="text-sm">{warning}</li>
+                ))}
+              </ul>
+            </AlertDescription>
+          </Alert>
+        )}
 
         {error ? (
           <Card className="mb-8 border-red-200 bg-gradient-to-br from-red-50 to-orange-50 shadow-lg">
@@ -637,7 +699,7 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                 <div className="relative z-10">
                   <CardTitle className="flex items-center gap-4 text-2xl font-bold mb-2">
                     <Calendar className="w-8 h-8" />
-                    {scheduleData.name}
+                    {renderSafeText(scheduleData.name)}
                   </CardTitle>
                   <CardDescription className="text-cyan-100 flex items-center gap-3 text-lg">
                     <Clock className="w-5 h-5" />
@@ -674,7 +736,7 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                           ></div>
                           <div className="md:hidden pl-4">
                             <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-cyan-600 transition-colors break-words">
-                              {event.name}
+                              {renderSafeText(event.name)}
                             </h5>
                             <div className="space-y-2">
                               <div className="flex items-center gap-2 text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
@@ -689,7 +751,7 @@ Don't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-c
                           <div className="hidden md:flex items-center justify-between">
                             <div className="flex-1 pl-4">
                               <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-cyan-600 transition-colors">
-                                {event.name}
+                                {renderSafeText(event.name)}
                               </h5>
                             </div>
                             <div className="text-right">
