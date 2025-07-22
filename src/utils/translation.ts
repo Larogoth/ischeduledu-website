@@ -1,5 +1,7 @@
+
 import { validateFormInput, sanitizeInput } from './security';
 import { logSafeError, ErrorSeverity } from './errorHandling';
+import { validateTranslationInput } from './inputValidation';
 
 export interface TranslationResponse {
   responseData: {
@@ -17,7 +19,28 @@ const getCacheKey = (text: string, targetLang: string): string => {
   return `${text.toLowerCase().trim()}_${targetLang}`;
 };
 
-export const translateText = async (text: string, targetLang: string): Promise<string> => {
+export const isEnglish = (text: string): boolean => {
+  if (!text || typeof text !== 'string') return true;
+  
+  // Simple heuristic to detect non-English text
+  const nonEnglishPatterns = [
+    /[ñáéíóúü]/i, // Spanish
+    /[àâäéèêëïîôöùûüÿç]/i, // French
+    /[äöüß]/i, // German
+    /[àèéìíîòóù]/i, // Italian
+    /[ãâáàéêíóôõú]/i, // Portuguese
+    /[а-яё]/i, // Russian
+    /[\u4e00-\u9fff]/, // Chinese
+    /[\u3040-\u309f\u30a0-\u30ff]/, // Japanese
+    /[\uac00-\ud7af]/, // Korean
+    /[\u0600-\u06ff]/, // Arabic
+    /[\u0900-\u097f]/ // Hindi
+  ];
+
+  return !nonEnglishPatterns.some(pattern => pattern.test(text));
+};
+
+export const translateText = async (text: string, targetLang: string = 'en'): Promise<string> => {
   // Enhanced input validation
   const validation = validateTranslationInput(text);
   if (!validation.isValid) {

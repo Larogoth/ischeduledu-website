@@ -33,8 +33,8 @@ const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: Test
     setIsTranslating(true);
     try {
       const [titleTranslation, contentTranslation] = await Promise.all([
-        !isEnglish(title) ? translateText(title) : Promise.resolve(title),
-        !isEnglish(content) ? translateText(content) : Promise.resolve(content)
+        !isEnglish(title) ? translateText(title, 'en') : Promise.resolve(title),
+        !isEnglish(content) ? translateText(content, 'en') : Promise.resolve(content)
       ]);
       
       setTranslatedTitle(titleTranslation);
