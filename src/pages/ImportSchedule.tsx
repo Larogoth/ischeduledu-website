@@ -1,11 +1,7 @@
 
-import React, { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDropzone } from 'react-dropzone';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 import { handleAsyncError } from '@/utils/errorHandling';
@@ -16,86 +12,43 @@ import { useScheduleStore } from '@/store/scheduleStore';
 
 const ImportSchedule = () => {
   const navigate = useNavigate();
+  const { scheduleId } = useParams();
   const { setScheduleData } = useScheduleStore();
 
-  const [scheduleName, setScheduleName] = useState<string>('');
-  const [scheduleType, setScheduleType] = useState<string>('custom');
-  const [rawDataText, setRawDataText] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    setIsLoading(true);
-    setError(null);
-
-    if (acceptedFiles.length === 0) {
-      setError("No files were uploaded.");
+  useEffect(() => {
+    if (scheduleId) {
+      handleScheduleImport(scheduleId);
+    } else {
+      setError("No schedule data found in the URL. Please use a valid share link from the iOS app.");
       setIsLoading(false);
-      return;
     }
+  }, [scheduleId]);
 
-    const file = acceptedFiles[0];
-    const reader = new FileReader();
-
-    reader.onload = async (event) => {
-      try {
-        const fileContent = event.target?.result;
-        if (typeof fileContent === 'string') {
-          await handleRawDataInput(fileContent);
-        } else {
-          setError("Could not read the file content.");
-        }
-      } catch (e) {
-        setError(`An error occurred while reading the file: ${(e as Error).message}`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    reader.onerror = () => {
-      setError("Failed to read the file.");
-      setIsLoading(false);
-    };
-
-    reader.readAsText(file);
-
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: { 'application/json': ['.json'] } })
-
-  const handleRawDataInput = async (rawData: string): Promise<void> => {
+  const handleScheduleImport = async (encodedData: string): Promise<void> => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const rawDataJson = JSON.parse(rawData);
-      await handleTransformAndImport(rawDataJson);
-    } catch (e) {
-      setError(`Failed to parse JSON: ${(e as Error).message}`);
-      setIsLoading(false);
-    }
-  };
-
-  const handleTransformAndImport = async (rawData: any): Promise<void> => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // Transform the data using the enhanced validation
+      // Decode the schedule data from the URL parameter
+      const decodedData = atob(encodedData);
+      const rawDataJson = JSON.parse(decodedData);
+      
+      // Transform the data
       const result = await handleAsyncError(
-        () => Promise.resolve(transformScheduleData(rawData)),
+        () => Promise.resolve(transformScheduleData(rawDataJson)),
         'schedule_transform'
       );
 
       if (result.success === false) {
-        // Only access result.error here
         console.error('Schedule transformation failed:', result.error.userMessage);
         setError(result.error.userMessage);
         setIsLoading(false);
         return;
       }
 
-      // Only access result.data here
       const transformedData = result.data;
 
       // Apply final validation before importing
@@ -106,28 +59,28 @@ const ImportSchedule = () => {
         return;
       }
 
-      // Set additional metadata
+      // Use the sanitized data
       const finalData = validationResult.sanitizedData;
-      finalData.name = scheduleName || finalData.name || 'Untitled Schedule';
-      finalData.type = scheduleType;
 
       // Persist to store and navigate
       setScheduleData(finalData);
       toast({
         title: "Success!",
-        description: "Schedule imported successfully.",
-      })
+        description: "Schedule imported successfully from your iOS app.",
+      });
       navigate('/schedule');
     } catch (error) {
-      setError(`An unexpected error occurred: ${(error as Error).message}`);
+      console.error('Import error:', error);
+      setError(`Invalid schedule link. Please check that you're using a complete share link from the iOS app.`);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
-    event.preventDefault();
-    await handleRawDataInput(rawDataText);
+  const handleRetry = () => {
+    if (scheduleId) {
+      handleScheduleImport(scheduleId);
+    }
   };
 
   return (
@@ -137,58 +90,35 @@ const ImportSchedule = () => {
           <CardTitle className="text-2xl font-bold">Import Schedule</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="scheduleName">Schedule Name</Label>
-              <Input
-                type="text"
-                id="scheduleName"
-                value={scheduleName}
-                onChange={(e) => setScheduleName(e.target.value)}
-                placeholder="Enter schedule name"
-              />
+          {isLoading && (
+            <div className="text-center py-8">
+              <p className="text-gray-600">Importing your schedule...</p>
             </div>
+          )}
 
-            <div>
-              <Label htmlFor="scheduleType">Schedule Type</Label>
-              <select
-                id="scheduleType"
-                className="w-full px-3 py-2 border rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
-                value={scheduleType}
-                onChange={(e) => setScheduleType(e.target.value)}
-              >
-                <option value="custom">Custom</option>
-                <option value="generated">Generated</option>
-                <option value="imported">Imported</option>
-              </select>
+          {error && (
+            <div className="text-center py-8 space-y-4">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                <h3 className="font-semibold text-red-800 mb-2">Import Failed</h3>
+                <p className="text-red-600">{error}</p>
+              </div>
+              
+              <div className="space-y-2">
+                <Button onClick={handleRetry} variant="outline" className="w-full">
+                  Try Again
+                </Button>
+                <p className="text-sm text-gray-500">
+                  Make sure you're using a complete share link from the iSchedulED iOS app.
+                </p>
+              </div>
             </div>
+          )}
 
-            <div>
-              <Label htmlFor="rawData">Raw Schedule Data (JSON)</Label>
-              <Textarea
-                id="rawData"
-                value={rawDataText}
-                onChange={(e) => setRawDataText(e.target.value)}
-                placeholder="Paste raw JSON data here"
-                rows={8}
-              />
+          {!isLoading && !error && (
+            <div className="text-center py-8">
+              <p className="text-green-600">Schedule imported successfully! Redirecting...</p>
             </div>
-
-            <div {...getRootProps()} className={`dropzone w-full p-4 border-2 border-dashed rounded-md cursor-pointer ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}>
-              <input {...getInputProps()} />
-              {
-                isDragActive ?
-                  <p className="text-center text-blue-500">Drop the files here ...</p> :
-                  <p className="text-center text-gray-500">Drag 'n' drop some files here, or click to select files</p>
-              }
-            </div>
-
-            {error && <p className="text-red-500">{error}</p>}
-
-            <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? 'Importing...' : 'Import Schedule'}
-            </Button>
-          </form>
+          )}
         </CardContent>
       </Card>
     </div>
