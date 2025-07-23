@@ -20,7 +20,7 @@ const Header = () => {
         <div className="relative mb-8">
           <div className="absolute inset-0 bg-[#0FA0CE] opacity-10 dark:opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
           <img
-            src="/lovable-uploads/ischeduledu-app-logo-teacher-scheduling-software.png"
+            src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png"
             alt="iSchedulEDU - school schedule generator app logo for teachers, administrators, and educational institutions"
             className="mx-auto w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full shadow-2xl hover:scale-110 transition-all duration-500 ring-4 ring-background ring-opacity-50"
             width="160"
