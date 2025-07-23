@@ -6,28 +6,28 @@ const Screenshots = () => {
 
   const screenshots = [
     {
-      src: "/lovable-uploads/ischededu-saved-schedules-management-interface.png",
+      src: "/lovable-uploads/ischeduledu-saved-schedules-management-interface.png",
       alt: "iSchedulEDU saved schedules management interface showing organized school timetables for teachers and administrators",
       title: "Smart Schedule Management",
       description: "Organize and access all your schedules in one place. Never lose track of your timetables again.",
       icon: <Calendar className="w-6 h-6" />
     },
     {
-      src: "/lovable-uploads/ischededu-daily-notifications-setup-screen.png",
+      src: "/lovable-uploads/ischeduledu-daily-notifications-setup-screen.png",
       alt: "iSchedulEDU daily schedule notifications setup screen for class period alerts and reminders for educators",
       title: "Smart Notifications",
       description: "Get timely reminders for class changes and important schedule updates throughout your day.",
       icon: <Zap className="w-6 h-6" />
     },
     {
-      src: "/lovable-uploads/ischededu-daily-timeline-schedule-view.png",
+      src: "/lovable-uploads/ischeduledu-daily-timeline-schedule-view.png",
       alt: "iSchedulEDU daily timeline view displaying complete school day schedule with class periods and break times",
       title: "Timeline View",
       description: "See your entire day at a glance with our intuitive timeline interface.",
       icon: <Play className="w-6 h-6" />
     },
     {
-      src: "/lovable-uploads/ischededu-rotating-block-schedule-calendar.png",
+      src: "/lovable-uploads/ischeduledu-rotating-block-schedule-calendar.png",
       alt: "iSchedulEDU rotating block schedule calendar managing A-day B-day alternating class periods for schools",
       title: "Rotating Schedules",
       description: "Handle A/B day rotations and complex schedule patterns with ease.",
