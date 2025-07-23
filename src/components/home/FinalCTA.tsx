@@ -47,7 +47,7 @@ const FinalCTA = () => {
 
           <div className="flex justify-center">
             <img
-              src="/lovable-uploads/ischededu-daily-timeline-schedule-view.png"
+              src="/lovable-uploads/ischeduledu-daily-timeline-schedule-view.png"
               alt="iSchedulEDU daily school schedule timeline view showing complete class periods and break times for teachers and administrators"
               className="w-64 h-auto rounded-xl shadow-2xl"
               width="256"
