@@ -6,21 +6,21 @@ const FeaturesHighlight = () => {
       icon: <Clock className="w-8 h-8 text-[#0FA0CE]" />,
       title: "Instant Schedule Generation",
       description: "Create abbreviated schedules for early dismissals and delays in seconds, not minutes.",
-      image: "/lovable-uploads/ischededu-generated-class-schedule-display.png",
+      image: "/lovable-uploads/ischeduledu-generated-class-schedule-display.png",
       alt: "iSchedulEDU instant schedule generation showing quick creation of abbreviated school schedules for delays and early dismissals"
     },
     {
       icon: <Calendar className="w-8 h-8 text-[#0FA0CE]" />,
       title: "Smart Rotating Schedules",
       description: "Handle A/B day rotations and multi-day cycles effortlessly with automatic tracking.",
-      image: "/lovable-uploads/ischededu-rotating-block-schedule-calendar.png",
+      image: "/lovable-uploads/ischeduledu-rotating-block-schedule-calendar.png",
       alt: "iSchedulEDU rotating block schedule calendar managing A-day B-day alternating periods for schools with automatic tracking"
     },
     {
       icon: <Share2 className="w-8 h-8 text-[#0FA0CE]" />,
       title: "Easy Schedule Sharing",
       description: "Share schedules instantly via QR codes or text - perfect for substitute teachers.",
-      image: "/lovable-uploads/ischededu-schedule-customization-colors-notifications.png",
+      image: "/lovable-uploads/ischeduledu-schedule-customization-colors-notifications.png",
       alt: "iSchedulEDU schedule sharing interface with QR code generation for easy distribution to substitute teachers and staff"
     }
   ];
