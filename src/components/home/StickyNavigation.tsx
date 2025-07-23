@@ -10,7 +10,7 @@ const StickyNavigation = () => {
         <div className="flex items-center gap-3">
           <div className="relative">
             <img
-              src="/lovable-uploads/ischededu-app-logo-teacher-scheduling-software.png"
+              src="/lovable-uploads/ischeduedu-app-logo-teacher-scheduling-software.png"
               alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"
               className="w-10 h-10 rounded-full ring-2 ring-[#0FA0CE]/30"
             />
