@@ -146,160 +146,161 @@ const ImportSchedule = () => {
 
   // (Replace the old useEffect and data extraction logic with this improved version)
 
+  // Helper functions (extractDataParameters, decodeUrlSafeBase64, etc.)
+  const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let data = urlParams.get('data');
+    let version = urlParams.get('v') || '1';
+    let isCompressed = urlParams.get('c') === '1';
+    if (data && data.includes('?v=')) {
+      const versionMatch = data.match(/\?v=(\d+)/);
+      if (versionMatch) version = versionMatch[1];
+      const compressionMatch = data.match(/\?c=(\d+)/);
+      if (compressionMatch) isCompressed = compressionMatch[1] === '1';
+      data = data.split('?v=')[0];
+    }
+    return { data, version, isCompressed };
+  };
+
+  const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
+    let base64 = urlSafeBase64.replace(/-/g, '+').replace(/_/g, '/');
+    const remainder = base64.length % 4;
+    if (remainder > 0) base64 += '='.repeat(4 - remainder);
+    const binaryString = atob(base64);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes;
+  };
+
+  const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
+    const binaryData = decodeUrlSafeBase64(encodedData);
+    let jsonData: string;
+    let decompressedData: Uint8Array | null = null;
+    if (isCompressed) {
+      try { decompressedData = pako.inflateRaw(binaryData); } catch {}
+      if (!decompressedData) { try { decompressedData = pako.inflate(binaryData); } catch {} }
+      if (!decompressedData) { try { decompressedData = pako.ungzip(binaryData); } catch {} }
+      jsonData = new TextDecoder().decode(decompressedData || binaryData);
+    } else {
+      jsonData = new TextDecoder().decode(binaryData);
+    }
+    if (!jsonData || jsonData.length === 0) throw new Error('Decompressed data is empty');
+    let shareableSchedule: ShareableSchedule;
+    try { shareableSchedule = JSON.parse(jsonData); } catch (parseError) { throw new Error(`JSON parsing failed: ${parseError.message}`); }
+    if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
+    return convertMinimalToFullSchedule(shareableSchedule);
+  };
+
+  const handleV2Format = (encodedData: string): any => {
+    const binaryData = decodeUrlSafeBase64(encodedData);
+    const jsonData = new TextDecoder().decode(binaryData);
+    return JSON.parse(jsonData);
+  };
+
+  const handleV1Format = (encodedData: string): any => {
+    const decodedData = decodeURIComponent(encodedData);
+    const jsonString = atob(decodedData);
+    return JSON.parse(jsonString);
+  };
+
+  const safeBase64Decode = (encodedData: string, version: string, isCompressed: boolean): any => {
+    if (version === '3') return handleV3Format(encodedData, isCompressed);
+    else if (version === '2') return handleV2Format(encodedData);
+    else return handleV1Format(encodedData);
+  };
+
+  const improvedValidation = (data: any) => {
+    // Use your improved validateScheduleData from the new version
+    // (Assume it's imported and available)
+    return validateScheduleData(data);
+  };
+
+  // Only one useEffect for loading schedule data
   useEffect(() => {
-    const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
-      const urlParams = new URLSearchParams(window.location.search);
-      let data = urlParams.get('data');
-      let version = urlParams.get('v') || '1';
-      let isCompressed = urlParams.get('c') === '1';
-      if (data && data.includes('?v=')) {
-        const versionMatch = data.match(/\?v=(\d+)/);
-        if (versionMatch) version = versionMatch[1];
-        const compressionMatch = data.match(/\?c=(\d+)/);
-        if (compressionMatch) isCompressed = compressionMatch[1] === '1';
-        data = data.split('?v=')[0];
-      }
-      return { data, version, isCompressed };
-    };
-
-    const decodeUrlSafeBase64 = (urlSafeBase64: string): Uint8Array => {
-      let base64 = urlSafeBase64.replace(/-/g, '+').replace(/_/g, '/');
-      const remainder = base64.length % 4;
-      if (remainder > 0) base64 += '='.repeat(4 - remainder);
-      const binaryString = atob(base64);
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-      return bytes;
-    };
-
-    const handleV3Format = (encodedData: string, isCompressed: boolean): any => {
-      const binaryData = decodeUrlSafeBase64(encodedData);
-      let jsonData: string;
-      let decompressedData: Uint8Array | null = null;
-      if (isCompressed) {
-        try { decompressedData = pako.inflateRaw(binaryData); } catch {}
-        if (!decompressedData) { try { decompressedData = pako.inflate(binaryData); } catch {} }
-        if (!decompressedData) { try { decompressedData = pako.ungzip(binaryData); } catch {} }
-        jsonData = new TextDecoder().decode(decompressedData || binaryData);
-      } else {
-        jsonData = new TextDecoder().decode(binaryData);
-      }
-      if (!jsonData || jsonData.length === 0) throw new Error('Decompressed data is empty');
-      let shareableSchedule: ShareableSchedule;
-      try { shareableSchedule = JSON.parse(jsonData); } catch (parseError) { throw new Error(`JSON parsing failed: ${parseError.message}`); }
-      if (!shareableSchedule.n || !shareableSchedule.e || !Array.isArray(shareableSchedule.e)) throw new Error('Invalid schedule data structure - missing required fields (n, e, t)');
-      return convertMinimalToFullSchedule(shareableSchedule);
-    };
-
-    const handleV2Format = (encodedData: string): any => {
-      const binaryData = decodeUrlSafeBase64(encodedData);
-      const jsonData = new TextDecoder().decode(binaryData);
-      return JSON.parse(jsonData);
-    };
-
-    const handleV1Format = (encodedData: string): any => {
-      const decodedData = decodeURIComponent(encodedData);
-      const jsonString = atob(decodedData);
-      return JSON.parse(jsonString);
-    };
-
-    const safeBase64Decode = (encodedData: string, version: string, isCompressed: boolean): any => {
-      if (version === '3') return handleV3Format(encodedData, isCompressed);
-      else if (version === '2') return handleV2Format(encodedData);
-      else return handleV1Format(encodedData);
-    };
-
-    const improvedValidation = (data: any) => {
-      // Use your improved validateScheduleData from the new version
-      // (Assume it's imported and available)
-      return validateScheduleData(data);
-    };
-
-    useEffect(() => {
-      const loadScheduleData = () => {
-        try {
-          const { data: encodedData, version, isCompressed } = extractDataParameters();
-          if (encodedData) {
-            try {
-              const decodedData = safeBase64Decode(encodedData, version, isCompressed);
-              const validationResult = improvedValidation(decodedData);
-              if (!validationResult.isValid) {
-                setError(`Schedule data validation failed: ${validationResult.errors.join(', ')}`);
-                setIsLoading(false);
-                return;
-              }
-              // Now use the old event processing logic on validationResult.sanitizedData
-              const rawData = validationResult.sanitizedData;
-              let events: any[] = [];
-              let scheduleName = '';
-              let scheduleType = 'custom';
-              if (rawData.name) scheduleName = rawData.name;
-              if (rawData.scheduleType) scheduleType = rawData.scheduleType;
-              else if (rawData.type) scheduleType = rawData.type;
-              if (rawData.events && Array.isArray(rawData.events)) events = rawData.events;
-              else if (rawData.setEvents && Array.isArray(rawData.setEvents)) events = rawData.setEvents;
-              else events = [];
-              const processed: ProcessedEvent[] = [];
-              let earliestTime: Date | null = null;
-              let latestTime: Date | null = null;
-              for (let i = 0; i < events.length; i++) {
-                const event = events[i];
-                let eventName = event.name || `Event ${i + 1}`;
-                let startTime: Date;
-                let endTime: Date;
-                let color = formatColor(event.colorData);
-                if (event.startTime !== undefined) startTime = parseDate(event.startTime);
-                else if (event.start !== undefined) startTime = parseDate(event.start);
-                else startTime = new Date();
-                if (event.endTime !== undefined) endTime = parseDate(event.endTime);
-                else if (event.end !== undefined) endTime = parseDate(event.end);
-                else endTime = new Date(startTime.getTime() + 3600000);
-                if (!earliestTime || startTime < earliestTime) earliestTime = startTime;
-                if (!latestTime || endTime > latestTime) latestTime = endTime;
-                processed.push({
-                  name: eventName,
-                  startTime: formatTimeFromDate(startTime),
-                  endTime: formatTimeFromDate(endTime),
-                  duration: calculateDuration(startTime, endTime),
-                  color: color
-                });
-              }
-              setProcessedEvents(processed);
-              const subjects = processed.map(event => event.name);
-              const startTime = earliestTime ? formatTimeFromDate(earliestTime) : '8:00 AM';
-              const endTime = latestTime ? formatTimeFromDate(latestTime) : '3:00 PM';
-              setScheduleData({
-                name: scheduleName,
-                type: scheduleType,
-                subjects: subjects,
-                periods: processed.length,
-                startTime: startTime,
-                endTime: endTime,
-                days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                notifications: false // or set as needed
-              });
+    const loadScheduleData = () => {
+      try {
+        const { data: encodedData, version, isCompressed } = extractDataParameters();
+        if (encodedData) {
+          try {
+            const decodedData = safeBase64Decode(encodedData, version, isCompressed);
+            const validationResult = improvedValidation(decodedData);
+            if (!validationResult.isValid) {
+              setError(`Schedule data validation failed: ${validationResult.errors.join(', ')}`);
               setIsLoading(false);
-            } catch (decodeError) {
-              setError('Invalid schedule data format.');
-              setIsLoading(false);
+              return;
             }
-          } else if (scheduleId) {
-            setError('Schedule ID lookup not yet implemented');
+            // Now use the old event processing logic on validationResult.sanitizedData
+            const rawData = validationResult.sanitizedData;
+            let events: any[] = [];
+            let scheduleName = '';
+            let scheduleType = 'custom';
+            if (rawData.name) scheduleName = rawData.name;
+            if (rawData.scheduleType) scheduleType = rawData.scheduleType;
+            else if (rawData.type) scheduleType = rawData.type;
+            if (rawData.events && Array.isArray(rawData.events)) events = rawData.events;
+            else if (rawData.setEvents && Array.isArray(rawData.setEvents)) events = rawData.setEvents;
+            else events = [];
+            const processed: ProcessedEvent[] = [];
+            let earliestTime: Date | null = null;
+            let latestTime: Date | null = null;
+            for (let i = 0; i < events.length; i++) {
+              const event = events[i];
+              let eventName = event.name || `Event ${i + 1}`;
+              let startTime: Date;
+              let endTime: Date;
+              let color = formatColor(event.colorData);
+              if (event.startTime !== undefined) startTime = parseDate(event.startTime);
+              else if (event.start !== undefined) startTime = parseDate(event.start);
+              else startTime = new Date();
+              if (event.endTime !== undefined) endTime = parseDate(event.endTime);
+              else if (event.end !== undefined) endTime = parseDate(event.end);
+              else endTime = new Date(startTime.getTime() + 3600000);
+              if (!earliestTime || startTime < earliestTime) earliestTime = startTime;
+              if (!latestTime || endTime > latestTime) latestTime = endTime;
+              processed.push({
+                name: eventName,
+                startTime: formatTimeFromDate(startTime),
+                endTime: formatTimeFromDate(endTime),
+                duration: calculateDuration(startTime, endTime),
+                color: color
+              });
+            }
+            setProcessedEvents(processed);
+            const subjects = processed.map(event => event.name);
+            const startTime = earliestTime ? formatTimeFromDate(earliestTime) : '8:00 AM';
+            const endTime = latestTime ? formatTimeFromDate(latestTime) : '3:00 PM';
+            setScheduleData({
+              name: scheduleName,
+              type: scheduleType,
+              subjects: subjects,
+              periods: processed.length,
+              startTime: startTime,
+              endTime: endTime,
+              days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+              notifications: false // or set as needed
+            });
             setIsLoading(false);
-          } else {
-            setError('No schedule data found in URL. Please check that the share link is complete and try again.');
+          } catch (decodeError) {
+            setError('Invalid schedule data format.');
             setIsLoading(false);
           }
-        } catch (err) {
-          setError(`An error occurred while loading the schedule data: ${err.message}`);
+        } else if (scheduleId) {
+          setError('Schedule ID lookup not yet implemented');
+          setIsLoading(false);
+        } else {
+          setError('No schedule data found in URL. Please check that the share link is complete and try again.');
           setIsLoading(false);
         }
-      };
-      const timer = setTimeout(loadScheduleData, 100);
-      return () => clearTimeout(timer);
-    }, [scheduleId, location.pathname, location.search, location.hash]);
+      } catch (err) {
+        setError(`An error occurred while loading the schedule data: ${err.message}`);
+        setIsLoading(false);
+      }
+    };
+    const timer = setTimeout(loadScheduleData, 100);
+    return () => clearTimeout(timer);
+  }, [scheduleId, location.pathname, location.search, location.hash]);
 
   // Add share/copy state
   const [shareUrlCopied, setShareUrlCopied] = useState(false);
