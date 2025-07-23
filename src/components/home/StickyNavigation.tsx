@@ -12,7 +12,7 @@ const StickyNavigation = () => {
             <img
               src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png"
               alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"
-              className="w-10 h-10 object-contain bg-white ring-2 ring-[#0FA0CE]/30"
+              className="w-10 h-10 object-contain ring-2 ring-[#0FA0CE]/30"
             />
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full flex items-center justify-center">
               <Sparkles className="w-2 h-2 text-white" />
