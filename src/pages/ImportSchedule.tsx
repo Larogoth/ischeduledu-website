@@ -301,9 +301,7 @@ const ImportSchedule = () => {
      const { data: encodedData, version, isCompressed } = extractDataParameters();
      const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
      const correctUrl = `${baseUrl}?data=${encodedData}&v=${version}&c=${isCompressed ? '1' : '0'}`;
-     const scheduleName = scheduleData?.name || "Schedule";
-     const shareText = `📅 ${scheduleName} - Import into iSchedulEDU\n\n${correctUrl}\n\nDon't have iSchedulEDU? Get it here: https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850`;
-     await navigator.clipboard.writeText(shareText);
+     await navigator.clipboard.writeText(correctUrl);
      setShareUrlCopied(true);
      setTimeout(() => setShareUrlCopied(false), 2000);
    } catch (error) {
@@ -548,7 +546,7 @@ const ImportSchedule = () => {
                           <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                             <Download className="w-4 h-4 text-green-600" />
                           </div>
-                          <span className="font-medium text-gray-800">QR code, Web Link, and PDF sharing</span>
+                          <span className="font-medium text-gray-800">QR code & PDF sharing</span>
                         </div>
                         <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
                           <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
@@ -605,7 +603,7 @@ const ImportSchedule = () => {
                               ) : (
                                 <>
                                   <Copy className="w-4 h-4" />
-                                  Copy Share Message
+                                  Copy Link
                                 </>
                               )}
                             </Button>
@@ -703,7 +701,7 @@ const ImportSchedule = () => {
                           </div>
                           <div>
                             <h4 className="font-bold text-gray-900 mb-2">Smart Notifications</h4>
-                            <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and upcoming AlarmKit integration.</p>
+                            <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and AlarmKit integration.</p>
                           </div>
                         </div>
                         
@@ -770,7 +768,7 @@ const ImportSchedule = () => {
                               ) : (
                                 <>
                                   <Copy className="w-5 h-5" />
-                                  Copy Share Message
+                                  Copy Link
                                 </>
                               )}
                             </Button>
