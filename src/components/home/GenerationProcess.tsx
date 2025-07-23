@@ -9,19 +9,19 @@ import {
 const GenerationProcess = () => {
   const steps = [
     {
-      image: "/lovable-uploads/ischededu-schedule-setup-parameters-screen.png",
+      image: "/lovable-uploads/ischeduledu-schedule-setup-parameters-screen.png",
       title: "Set Your Parameters",
       description: "Enter your schedule details including start time, end time, and any pre-set events like lunch or electives",
       alt: "iSchedulEDU schedule parameter setup screen showing start time, end time, and lunch period configuration for teachers and school administrators"
     },
     {
-      image: "/lovable-uploads/ischededu-generated-class-schedule-display.png",
+      image: "/lovable-uploads/ischeduledu-generated-class-schedule-display.png",
       title: "Review Generated Schedule",
       description: "See your automatically generated class periods with perfect timing",
       alt: "iSchedulEDU generated class schedule display showing perfectly timed school periods and breaks for educational institutions"
     },
     {
-      image: "/lovable-uploads/ischededu-schedule-customization-colors-notifications.png",
+      image: "/lovable-uploads/ischeduledu-schedule-customization-colors-notifications.png",
       title: "Customize Events",
       description: "Personalize each event with custom colors and notification settings",
       alt: "iSchedulEDU schedule customization interface with color coding and notification settings for class periods and school events"
@@ -30,19 +30,19 @@ const GenerationProcess = () => {
 
   const customSteps = [
     {
-      image: "/lovable-uploads/ischededu-custom-schedule-creation-naming.png",
+      image: "/lovable-uploads/ischeduledu-custom-schedule-creation-naming.png",
       title: "Name Your Schedule & Add Events",
       description: "Give your schedule a name and start adding your custom events",
       alt: "iSchedulEDU custom schedule creation screen for naming and adding school events manually for educational planning"
     },
     {
-      image: "/lovable-uploads/ischededu-event-configuration-times-alerts.png",
+      image: "/lovable-uploads/ischeduledu-event-configuration-times-alerts.png",
       title: "Configure Each Event",
       description: "Set event name, times, alerts, and choose custom colors",
       alt: "iSchedulEDU event configuration interface showing time settings, alerts, and color customization options for school schedules"
     },
     {
-      image: "/lovable-uploads/ischededu-final-schedule-review-custom-events.png",
+      image: "/lovable-uploads/ischeduledu-final-schedule-review-custom-events.png",
       title: "Review Your Schedule",
       description: "See all your events laid out with their custom settings",
       alt: "iSchedulEDU final schedule review showing completed custom school timetable with color-coded events for teachers"
