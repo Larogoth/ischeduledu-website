@@ -11,15 +11,24 @@ import { ScheduleData } from '@/types';
 import { useScheduleStore } from '@/store/scheduleStore';
 import * as pako from 'pako';
 
+interface ProcessedEvent {
+  name: string;
+  startTime: string;
+  endTime: string;
+  color?: string;
+}
+
 const ImportSchedule = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { scheduleId } = useParams();
   const [searchParams] = useSearchParams();
   const location = useLocation();
-  const { setScheduleData } = useScheduleStore();
+  // const { setScheduleData } = useScheduleStore();
 
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [scheduleData, setScheduleData] = useState<ScheduleData | null>(null);
+  const [processedEvents, setProcessedEvents] = useState<ProcessedEvent[]>([]);
 
   // Convert TimeInterval (seconds since 2001-01-01) to JavaScript Date
   const parseTimeInterval = (timeInterval: number): Date => {
@@ -277,128 +286,86 @@ const ImportSchedule = () => {
     setIsLoading(true);
     setError(null);
 
-    console.log('=== SCHEDULE IMPORT DEBUG ===');
-    console.log('1. Encoded data length:', encodedData.length);
-    console.log('2. First 100 chars of encoded data:', encodedData.substring(0, 100));
-
     try {
       // Extract parameters from URL
       const { data: urlData, version, isCompressed } = extractDataParameters();
-      
       let dataToDecode = encodedData;
       if (urlData) {
         dataToDecode = urlData;
       }
-
       // Decode the schedule data
-      console.log('3. Attempting to decode data with version:', version, 'compressed:', isCompressed);
       const decodedData = safeBase64Decode(dataToDecode, version, isCompressed);
-      console.log('4. Decoded data:', decodedData);
-      
       // Transform the data
-      console.log('5. Transforming data...');
       const result = await handleAsyncError(
         () => Promise.resolve(transformScheduleData(decodedData)),
         'schedule_transform'
       );
-
       if (result.success === false) {
-        console.error('6. Schedule transformation failed:', result.error.userMessage);
         setError(result.error.userMessage);
         setIsLoading(false);
         return;
       }
-
       const transformedData = result.data;
-      console.log('6. Transformed data:', transformedData);
-
-      // Apply validation - but with very permissive rules
-      console.log('7. Validating transformed data...');
+      // Apply validation
       const validationResult = validateScheduleData(transformedData);
-      console.log('8. Validation result:', {
-        isValid: validationResult.isValid,
-        errorsCount: validationResult.errors.length,
-        errors: validationResult.errors,
-        hasEvents: validationResult.sanitizedData.events?.length > 0
-      });
-
       if (!validationResult.isValid) {
-        console.error('9. Validation failed with errors:', validationResult.errors);
         setError(`Schedule data validation failed: ${validationResult.errors.join(', ')}`);
         setIsLoading(false);
         return;
       }
-
       // Use the sanitized data
       const finalData = validationResult.sanitizedData;
-      console.log('9. Final data to be stored:', finalData);
-
-      // Persist to store and navigate
       setScheduleData(finalData);
-      console.log('10. Data stored successfully, navigating to schedule page');
-      
+      // Process events for display
+      if (finalData.events && Array.isArray(finalData.events)) {
+        setProcessedEvents(finalData.events.map((event: any) => ({
+          name: event.name,
+          startTime: event.startTime,
+          endTime: event.endTime,
+          color: event.color || undefined
+        })));
+      } else {
+        setProcessedEvents([]);
+      }
       toast({
         title: "Success!",
         description: "Schedule imported successfully from your iOS app.",
       });
-      
-      navigate('/schedule');
+      setIsLoading(false);
     } catch (error) {
-      console.error('=== IMPORT ERROR ===');
-      console.error('Error type:', error?.constructor?.name);
-      console.error('Error message:', error?.message);
-      console.error('Full error:', error);
-      
       let errorMessage = 'Invalid schedule link. Please check that you\'re using a complete share link from the iOS app.';
-      
       if (error instanceof SyntaxError) {
         errorMessage = 'The schedule data format is corrupted. Please generate a new share link from the iOS app.';
       } else if (error?.message?.includes('atob')) {
         errorMessage = 'The schedule link is not properly encoded. Please generate a new share link from the iOS app.';
       }
-      
       setError(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    console.log('=== ImportSchedule useEffect TRIGGERED ===');
-    
     const loadScheduleData = () => {
       try {
-        console.log('=== STARTING DATA LOAD PROCESS ===');
-        
         const { data: encodedData, version, isCompressed } = extractDataParameters();
-        
         if (encodedData) {
-          console.log('Found encoded data, attempting to decode...');
-          
           try {
-            const decodedData = safeBase64Decode(encodedData, version, isCompressed);
-            const transformedData = transformScheduleData(decodedData);
-            setScheduleData(transformedData);
-            
+            handleScheduleImport(encodedData);
           } catch (decodeError) {
-            console.error('Failed to decode data:', decodeError);
             setError('Invalid schedule data format.');
+            setIsLoading(false);
           }
         } else if (scheduleId) {
-          console.log('Attempting to load schedule by ID:', scheduleId);
           handleScheduleImport(scheduleId);
         } else {
-          console.error('No schedule data found');
           setError('No schedule data found in URL. Please check that the share link is complete and try again.');
+          setIsLoading(false);
         }
       } catch (err) {
-        console.error('Error in loadScheduleData:', err);
         setError(`An error occurred while loading the schedule data: ${err.message}`);
-      } finally {
         setIsLoading(false);
       }
     };
-
     const timer = setTimeout(loadScheduleData, 100);
     return () => clearTimeout(timer);
   }, [scheduleId, location.pathname, location.search, location.hash]);
@@ -421,14 +388,12 @@ const ImportSchedule = () => {
               <p className="text-gray-600">Importing your schedule...</p>
             </div>
           )}
-
           {error && (
             <div className="text-center py-8 space-y-4">
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                 <h3 className="font-semibold text-red-800 mb-2">Import Failed</h3>
                 <p className="text-red-600">{error}</p>
               </div>
-              
               <div className="space-y-2">
                 <Button onClick={handleRetry} variant="outline" className="w-full">
                   Try Again
@@ -439,10 +404,16 @@ const ImportSchedule = () => {
               </div>
             </div>
           )}
-
-          {!isLoading && !error && (
+          {!isLoading && !error && scheduleData && (
             <div className="text-center py-8">
-              <p className="text-green-600">Schedule imported successfully! Redirecting...</p>
+              <h2 className="text-xl font-bold mb-4">{scheduleData.name}</h2>
+              <ul className="space-y-2">
+                {processedEvents.map((event, idx) => (
+                  <li key={idx} className="border rounded p-2">
+                    <strong>{event.name}</strong>: {event.startTime} - {event.endTime}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </CardContent>
