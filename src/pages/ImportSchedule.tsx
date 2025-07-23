@@ -18,17 +18,6 @@ const ImportSchedule = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (scheduleId) {
-      console.log('Import triggered with scheduleId:', scheduleId);
-      handleScheduleImport(scheduleId);
-    } else {
-      console.log('No scheduleId found in URL params');
-      setError("No schedule data found in the URL. Please use a valid share link from the iOS app.");
-      setIsLoading(false);
-    }
-  }, [scheduleId]);
-
   const handleScheduleImport = async (encodedData: string): Promise<void> => {
     setIsLoading(true);
     setError(null);
@@ -123,6 +112,17 @@ const ImportSchedule = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (scheduleId) {
+      console.log('Import triggered with scheduleId:', scheduleId);
+      handleScheduleImport(scheduleId);
+    } else {
+      console.log('No scheduleId found in URL params');
+      setError("No schedule data found in the URL. Please use a valid share link from the iOS app.");
+      setIsLoading(false);
+    }
+  }, [scheduleId]);
 
   const handleRetry = () => {
     if (scheduleId) {
