@@ -786,6 +786,6 @@ const ImportSchedule = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ImportSchedule;
