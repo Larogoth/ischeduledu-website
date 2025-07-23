@@ -789,7 +789,7 @@ const ImportSchedule = () => {
                         <p className="text-sm text-green-600 font-semibold">✓ Free Download • 4 Free Sessions • $4.99 One-Time Purchase</p>
                         <p className="text-xs text-gray-500 mt-2 italic leading-relaxed">
                           Users with iSchedulEDU can tap shared links to import directly into the app.<br />
-                          Others will view the schedule webpage, where they can also download the app for full access to all features and unlock the full power of iSchedulEDU..
+                          Others will view the schedule webpage, where they can also download the app for full access to all features.
                         </p>
                         
                         {/* Learn More Link for Desktop */}
