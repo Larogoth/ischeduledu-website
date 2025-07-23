@@ -587,7 +587,7 @@ const ImportSchedule = () => {
                               Share This Schedule
                             </h4>
                             <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                              Copy a formatted message to share with colleagues via any platform
+                              Copy the schedule url to share with colleagues via any platform
                             </p>
                             
                             <Button 
@@ -610,7 +610,7 @@ const ImportSchedule = () => {
                             
                             <div className="space-y-2">
                               <p className="text-sm text-gray-500">
-                                Includes schedule link and App Store link
+                                Includes schedule link
                               </p>
                               <p className="text-xs text-gray-400">
                                 Perfect for iMessage, email, Slack, or any messaging app
@@ -752,7 +752,7 @@ const ImportSchedule = () => {
                               Share This Schedule
                             </h4>
                             <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-                              Copy a formatted message to share with colleagues via any platform
+                              Copy the schedule url to share with colleagues via any platform
                             </p>
                             
                             <Button 
@@ -775,7 +775,7 @@ const ImportSchedule = () => {
                             
                             <div className="space-y-2">
                               <p className="text-sm text-gray-500">
-                                Includes schedule link and App Store link
+                                Includes schedule link
                               </p>
                               <p className="text-xs text-gray-400">
                                 Perfect for iMessage, email, Slack, or any messaging app
