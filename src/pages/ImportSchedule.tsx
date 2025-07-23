@@ -548,7 +548,7 @@ const ImportSchedule = () => {
                           <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                             <Download className="w-4 h-4 text-green-600" />
                           </div>
-                          <span className="font-medium text-gray-800">QR code & PDF sharing</span>
+                          <span className="font-medium text-gray-800">QR code, Web Link, and PDF sharing</span>
                         </div>
                         <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
                           <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
@@ -703,7 +703,7 @@ const ImportSchedule = () => {
                           </div>
                           <div>
                             <h4 className="font-bold text-gray-900 mb-2">Smart Notifications</h4>
-                            <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and AlarmKit integration.</p>
+                            <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and upcoming AlarmKit integration.</p>
                           </div>
                         </div>
                         
