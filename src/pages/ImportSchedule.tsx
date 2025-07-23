@@ -333,11 +333,11 @@ const ImportSchedule = () => {
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
-            <div className="w-20 h-20 rounded-full overflow-hidden mx-auto shadow-lg ring-4 ring-white/20">
+            <div className="w-20 h-20 overflow-hidden mx-auto shadow-lg ring-4 ring-white/20 bg-white">
               <img 
                 src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" 
                 alt="iSchedulEDU Logo" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>

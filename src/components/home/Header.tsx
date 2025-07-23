@@ -22,7 +22,7 @@ const Header = () => {
           <img
             src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png"
             alt="iSchedulEDU - school schedule generator app logo for teachers, administrators, and educational institutions"
-            className="mx-auto w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full shadow-2xl hover:scale-110 transition-all duration-500 ring-4 ring-background ring-opacity-50"
+            className="mx-auto w-32 h-32 md:w-40 md:h-40 mb-8 object-contain bg-white shadow-2xl hover:scale-110 transition-all duration-500 ring-4 ring-background ring-opacity-50"
             width="160"
             height="160"
           />
