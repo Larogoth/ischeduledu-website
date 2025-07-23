@@ -11,15 +11,17 @@ const Header = () => {
       <div className="absolute bottom-10 right-1/4 w-16 h-16 bg-[#0FA0CE]/30 dark:bg-[#0FA0CE]/15 rounded-full blur-xl animate-pulse delay-1000"></div>
       
       <div className="relative z-10">
-        {/* Enhanced Badge with sparkle effect */}
-        <div className="inline-flex flex-col sm:flex-row items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-          <Sparkles className="w-4 h-4" />
-          <span>Trusted by Teachers Worldwide</span>
+        {/* Enhanced Badges Row */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Sparkles className="w-4 h-4" />
+            <span>Trusted by Teachers Worldwide</span>
+          </div>
           <a
             href="https://peerpush.net/p/ischeduledu"
             target="_blank"
             rel="noopener"
-            className="sm:ml-4 flex items-center"
+            className="flex items-center"
           >
             <img
               src="https://peerpush.net/p/ischeduledu/badge"
