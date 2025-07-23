@@ -701,7 +701,7 @@ const ImportSchedule = () => {
                           </div>
                           <div>
                             <h4 className="font-bold text-gray-900 mb-2">Smart Notifications</h4>
-                            <p className="text-gray-600 text-sm">Never miss a class with intelligent alerts and AlarmKit integration.</p>
+                            <p className="text-gray-600 text-sm">Never miss a class ending with intelligent alerts and upcoming AlarmKit integration.</p>
                           </div>
                         </div>
                         
