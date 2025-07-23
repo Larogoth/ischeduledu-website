@@ -12,9 +12,21 @@ const Header = () => {
       
       <div className="relative z-10">
         {/* Enhanced Badge with sparkle effect */}
-        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+        <div className="inline-flex flex-col sm:flex-row items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
           <Sparkles className="w-4 h-4" />
           <span>Trusted by Teachers Worldwide</span>
+          <a
+            href="https://peerpush.net/p/ischeduledu"
+            target="_blank"
+            rel="noopener"
+            className="sm:ml-4 flex items-center"
+          >
+            <img
+              src="https://peerpush.net/p/ischeduledu/badge"
+              alt="iSchedulEDU badge"
+              className="h-8 sm:h-10"
+            />
+          </a>
         </div>
 
         <div className="relative mb-8">
