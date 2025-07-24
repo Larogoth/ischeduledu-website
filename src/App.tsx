@@ -122,18 +122,16 @@ const App = () => {
         <div className="min-h-screen bg-gradient-to-b from-[#0FA0CE] via-[#1a2233] to-[#101624] dark:from-[#0FA0CE] dark:via-[#1a2233] dark:to-[#101624] text-foreground">
           <Toaster />
           <Sonner />
-          <BrowserRouter>
-            <GithubPagesRouter />
-            <RouteDebugger />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/import" element={<ImportSchedule />} />
-              <Route path="/import/:scheduleId" element={<ImportSchedule />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </BrowserRouter>
+          <GithubPagesRouter />
+          <RouteDebugger />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/import" element={<ImportSchedule />} />
+            <Route path="/import/:scheduleId" element={<ImportSchedule />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </div>
       </TooltipProvider>
     </QueryClientProvider>
