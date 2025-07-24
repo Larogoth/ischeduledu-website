@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
 import { initializeSecurity } from "./utils/securityInit";
+import { usePageView } from "./hooks/usePageView";
 
 const queryClient = new QueryClient();
 
@@ -112,6 +113,8 @@ const App = () => {
       document.documentElement.classList.add("dark")
     }
   }, [])
+
+  usePageView();
 
   return (
     <QueryClientProvider client={queryClient}>
