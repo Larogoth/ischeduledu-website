@@ -1,4 +1,3 @@
-
 import { sanitizeErrorMessage } from './security';
 
 // Production-safe error handling
@@ -111,4 +110,13 @@ export const handleValidationError = (
   logSafeError(technicalError, context, ErrorSeverity.LOW);
   
   return new SafeError(userMessage, technicalError, context);
+};
+
+// Add the missing handleSecureError function
+export const handleSecureError = (
+  error: Error | unknown,
+  context: string,
+  severity: ErrorSeverity = ErrorSeverity.MEDIUM
+): void => {
+  logSafeError(error, context, severity);
 };
