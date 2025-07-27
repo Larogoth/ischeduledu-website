@@ -14,7 +14,6 @@ import BlogPost from "./pages/BlogPost";
 import EmergencyScheduling from "./pages/EmergencyScheduling";
 import EqualTimePlanning from "./pages/EqualTimePlanning";
 import ShareablePlans from "./pages/ShareablePlans";
-import AppNameTest from "./components/AppNameTest";
 import { initializeSecurity } from "./utils/securityInit";
 import { usePageView } from "./hooks/usePageView";
 
