@@ -26,7 +26,7 @@ const Header = () => {
             <img
               src="https://peerpush.net/p/ischeduledu/badge"
               alt="iSchedulEDU badge"
-              className="h-8 sm:h-[60px]"
+              className="h-12 sm:h-[60px]"
             />
           </a>
         </div>
