@@ -8,14 +8,14 @@ const ShareablePlans = () => {
     {
       icon: <QrCode className="w-8 h-8 text-[#0FA0CE]" />,
       title: "QR Code Sharing",
-      description: "Generate QR codes instantly that anyone can scan to view your complete schedule.",
-      benefit: "Perfect for substitute teachers and staff"
+      description: "Generate QR codes that app users can scan to import schedules directly into their app.",
+      benefit: "Instant import for app users"
     },
     {
       icon: <MessageSquare className="w-8 h-8 text-green-600" />,
-      title: "Text Message Sharing",
-      description: "Send schedules directly via text message with all details included.",
-      benefit: "Instant communication with parents and colleagues"
+      title: "Universal Link Sharing",
+      description: "Share schedules via Universal Links that work for both app users and non-app users. App users get direct import, others see web version.",
+      benefit: "Works for everyone, regardless of app installation"
     },
     {
       icon: <Download className="w-8 h-8 text-blue-600" />,
@@ -203,32 +203,32 @@ const ShareablePlans = () => {
                     <h4 className="font-bold text-lg text-gray-900">Mrs. Johnson's Class - Emergency Schedule</h4>
                     <p className="text-sm text-gray-500">Monday, January 15th - Early Dismissal Day</p>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                      <span className="font-semibold">9:00-9:30</span>
-                      <span>Math - Fractions Review</span>
-                    </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                      <span className="font-semibold">9:30-10:00</span>
-                      <span>Reading - Chapter 5 Discussion</span>
-                    </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                      <span className="font-semibold">10:00-10:30</span>
-                      <span>Science - Weather Unit</span>
-                    </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                      <span className="font-semibold">10:30-11:00</span>
-                      <span>Social Studies - Community Helpers</span>
-                    </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                      <span className="font-semibold">11:00-11:30</span>
-                      <span>Writing - Journal Entry</span>
-                    </div>
-                  </div>
-                  <div className="mt-4 text-center text-sm text-gray-500">
-                    <p>Lunch: 11:30-12:15 | Recess: 12:15-12:45 | Dismissal: 2:30 PM</p>
-                    <p className="mt-2">Special Notes: Early dismissal due to weather. All subjects covered equally.</p>
-                  </div>
+                                     <div className="space-y-3">
+                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                       <span className="font-semibold">7:55-8:55</span>
+                       <span>Math - Fractions Review</span>
+                     </div>
+                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                       <span className="font-semibold">8:55-9:55</span>
+                       <span>Reading - Chapter 5 Discussion</span>
+                     </div>
+                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                       <span className="font-semibold">9:55-10:55</span>
+                       <span>Science - Weather Unit</span>
+                     </div>
+                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                       <span className="font-semibold">10:55-11:55</span>
+                       <span>Social Studies - Community Helpers</span>
+                     </div>
+                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                       <span className="font-semibold">11:55-1:00</span>
+                       <span>Writing - Journal Entry</span>
+                     </div>
+                   </div>
+                   <div className="mt-4 text-center text-sm text-gray-500">
+                     <p>Lunch: 1:00-1:30 | Afternoon: 1:30-3:00 | Dismissal: 3:00 PM</p>
+                     <p className="mt-2">Special Notes: Regular school day with equal subject periods. Writing gets 5 extra minutes to handle odd division.</p>
+                   </div>
                 </div>
               </CardContent>
             </Card>
@@ -276,8 +276,9 @@ const ShareablePlans = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Yes! When you share via QR code or text message, recipients can view your complete schedule 
-                    without needing the app. The sharing feature creates a web-friendly format that anyone can access.
+                    Yes! <AppName /> supports multiple sharing methods: Universal Links work for both app users and non-app users, 
+                    QR codes are for app users only, and PDF exports work for everyone. Universal Links automatically 
+                    import schedules for app users or show web versions at ischeduledu.app/import for non-app users.
                   </p>
                 </CardContent>
               </Card>

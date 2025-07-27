@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import EmergencyScheduling from "./pages/EmergencyScheduling";
 import EqualTimePlanning from "./pages/EqualTimePlanning";
 import ShareablePlans from "./pages/ShareablePlans";
@@ -135,6 +136,7 @@ const App = () => {
             <Route path="/import" element={<ImportSchedule />} />
             <Route path="/import/:scheduleId" element={<ImportSchedule />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:postId" element={<BlogPost />} />
             <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
             <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
             <Route path="/shareable-plans" element={<ShareablePlans />} />

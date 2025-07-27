@@ -40,7 +40,7 @@ const StickyNavigation = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
           <nav className="flex items-center gap-6">
-            {navigationItems.slice(1, 4).map((item) => (
+            {navigationItems.slice(1, 5).map((item) => (
               <Link
                 key={item.name}
                 to={item.href}

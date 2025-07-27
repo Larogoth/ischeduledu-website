@@ -19,9 +19,9 @@ const EmergencyScheduling = () => {
     },
     {
       icon: <Share2 className="w-8 h-8 text-green-600" />,
-      title: "Quick Schedule Sharing",
-      description: "Share emergency schedules instantly via QR codes or text messages. Perfect for substitute teachers and staff communication.",
-      benefit: "Everyone stays informed instantly"
+      title: "Universal Link Sharing",
+      description: "Share schedules via Universal Links that work for both app users and non-app users. App users get direct import, others see web version.",
+      benefit: "Works for everyone, regardless of app installation"
     },
     {
       icon: <Download className="w-8 h-8 text-blue-600" />,
@@ -195,9 +195,9 @@ const EmergencyScheduling = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Absolutely! <AppName /> supports both QR code sharing for instant distribution 
-                    and PDF export for professional documentation. Perfect for substitute teachers 
-                    or staff who need immediate access to your emergency schedule.
+                    Absolutely! <AppName /> supports multiple sharing methods: Universal Links for app users and non-app users, 
+                    QR codes for app users, text messages, and PDF export for professional documentation. 
+                    Universal Links automatically import schedules for app users or show web versions for non-app users.
                   </p>
                 </CardContent>
               </Card>

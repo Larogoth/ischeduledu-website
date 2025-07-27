@@ -71,11 +71,11 @@ const FAQ = () => {
         },
         {
           q: "Does it support QR code sharing or PDFs?",
-          a: "Absolutely! iSchedulEDU supports both QR code sharing for instant distribution and PDF export for professional documentation. Perfect for substitute teachers or staff who need immediate access to your emergency schedule."
+          a: "Absolutely! iSchedulEDU supports multiple sharing methods: Universal Links for app users and non-app users, QR codes for app users only, text messages, and PDF export for professional documentation. Universal Links automatically import schedules for app users or show web versions for non-app users."
         },
         {
           q: "How do I share my schedule with substitute teachers?",
-          a: "You can share schedules instantly via QR code, text message, or PDF export. The QR code option is particularly popular with substitute teachers as they can scan it and immediately see your complete schedule with all class periods and times."
+          a: "You can share schedules via Universal Links (works for everyone), QR codes (app users only), text messages, or PDF export. Universal Links are perfect for substitute teachers as they automatically import the schedule if they have the app, or show a web version if they don't."
         }
       ]
     },
@@ -93,6 +93,23 @@ const FAQ = () => {
         {
           q: "Can I handle assembly interruptions?",
           a: "Yes! When assemblies eat up your morning, simply set your new start time and iSchedulEDU will create a balanced schedule that gives equal time to all your subjects for the remaining hours."
+        }
+      ]
+    },
+    {
+      title: "Equal Time Division",
+      questions: [
+        {
+          q: "How does iSchedulEDU handle odd time divisions?",
+          a: "When perfect equal division isn't possible, iSchedulEDU makes the first periods equal and adjusts the last period to handle any remaining minutes. This ensures maximum fairness while accounting for odd time divisions."
+        },
+        {
+          q: "What if I have 305 minutes to divide into 5 periods?",
+          a: "The app would create 4 periods of 60 minutes each, and the last period would be 65 minutes. This approach ensures most periods are equal while handling the remainder intelligently."
+        },
+        {
+          q: "Can I manually adjust the equal time periods?",
+          a: "Yes! While iSchedulEDU creates intelligent equal divisions automatically, you can always make manual adjustments if you need to prioritize certain subjects or accommodate special activities."
         }
       ]
     }

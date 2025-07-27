@@ -7,9 +7,9 @@ const EqualTimePlanning = () => {
   const benefits = [
     {
       icon: <Calculator className="w-8 h-8 text-[#0FA0CE]" />,
-      title: "Automatic Equal Division",
-      description: "No more manual math! The app automatically divides your remaining time into equal class periods.",
-      benefit: "Eliminates calculation errors"
+      title: "Smart Equal Division",
+      description: "The app intelligently divides remaining time into equal periods, adjusting the last period if needed to handle odd minutes perfectly.",
+      benefit: "Handles any time division scenario"
     },
     {
       icon: <Clock className="w-8 h-8 text-green-600" />,
@@ -186,38 +186,38 @@ const EqualTimePlanning = () => {
             <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
               <CardContent className="py-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Early Dismissal Day</h3>
-                  <p className="text-gray-600">School ends at 2:30 PM instead of 3:30 PM</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Regular School Day</h3>
+                  <p className="text-gray-600">7:55 AM to 3:00 PM with equal subject periods</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Math</h4>
-                    <p className="text-[#0FA0CE] font-semibold">30 min</p>
-                    <p className="text-sm text-gray-500">9:00-9:30</p>
+                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
+                    <p className="text-sm text-gray-500">7:55-8:55</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Reading</h4>
-                    <p className="text-[#0FA0CE] font-semibold">30 min</p>
-                    <p className="text-sm text-gray-500">9:30-10:00</p>
+                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
+                    <p className="text-sm text-gray-500">8:55-9:55</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Science</h4>
-                    <p className="text-[#0FA0CE] font-semibold">30 min</p>
-                    <p className="text-sm text-gray-500">10:00-10:30</p>
+                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
+                    <p className="text-sm text-gray-500">9:55-10:55</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Social Studies</h4>
-                    <p className="text-[#0FA0CE] font-semibold">30 min</p>
-                    <p className="text-sm text-gray-500">10:30-11:00</p>
+                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
+                    <p className="text-sm text-gray-500">10:55-11:55</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Writing</h4>
-                    <p className="text-[#0FA0CE] font-semibold">30 min</p>
-                    <p className="text-sm text-gray-500">11:00-11:30</p>
+                    <p className="text-[#0FA0CE] font-semibold">65 min</p>
+                    <p className="text-sm text-gray-500">11:55-1:00</p>
                   </div>
                 </div>
                 <div className="text-center mt-6">
-                  <p className="text-sm text-gray-500">Lunch: 11:30-12:15 | Recess: 12:15-12:45 | Dismissal: 2:30</p>
+                  <p className="text-sm text-gray-500">Lunch: 1:00-1:30 | Afternoon: 1:30-3:00 | Note: Writing gets 5 extra minutes to handle odd division</p>
                 </div>
               </CardContent>
             </Card>
@@ -235,9 +235,9 @@ const EqualTimePlanning = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    The app uses precise mathematical calculations to divide your remaining time into perfectly equal periods. 
-                    It accounts for fixed events like lunch and recess, then distributes the remaining time equally 
-                    across all your subjects or class periods.
+                    The app uses intelligent mathematical calculations to divide your remaining time into equal periods. 
+                    When perfect division isn't possible, it makes the first periods equal and adjusts the last period 
+                    to handle any remaining minutes. This ensures maximum fairness while accounting for odd time divisions.
                   </p>
                 </CardContent>
               </Card>
