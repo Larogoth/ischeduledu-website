@@ -3,6 +3,7 @@ import { ChevronLeft, Share2, QrCode, MessageSquare, Download, Users } from "luc
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
 import StickyNavigation from "@/components/home/StickyNavigation";
+import { Helmet } from "react-helmet-async";
 
 const ShareablePlans = () => {
   const sharingMethods = [
@@ -60,9 +61,43 @@ const ShareablePlans = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <StickyNavigation />
-      <div className="pt-20">
+    <>
+      <Helmet>
+        <title>Shareable School Day Plans for Teachers | iSchedulEDU - Schedule Sharing & Collaboration</title>
+        <meta name="description" content="Create professional, shareable schedules that everyone can access instantly. From substitute teachers to parents, iSchedulEDU makes schedule sharing effortless with QR codes, Universal Links, and PDF exports." />
+        <meta name="keywords" content="shareable school schedules, substitute teacher schedule sharing, QR code schedule sharing, Universal Links sharing, PDF schedule export, teacher collaboration app" />
+        <meta property="og:title" content="Shareable School Day Plans for Teachers | iSchedulEDU" />
+        <meta property="og:description" content="Create professional, shareable schedules that everyone can access instantly. From substitute teachers to parents, iSchedulEDU makes schedule sharing effortless." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/shareable-plans" />
+        <link rel="canonical" href="https://ischeduledu.app/shareable-plans" />
+        
+        {/* Article Schema for Shareable Plans */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Shareable School Day Plans for Teachers",
+            "description": "Create professional, shareable schedules that everyone can access instantly. From substitute teachers to parents, iSchedulEDU makes schedule sharing effortless.",
+            "author": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://ischeduledu.app/shareable-plans"
+            }
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-gray-50">
+        <StickyNavigation />
+        <div className="pt-20">
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -341,6 +376,7 @@ const ShareablePlans = () => {
       </div>
       </div>
     </div>
+    </>
   );
 };
 

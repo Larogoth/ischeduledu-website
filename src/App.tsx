@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
@@ -142,29 +143,31 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen bg-gradient-to-b from-[#0FA0CE] via-[#1a2233] to-[#101624] dark:from-[#0FA0CE] dark:via-[#1a2233] dark:to-[#101624] text-foreground">
-          <Toaster />
-          <Sonner />
-          <GithubPagesRouter />
-          <RouteDebugger />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/import" element={<ImportSchedule />} />
-            <Route path="/import/:scheduleId" element={<ImportSchedule />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:postId" element={<BlogPost />} />
-            <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
-            <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
-            <Route path="/shareable-plans" element={<ShareablePlans />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <div className="min-h-screen bg-gradient-to-b from-[#0FA0CE] via-[#1a2233] to-[#101624] dark:from-[#0FA0CE] dark:via-[#1a2233] dark:to-[#101624] text-foreground">
+            <Toaster />
+            <Sonner />
+            <GithubPagesRouter />
+            <RouteDebugger />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/import" element={<ImportSchedule />} />
+              <Route path="/import/:scheduleId" element={<ImportSchedule />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:postId" element={<BlogPost />} />
+              <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
+              <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
+              <Route path="/shareable-plans" element={<ShareablePlans />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 

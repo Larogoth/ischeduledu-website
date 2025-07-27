@@ -3,6 +3,7 @@ import { ChevronLeft, AlertTriangle, Clock, Share2, Download, CheckCircle } from
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
 import StickyNavigation from "@/components/home/StickyNavigation";
+import { Helmet } from "react-helmet-async";
 
 const EmergencyScheduling = () => {
   const features = [
@@ -56,9 +57,43 @@ const EmergencyScheduling = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <StickyNavigation />
-      <div className="pt-20">
+    <>
+      <Helmet>
+        <title>Emergency Schedule Generator for Teachers | iSchedulEDU - Fire Drill & Assembly Scheduling</title>
+        <meta name="description" content="Create emergency schedules instantly when fire drills, assemblies, or weather delays disrupt your school day. Generate equal-length class periods in under 2 minutes with iSchedulEDU." />
+        <meta name="keywords" content="emergency schedule generator, fire drill schedule, assembly interruption, weather delay schedule, substitute teacher emergency, classroom scheduling app" />
+        <meta property="og:title" content="Emergency Schedule Generator for Teachers | iSchedulEDU" />
+        <meta property="og:description" content="Create emergency schedules instantly when fire drills, assemblies, or weather delays disrupt your school day. Generate equal-length class periods in under 2 minutes." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/emergency-scheduling" />
+        <link rel="canonical" href="https://ischeduledu.app/emergency-scheduling" />
+        
+        {/* Article Schema for Emergency Scheduling */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Emergency Schedule Generator for Teachers",
+            "description": "Create emergency schedules instantly when fire drills, assemblies, or weather delays disrupt your school day.",
+            "author": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://ischeduledu.app/emergency-scheduling"
+            }
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-gray-50">
+        <StickyNavigation />
+        <div className="pt-20">
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -243,6 +278,7 @@ const EmergencyScheduling = () => {
       </div>
       </div>
     </div>
+    </>
   );
 };
 

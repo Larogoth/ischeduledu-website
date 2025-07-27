@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, Share2, Clock, AlertTriangle, Users, Download } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
+import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -610,13 +611,50 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
-        <Link to="/blog" className="inline-flex items-center text-primary hover:underline">
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to Blog
-        </Link>
-      </div>
+    <>
+      <Helmet>
+        <title>{post.title} | iSchedulEDU Blog</title>
+        <meta name="description" content={`${post.title} - Read about teacher scheduling solutions, emergency planning, and classroom management tips on the iSchedulEDU blog.`} />
+        <meta name="keywords" content="teacher blog, classroom scheduling, emergency planning, teacher tools, educational technology, classroom management" />
+        <meta property="og:title" content={`${post.title} | iSchedulEDU Blog`} />
+        <meta property="og:description" content={`${post.title} - Read about teacher scheduling solutions, emergency planning, and classroom management tips.`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://ischeduledu.app/blog/${postId}`} />
+        <meta property="article:published_time" content={post.date} />
+        <meta property="article:section" content={post.category} />
+        <link rel="canonical" href={`https://ischeduledu.app/blog/${postId}`} />
+        
+        {/* Article Schema for Blog Posts */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": `${post.title} - Read about teacher scheduling solutions, emergency planning, and classroom management tips.`,
+            "author": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "datePublished": post.date,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://ischeduledu.app/blog/${postId}`
+            }
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-gray-50">
+        <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
+          <Link to="/blog" className="inline-flex items-center text-primary hover:underline">
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            Back to Blog
+          </Link>
+        </div>
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
@@ -665,6 +703,7 @@ const BlogPost = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

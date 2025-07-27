@@ -3,6 +3,7 @@ import { ChevronLeft, Clock, Calculator, Share2, Save, CheckCircle } from "lucid
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
 import StickyNavigation from "@/components/home/StickyNavigation";
+import { Helmet } from "react-helmet-async";
 
 const EqualTimePlanning = () => {
   const benefits = [
@@ -56,9 +57,43 @@ const EqualTimePlanning = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <StickyNavigation />
-      <div className="pt-20">
+    <>
+      <Helmet>
+        <title>Equal Time Lesson Planning App | iSchedulEDU - Fair Schedule Division for Teachers</title>
+        <meta name="description" content="Create perfectly balanced schedules where every subject gets equal time. Stop playing favorites with your subjects. Fair, fast, and frustration-free lesson planning." />
+        <meta name="keywords" content="equal time lesson planning, balanced schedule division, fair subject time, classroom schedule app, teacher planning tool, equal period scheduling" />
+        <meta property="og:title" content="Equal Time Lesson Planning App | iSchedulEDU" />
+        <meta property="og:description" content="Create perfectly balanced schedules where every subject gets equal time. Stop playing favorites with your subjects. Fair, fast, and frustration-free." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/equal-time-planning" />
+        <link rel="canonical" href="https://ischeduledu.app/equal-time-planning" />
+        
+        {/* Article Schema for Equal Time Planning */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Equal Time Lesson Planning App",
+            "description": "Create perfectly balanced schedules where every subject gets equal time. Stop playing favorites with your subjects.",
+            "author": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://ischeduledu.app/equal-time-planning"
+            }
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-gray-50">
+        <StickyNavigation />
+        <div className="pt-20">
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -305,6 +340,7 @@ const EqualTimePlanning = () => {
       </div>
       </div>
     </div>
+    </>
   );
 };
 
