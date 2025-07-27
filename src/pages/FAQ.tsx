@@ -106,7 +106,7 @@ const FAQ = () => {
         },
         {
           q: "What if I have 307 minutes to divide into 5 periods?",
-          a: "The app would create 4 periods of 60 minutes each, and the last period would be 67 minutes. This approach ensures most periods are equal while handling the remainder intelligently."
+          a: "The app would create 4 periods of 61 minutes each, and the last period would be 63 minutes. This approach ensures most periods are equal while handling the remainder intelligently."
         },
         {
           q: "Can I manually adjust the equal time periods?",
