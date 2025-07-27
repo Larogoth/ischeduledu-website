@@ -11,13 +11,20 @@ const BlogPost = () => {
       title: "Best Apps for Classroom Schedule Changes in 2025",
       category: "Teacher Tools",
       date: "2025-01-27",
-      readTime: "8 min read",
+      readTime: "10 min read",
       content: `
         <h2>Introduction</h2>
         <p>As we move into 2025, teachers are facing more schedule disruptions than ever. From unexpected assemblies to weather delays, having the right tools to handle last-minute changes is crucial for maintaining classroom flow and student engagement. The best scheduling apps now offer intelligent equal-time division, multiple sharing methods, and seamless integration with modern iOS features.</p>
 
-        <h2>Why Emergency Scheduling Tools Matter</h2>
-        <p>When your carefully planned day gets thrown off by a fire drill or assembly, you need a solution that works fast. Traditional manual calculations can take 10-15 minutes, time you simply don't have when students are waiting. Modern apps like <AppName /> can create balanced schedules in under 2 minutes, ensuring every subject gets fair time allocation.</p>
+        <h2>Why Smart Scheduling Tools Matter</h2>
+        <p>Whether you're planning ahead for known delays or responding to unexpected disruptions, having the right scheduling tools is crucial. Traditional manual calculations can take 10-15 minutes, time you simply don't have when students are waiting. Modern apps like <AppName /> can create balanced schedules in under 2 minutes, ensuring every subject gets fair time allocation.</p>
+
+        <h2>Proactive Planning vs. Emergency Response</h2>
+        <p>The best scheduling apps serve two critical purposes:</p>
+        <ul>
+          <li><strong>Proactive Planning:</strong> Create and store schedules for known scenarios like 1-hour delays, 2-hour delays, or early dismissal days. Switch between saved schedules instantly when needed.</li>
+          <li><strong>Emergency Response:</strong> Generate new schedules on-the-fly when unexpected disruptions occur like fire drills or assemblies.</li>
+        </ul>
 
         <h2>Top Features to Look For in 2025</h2>
         <ul>
@@ -41,24 +48,27 @@ const BlogPost = () => {
         </ul>
 
         <h2>Real-World Scenarios</h2>
-        <h3>Fire Drill Disruption</h3>
-        <p>When a fire drill cuts into your morning, you need to redistribute remaining time quickly. The best apps create equal periods automatically, handling odd minutes by adjusting the final period. For example, if you have 305 minutes to divide into 5 periods, you get 4 periods of 60 minutes each and 1 period of 65 minutes.</p>
+        <h3>Proactive Planning: Weather Delay Schedules</h3>
+        <p>Smart teachers prepare for weather delays by creating and storing 1-hour and 2-hour delay schedules in advance. When the district announces a delay, you can instantly switch to your pre-made schedule instead of scrambling to adjust all your iOS alarms manually. The best apps let you save multiple scenarios and switch between them seamlessly.</p>
 
-        <h3>Assembly Interruption</h3>
+        <h3>Proactive Planning: Early Dismissal Days</h3>
+        <p>Create schedules for early dismissal days, half-days, or special event days in advance. Store these schedules with descriptive names like "2-Hour Delay Schedule" or "Early Dismissal 1:00 PM" so you can instantly activate them when needed.</p>
+
+        <h3>Emergency Response: Fire Drill Disruption</h3>
+        <p>When a fire drill cuts into your morning, you need to redistribute remaining time quickly. The best apps create equal periods automatically, handling odd minutes by adjusting the final period. For example, if you have 307 minutes to divide into 5 periods, you get 4 periods of 60 minutes each and 1 period of 67 minutes.</p>
+
+        <h3>Emergency Response: Assembly Interruption</h3>
         <p>Morning assemblies eating up your schedule? Look for apps that can rebalance your entire day with equal subject periods in under 2 minutes. The key is intelligent time division that doesn't favor any particular subject.</p>
 
         <h3>Substitute Teacher Handoff</h3>
         <p>Universal Links are perfect for substitute teachers - they work whether the sub has the app or not. App users get direct import, others see the web version. This ensures smooth transitions regardless of the substitute's technical setup.</p>
-
-        <h3>Weather Delays</h3>
-        <p>Late starts due to weather require quick recalculation. The best apps handle this by maintaining equal time distribution while accounting for the shortened day.</p>
 
         <h2>Advanced Features for 2025</h2>
         <h3>AlarmKit Integration (iOS 26+)</h3>
         <p>Modern apps now support Apple's AlarmKit framework, providing enhanced alarm functionality with Live Activities. This means alarms can continue playing even when the app is backgrounded, with system-level controls available.</p>
 
         <h3>Custom Schedule Management</h3>
-        <p>The best apps allow you to create and save custom schedules, with support for weekly rotations and complex scheduling patterns. This is essential for teachers with varied schedules.</p>
+        <p>The best apps allow you to create and save custom schedules for different scenarios. Store 1-hour delay schedules, 2-hour delay schedules, early dismissal schedules, and more. When the district announces a delay, you can instantly switch to your pre-made schedule instead of manually adjusting all your iOS alarms. This proactive approach saves valuable time and reduces stress.</p>
 
         <h3>Professional Sharing</h3>
         <p>Multiple sharing methods ensure compatibility with different scenarios: Universal Links for digital sharing, PDFs for printing, QR codes for app users, and text messages for quick communication.</p>
@@ -71,12 +81,22 @@ const BlogPost = () => {
       title: "How to Instantly Replan Your School Day as a Teacher",
       category: "Classroom Management",
       date: "2025-01-26",
-      readTime: "6 min read",
+      readTime: "8 min read",
       content: `
         <h2>Introduction</h2>
-        <p>When assemblies, fire drills, or weather delays throw your schedule off, you need a solution that works fast. Traditional manual calculations can take 10-15 minutes, but modern apps can create balanced schedules in under 2 minutes. Here's how to instantly replan your school day when disruptions occur.</p>
+        <p>Whether you're planning ahead for known delays or responding to unexpected disruptions, you need a solution that works fast. Traditional manual calculations can take 10-15 minutes, but modern apps can create balanced schedules in under 2 minutes. Here's how to instantly replan your school day using both proactive planning and emergency response strategies.</p>
 
-        <h2>Step-by-Step Emergency Schedule Creation</h2>
+        <h2>Proactive Planning: The Smart Teacher's Secret</h2>
+        <p>Smart teachers don't wait for disruptions to happen. They prepare in advance by creating and storing schedules for common scenarios:</p>
+        <ul>
+          <li><strong>1-Hour Delay Schedules:</strong> Create schedules that start 1 hour later than normal, with adjusted periods for the shortened day</li>
+          <li><strong>2-Hour Delay Schedules:</strong> Prepare for longer delays with even more condensed periods</li>
+          <li><strong>Early Dismissal Schedules:</strong> Plan for half-days or early dismissal events</li>
+          <li><strong>Assembly Day Schedules:</strong> Account for known assemblies or special events</li>
+        </ul>
+        <p>When the district announces a delay, you can instantly switch to your pre-made schedule instead of scrambling to adjust all your iOS alarms manually.</p>
+
+        <h2>Step-by-Step Schedule Creation</h2>
         <h3>1. Assess the Disruption</h3>
         <p>First, determine how much time you've lost and what your new constraints are. For example, if a fire drill cut 30 minutes from your morning, you need to redistribute the remaining time across all subjects.</p>
 
@@ -312,6 +332,86 @@ const BlogPost = () => {
 
         <h2>Conclusion</h2>
         <p>Fire drills don't have to derail your entire day. With the right tools and approach, you can recover quickly and maintain learning momentum. The key is using apps that provide intelligent equal-time division and multiple sharing options to ensure everyone stays informed and on schedule.</p>
+      `
+    },
+    "weather-delay-schedule-planning": {
+      title: "How to Prepare Weather Delay Schedules in Advance: The Smart Teacher's Guide",
+      category: "Proactive Planning",
+      date: "2025-01-24",
+      readTime: "7 min read",
+      content: `
+        <h2>Introduction</h2>
+        <p>Smart teachers don't wait for the district to announce a weather delay to start planning. They prepare in advance by creating and storing weather delay schedules that can be instantly activated when needed. This proactive approach saves valuable time and reduces stress when delays are announced.</p>
+
+        <h2>Why Proactive Weather Delay Planning Matters</h2>
+        <p>When your district announces a 1-hour or 2-hour delay at 6:00 AM, you don't want to spend 15 minutes manually adjusting all your iOS alarms. Instead, you should be able to instantly switch to a pre-made schedule that's already optimized for the shortened day.</p>
+
+        <h2>Creating Your Weather Delay Schedule Library</h2>
+        <h3>1-Hour Delay Schedules</h3>
+        <p>Create schedules that start 1 hour later than normal. For example, if your normal day is 7:55 AM - 3:00 PM, your 1-hour delay schedule would be 8:55 AM - 3:00 PM. The app will automatically calculate equal periods for the shortened day.</p>
+
+        <h3>2-Hour Delay Schedules</h3>
+        <p>Prepare for longer delays with even more condensed periods. A 2-hour delay schedule (9:55 AM - 3:00 PM) will have shorter periods but still maintain equal time distribution across subjects.</p>
+
+        <h3>Early Dismissal Schedules</h3>
+        <p>Plan for early dismissal days by creating schedules that end at 1:00 PM or 2:00 PM instead of 3:00 PM. Store these with descriptive names like "Early Dismissal 1:00 PM" for easy access.</p>
+
+        <h2>Step-by-Step Weather Delay Preparation</h2>
+        <h3>Step 1: Create Your Base Schedules</h3>
+        <p>Use your scheduling app to create and save multiple scenarios:</p>
+        <ul>
+          <li><strong>"1-Hour Delay Schedule":</strong> 8:55 AM - 3:00 PM</li>
+          <li><strong>"2-Hour Delay Schedule":</strong> 9:55 AM - 3:00 PM</li>
+          <li><strong>"Early Dismissal 1:00 PM":</strong> 7:55 AM - 1:00 PM</li>
+          <li><strong>"Early Dismissal 2:00 PM":</strong> 7:55 AM - 2:00 PM</li>
+        </ul>
+
+        <h3>Step 2: Test Your Schedules</h3>
+        <p>Before you need them, test each schedule to ensure the periods are reasonable and the alarms work correctly. The best apps let you preview schedules before saving them.</p>
+
+        <h3>Step 3: Organize Your Library</h3>
+        <p>Use descriptive names and organize your schedules logically. Consider creating folders or categories for different types of delays.</p>
+
+        <h2>Real-World Examples</h2>
+        <h3>1-Hour Delay Scenario</h3>
+        <p><strong>Normal Day:</strong> 7:55 AM - 3:00 PM (7 hours 5 minutes)<br>
+        <strong>1-Hour Delay:</strong> 8:55 AM - 3:00 PM (6 hours 5 minutes)<br>
+        <strong>Result:</strong> 5 periods of approximately 73 minutes each, with the last period adjusted for any odd minutes.</p>
+
+        <h3>2-Hour Delay Scenario</h3>
+        <p><strong>Normal Day:</strong> 7:55 AM - 3:00 PM (7 hours 5 minutes)<br>
+        <strong>2-Hour Delay:</strong> 9:55 AM - 3:00 PM (5 hours 5 minutes)<br>
+        <strong>Result:</strong> 5 periods of approximately 61 minutes each, with the last period adjusted for any odd minutes.</p>
+
+        <h2>Advanced Proactive Planning</h2>
+        <h3>Seasonal Preparation</h3>
+        <p>Create different schedules for different seasons. Winter schedules might include more weather delay scenarios, while spring schedules might focus on field trip days or testing schedules.</p>
+
+        <h3>Event-Based Planning</h3>
+        <p>Prepare for known events like:</p>
+        <ul>
+          <li><strong>Parent-Teacher Conference Days:</strong> Create schedules for half-days</li>
+          <li><strong>Professional Development Days:</strong> Plan for early dismissal</li>
+          <li><strong>Holiday Weeks:</strong> Account for shortened weeks</li>
+        </ul>
+
+        <h2>Sharing Your Prepared Schedules</h2>
+        <h3>Universal Links for Teams</h3>
+        <p>Share your prepared schedules with your team using Universal Links. When the district announces a delay, you can instantly share the appropriate schedule with your colleagues.</p>
+
+        <h3>QR Code Sharing</h3>
+        <p>For app users, QR codes provide instant access to your prepared schedules. Simply scan the code to load the weather delay schedule into your app.</p>
+
+        <h2>Benefits of Proactive Planning</h2>
+        <ul>
+          <li><strong>Time Savings:</strong> No more scrambling to adjust alarms when delays are announced</li>
+          <li><strong>Stress Reduction:</strong> Peace of mind knowing you're prepared for any scenario</li>
+          <li><strong>Better Teaching:</strong> More time to focus on students instead of schedule logistics</li>
+          <li><strong>Professional Image:</strong> Always prepared and organized</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>Proactive weather delay planning is the hallmark of organized, professional teachers. By creating and storing weather delay schedules in advance, you can instantly respond to any delay announcement while maintaining equal time for all subjects. This approach saves time, reduces stress, and ensures your students get the most out of every shortened day.</p>
       `
     },
     "substitute-teacher-schedule-sharing": {

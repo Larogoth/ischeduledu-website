@@ -47,6 +47,14 @@ const Blog = () => {
       date: "2025-01-03"
     },
     {
+      id: "weather-delay-schedule-planning",
+      title: "How to Prepare Weather Delay Schedules in Advance: The Smart Teacher's Guide",
+      excerpt: "Smart teachers prepare weather delay schedules in advance. Learn how to create 1-hour and 2-hour delay schedules that you can instantly activate when delays are announced.",
+      readTime: "7 min read",
+      category: "Proactive Planning",
+      date: "2025-01-24"
+    },
+    {
       id: "assembly-interruption-classroom-management",
       title: "When Assemblies Eat Up Your Morning: Quick Schedule Adjustments",
       excerpt: "How to rebalance your entire day when special events disrupt your carefully planned schedule.",
