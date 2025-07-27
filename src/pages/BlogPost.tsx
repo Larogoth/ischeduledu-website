@@ -56,7 +56,7 @@ const BlogPost = () => {
         <p>Create schedules for early dismissal days, half-days, or special event days in advance. Store these schedules with descriptive names like "2-Hour Delay Schedule" or "Early Dismissal 1:00 PM" so you can instantly activate them when needed.</p>
 
         <h3>Emergency Response: Fire Drill Disruption</h3>
-        <p>When a fire drill cuts into your morning, you need to redistribute remaining time quickly. The best apps create equal periods automatically, handling odd minutes by adjusting the final period. For example, if you have 307 minutes to divide into 5 periods, you get 4 periods of 60 minutes each and 1 period of 67 minutes.</p>
+        <p>When a fire drill cuts into your morning, you need to redistribute remaining time quickly. The best apps create equal periods automatically, handling odd minutes by adjusting the final period. For example, if you have 307 minutes to divide into 5 periods, you get 4 periods of 61 minutes each and 1 period of 63 minutes.</p>
 
         <h3>Emergency Response: Assembly Interruption</h3>
         <p>Morning assemblies eating up your schedule? Look for apps that can rebalance your entire day with equal subject periods in under 2 minutes. The key is intelligent time division that doesn't favor any particular subject.</p>
