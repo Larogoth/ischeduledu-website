@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import AppName from "@/components/AppName";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 const FAQ = () => {
   useEffect(() => {
@@ -116,19 +117,50 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
-        <Link to="/" className="inline-flex items-center text-primary hover:underline">
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to Home
-        </Link>
-      </div>
+    <>
+      <Helmet>
+        <title>FAQ - iSchedulEDU | Emergency Schedule Generator for Teachers</title>
+        <meta name="description" content="Get answers to common questions about iSchedulEDU. Learn how to create emergency schedules, share with substitute teachers, handle fire drills, and manage equal time divisions for your classroom." />
+        <meta name="keywords" content="teacher schedule FAQ, emergency schedule questions, substitute teacher sharing, fire drill schedule, equal time division, classroom scheduling app" />
+        <meta property="og:title" content="FAQ - iSchedulEDU | Emergency Schedule Generator for Teachers" />
+        <meta property="og:description" content="Get answers to common questions about iSchedulEDU. Learn how to create emergency schedules, share with substitute teachers, handle fire drills, and manage equal time divisions for your classroom." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/faq" />
+        <link rel="canonical" href="https://ischeduledu.app/faq" />
+        
+        {/* FAQ Schema Markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqSections.flatMap(section => 
+              section.questions.map(q => ({
+                "@type": "Question",
+                "name": q.q,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": q.a
+                }
+              }))
+            )
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-gray-50">
+        <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
+          <Link to="/" className="inline-flex items-center text-primary hover:underline">
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            Back to Home
+          </Link>
+        </div>
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
             <p className="text-lg text-gray-600">Find answers to common questions about <AppName /></p>
+            <p className="text-sm text-gray-500 mt-2">Emergency scheduling, substitute teacher sharing, fire drill management, and equal time division for teachers</p>
           </div>
           
           <div className="space-y-6">
@@ -152,6 +184,7 @@ const FAQ = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
