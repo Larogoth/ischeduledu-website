@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, Share2, QrCode, MessageSquare, Download, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
+import StickyNavigation from "@/components/home/StickyNavigation";
 
 const ShareablePlans = () => {
   const sharingMethods = [
@@ -60,12 +61,8 @@ const ShareablePlans = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
-        <Link to="/" className="inline-flex items-center text-primary hover:underline">
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to Home
-        </Link>
-      </div>
+      <StickyNavigation />
+      <div className="pt-20">
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -341,6 +338,7 @@ const ShareablePlans = () => {
             </Card>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

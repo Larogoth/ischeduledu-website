@@ -121,6 +121,26 @@ const App = () => {
 
   usePageView();
 
+  // Track download button clicks
+  useEffect(() => {
+    const trackDownloadClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('a[href*="apps.apple.com"]')) {
+        if (window.gtag) {
+          window.gtag('event', 'download_click', {
+            app_name: 'iSchedulEDU',
+            page_location: window.location.pathname,
+            link_text: target.textContent || 'Download Button'
+          });
+          console.log('Download click tracked');
+        }
+      }
+    };
+
+    document.addEventListener('click', trackDownloadClick);
+    return () => document.removeEventListener('click', trackDownloadClick);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

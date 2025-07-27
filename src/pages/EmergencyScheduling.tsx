@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, AlertTriangle, Clock, Share2, Download, CheckCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
+import StickyNavigation from "@/components/home/StickyNavigation";
 
 const EmergencyScheduling = () => {
   const features = [
@@ -56,12 +57,8 @@ const EmergencyScheduling = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
-        <Link to="/" className="inline-flex items-center text-primary hover:underline">
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to Home
-        </Link>
-      </div>
+      <StickyNavigation />
+      <div className="pt-20">
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -243,6 +240,7 @@ const EmergencyScheduling = () => {
             </Card>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
