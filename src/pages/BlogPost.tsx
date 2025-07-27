@@ -10,7 +10,7 @@ const BlogPost = () => {
     "best-apps-classroom-schedule-changes-2025": {
       title: "Best Apps for Classroom Schedule Changes in 2025",
       category: "Teacher Tools",
-      date: "2025-01-27",
+      date: "2025-07-25",
       readTime: "10 min read",
       content: `
         <h2>Introduction</h2>
@@ -80,7 +80,7 @@ const BlogPost = () => {
     "instantly-replan-school-day-teacher": {
       title: "How to Instantly Replan Your School Day as a Teacher",
       category: "Classroom Management",
-      date: "2025-01-26",
+      date: "2025-07-24",
       readTime: "8 min read",
       content: `
         <h2>Introduction</h2>
@@ -164,7 +164,7 @@ const BlogPost = () => {
     "tools-elementary-teacher-last-minute-scheduling": {
       title: "Tools Every Elementary Teacher Needs for Last-Minute Scheduling",
       category: "Elementary Education",
-      date: "2025-01-25",
+      date: "2025-07-23",
       readTime: "7 min read",
       content: `
         <h2>Introduction</h2>
@@ -257,7 +257,7 @@ const BlogPost = () => {
     "fire-drill-schedule-disruption": {
       title: "Fire Drill Just Ruined Your Schedule? Here's How to Recover",
       category: "Emergency Planning",
-      date: "2025-01-24",
+      date: "2025-07-22",
       readTime: "5 min read",
       content: `
         <h2>Introduction</h2>
@@ -337,7 +337,7 @@ const BlogPost = () => {
     "weather-delay-schedule-planning": {
       title: "How to Prepare Weather Delay Schedules in Advance: The Smart Teacher's Guide",
       category: "Proactive Planning",
-      date: "2025-01-24",
+      date: "2025-07-21",
       readTime: "7 min read",
       content: `
         <h2>Introduction</h2>
@@ -417,7 +417,7 @@ const BlogPost = () => {
     "substitute-teacher-schedule-sharing": {
       title: "The Ultimate Guide to Sharing Schedules with Substitute Teachers",
       category: "Substitute Teaching",
-      date: "2025-01-23",
+      date: "2025-07-20",
       readTime: "8 min read",
       content: `
         <h2>Introduction</h2>
@@ -502,7 +502,7 @@ const BlogPost = () => {
     "assembly-interruption-classroom-management": {
       title: "When Assemblies Eat Up Your Morning: Quick Schedule Adjustments",
       category: "Classroom Management",
-      date: "2025-01-22",
+      date: "2025-07-19",
       readTime: "6 min read",
       content: `
         <h2>Introduction</h2>

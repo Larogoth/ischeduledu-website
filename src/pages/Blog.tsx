@@ -11,7 +11,7 @@ const Blog = () => {
       excerpt: "Discover the top tools teachers are using to handle unexpected schedule disruptions and create emergency lesson plans.",
       readTime: "5 min read",
       category: "Teacher Tools",
-      date: "2025-01-15",
+      date: "2025-07-25",
       featured: true
     },
     {
@@ -20,7 +20,7 @@ const Blog = () => {
       excerpt: "When assemblies, fire drills, or weather delays throw your schedule off, here's how to adapt quickly and keep students engaged.",
       readTime: "4 min read", 
       category: "Classroom Management",
-      date: "2025-01-10"
+      date: "2025-07-24"
     },
     {
       id: "tools-elementary-teacher-last-minute-scheduling",
@@ -28,7 +28,7 @@ const Blog = () => {
       excerpt: "Essential apps and strategies for creating emergency schedules when your day gets interrupted unexpectedly.",
       readTime: "6 min read",
       category: "Elementary Education", 
-      date: "2025-01-08"
+      date: "2025-07-23"
     },
     {
       id: "fire-drill-schedule-disruption",
@@ -36,7 +36,7 @@ const Blog = () => {
       excerpt: "Real strategies from experienced teachers on handling unexpected interruptions and maintaining classroom flow.",
       readTime: "3 min read",
       category: "Emergency Planning",
-      date: "2025-01-05"
+      date: "2025-07-22"
     },
     {
       id: "substitute-teacher-schedule-sharing",
@@ -44,7 +44,7 @@ const Blog = () => {
       excerpt: "Best practices for creating and sharing emergency schedules that substitute teachers can follow easily.",
       readTime: "7 min read",
       category: "Substitute Teaching",
-      date: "2025-01-03"
+      date: "2025-07-20"
     },
     {
       id: "weather-delay-schedule-planning",
@@ -60,7 +60,7 @@ const Blog = () => {
       excerpt: "How to rebalance your entire day when special events disrupt your carefully planned schedule.",
       readTime: "4 min read",
       category: "Classroom Management",
-      date: "2025-01-01"
+      date: "2025-07-19"
     }
   ];
 
