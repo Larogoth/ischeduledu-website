@@ -10,7 +10,7 @@ const BlogPost = () => {
     "best-apps-classroom-schedule-changes-2025": {
       title: "Best Apps for Classroom Schedule Changes in 2025",
       category: "Teacher Tools",
-      date: "2025-01-15",
+      date: "2025-01-27",
       readTime: "8 min read",
       content: `
         <h2>Introduction</h2>
@@ -70,7 +70,7 @@ const BlogPost = () => {
     "instantly-replan-school-day-teacher": {
       title: "How to Instantly Replan Your School Day as a Teacher",
       category: "Classroom Management",
-      date: "2025-01-10",
+      date: "2025-01-26",
       readTime: "6 min read",
       content: `
         <h2>Introduction</h2>
@@ -144,7 +144,7 @@ const BlogPost = () => {
     "tools-elementary-teacher-last-minute-scheduling": {
       title: "Tools Every Elementary Teacher Needs for Last-Minute Scheduling",
       category: "Elementary Education",
-      date: "2025-01-08",
+      date: "2025-01-25",
       readTime: "7 min read",
       content: `
         <h2>Introduction</h2>
@@ -237,7 +237,7 @@ const BlogPost = () => {
     "fire-drill-schedule-disruption": {
       title: "Fire Drill Just Ruined Your Schedule? Here's How to Recover",
       category: "Emergency Planning",
-      date: "2025-01-05",
+      date: "2025-01-24",
       readTime: "5 min read",
       content: `
         <h2>Introduction</h2>
@@ -317,7 +317,7 @@ const BlogPost = () => {
     "substitute-teacher-schedule-sharing": {
       title: "The Ultimate Guide to Sharing Schedules with Substitute Teachers",
       category: "Substitute Teaching",
-      date: "2025-01-03",
+      date: "2025-01-23",
       readTime: "8 min read",
       content: `
         <h2>Introduction</h2>
@@ -402,7 +402,7 @@ const BlogPost = () => {
     "assembly-interruption-classroom-management": {
       title: "When Assemblies Eat Up Your Morning: Quick Schedule Adjustments",
       category: "Classroom Management",
-      date: "2025-01-01",
+      date: "2025-01-22",
       readTime: "6 min read",
       content: `
         <h2>Introduction</h2>
@@ -530,10 +530,12 @@ const BlogPost = () => {
               <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
             </header>
 
-            <div 
-              className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <div className="blog-content">
+              <div 
+                className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </div>
 
             <div className="mt-12 pt-8 border-t border-gray-200">
               <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">

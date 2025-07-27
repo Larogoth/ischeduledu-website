@@ -237,7 +237,9 @@ const EqualTimePlanning = () => {
                   <p className="text-gray-600">
                     The app uses intelligent mathematical calculations to divide your remaining time into equal periods. 
                     When perfect division isn't possible, it makes the first periods equal and adjusts the last period 
-                    to handle any remaining minutes. This ensures maximum fairness while accounting for odd time divisions.
+                    to handle any remaining minutes. For example, with 307 minutes divided into 5 periods, you'd get 
+                    4 periods of 60 minutes each, and the last period would be 67 minutes. This ensures maximum fairness 
+                    while accounting for odd time divisions.
                   </p>
                 </CardContent>
               </Card>

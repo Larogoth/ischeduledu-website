@@ -104,8 +104,8 @@ const FAQ = () => {
           a: "When perfect equal division isn't possible, iSchedulEDU makes the first periods equal and adjusts the last period to handle any remaining minutes. This ensures maximum fairness while accounting for odd time divisions."
         },
         {
-          q: "What if I have 305 minutes to divide into 5 periods?",
-          a: "The app would create 4 periods of 60 minutes each, and the last period would be 65 minutes. This approach ensures most periods are equal while handling the remainder intelligently."
+          q: "What if I have 307 minutes to divide into 5 periods?",
+          a: "The app would create 4 periods of 60 minutes each, and the last period would be 67 minutes. This approach ensures most periods are equal while handling the remainder intelligently."
         },
         {
           q: "Can I manually adjust the equal time periods?",
