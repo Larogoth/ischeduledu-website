@@ -671,9 +671,7 @@ const BlogPost = () => {
             <div className="blog-content">
               <div 
                 className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
-                dangerouslySetInnerHTML={{ 
-                  __html: post.content.replace(/<AppName\s*\/?>/g, '<span class="font-euclid font-bold text-xl">iSchedulEDU</span>')
-                }}
+                dangerouslySetInnerHTML={{ __html: post.content }}
               />
             </div>
 
