@@ -173,7 +173,7 @@ const BlogPost = () => {
 
         <h2>Essential Features for Elementary Teachers</h2>
         <h3>1. Intelligent Equal Time Division</h3>
-        <p>Elementary teachers need to ensure every subject gets fair time. The best apps handle odd time divisions by making most periods equal and adjusting only the last period. For example, if you have 305 minutes to divide into 5 subjects, you get 4 periods of 60 minutes each and 1 period of 65 minutes.</p>
+        <p>Elementary teachers need to ensure every subject gets fair time. The best apps handle odd time divisions by making most periods equal and adjusting only the last period. For example, if you have 307 minutes to divide into 5 subjects, you get 4 periods of 61 minutes each and 1 period of 63 minutes.</p>
 
         <h3>2. Multiple Sharing Methods</h3>
         <p>Elementary teachers often need to share schedules with substitute teachers, administrators, and parents. Look for apps that offer:</p>
