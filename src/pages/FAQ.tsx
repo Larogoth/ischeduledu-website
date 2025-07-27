@@ -61,6 +61,40 @@ const FAQ = () => {
           a: "iSchedulEDU requires access to your device's storage to save schedules locally and to your notifications to set alarms for class end times. These permissions are solely for the functionality of the app and are not used for any other purposes."
         }
       ]
+    },
+    {
+      title: "Sharing and Exporting",
+      questions: [
+        {
+          q: "Can I create printable schedules from iSchedulEDU?",
+          a: "Yes! iSchedulEDU generates printable schedules that you can post in your classroom, share with administrators, or keep for documentation. The app creates clean, professional layouts perfect for any emergency situation."
+        },
+        {
+          q: "Does it support QR code sharing or PDFs?",
+          a: "Absolutely! iSchedulEDU supports both QR code sharing for instant distribution and PDF export for professional documentation. Perfect for substitute teachers or staff who need immediate access to your emergency schedule."
+        },
+        {
+          q: "How do I share my schedule with substitute teachers?",
+          a: "You can share schedules instantly via QR code, text message, or PDF export. The QR code option is particularly popular with substitute teachers as they can scan it and immediately see your complete schedule with all class periods and times."
+        }
+      ]
+    },
+    {
+      title: "Emergency Scheduling",
+      questions: [
+        {
+          q: "How fast can I create an emergency schedule?",
+          a: "Most teachers create emergency schedules in under 2 minutes. Simply input your start time, end time, and any fixed events, then let the app handle the math. No manual calculations needed!"
+        },
+        {
+          q: "What if a fire drill disrupts my schedule?",
+          a: "iSchedulEDU is perfect for fire drill disruptions! Just input your new start time and the app will automatically redistribute your remaining time into equal class periods. No more panic about lost instructional time."
+        },
+        {
+          q: "Can I handle assembly interruptions?",
+          a: "Yes! When assemblies eat up your morning, simply set your new start time and iSchedulEDU will create a balanced schedule that gives equal time to all your subjects for the remaining hours."
+        }
+      ]
     }
   ];
 

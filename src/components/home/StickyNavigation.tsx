@@ -1,9 +1,22 @@
 
 import { Button } from "@/components/ui/button";
-import { Download, Sparkles } from "lucide-react";
+import { Download, Sparkles, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const StickyNavigation = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigationItems = [
+    { name: "Home", href: "/" },
+    { name: "Emergency Scheduling", href: "/emergency-scheduling" },
+    { name: "Equal Time Planning", href: "/equal-time-planning" },
+    { name: "Shareable Plans", href: "/shareable-plans" },
+    { name: "Blog", href: "/blog" },
+    { name: "FAQ", href: "/faq" }
+  ];
+
   return (
     <div className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm shadow-lg border-b border-[#0FA0CE]/20 z-50 transition-all duration-300">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -24,7 +37,19 @@ const StickyNavigation = () => {
           </span>
         </div>
         
-        <div className="flex items-center gap-3">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-6">
+          <nav className="flex items-center gap-6">
+            {navigationItems.slice(1, 4).map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
           <ThemeToggle />
           <a 
             href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
@@ -42,7 +67,55 @@ const StickyNavigation = () => {
             </Button>
           </a>
         </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 text-foreground hover:text-[#0FA0CE] transition-colors duration-200"
+          >
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-background/95 backdrop-blur-sm border-t border-[#0FA0CE]/20">
+          <div className="container mx-auto px-4 py-4">
+            <nav className="flex flex-col gap-4">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="pt-4 border-t border-[#0FA0CE]/20">
+                <a 
+                  href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block w-full"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Button 
+                    size="sm" 
+                    className="w-full bg-gradient-to-r from-[#0FA0CE] to-blue-600 hover:from-[#0D8CB6] hover:to-blue-700 shadow-lg hover:shadow-xl text-white font-semibold px-4 py-2 gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Free
+                  </Button>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
