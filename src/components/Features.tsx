@@ -27,7 +27,7 @@ const Features = () => {
           <FeatureCard
             icon={<Share2 className="text-[#0FA0CE]" />}
             title="Easy Sharing"
-            description="Share schedules via QR codes or text"
+            description="Share schedules via Universal Links, QR codes, or text"
           />
           <FeatureCard
             icon={<Bell className="text-[#0FA0CE]" />}

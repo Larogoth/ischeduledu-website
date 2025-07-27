@@ -124,7 +124,7 @@ const StorySection = () => {
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Share & Save</h3>
                   <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
-                    Save your schedule, set smart notifications, and share with colleagues via QR code, PDF, or link.
+                    Save your schedule, set smart notifications, and share with colleagues via Universal Links, QR code, PDF, or text.
                   </p>
                 </CardContent>
               </Card>

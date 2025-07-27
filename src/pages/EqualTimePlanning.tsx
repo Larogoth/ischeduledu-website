@@ -186,38 +186,48 @@ const EqualTimePlanning = () => {
             <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
               <CardContent className="py-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Regular School Day</h3>
-                  <p className="text-gray-600">7:55 AM to 3:00 PM with equal subject periods</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Real App-Generated Schedule</h3>
+                  <p className="text-gray-600">7:55 AM to 3:00 PM with lunch interruption (11:00-11:30)</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Math</h4>
-                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
-                    <p className="text-sm text-gray-500">7:55-8:55</p>
+                    <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
+                    <p className="text-sm text-gray-500">7:55-9:14</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Reading</h4>
-                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
-                    <p className="text-sm text-gray-500">8:55-9:55</p>
+                    <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
+                    <p className="text-sm text-gray-500">9:14-10:33</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Science</h4>
-                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
-                    <p className="text-sm text-gray-500">9:55-10:55</p>
+                    <p className="text-[#0FA0CE] font-semibold">27m</p>
+                    <p className="text-sm text-gray-500">10:33-11:00</p>
+                  </div>
+                  <div className="text-center p-4 bg-white rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 mb-2">Lunch</h4>
+                    <p className="text-[#0FA0CE] font-semibold">30m</p>
+                    <p className="text-sm text-gray-500">11:00-11:30</p>
+                  </div>
+                  <div className="text-center p-4 bg-white rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 mb-2">Science (cont.)</h4>
+                    <p className="text-[#0FA0CE] font-semibold">52m</p>
+                    <p className="text-sm text-gray-500">11:30-12:22</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Social Studies</h4>
-                    <p className="text-[#0FA0CE] font-semibold">60 min</p>
-                    <p className="text-sm text-gray-500">10:55-11:55</p>
+                    <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
+                    <p className="text-sm text-gray-500">12:22-1:41</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 mb-2">Writing</h4>
-                    <p className="text-[#0FA0CE] font-semibold">65 min</p>
-                    <p className="text-sm text-gray-500">11:55-1:00</p>
+                    <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
+                    <p className="text-sm text-gray-500">1:41-3:00</p>
                   </div>
                 </div>
                 <div className="text-center mt-6">
-                  <p className="text-sm text-gray-500">Lunch: 1:00-1:30 | Afternoon: 1:30-3:00 | Note: Writing gets 5 extra minutes to handle odd division</p>
+                  <p className="text-sm text-gray-500">Note: Science is interrupted by lunch and continues afterward. The app intelligently handles interruptions while maintaining equal time distribution.</p>
                 </div>
               </CardContent>
             </Card>

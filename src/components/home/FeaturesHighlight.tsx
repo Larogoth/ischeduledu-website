@@ -19,7 +19,7 @@ const FeaturesHighlight = () => {
     {
       icon: <Share2 className="w-8 h-8 text-[#0FA0CE]" />,
       title: "Easy Schedule Sharing",
-      description: "Share schedules instantly via QR codes or text - perfect for substitute teachers.",
+      description: "Share schedules instantly via Universal Links, QR codes, or text - perfect for substitute teachers.",
       image: "/lovable-uploads/ischeduledu-schedule-customization-colors-notifications.png",
       alt: "iSchedulEDU schedule sharing interface with QR code generation for easy distribution to substitute teachers and staff"
     }

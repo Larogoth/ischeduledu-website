@@ -709,7 +709,7 @@ const ImportSchedule = () => {
                           </div>
                           <div>
                             <h4 className="font-bold text-gray-900 mb-2">Multiple Sharing Options</h4>
-                            <p className="text-gray-600 text-sm">Share schedules via QR codes, PDFs, text, or web links - all generated in-app.</p>
+                            <p className="text-gray-600 text-sm">Share schedules via Universal Links, QR codes, PDFs, text, or web links - all generated in-app.</p>
                           </div>
                         </div>
                         

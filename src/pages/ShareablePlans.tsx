@@ -167,7 +167,7 @@ const ShareablePlans = () => {
                     2
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">Choose Share Method</h3>
-                  <p className="text-gray-600">Select QR code, text, or PDF export.</p>
+                  <p className="text-gray-600">Select Universal Links, QR code, text, or PDF export.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
@@ -195,40 +195,47 @@ const ShareablePlans = () => {
             <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
               <CardContent className="py-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Emergency Schedule - Shared via QR Code</h3>
-                  <p className="text-gray-600">When shared, recipients see this complete format</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Sample Schedule - App Generated</h3>
+                  <p className="text-gray-600">This is a sample of the schedule format your app creates</p>
                 </div>
                 <div className="bg-white rounded-lg p-6 shadow-lg max-w-2xl mx-auto">
                   <div className="text-center mb-4">
-                    <h4 className="font-bold text-lg text-gray-900">Mrs. Johnson's Class - Emergency Schedule</h4>
-                    <p className="text-sm text-gray-500">Monday, January 15th - Early Dismissal Day</p>
+                    <h4 className="font-bold text-lg text-gray-900">Mrs. Johnson's Class - Regular Day Schedule</h4>
+                    <p className="text-sm text-gray-500">Monday, July 28th - 7:55 AM to 3:00 PM</p>
                   </div>
-                                     <div className="space-y-3">
-                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                       <span className="font-semibold">7:55-8:55</span>
-                       <span>Math - Fractions Review</span>
-                     </div>
-                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                       <span className="font-semibold">8:55-9:55</span>
-                       <span>Reading - Chapter 5 Discussion</span>
-                     </div>
-                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                       <span className="font-semibold">9:55-10:55</span>
-                       <span>Science - Weather Unit</span>
-                     </div>
-                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                       <span className="font-semibold">10:55-11:55</span>
-                       <span>Social Studies - Community Helpers</span>
-                     </div>
-                     <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                       <span className="font-semibold">11:55-1:00</span>
-                       <span>Writing - Journal Entry</span>
-                     </div>
-                   </div>
-                   <div className="mt-4 text-center text-sm text-gray-500">
-                     <p>Lunch: 1:00-1:30 | Afternoon: 1:30-3:00 | Dismissal: 3:00 PM</p>
-                     <p className="mt-2">Special Notes: Regular school day with equal subject periods. Writing gets 5 extra minutes to handle odd division.</p>
-                   </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">7:55-9:14</span>
+                      <span>Math - Fractions Review</span>
+                    </div>
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">9:14-10:33</span>
+                      <span>Reading - Chapter 5 Discussion</span>
+                    </div>
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">10:33-11:00</span>
+                      <span>Science - Weather Unit</span>
+                    </div>
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">11:00-11:30</span>
+                      <span>Lunch</span>
+                    </div>
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">11:30-12:22</span>
+                      <span>Science (continued) - Weather Unit</span>
+                    </div>
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">12:22-1:41</span>
+                      <span>Social Studies - Community Helpers</span>
+                    </div>
+                    <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <span className="font-semibold">1:41-3:00</span>
+                      <span>Writing - Journal Entry</span>
+                    </div>
+                  </div>
+                  <div className="mt-4 text-center text-sm text-gray-500">
+                    <p>Note: Science is interrupted by lunch and continues afterward. The app intelligently handles interruptions while maintaining equal time distribution.</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>

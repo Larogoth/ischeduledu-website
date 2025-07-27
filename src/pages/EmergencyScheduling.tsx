@@ -165,7 +165,7 @@ const EmergencyScheduling = () => {
                     3
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">Share & Save</h3>
-                  <p className="text-gray-600">Share via QR code, text, or print. Save for future reference.</p>
+                  <p className="text-gray-600">Share via Universal Links, QR codes, text, or PDF. Save for future reference.</p>
                 </div>
               </div>
             </div>

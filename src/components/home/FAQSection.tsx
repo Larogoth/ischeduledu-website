@@ -26,7 +26,7 @@ const FAQSection = () => {
     },
     {
       question: "Can I share schedules with other teachers?",
-      answer: "Yes! You can easily share schedules via QR codes or text messages. This is especially helpful for substitute teachers or when communicating schedule changes to colleagues."
+      answer: "Yes! You can easily share schedules via Universal Links, QR codes, or text messages. Universal Links work for everyone - app users get direct import, non-app users see web versions. This is especially helpful for substitute teachers or when communicating schedule changes to colleagues."
     },
     {
       question: "Do I need an internet connection to use the app?",
