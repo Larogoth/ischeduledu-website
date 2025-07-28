@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { Target, TrendingUp, Users, Smartphone, Clock, Share2, Bell, QrCode, Calendar, Award, Lightbulb, BarChart3, Globe, Zap, Download, ChevronLeft } from 'lucide-react';
+import { Target, TrendingUp, Users, Smartphone, Clock, Share2, Bell, QrCode, Calendar, Award, Lightbulb, BarChart3, Globe, Zap, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/home/Footer';
 
@@ -173,12 +173,21 @@ const StrategyReview: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
-        {/* Header with Navigation */}
+        {/* Breadcrumb Navigation */}
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 mb-4">
-            <ChevronLeft className="w-4 h-4 mr-1" />
-            Back to Home
-          </Link>
+          <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <Link 
+              to="/" 
+              className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
+              Home
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-gray-900 dark:text-gray-100 font-semibold">Strategy Review</span>
+          </nav>
         </div>
 
         {/* Header */}

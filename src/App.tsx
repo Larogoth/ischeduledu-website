@@ -24,6 +24,7 @@ import CompetitorAnalysis from "./pages/CompetitorAnalysis";
 import StrategyReview from "./pages/StrategyReview";
 import { initializeSecurity } from "./utils/securityInit";
 import { usePageView } from "./hooks/usePageView";
+import { useScrollToTop } from "./hooks/useScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -129,6 +130,7 @@ const App = () => {
   }, [])
 
   usePageView();
+  useScrollToTop();
 
   // Track download button clicks
   useEffect(() => {
