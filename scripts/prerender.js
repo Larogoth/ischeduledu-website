@@ -34,11 +34,14 @@ pages.forEach(page => {
   // Read the main index.html
   const mainHtml = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8');
   
-  // Update title for this page
-  const updatedHtml = mainHtml.replace(
-    /<title>.*?<\/title>/,
-    `<title>${page.title}</title>`
-  );
+  // Only update title for non-homepage pages to avoid duplication
+  let updatedHtml = mainHtml;
+  if (page.path !== '/') {
+    updatedHtml = mainHtml.replace(
+      /<title>.*?<\/title>/,
+      `<title>${page.title}</title>`
+    );
+  }
   
   // Write the prerendered file
   fs.writeFileSync(filePath, updatedHtml);
