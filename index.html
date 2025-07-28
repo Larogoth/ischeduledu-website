@@ -139,7 +139,8 @@
     <meta name="bingbot" content="index, follow">
     <link rel="canonical" href="https://ischeduledu.app/">
     
-    <!-- App Store App Site Association -->
+    <!-- App Store Smart App Banner -->
+    <meta name="apple-itunes-app" content="app-id=6504114850, app-argument=https://ischeduledu.app">
     <meta name="apple-itunes-app" content="app-id=6504114850">
     
     <!-- Enhanced SEO tags -->
@@ -173,6 +174,24 @@
     <meta name="geo.region" content="US">
     <meta name="geo.placename" content="United States">
     <meta name="ICBM" content="39.8283, -98.5795">
+
+    <!-- Mobile Application Schema for AEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "iSchedulEDU",
+        "description": "Emergency schedule generator for teachers - create equal time schedules in under 2 minutes",
+        "applicationCategory": "EducationApplication",
+        "operatingSystem": "iOS",
+        "url": "https://apps.apple.com/us/app/ischeduledu/id6504114850",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
 
     <!-- JSON-LD Structured Data - Enhanced -->
     <script type="application/ld+json">
@@ -291,6 +310,25 @@
           "name": "Home",
           "item": "https://ischeduledu.app/"
         }]
+      }
+    </script>
+
+    <!-- WebSite Schema with Search Action for App Store Deep Linking -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "iSchedulEDU",
+        "url": "https://ischeduledu.app",
+        "description": "Emergency schedule generator for teachers",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://apps.apple.com/us/app/ischeduledu/id6504114850"
+          },
+          "query-input": "required name=app"
+        }
       }
     </script>
 
