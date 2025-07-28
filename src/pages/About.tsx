@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, GraduationCap, Clock, Users, Shield, Zap, Heart, Star, Award, Globe, Smartphone, Download } from "lucide-react";
+import { ChevronLeft, ChevronRight, GraduationCap, Clock, Users, Shield, Zap, Heart, Star, Award, Globe, Smartphone, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AppName from "@/components/AppName";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
+import Footer from "@/components/home/Footer";
 import { Helmet } from "react-helmet-async";
 
 const About = () => {
@@ -88,23 +89,38 @@ const About = () => {
       </Helmet>
       
       <div className="min-h-screen bg-gray-50">
-        <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
-          <Link to="/" className="inline-flex items-center text-primary hover:underline">
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Back to Home
-          </Link>
+        <div className="sticky top-0 z-10 bg-gray-50 border-b">
+          {/* Back to Home Link */}
+          <div className="p-4">
+            <Link to="/" className="inline-flex items-center text-primary hover:underline">
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Back to Home
+            </Link>
+          </div>
+          
+          {/* Breadcrumb Navigation - Under the header but still in header area */}
+          <div className="px-4 pb-3">
+            <div className="max-w-4xl mx-auto">
+              <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                <Link 
+                  to="/" 
+                  className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                  </svg>
+                  Home
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+                <span className="text-gray-900 dark:text-gray-100 font-semibold">About</span>
+              </nav>
+            </div>
+          </div>
         </div>
 
         <div className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            {/* Breadcrumb Navigation */}
-            <div className="mb-8">
-              <Breadcrumb 
-                items={[
-                  { label: "About", href: "/about", current: true }
-                ]} 
-              />
-            </div>
+
             
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold text-gray-900 mb-4">About <AppName /></h1>
@@ -330,6 +346,8 @@ const About = () => {
       {/* Related Content Section */}
       <RelatedContent currentPage="about" />
       
+      {/* Footer */}
+      <Footer />
     </>
   );
 };

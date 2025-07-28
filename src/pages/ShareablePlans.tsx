@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft, Share2, QrCode, MessageSquare, Download, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, Share2, QrCode, MessageSquare, Download, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
+import Footer from "@/components/home/Footer";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
 
@@ -127,11 +128,19 @@ const ShareablePlans = () => {
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb Navigation */}
           <div className="mb-8">
-            <Breadcrumb 
-              items={[
-                { label: "Shareable Plans", href: "/shareable-plans", current: true }
-              ]} 
-            />
+            <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+              <Link 
+                to="/" 
+                className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+                Home
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-gray-900 dark:text-gray-100 font-semibold">Shareable Plans</span>
+            </nav>
           </div>
           
           {/* Hero Section */}
@@ -411,6 +420,8 @@ const ShareablePlans = () => {
       {/* Related Content Section */}
       <RelatedContent currentPage="shareable-plans" />
       
+      {/* Footer */}
+      <Footer />
       </div>
     </div>
     </>
