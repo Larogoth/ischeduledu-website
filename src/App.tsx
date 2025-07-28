@@ -20,6 +20,8 @@ import AppNameTest from "./components/AppNameTest";
 import EmergencyScheduleGuide from "./pages/EmergencyScheduleGuide";
 import RotatingScheduleGuide from "./pages/RotatingScheduleGuide";
 import CustomScheduleGuide from "./pages/CustomScheduleGuide";
+import CompetitorAnalysis from "./pages/CompetitorAnalysis";
+import StrategyReview from "./pages/StrategyReview";
 import { initializeSecurity } from "./utils/securityInit";
 import { usePageView } from "./hooks/usePageView";
 
@@ -174,6 +176,8 @@ const App = () => {
               <Route path="/emergency-schedule-guide" element={<EmergencyScheduleGuide />} />
               <Route path="/rotating-schedule-guide" element={<RotatingScheduleGuide />} />
               <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
+              <Route path="/competitor-analysis" element={<CompetitorAnalysis />} />
+              <Route path="/strategy-review" element={<StrategyReview />} />
               <Route path="/test-appname" element={<AppNameTest />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

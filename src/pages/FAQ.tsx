@@ -1,277 +1,256 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import AppName from "@/components/AppName";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
-import RelatedContent from "@/components/RelatedContent";
-import Footer from "@/components/home/Footer";
-import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { ExternalLink, Download, Smartphone, Clock, Share2, Bell, QrCode, Calendar, ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const FAQ = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const faqSections = [
+const FAQ: React.FC = () => {
+  const faqData = [
     {
-      title: "General Information",
+      category: "App Features",
       questions: [
         {
-          q: "What is iSchedulEDU and how does it help teachers?",
-          a: "iSchedulEDU is a comprehensive school schedule generator app designed specifically for teachers and educators. It helps teachers create custom schedules, handle emergency schedule changes, manage A/B rotations, and generate equal-time lesson plans in under 2 minutes. The app is perfect for fire drills, assemblies, weather delays, early dismissals, and substitute teacher scenarios. iSchedulEDU eliminates the need for manual time calculations and provides intelligent equal time division algorithms."
+          question: "What is iSchedulEDU and how does it help teachers?",
+          answer: "iSchedulEDU is an emergency schedule generator app designed specifically for teachers. It allows you to create custom school schedules in under 2 minutes, handle A/B rotations, manage early dismissals, delays, and emergency schedule changes instantly. The app automatically generates equal-time schedules and provides features like notifications, QR code sharing, and visual timeline views."
         },
         {
-          q: "Who is iSchedulEDU designed for in the education sector?",
-          a: "iSchedulEDU is tailored for elementary school teachers, middle school teachers, substitute teachers, school administrators, curriculum coordinators, and education professionals who need a quick and reliable tool to manage and generate abbreviated schedules. The app is specifically optimized for classroom environments where schedule disruptions are common."
+          question: "What types of schedule rotations does iSchedulEDU support?",
+          answer: "iSchedulEDU supports A/B day rotations, A/B/C rotations, and custom multi-day cycles. You can set up rotating schedules with different periods, times, and activities for each rotation day. The app handles complex rotation patterns commonly used in schools and automatically adjusts schedules based on your rotation settings."
         },
         {
-          q: "How can iSchedulEDU improve classroom management and scheduling?",
-          a: "iSchedulEDU simplifies the process of creating and managing abbreviated schedules by allowing you to input preset events (like lunch or elective periods) and generate equal class durations automatically. It also provides features like saving and naming schedules, Universal Link sharing, QR code support, and PDF export. This ensures you spend less time on developing an abbreviated schedule and more time focusing on your students and curriculum delivery."
+          question: "Can iSchedulEDU handle early dismissals and delays?",
+          answer: "Yes, iSchedulEDU is specifically designed for early dismissals, delays, and abbreviated schedules. Simply input the shortened school day time and the app will automatically create an equal-time schedule that fits within the available time. This is perfect for weather delays, fire drills, assemblies, and other schedule disruptions."
         },
         {
-          q: "What makes iSchedulEDU different from other teacher scheduling apps?",
-          a: "iSchedulEDU is specifically designed for educational environments with intelligent equal time division algorithms, comprehensive emergency schedule management, seamless sharing across different user types, and deep integration with modern iOS features like AlarmKit. The app understands the unique challenges of elementary and middle school education, including fire drill disruptions, assembly interruptions, weather delays, and substitute teacher scenarios."
+          question: "How do I share schedules with other teachers and administrators?",
+          answer: "iSchedulEDU offers multiple sharing options: QR code generation for easy scanning, text message sharing, and direct printing. Teachers can also save schedules and access them later. The app makes it easy to communicate schedule changes quickly and efficiently to other teachers, substitutes, and administrators."
         }
       ]
     },
     {
-      title: "Technical Support",
+      category: "Technical Support",
       questions: [
         {
-          q: "What should I do if the app crashes or doesn't work properly?",
-          a: "Please contact support via the email ischeduledu@gmail.com"
+          question: "What devices are supported by iSchedulEDU?",
+          answer: "iSchedulEDU is compatible with iOS and iPadOS devices, requiring iOS 17.6 or later and iPadOS 17.6 or later. The app is optimized for both iPhone and iPad, making it perfect for teachers who use multiple devices throughout their day."
         },
         {
-          q: "How do I report a bug or provide feedback?",
-          a: "Please contact support via the email ischeduledu@gmail.com"
+          question: "Is iSchedulEDU free to use?",
+          answer: "iSchedulEDU offers 4 free schedule generation sessions to get started. Additional premium features are available through in-app purchases. The app is designed to be accessible for all teachers while offering advanced features for power users who need more frequent schedule generation."
         },
         {
-          q: "How can I contact support?",
-          a: "Please contact support via the email ischeduledu@gmail.com"
+          question: "How does iSchedulEDU handle notifications?",
+          answer: "iSchedulEDU allows teachers to set up daily notifications for schedule changes. You can configure notification times, customize messages, and ensure teachers and administrators are informed of schedule modifications in advance. This helps maintain clear communication during schedule disruptions."
+        },
+        {
+          question: "Can I create custom daily schedules?",
+          answer: "Yes, iSchedulEDU excels at creating custom daily schedules. You can input specific times, periods, activities, and create personalized schedules for regular days, special events, substitute teachers, and unique school situations. The app adapts to your specific needs."
         }
       ]
     },
     {
-      title: "Account and Privacy",
+      category: "Emergency Scenarios",
       questions: [
         {
-          q: "Do I need an account to use iSchedulEDU?",
-          a: "No, you do not need an account to use iSchedulEDU. The app is designed to be straightforward and user-friendly, allowing you to create and manage schedules without the need for registration or login."
+          question: "How do I create a fire drill schedule?",
+          answer: "For fire drills, open iSchedulEDU and select 'Emergency Schedule'. Input your start time and end time, along with the number of class rotations you want to have (including pre-set periods like lunch or elective). The app will automatically generate an equal-time schedule that fits within the available time, ensuring all classes get fair time allocation."
         },
         {
-          q: "How does iSchedulEDU handle my data?",
-          a: "iSchedulEDU is committed to ensuring your data privacy and security. The app stores your schedules locally on your device, meaning that your data is not uploaded to any servers or cloud storage. This ensures that your information remains private and secure."
+          question: "What about weather delay schedules?",
+          answer: "For weather delays, use the same emergency schedule feature. Input your delayed start time and the desired end time. iSchedulEDU will create a schedule that maximizes learning time while ensuring equal distribution among all classes. This is especially useful for snow days or late starts."
         },
         {
-          q: "What permissions does iSchedulEDU require?",
-          a: "iSchedulEDU requires access to your device's storage to save schedules locally and to your notifications to set alarms for class end times. These permissions are solely for the functionality of the app and are not used for any other purposes."
+          question: "How do I handle assembly schedules?",
+          answer: "Assembly schedules are easily managed by inputting the assembly time and duration as a pre-set event. Input the start time of the abbreviated schedule and the end time of the abbreviated schedule, then generate the alternate schedule. iSchedulEDU will automatically adjust your regular schedule to accommodate the assembly while maintaining equal time for remaining classes."
+        },
+        {
+          question: "Can I create substitute teacher schedules?",
+          answer: "Yes, iSchedulEDU is perfect for substitute teacher scenarios. Create a simplified schedule that's easy for substitutes to follow, with clear time blocks. You can customize the names of the classes to make it easier for substitutes to understand the schedule structure."
         }
       ]
     },
     {
-      title: "Sharing and Exporting",
+      category: "Advanced Features",
       questions: [
         {
-          q: "Can I create printable schedules from iSchedulEDU?",
-          a: "Yes! iSchedulEDU generates printable schedules that you can post in your classroom, share with administrators, or keep for documentation. The app creates clean, professional layouts perfect for any emergency situation."
+          question: "How does the QR code sharing work?",
+          answer: "iSchedulEDU generates QR codes for each schedule you create. Other teachers, substitutes, and administrators can scan these codes with their phone's camera to instantly access the schedule. This eliminates the need for paper copies and ensures everyone has the most up-to-date schedule information."
         },
         {
-          q: "Does it support QR code sharing or PDFs?",
-          a: "Absolutely! iSchedulEDU supports multiple sharing methods: Universal Links for app users and non-app users, QR codes for app users only, text messages, and PDF export for professional documentation. Universal Links automatically import schedules for app users or show web versions for non-app users."
+          question: "How do universal links work for sharing schedules?",
+          answer: "iSchedulEDU uses universal links for seamless schedule sharing. When you share a schedule via universal link, other teachers with the app will have it automatically imported into their iSchedulEDU app. For those without the app, the link opens a web version of the schedule. This ensures compatibility regardless of whether recipients have the app installed."
         },
         {
-          q: "How do I share my schedule with substitute teachers?",
-          a: "You can share schedules via Universal Links (works for everyone), QR codes (app users only), text messages, or PDF export. Universal Links are perfect for substitute teachers as they automatically import the schedule if they have the app, or show a web version if they don't."
-        }
-      ]
-    },
-    {
-      title: "Emergency Scheduling",
-      questions: [
-        {
-          q: "How fast can I create an emergency schedule with iSchedulEDU?",
-          a: "Most teachers create emergency schedules in under 2 minutes with iSchedulEDU. Simply input your start time, end time, and any fixed events, then let the app handle the math. No manual calculations needed! The app's intelligent equal time division algorithms ensure fair distribution of remaining instructional time."
+          question: "What is the visual timeline view?",
+          answer: "The visual timeline view provides a clear, graphical representation of your daily schedule. It shows each period as a block with start and end times, making it easy to see the flow of your day at a glance. This is especially helpful for complex schedules with multiple periods."
         },
         {
-          q: "What if a fire drill disrupts my classroom schedule?",
-          a: "iSchedulEDU is perfect for fire drill disruptions! Just input your new start time and the app will automatically redistribute your remaining time into equal class periods. No more panic about lost instructional time. The app handles odd time divisions by making most periods equal and adjusting only the last period."
+          question: "How do I manage bell schedules?",
+          answer: "iSchedulEDU allows you to input your school's bell schedule as a custom schedule. You can set up different bell schedules for different days or special events, ensuring your schedules align with your school's timing system."
         },
         {
-          q: "Can I handle assembly interruptions and special events?",
-          a: "Yes! When assemblies eat up your morning, simply set your new start time and iSchedulEDU will create a balanced schedule that gives equal time to all your subjects for the remaining hours. The app is designed to handle any type of schedule disruption including weather delays, early dismissals, and special events."
-        },
-        {
-          q: "How does iSchedulEDU handle weather delays and early dismissals?",
-          a: "iSchedulEDU excels at weather delay and early dismissal scenarios. Input your new start or end time, and the app automatically creates a balanced schedule with equal time periods. The intelligent algorithm ensures maximum fairness while accounting for the reduced instructional time."
-        }
-      ]
-    },
-    {
-      title: "Equal Time Division",
-      questions: [
-        {
-          q: "How does iSchedulEDU handle odd time divisions?",
-          a: "When perfect equal division isn't possible, iSchedulEDU makes the first periods equal and adjusts the last period to handle any remaining minutes. This ensures maximum fairness while accounting for odd time divisions."
-        },
-        {
-          q: "What if I have 307 minutes to divide into 5 periods?",
-          a: "iSchedulEDU would create 4 periods of 61 minutes each, and the last period would be 63 minutes. This approach ensures most periods are equal while handling the remainder intelligently. The algorithm prioritizes fairness and equal distribution across the majority of periods."
-        },
-        {
-          q: "How does the equal time division algorithm work for different scenarios?",
-          a: "iSchedulEDU's equal time division algorithm is designed to handle any scheduling scenario. For fire drills, it redistributes remaining time equally. For weather delays, it adjusts the entire day proportionally. For early dismissals, it compresses the schedule while maintaining equal periods. The algorithm adapts to the specific disruption type."
-        },
-        {
-          q: "Can I manually adjust the equal time periods?",
-          a: "Yes! While iSchedulEDU creates intelligent equal divisions automatically, you can always make manual adjustments if you need to prioritize certain subjects or accommodate special activities."
-        }
-      ]
-    },
-    {
-      title: "Advanced Features and Technology",
-      questions: [
-        {
-          q: "What sharing options does iSchedulEDU provide for teachers?",
-          a: "iSchedulEDU supports multiple sharing methods: Universal Links work for both app users and non-app users (app users get direct import, others see web versions), QR codes for app users only, text messages with schedule details, and PDF export for professional documentation and classroom posting. This ensures compatibility with any sharing scenario."
-        },
-        {
-          q: "How does iSchedulEDU help with substitute teacher scenarios?",
-          a: "iSchedulEDU is perfect for substitute teacher handoffs. Universal Links automatically import schedules for substitute teachers who have the app, or show web versions for those who don't. This ensures smooth transitions regardless of the substitute's technical setup and provides professional documentation."
-        },
-        {
-          q: "What iOS features does iSchedulEDU integrate with?",
-          a: "iSchedulEDU integrates with modern iOS features including AlarmKit for enhanced alarm functionality with Live Activities, Universal Links for seamless sharing, QR code scanning for instant imports, and PDF generation for professional documentation. The app is optimized for iOS 17.6+ and iPadOS 17.6+."
-        },
-        {
-          q: "How does iSchedulEDU ensure data privacy and security?",
-          a: "iSchedulEDU is committed to data privacy and security. The app stores schedules locally on your device, meaning your data is never uploaded to servers or cloud storage. This ensures your information remains private and secure while maintaining full functionality."
+          question: "Can I save and reuse schedules?",
+          answer: "Yes, iSchedulEDU allows you to save frequently used schedules for quick access. This is especially useful for common scenarios like fire drills, early dismissals, or special events. You can also modify saved schedules to fit new situations."
         }
       ]
     }
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>FAQ - iSchedulEDU | Emergency Schedule Generator for Teachers</title>
-        <meta name="description" content="Get answers to common questions about iSchedulEDU. Learn how to create emergency schedules, share with substitute teachers, handle fire drills, and manage equal time divisions for your classroom." />
-        <meta name="keywords" content="teacher schedule FAQ, emergency schedule questions, substitute teacher sharing, fire drill schedule, equal time division, classroom scheduling app" />
-        <meta property="og:title" content="FAQ - iSchedulEDU | Emergency Schedule Generator for Teachers" />
-        <meta property="og:description" content="Get answers to common questions about iSchedulEDU. Learn how to create emergency schedules, share with substitute teachers, handle fire drills, and manage equal time divisions for your classroom." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ischeduledu.app/faq" />
-        <link rel="canonical" href="https://ischeduledu.app/faq" />
-        
-        {/* FAQ Schema Markup */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqSections.flatMap(section => 
-              section.questions.map(q => ({
-                "@type": "Question",
-                "name": q.q,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": q.a
-                }
-              }))
-            )
-          })}
-        </script>
-
-        {/* Breadcrumb Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://ischeduledu.app/"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "FAQ",
-                "item": "https://ischeduledu.app/faq"
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
-      
-      <div className="min-h-screen bg-gray-50">
-        <div className="sticky top-0 z-10 bg-gray-50 border-b">
-          {/* Back to Home Link */}
-          <div className="p-4">
-            <Link to="/" className="inline-flex items-center text-primary hover:underline">
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              Back to Home
-            </Link>
-          </div>
-          
-          {/* Breadcrumb Navigation - Under the header but still in header area */}
-          <div className="px-4 pb-3">
-            <div className="max-w-4xl mx-auto">
-              <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                <Link 
-                  to="/" 
-                  className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                  </svg>
-                  Home
-                </Link>
-                <ChevronRight className="w-4 h-4" />
-                <span className="text-gray-900 dark:text-gray-100 font-semibold">FAQ</span>
-              </nav>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header with Navigation */}
+        <div className="mb-8">
+          <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 mb-4">
+            <ChevronLeft className="w-4 h-4 mr-1" />
+            Back to Home
+          </Link>
         </div>
 
-      <div className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
-            <p className="text-lg text-gray-600">Find answers to common questions about <AppName /></p>
-            <p className="text-sm text-gray-500 mt-2">Emergency scheduling, substitute teacher sharing, fire drill management, and equal time division for teachers</p>
-          </div>
-          
-          <div className="space-y-6">
-            {faqSections.map((section, idx) => (
-              <Card key={idx} className="mb-6">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-gray-900">{section.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {section.questions.map((item, qIdx) => (
-                    <div key={qIdx} className="mb-6 last:mb-0">
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">{item.q}</h3>
-                      <p className="text-gray-600">{item.a}</p>
-                      {qIdx < section.questions.length - 1 && <Separator className="my-4" />}
-                    </div>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Everything you need to know about iSchedulEDU - the emergency schedule generator for teachers
+          </p>
+        </div>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <Card className="text-center">
+            <CardContent className="pt-6">
+              <Clock className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">2 Minutes</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Schedule Creation Time</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center">
+            <CardContent className="pt-6">
+              <Smartphone className="w-8 h-8 mx-auto mb-2 text-green-600" />
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">iOS 17.6+</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Required Version</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center">
+            <CardContent className="pt-6">
+              <QrCode className="w-8 h-8 mx-auto mb-2 text-purple-600" />
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">QR Sharing</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Instant Schedule Sharing</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center">
+            <CardContent className="pt-6">
+              <Bell className="w-8 h-8 mx-auto mb-2 text-orange-600" />
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">Notifications</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Smart Alerts</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* FAQ Categories */}
+        <div className="space-y-8">
+          {faqData.map((category, categoryIndex) => (
+            <Card key={categoryIndex} className="shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Badge variant="secondary" className="text-sm">
+                    {category.category}
+                  </Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  {category.questions.map((item, index) => (
+                    <AccordionItem key={index} value={`item-${categoryIndex}-${index}`}>
+                      <AccordionTrigger className="text-left">
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {item.question}
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="text-gray-600 dark:text-gray-300">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
                   ))}
-                </CardContent>
-              </Card>
-            ))}
+                </Accordion>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-16 text-center">
+          <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+            <CardContent className="pt-8 pb-8">
+              <h2 className="text-3xl font-bold mb-4">
+                Ready to Simplify Your Schedule Management?
+              </h2>
+              <p className="text-xl mb-6 opacity-90">
+                Join thousands of teachers who trust iSchedulEDU for emergency schedule generation
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-blue-600 hover:bg-gray-100"
+                  onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu/id6504114850', '_blank')}
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download on App Store
+                </Button>
+                <Button 
+                  size="lg" 
+                  className="bg-white/10 border-white text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm"
+                  onClick={() => window.open('https://ischeduledu.app', '_blank')}
+                >
+                  <ExternalLink className="w-5 h-5 mr-2" />
+                  Learn More
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Resources */}
+        <div className="mt-12">
+          <h3 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+            Additional Resources
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <CardContent className="pt-6">
+                <Calendar className="w-8 h-8 mb-4 text-blue-600" />
+                <h4 className="font-semibold mb-2">Emergency Schedule Guide</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Step-by-step instructions for creating emergency schedules
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <CardContent className="pt-6">
+                <Share2 className="w-8 h-8 mb-4 text-green-600" />
+                <h4 className="font-semibold mb-2">Rotating Schedule Guide</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Complete guide for A/B day rotations and multi-day cycles
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <CardContent className="pt-6">
+                <Smartphone className="w-8 h-8 mb-4 text-purple-600" />
+                <h4 className="font-semibold mb-2">Custom Schedule Guide</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Guide for creating personalized daily schedules
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
-      
-      {/* Related Content Section */}
-      <RelatedContent currentPage="faq" />
-      
-      {/* Footer */}
-      <Footer />
     </div>
-    </>
   );
 };
 

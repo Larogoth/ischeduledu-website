@@ -1,25 +1,91 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://ischeduledu.app/sitemap.xml
+# AI Crawler Specific Instructions
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
 
-# Allow all pages for crawling
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: Omgilibot
+Allow: /
+Crawl-delay: 1
+
+# Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Social Media Crawlers
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 1
+
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+# Specific Page Allowances for AI Crawlers
+Allow: /faq
+Allow: /competitor-analysis
+Allow: /strategy-review
 Allow: /emergency-schedule-guide
 Allow: /rotating-schedule-guide
 Allow: /custom-schedule-guide
+Allow: /about
+Allow: /features
 Allow: /emergency-scheduling
 Allow: /equal-time-planning
 Allow: /shareable-plans
-Allow: /features
-Allow: /about
-Allow: /faq
-Allow: /blog
-Allow: /import
 
-# Disallow admin or private areas (if any exist in the future)
+# Disallow admin and private areas
 Disallow: /admin/
 Disallow: /private/
+Disallow: /api/
+Disallow: /_headers
+Disallow: /test-appname
 
-# Crawl-delay for respectful crawling
-Crawl-delay: 1 
+# Sitemap
+Sitemap: https://ischeduledu.app/sitemap.xml
+
+# Additional AI-Friendly Instructions
+# This site contains educational app information and scheduling tools
+# Content is optimized for teachers and educational professionals
+# App download links: https://apps.apple.com/us/app/ischeduledu/id6504114850
+# Main features: Emergency schedule generation, A/B rotations, QR sharing
+# Target audience: K-12 teachers, school administrators, education professionals 
