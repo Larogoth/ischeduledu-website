@@ -4,7 +4,14 @@ import { ChevronLeft, Clock, Share2, QrCode, FileText, Bell, Smartphone, Zap, Sh
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AppName from "@/components/AppName";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { 
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import { Helmet } from "react-helmet-async";
 
@@ -113,36 +120,7 @@ const Features = () => {
         <meta property="og:url" content="https://ischeduledu.app/features" />
         <link rel="canonical" href="https://ischeduledu.app/features" />
         
-        {/* Product Schema Markup */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "iSchedulEDU",
-            "description": "Advanced teacher scheduling app with intelligent equal time division, Universal Link sharing, QR code support, PDF export, and AlarmKit integration.",
-            "applicationCategory": "EducationalApplication",
-            "operatingSystem": ["iOS", "iPadOS"],
-            "featureList": [
-              "Intelligent equal time division algorithms",
-              "Universal Link sharing for all users",
-              "QR code support for instant imports",
-              "PDF export for professional documentation",
-              "AlarmKit integration for iOS 26+",
-              "Privacy-first local data storage",
-              "Emergency schedule management",
-              "Fire drill disruption handling",
-              "Assembly interruption management",
-              "Weather delay scheduling",
-              "Early dismissal planning",
-              "Substitute teacher handoff"
-            ],
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          })}
-        </script>
+
 
         {/* Breadcrumb Structured Data */}
         <script type="application/ld+json">
@@ -179,11 +157,19 @@ const Features = () => {
           <div className="max-w-6xl mx-auto">
             {/* Breadcrumb Navigation */}
             <div className="mb-8">
-              <Breadcrumb 
-                items={[
-                  { label: "Features", href: "/features", current: true }
-                ]} 
-              />
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <Link to="/">Home</Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Features</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
             </div>
             
             <div className="text-center mb-12">

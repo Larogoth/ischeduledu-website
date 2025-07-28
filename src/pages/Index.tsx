@@ -27,58 +27,7 @@ const Index = () => {
         <meta property="og:image" content="https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
         <link rel="canonical" href="https://ischeduledu.app" />
         
-        {/* App Store Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MobileApplication",
-            "name": "iSchedulEDU",
-            "description": "Emergency schedule generator for teachers",
-            "applicationCategory": "EducationApplication",
-            "operatingSystem": "iOS",
-            "url": "https://apps.apple.com/us/app/ischeduledu/id6504114850",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          })}
-        </script>
-        
-        {/* Reviews Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "iSchedulEDU",
-            "applicationCategory": "EducationalApplication",
-            "operatingSystem": "iOS",
-            "url": "https://apps.apple.com/us/app/ischeduledu/id6504114850",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5.0",
-              "ratingCount": "171",
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "review": reviews.map(review => ({
-              "@type": "Review",
-              "author": {
-                "@type": "Person",
-                "name": review.name
-              },
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": review.stars.toString(),
-                "bestRating": "5",
-                "worstRating": "1"
-              },
-              "reviewBody": review.content,
-              "reviewAspect": "Overall",
-              "datePublished": new Date().toISOString().split('T')[0]
-            }))
-          })}
-        </script>
+
       </Helmet>
       
       <main className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-14 relative overflow-hidden">
