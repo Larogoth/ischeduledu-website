@@ -18,11 +18,11 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>iSchedulEDU - Teacher Schedule App | Emergency Schedule Generator | Equal Time Lesson Planning</title>
-        <meta name="description" content="Create emergency schedules and equal time lesson plans in under 2 minutes. Perfect for fire drills, assemblies, weather delays, and substitute teachers. Free to start." />
+        <title>iSchedulEDU - Emergency Schedule Generator for Teachers</title>
+        <meta name="description" content="Create emergency schedules in under 2 minutes. Perfect for fire drills, weather delays, and substitute teachers. Free to start." />
         <meta name="keywords" content="teacher schedule app, emergency schedule generator, equal time lesson planning, fire drill schedule, substitute teacher schedule, classroom scheduling app, school schedule generator, lesson planning app, teacher tools, educational technology, classroom management" />
-        <meta property="og:title" content="iSchedulEDU - Teacher Schedule App | Emergency Schedule Generator" />
-        <meta property="og:description" content="Create emergency schedules and equal time lesson plans in under 2 minutes. Perfect for fire drills, assemblies, weather delays, and substitute teachers." />
+        <meta property="og:title" content="iSchedulEDU - Emergency Schedule Generator for Teachers" />
+        <meta property="og:description" content="Create emergency schedules in under 2 minutes. Perfect for fire drills, weather delays, and substitute teachers. Free to start." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ischeduledu.app" />
         <meta property="og:image" content="https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
