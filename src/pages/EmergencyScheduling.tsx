@@ -5,6 +5,7 @@ import AppName from "@/components/AppName";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import Footer from "@/components/home/Footer";
+import BackToTop from "@/components/BackToTop";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
 
@@ -324,6 +325,9 @@ const EmergencyScheduling = () => {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
       </div>
     </div>
     </>

@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
 import RelatedContent from "@/components/RelatedContent";
 import Footer from "@/components/home/Footer";
+import BackToTop from "@/components/BackToTop";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
 
@@ -103,7 +104,7 @@ const Blog = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <StickyNavigation />
         <div className="pt-20">
           <div className="py-8 px-4 sm:px-6 lg:px-8">
@@ -127,14 +128,14 @@ const Blog = () => {
 
               {/* Hero Section */}
               <div className="text-center mb-16">
-                <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
                   <Tag className="w-4 h-4" />
                   Teacher Resources & Tips
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                   Teacher Blog
                 </h1>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
                   Expert tips on emergency scheduling, classroom management, and teacher tools. 
                   Learn how to handle fire drills, weather delays, and substitute teacher handoffs with confidence.
                 </p>
@@ -145,12 +146,12 @@ const Blog = () => {
                 <div key={post.id} className="mb-16">
                   <div className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border border-[#0FA0CE]/20 rounded-2xl p-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-sm text-gray-500">{post.category}</span>
-                      <span className="text-sm text-gray-500">{post.readTime}</span>
-                      <span className="text-sm text-gray-500">{new Date(post.date).toLocaleDateString()}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{post.category}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{post.readTime}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{new Date(post.date).toLocaleDateString()}</span>
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">{post.title}</h2>
-                    <p className="text-lg text-gray-600 mb-6">{post.excerpt}</p>
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{post.title}</h2>
+                    <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">{post.excerpt}</p>
                     <Link 
                       to={`/blog/${post.id}`}
                       className="inline-flex items-center gap-2 text-[#0FA0CE] hover:text-blue-700 font-semibold"
@@ -164,7 +165,7 @@ const Blog = () => {
 
               {/* All Posts Grid */}
               <div className="mb-16">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
                   Latest Articles
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -172,22 +173,22 @@ const Blog = () => {
                     <Card key={post.id} className="hover:shadow-lg transition-shadow duration-300">
                       <CardHeader>
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{post.category}</span>
-                          <span className="text-xs text-gray-500 flex items-center gap-1">
+                          <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">{post.category}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             {post.readTime}
                           </span>
                         </div>
-                        <CardTitle className="text-lg font-bold text-gray-900 mb-3">
+                        <CardTitle className="text-lg font-bold text-gray-900 dark:text-white mb-3">
                           {post.title}
                         </CardTitle>
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                           <Calendar className="w-4 h-4" />
                           {new Date(post.date).toLocaleDateString()}
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                        <p className="text-gray-600 dark:text-gray-300 mb-4">{post.excerpt}</p>
                         <Link 
                           to={`/blog/${post.id}`}
                           className="inline-flex items-center gap-2 text-[#0FA0CE] hover:text-blue-700 font-semibold text-sm"
@@ -205,10 +206,10 @@ const Blog = () => {
               <div className="text-center">
                 <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
                   <CardContent className="py-12">
-                    <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                    <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                       Ready to Try <AppName />?
                     </h3>
-                    <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                       Download the app and experience the difference that intelligent scheduling makes in your daily routine.
                     </p>
                     <a 
@@ -236,6 +237,9 @@ const Blog = () => {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </>
   );
 };

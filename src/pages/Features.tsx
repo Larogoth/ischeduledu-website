@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import Footer from "@/components/home/Footer";
+import BackToTop from "@/components/BackToTop";
 import { Helmet } from "react-helmet-async";
 
 const Features = () => {
@@ -146,7 +147,7 @@ const Features = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             {/* Breadcrumb Navigation */}
@@ -167,8 +168,8 @@ const Features = () => {
             </div>
             
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Advanced Features</h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Advanced Features</h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Discover the powerful features that make <AppName /> the most intelligent teacher scheduling solution
               </p>
             </div>
@@ -180,18 +181,18 @@ const Features = () => {
                   <CardHeader>
                     <div className="flex items-center gap-3 mb-3">
                       {feature.icon}
-                      <CardTitle className="text-lg font-semibold text-gray-900">
+                      <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
                         {feature.title}
                       </CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-700 mb-4 leading-relaxed">
+                    <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                       {feature.description}
                     </p>
                     <ul className="space-y-2">
                       {feature.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="flex items-start gap-2 text-sm text-gray-600">
+                        <li key={detailIndex} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
                           <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                           {detail}
                         </li>
@@ -205,22 +206,22 @@ const Features = () => {
             {/* Emergency Scenarios */}
             <Card className="mb-12">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Zap className="w-6 h-6 text-yellow-500" />
                   Emergency Scenario Management
                 </CardTitle>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-300">
                   iSchedulEDU is specifically designed to handle real-world classroom disruptions with intelligent algorithms
                 </p>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   {emergencyScenarios.map((scenario, index) => (
-                    <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       {scenario.icon}
                       <div>
-                        <h3 className="font-semibold text-gray-900 mb-2">{scenario.title}</h3>
-                        <p className="text-gray-700 text-sm leading-relaxed">{scenario.description}</p>
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{scenario.title}</h3>
+                        <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{scenario.description}</p>
                       </div>
                     </div>
                   ))}
@@ -231,7 +232,7 @@ const Features = () => {
             {/* Technical Specifications */}
             <Card className="mb-12">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Smartphone className="w-6 h-6 text-blue-500" />
                   Technical Specifications
                 </CardTitle>
@@ -239,44 +240,44 @@ const Features = () => {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">System Requirements</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">System Requirements</h3>
                     <ul className="space-y-3">
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">iOS 17.6 or later</span>
+                        <span className="text-gray-700 dark:text-gray-300">iOS 17.6 or later</span>
                       </li>
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">iPadOS 17.6 or later</span>
+                        <span className="text-gray-700 dark:text-gray-300">iPadOS 17.6 or later</span>
                       </li>
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">iPhone or iPad</span>
+                        <span className="text-gray-700 dark:text-gray-300">iPhone or iPad</span>
                       </li>
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">Internet connection for sharing features</span>
+                        <span className="text-gray-700 dark:text-gray-300">Internet connection for sharing features</span>
                       </li>
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Technologies</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Key Technologies</h3>
                     <ul className="space-y-3">
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">AlarmKit integration (iOS 26+)</span>
+                        <span className="text-gray-700 dark:text-gray-300">AlarmKit integration (iOS 26+)</span>
                       </li>
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">Universal Links for seamless sharing</span>
+                        <span className="text-gray-700 dark:text-gray-300">Universal Links for seamless sharing</span>
                       </li>
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">QR code generation and scanning</span>
+                        <span className="text-gray-700 dark:text-gray-300">QR code generation and scanning</span>
                       </li>
                       <li className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <span className="text-gray-700">PDF generation for documentation</span>
+                        <span className="text-gray-700 dark:text-gray-300">PDF generation for documentation</span>
                       </li>
                     </ul>
                   </div>
@@ -285,12 +286,12 @@ const Features = () => {
             </Card>
 
             {/* CTA Section */}
-            <Card className="bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200">
+            <Card className="bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 dark:from-blue-900/20 dark:to-cyan-900/20 dark:border-blue-800">
               <CardContent className="py-8 text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Ready to Experience Advanced Teacher Scheduling?
                 </h3>
-                <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
                   Download <AppName /> and discover how intelligent algorithms can transform your classroom scheduling experience.
                 </p>
                 <a 
@@ -316,6 +317,9 @@ const Features = () => {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </>
   );
 };

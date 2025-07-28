@@ -7,6 +7,7 @@ import Footer from "@/components/home/Footer";
 import StorySection from "@/components/home/StorySection";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import ReviewsSection from "@/components/home/ReviewsSection";
+import BackToTop from "@/components/BackToTop";
 import { testimonials } from "@/data/testimonials";
 import type { Testimonial } from "@/data/testimonials";
 import { Helmet } from "react-helmet-async";
@@ -53,6 +54,9 @@ const Index = () => {
       
       {/* 6. Footer */}
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </main>
     </>
   );

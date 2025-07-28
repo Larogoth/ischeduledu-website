@@ -6,6 +6,7 @@ import { Button } from '../components/ui/button';
 import { ExternalLink, Download, Smartphone, Clock, Share2, Bell, QrCode, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/home/Footer';
+import BackToTop from '../components/BackToTop';
 
 const FAQ: React.FC = () => {
   const faqData = [
@@ -194,7 +195,7 @@ const FAQ: React.FC = () => {
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
-          <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+          <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white dark:from-blue-800 dark:to-indigo-800">
             <CardContent className="pt-8 pb-8">
               <h2 className="text-3xl font-bold mb-4">
                 Ready to Simplify Your Schedule Management?
@@ -205,7 +206,7 @@ const FAQ: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-white text-blue-600 hover:bg-gray-100"
+                  className="bg-white text-blue-600 hover:bg-gray-100 dark:bg-white dark:text-blue-600 dark:hover:bg-gray-100"
                   onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu/id6504114850', '_blank')}
                 >
                   <Download className="w-5 h-5 mr-2" />
@@ -213,7 +214,7 @@ const FAQ: React.FC = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  className="bg-white/10 border-white text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm"
+                  className="bg-white/10 border-white text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm dark:bg-white/10 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600"
                   onClick={() => window.open('https://ischeduledu.app', '_blank')}
                 >
                   <ExternalLink className="w-5 h-5 mr-2" />
@@ -263,6 +264,9 @@ const FAQ: React.FC = () => {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

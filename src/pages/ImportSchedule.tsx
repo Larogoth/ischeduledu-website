@@ -9,6 +9,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
 import { toast } from "@/components/ui/use-toast";
 import { validateScheduleData } from '@/utils/inputValidation';
+import Footer from "@/components/home/Footer";
+import BackToTop from "@/components/BackToTop";
 
 interface ScheduleData {
  name: string;
@@ -824,6 +826,12 @@ const ImportSchedule = () => {
           </p>
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

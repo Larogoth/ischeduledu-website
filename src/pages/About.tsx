@@ -7,6 +7,7 @@ import AppName from "@/components/AppName";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import Footer from "@/components/home/Footer";
+import BackToTop from "@/components/BackToTop";
 import { Helmet } from "react-helmet-async";
 
 const About = () => {
@@ -88,7 +89,7 @@ const About = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb Navigation */}
@@ -110,8 +111,8 @@ const About = () => {
 
             
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">About <AppName /></h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">About <AppName /></h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Revolutionizing teacher scheduling with intelligent algorithms and comprehensive emergency management solutions
               </p>
             </div>
@@ -119,18 +120,18 @@ const About = () => {
             {/* Mission Section */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Heart className="w-6 h-6 text-red-500" />
                   Our Mission
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                   At <AppName />, we believe that teachers should spend their time educating students, not calculating schedules. 
                   Our mission is to provide educators with intelligent, reliable tools that handle the complex mathematics of 
                   emergency scheduling while ensuring every subject receives fair instructional time.
                 </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                   We understand the unique challenges faced by elementary and middle school teachers - fire drills, assemblies, 
                   weather delays, and substitute teacher scenarios. Our technology is specifically designed to address these 
                   real-world classroom situations with precision and speed.
@@ -141,7 +142,7 @@ const About = () => {
             {/* What We Do */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Zap className="w-6 h-6 text-yellow-500" />
                   What We Do
                 </CardTitle>
@@ -149,32 +150,32 @@ const About = () => {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Emergency Schedule Management</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Emergency Schedule Management</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       We specialize in creating intelligent algorithms that handle emergency schedule changes. 
                       When disruptions occur, our technology automatically redistributes remaining time into 
                       equal class periods, ensuring no subject is favored over another.
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Equal Time Division</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Equal Time Division</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       Our proprietary algorithms ensure fair distribution of instructional time. 
                       When perfect division isn't possible, we make most periods equal and adjust 
                       only the last period to handle remainders intelligently.
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Seamless Sharing</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Seamless Sharing</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       We provide multiple sharing methods that work for everyone - Universal Links for 
                       app users and non-app users, QR codes for instant imports, and PDF export for 
                       professional documentation.
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Modern iOS Integration</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Modern iOS Integration</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       Our app integrates deeply with modern iOS features including AlarmKit for enhanced 
                       alarms, Universal Links for seamless sharing, and QR code scanning for instant 
                       schedule imports.
@@ -187,7 +188,7 @@ const About = () => {
             {/* Technology & Innovation */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Award className="w-6 h-6 text-blue-500" />
                   Technology & Innovation
                 </CardTitle>
@@ -195,24 +196,24 @@ const About = () => {
               <CardContent>
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Intelligent Algorithms</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Intelligent Algorithms</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       Our equal time division algorithms are specifically designed for educational environments. 
                       They handle any scheduling scenario - fire drills, weather delays, early dismissals, 
                       and assembly interruptions - with mathematical precision and educational fairness.
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Universal Compatibility</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Universal Compatibility</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       Our sharing technology works for everyone. App users get direct imports, while 
                       non-app users see professional web versions. This ensures smooth transitions 
                       regardless of technical setup.
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Privacy-First Design</h3>
-                    <p className="text-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Privacy-First Design</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       We prioritize data privacy and security. All schedules are stored locally on your 
                       device, ensuring your information remains private and secure while maintaining 
                       full functionality.
@@ -225,7 +226,7 @@ const About = () => {
             {/* Impact & Statistics */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Globe className="w-6 h-6 text-green-500" />
                   Our Impact
                 </CardTitle>
@@ -234,15 +235,15 @@ const About = () => {
                 <div className="grid md:grid-cols-3 gap-6 text-center">
                   <div>
                     <div className="text-3xl font-bold text-blue-600 mb-2">166+</div>
-                    <p className="text-gray-600">Teacher Reviews</p>
+                    <p className="text-gray-600 dark:text-gray-400">Teacher Reviews</p>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-green-600 mb-2">5.0</div>
-                    <p className="text-gray-600">Average Rating</p>
+                    <p className="text-gray-600 dark:text-gray-400">Average Rating</p>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-purple-600 mb-2">&lt;2min</div>
-                    <p className="text-gray-600">Average Setup Time</p>
+                    <p className="text-gray-600 dark:text-gray-400">Average Setup Time</p>
                   </div>
                 </div>
               </CardContent>
@@ -251,7 +252,7 @@ const About = () => {
             {/* Team Values */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                   <Star className="w-6 h-6 text-yellow-500" />
                   Our Values
                 </CardTitle>
@@ -261,8 +262,8 @@ const About = () => {
                   <div className="flex items-start gap-3">
                     <Shield className="w-6 h-6 text-blue-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Trust & Reliability</h3>
-                      <p className="text-gray-700">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Trust & Reliability</h3>
+                      <p className="text-gray-700 dark:text-gray-300">
                         Teachers trust us with their daily schedules. We ensure our technology is 
                         reliable, accurate, and ready when emergencies strike.
                       </p>
@@ -271,8 +272,8 @@ const About = () => {
                   <div className="flex items-start gap-3">
                     <Clock className="w-6 h-6 text-green-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Speed & Efficiency</h3>
-                      <p className="text-gray-700">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Speed & Efficiency</h3>
+                      <p className="text-gray-700 dark:text-gray-300">
                         Time is precious in education. Our technology creates emergency schedules 
                         in under 2 minutes, giving teachers more time for what matters most.
                       </p>
@@ -281,8 +282,8 @@ const About = () => {
                   <div className="flex items-start gap-3">
                     <Users className="w-6 h-6 text-purple-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Teacher-First Design</h3>
-                      <p className="text-gray-700">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Teacher-First Design</h3>
+                      <p className="text-gray-700 dark:text-gray-300">
                         Every feature is designed with real classroom scenarios in mind. We understand 
                         the challenges teachers face and build solutions accordingly.
                       </p>
@@ -291,8 +292,8 @@ const About = () => {
                   <div className="flex items-start gap-3">
                     <GraduationCap className="w-6 h-6 text-orange-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Educational Excellence</h3>
-                      <p className="text-gray-700">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Educational Excellence</h3>
+                      <p className="text-gray-700 dark:text-gray-300">
                         We're committed to supporting educational excellence by providing tools that 
                         enhance classroom management and student learning outcomes.
                       </p>
@@ -303,12 +304,12 @@ const About = () => {
             </Card>
 
             {/* CTA Section */}
-            <Card className="bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200">
+            <Card className="bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 dark:from-blue-900/20 dark:to-cyan-900/20 dark:border-blue-800">
               <CardContent className="py-8 text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Ready to Experience the Difference?
                 </h3>
-                <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
                   Join hundreds of teachers who trust <AppName /> for their emergency scheduling needs. 
                   Download the app and experience intelligent scheduling that works as fast as you need it to.
                 </p>
@@ -335,6 +336,9 @@ const About = () => {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </>
   );
 };

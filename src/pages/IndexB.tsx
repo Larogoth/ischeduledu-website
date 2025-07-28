@@ -9,6 +9,7 @@ import FAQSection from "@/components/home/FAQSection";
 import FinalCTA from "@/components/home/FinalCTA";
 import Footer from "@/components/home/Footer";
 import StickyNavigation from "@/components/home/StickyNavigation";
+import BackToTop from "@/components/BackToTop";
 import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
 import { useEffect, useState } from "react";
 import type { Testimonial } from "@/data/testimonials";
@@ -45,6 +46,9 @@ const IndexB = () => {
       <FAQSection />
       <FinalCTA />
       <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

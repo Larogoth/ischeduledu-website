@@ -2,6 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, Share2, Clock, AlertTriangle, Users, Download } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
+import Footer from "@/components/home/Footer";
+import BackToTop from "@/components/BackToTop";
 import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
@@ -704,6 +706,12 @@ const BlogPost = () => {
           </article>
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
     </>
   );
