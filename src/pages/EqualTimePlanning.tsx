@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, Clock, Calculator, Share2, Save, CheckCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
-import Breadcrumb from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
@@ -89,6 +89,28 @@ const EqualTimePlanning = () => {
               "@type": "WebPage",
               "@id": "https://ischeduledu.app/equal-time-planning"
             }
+          })}
+        </script>
+
+        {/* Breadcrumb Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ischeduledu.app/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Equal Time Planning",
+                "item": "https://ischeduledu.app/equal-time-planning"
+              }
+            ]
           })}
         </script>
       </Helmet>

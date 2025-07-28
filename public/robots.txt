@@ -4,5 +4,22 @@ Allow: /
 # Sitemap
 Sitemap: https://ischeduledu.app/sitemap.xml
 
+# Allow all pages for crawling
+Allow: /emergency-schedule-guide
+Allow: /rotating-schedule-guide
+Allow: /custom-schedule-guide
+Allow: /emergency-scheduling
+Allow: /equal-time-planning
+Allow: /shareable-plans
+Allow: /features
+Allow: /about
+Allow: /faq
+Allow: /blog
+Allow: /import
+
+# Disallow admin or private areas (if any exist in the future)
+Disallow: /admin/
+Disallow: /private/
+
 # Crawl-delay for respectful crawling
 Crawl-delay: 1 

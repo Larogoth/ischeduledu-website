@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Clock, Users, AlertTriangle, Share2, BookOpen, HelpCircle, Info } from "lucide-react";
+import { ArrowRight, Clock, Users, AlertTriangle, Share2, BookOpen, HelpCircle, Info, Calendar } from "lucide-react";
 
 interface RelatedContentProps {
   currentPage: string;
@@ -11,6 +11,12 @@ interface RelatedContentProps {
 const RelatedContent: React.FC<RelatedContentProps> = ({ currentPage, className }) => {
   const relatedPages = {
     "emergency-scheduling": [
+      {
+        title: "Emergency Schedule Guide",
+        description: "Step-by-step guide for creating emergency schedules",
+        href: "/emergency-schedule-guide",
+        icon: <AlertTriangle className="w-5 h-5 text-red-600" />
+      },
       {
         title: "Equal Time Planning",
         description: "Create perfectly balanced schedules where every subject gets equal time",
@@ -22,12 +28,6 @@ const RelatedContent: React.FC<RelatedContentProps> = ({ currentPage, className 
         description: "Create professional, shareable schedules that everyone can access instantly",
         href: "/shareable-plans",
         icon: <Share2 className="w-5 h-5 text-green-600" />
-      },
-      {
-        title: "FAQ",
-        description: "Get answers to common questions about emergency scheduling and teacher tools",
-        href: "/faq",
-        icon: <HelpCircle className="w-5 h-5 text-purple-600" />
       }
     ],
     "equal-time-planning": [
@@ -110,24 +110,84 @@ const RelatedContent: React.FC<RelatedContentProps> = ({ currentPage, className 
         icon: <BookOpen className="w-5 h-5 text-green-600" />
       }
     ],
-    "faq": [
+    "emergency-schedule-guide": [
+      {
+        title: "Custom Schedule Guide",
+        description: "Learn how to create custom daily schedules",
+        href: "/custom-schedule-guide",
+        icon: <Calendar className="w-5 h-5 text-green-600" />
+      },
+      {
+        title: "Rotating Schedule Guide",
+        description: "Set up A/B day rotations and multi-day cycles",
+        href: "/rotating-schedule-guide",
+        icon: <ArrowRight className="w-5 h-5 text-blue-600" />
+      },
       {
         title: "Emergency Scheduling",
-        description: "Learn how to create emergency schedules step by step",
+        description: "See emergency scheduling features in action",
         href: "/emergency-scheduling",
+        icon: <AlertTriangle className="w-5 h-5 text-red-600" />
+      }
+    ],
+    "rotating-schedule-guide": [
+      {
+        title: "Custom Schedule Guide",
+        description: "Learn how to create custom daily schedules",
+        href: "/custom-schedule-guide",
+        icon: <Calendar className="w-5 h-5 text-green-600" />
+      },
+      {
+        title: "Emergency Schedule Guide",
+        description: "Step-by-step guide for creating emergency schedules",
+        href: "/emergency-schedule-guide",
         icon: <AlertTriangle className="w-5 h-5 text-red-600" />
       },
       {
-        title: "Equal Time Planning",
-        description: "Understand how equal time division works in practice",
-        href: "/equal-time-planning",
-        icon: <Clock className="w-5 h-5 text-blue-600" />
-      },
-      {
         title: "Features",
-        description: "Explore all the features mentioned in our FAQ",
+        description: "Explore all advanced scheduling features",
         href: "/features",
         icon: <Info className="w-5 h-5 text-blue-600" />
+      }
+    ],
+    "custom-schedule-guide": [
+      {
+        title: "Emergency Schedule Guide",
+        description: "Step-by-step guide for creating emergency schedules",
+        href: "/emergency-schedule-guide",
+        icon: <AlertTriangle className="w-5 h-5 text-red-600" />
+      },
+      {
+        title: "Rotating Schedule Guide",
+        description: "Set up A/B day rotations and multi-day cycles",
+        href: "/rotating-schedule-guide",
+        icon: <ArrowRight className="w-5 h-5 text-blue-600" />
+      },
+      {
+        title: "Shareable Plans",
+        description: "Learn how to share your custom schedules",
+        href: "/shareable-plans",
+        icon: <Share2 className="w-5 h-5 text-green-600" />
+      }
+    ],
+    "faq": [
+      {
+        title: "Emergency Schedule Guide",
+        description: "Step-by-step guide for creating emergency schedules",
+        href: "/emergency-schedule-guide",
+        icon: <AlertTriangle className="w-5 h-5 text-red-600" />
+      },
+      {
+        title: "Custom Schedule Guide",
+        description: "Learn how to create custom daily schedules",
+        href: "/custom-schedule-guide",
+        icon: <Calendar className="w-5 h-5 text-green-600" />
+      },
+      {
+        title: "Rotating Schedule Guide",
+        description: "Set up A/B day rotations and multi-day cycles",
+        href: "/rotating-schedule-guide",
+        icon: <ArrowRight className="w-5 h-5 text-blue-600" />
       }
     ],
     "blog": [

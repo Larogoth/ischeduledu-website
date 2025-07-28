@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, Share2, QrCode, MessageSquare, Download, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
-import Breadcrumb from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
@@ -93,6 +93,28 @@ const ShareablePlans = () => {
               "@type": "WebPage",
               "@id": "https://ischeduledu.app/shareable-plans"
             }
+          })}
+        </script>
+
+        {/* Breadcrumb Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ischeduledu.app/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Shareable Plans",
+                "item": "https://ischeduledu.app/shareable-plans"
+              }
+            ]
           })}
         </script>
       </Helmet>

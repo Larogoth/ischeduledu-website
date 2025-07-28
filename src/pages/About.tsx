@@ -4,7 +4,7 @@ import { ChevronLeft, GraduationCap, Clock, Users, Shield, Zap, Heart, Star, Awa
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AppName from "@/components/AppName";
-import Breadcrumb from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import { Helmet } from "react-helmet-async";
 
@@ -60,6 +60,28 @@ const About = () => {
               "School administration",
               "iOS development",
               "Educational software"
+            ]
+          })}
+        </script>
+
+        {/* Breadcrumb Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ischeduledu.app/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About",
+                "item": "https://ischeduledu.app/about"
+              }
             ]
           })}
         </script>

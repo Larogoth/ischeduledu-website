@@ -11,9 +11,11 @@ interface TestimonialCardBProps {
   content: string;
   stars: number;
   isAppStoreReview?: boolean;
+  version?: string;
+  location?: string;
 }
 
-const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: TestimonialCardBProps) => {
+const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview, version, location }: TestimonialCardBProps) => {
   const [translatedTitle, setTranslatedTitle] = useState<string>("");
   const [translatedContent, setTranslatedContent] = useState<string>("");
   const [isTranslated, setIsTranslated] = useState(false);
@@ -128,23 +130,31 @@ const TestimonialCardB = ({ title, name, content, stars, isAppStoreReview }: Tes
         )}
         
         <footer className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center">
               <User className="w-4 h-4 text-gray-500 dark:text-gray-300" />
             </div>
             <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{name}</p>
           </div>
+          
+          {/* App Store Review Metadata */}
+          {isAppStoreReview && (version || location) && (
+            <div className="flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-400 mb-2">
+              {version && <span>📱 v{version}</span>}
+              {location && <span>🌍 {location}</span>}
+            </div>
+          )}
+          
+          {/* App Store badge on its own line at bottom right */}
+          {isAppStoreReview && (
+            <div className="flex justify-end">
+              <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                <Star className="w-3 h-3 fill-current" />
+                App Store
+              </span>
+            </div>
+          )}
         </footer>
-        
-        {/* App Store badge on its own line at bottom right */}
-        {isAppStoreReview && (
-          <div className="flex justify-end mt-3">
-            <span className="bg-[#0FA0CE] text-white px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-              <Star className="w-3 h-3 fill-current" />
-              App Store
-            </span>
-          </div>
-        )}
       </CardContent>
     </Card>
   );

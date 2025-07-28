@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import AppName from "@/components/AppName";
-import Breadcrumb from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -178,6 +178,28 @@ const FAQ = () => {
                 }
               }))
             )
+          })}
+        </script>
+
+        {/* Breadcrumb Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ischeduledu.app/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "FAQ",
+                "item": "https://ischeduledu.app/faq"
+              }
+            ]
           })}
         </script>
       </Helmet>

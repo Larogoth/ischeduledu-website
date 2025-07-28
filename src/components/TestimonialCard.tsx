@@ -11,9 +11,11 @@ interface TestimonialCardProps {
   content: string;
   stars: number;
   isAppStoreReview?: boolean;
+  version?: string;
+  location?: string;
 }
 
-const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: TestimonialCardProps) => {
+const TestimonialCard = ({ title, name, content, stars, isAppStoreReview, version, location }: TestimonialCardProps) => {
   const [translatedTitle, setTranslatedTitle] = useState<string>("");
   const [translatedContent, setTranslatedContent] = useState<string>("");
   const [isTranslated, setIsTranslated] = useState(false);
@@ -88,7 +90,7 @@ const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: Test
         </blockquote>
         
         <footer className="border-t border-border pt-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <p className="text-sm font-bold text-foreground">— {name}</p>
             {isAppStoreReview && (
               <span className="bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
@@ -96,6 +98,15 @@ const TestimonialCard = ({ title, name, content, stars, isAppStoreReview }: Test
               </span>
             )}
           </div>
+          
+          {/* App Store Review Metadata */}
+          {isAppStoreReview && (version || location) && (
+            <div className="flex flex-wrap gap-2 text-xs text-foreground/60">
+              {version && <span>📱 v{version}</span>}
+              {location && <span>🌍 {location}</span>}
+            </div>
+          )}
+          
           {import.meta.env.DEV && (
             <p className="text-xs text-foreground/50 mt-2">
               Source: {isAppStoreReview ? 'App Store Review' : 'Local Testimonial'}

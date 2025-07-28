@@ -1,20 +1,42 @@
 
 import { Button } from "@/components/ui/button";
-import { Download, Sparkles, Menu, X } from "lucide-react";
+import { Download, Sparkles, Menu, X, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const StickyNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isGuidesOpen, setIsGuidesOpen] = useState(false);
+  const guidesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (guidesRef.current && !guidesRef.current.contains(event.target as Node)) {
+        setIsGuidesOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const navigationItems = [
     { name: "Home", href: "/" },
     { name: "Emergency Scheduling", href: "/emergency-scheduling" },
     { name: "Equal Time Planning", href: "/equal-time-planning" },
     { name: "Shareable Plans", href: "/shareable-plans" },
+    { name: "Guides", href: "/guides", hasDropdown: true },
     { name: "Blog", href: "/blog" },
     { name: "FAQ", href: "/faq" }
+  ];
+
+  const guideItems = [
+    { name: "Emergency Schedule Guide", href: "/emergency-schedule-guide" },
+    { name: "Custom Schedule Guide", href: "/custom-schedule-guide" },
+    { name: "Rotating Schedule Guide", href: "/rotating-schedule-guide" }
   ];
 
   return (
@@ -41,13 +63,42 @@ const StickyNavigation = () => {
         <div className="hidden md:flex items-center gap-6">
           <nav className="flex items-center gap-6">
             {navigationItems.slice(0, 5).map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200"
-              >
-                {item.name}
-              </Link>
+              <div key={item.name} className="relative">
+                {item.hasDropdown ? (
+                  <div className="relative" ref={guidesRef}>
+                    <button
+                      onClick={() => setIsGuidesOpen(!isGuidesOpen)}
+                      className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200"
+                    >
+                      {item.name}
+                      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isGuidesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {isGuidesOpen && (
+                      <div className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-sm border border-[#0FA0CE]/20 rounded-lg shadow-lg z-50">
+                        <div className="py-2">
+                          {guideItems.map((guide) => (
+                            <Link
+                              key={guide.name}
+                              to={guide.href}
+                              className="block px-4 py-2 text-sm text-foreground/80 hover:text-[#0FA0CE] hover:bg-[#0FA0CE]/10 transition-colors duration-200"
+                              onClick={() => setIsGuidesOpen(false)}
+                            >
+                              {guide.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className="text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200"
+                  >
+                    {item.name}
+                  </Link>
+                )}
+              </div>
             ))}
           </nav>
           <ThemeToggle />
@@ -86,14 +137,41 @@ const StickyNavigation = () => {
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col gap-4">
               {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                <div key={item.name}>
+                  {item.hasDropdown ? (
+                    <div>
+                      <button
+                        onClick={() => setIsGuidesOpen(!isGuidesOpen)}
+                        className="flex items-center justify-between w-full text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 py-2"
+                      >
+                        {item.name}
+                        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isGuidesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {isGuidesOpen && (
+                        <div className="ml-4 mt-2 space-y-2">
+                          {guideItems.map((guide) => (
+                            <Link
+                              key={guide.name}
+                              to={guide.href}
+                              className="block text-sm text-foreground/60 hover:text-[#0FA0CE] transition-colors duration-200 py-1"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {guide.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="text-sm font-medium text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 py-2"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </div>
               ))}
               <div className="pt-4 border-t border-[#0FA0CE]/20">
                 <a 

@@ -4,7 +4,7 @@ import { ChevronLeft, Clock, Share2, QrCode, FileText, Bell, Smartphone, Zap, Sh
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AppName from "@/components/AppName";
-import Breadcrumb from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import { Helmet } from "react-helmet-async";
 
@@ -141,6 +141,28 @@ const Features = () => {
               "price": "0",
               "priceCurrency": "USD"
             }
+          })}
+        </script>
+
+        {/* Breadcrumb Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ischeduledu.app/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Features",
+                "item": "https://ischeduledu.app/features"
+              }
+            ]
           })}
         </script>
       </Helmet>

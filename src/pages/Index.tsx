@@ -7,32 +7,12 @@ import Footer from "@/components/home/Footer";
 import StorySection from "@/components/home/StorySection";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import ReviewsSection from "@/components/home/ReviewsSection";
-import { getTestimonials, testimonials as fallbackTestimonials } from "@/data/testimonials";
-import { useEffect } from "react";
+import { testimonials } from "@/data/testimonials";
 import type { Testimonial } from "@/data/testimonials";
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const Index = () => {
-  const [reviews, setReviews] = useState<Testimonial[]>(fallbackTestimonials);
-  const [isLoadingReviews, setIsLoadingReviews] = useState(true);
-
-  useEffect(() => {
-    const loadReviews = async () => {
-      setIsLoadingReviews(true);
-      try {
-        console.log("Starting to fetch reviews...");
-        const fetchedReviews = await getTestimonials();
-        console.log("Fetched reviews:", fetchedReviews);
-        setReviews(fetchedReviews);
-      } catch (error) {
-        console.error("Error loading reviews:", error);
-      } finally {
-        setIsLoadingReviews(false);
-      }
-    };
-    loadReviews();
-  }, []);
+  const reviews: Testimonial[] = testimonials;
 
   return (
     <>
@@ -64,6 +44,37 @@ const Index = () => {
             }
           })}
         </script>
+        
+        {/* Reviews Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "iSchedulEDU",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "ratingCount": "3",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": reviews.map(review => ({
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": review.name
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": review.stars.toString(),
+                "bestRating": "5",
+                "worstRating": "1"
+              },
+              "reviewBody": review.content,
+              "datePublished": review.date ? new Date().toISOString().split('T')[0] : undefined
+            }))
+          })}
+        </script>
       </Helmet>
       
       <main className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-14 relative overflow-hidden">
@@ -82,7 +93,7 @@ const Index = () => {
       <Screenshots />
       
       {/* 4. Social Proof - Real results from real teachers */}
-      <ReviewsSection reviews={reviews} isLoadingReviews={isLoadingReviews} />
+      <ReviewsSection reviews={reviews} isLoadingReviews={false} />
 
       {/* 5. Pricing & Final CTA - Clear offer and action */}
       <Pricing />

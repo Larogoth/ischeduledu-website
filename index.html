@@ -316,6 +316,38 @@
               "@type": "Answer",
               "text": "iSchedulEDU is specifically designed for educational environments with intelligent equal time division, comprehensive emergency schedule management, seamless sharing across different user types, and deep integration with modern iOS features like AlarmKit. The app understands the unique challenges of elementary and middle school education."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast can teachers create emergency schedules with iSchedulEDU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most teachers create emergency schedules in under 2 minutes with iSchedulEDU. Simply input your start time, end time, and any fixed events, then let the app handle the math. No manual calculations needed! The app's intelligent equal time division algorithms ensure fair distribution of remaining instructional time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What emergency scenarios does iSchedulEDU handle?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "iSchedulEDU handles all common emergency scenarios: fire drill disruptions, assembly interruptions, weather delays, early dismissals, substitute teacher emergencies, and special event days. The app automatically redistributes remaining time into equal class periods for any disruption."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does iSchedulEDU ensure data privacy and security?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "iSchedulEDU is committed to data privacy and security. The app stores schedules locally on your device, meaning your data is never uploaded to servers or cloud storage. This ensures your information remains private and secure while maintaining full functionality."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can iSchedulEDU handle complex rotating schedules?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! iSchedulEDU handles A/B day rotations, multi-day cycles, and complex rotating schedules with ease. You can set up different schedules for different days and the app will track which schedule to use, making it perfect for schools with complex scheduling requirements."
+            }
           }
         ]
       }
@@ -335,6 +367,22 @@
       }
     </script>
 
+    <!-- WebSite Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "iSchedulEDU",
+        "url": "https://ischeduledu.app",
+        "description": "Emergency schedule generator for teachers - create equal time schedules in under 2 minutes",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ischeduledu.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
     <!-- Organization Structured Data -->
     <script type="application/ld+json">
       {
@@ -343,9 +391,17 @@
         "name": "iSchedulEDU",
         "url": "https://ischeduledu.app",
         "logo": "https://ischeduledu.app/lovable-uploads/6bccc818-bd50-4f4a-ad6e-ebf8c4736a68.png",
-        "description": "Educational technology company focused on creating scheduling solutions for teachers and school administrators.",
+        "description": "Educational technology company focused on creating intelligent scheduling solutions for teachers and school administrators. Specializing in emergency schedule management, equal time division algorithms, and seamless schedule sharing across educational environments.",
         "foundingDate": "2024",
         "industry": "Educational Technology",
+        "numberOfEmployees": "5-10",
+        "location": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+          }
+        },
         "sameAs": [
           "https://apps.apple.com/us/app/ischeduledu/id6504114850",
           "https://twitter.com/ischeduledu",
@@ -354,7 +410,38 @@
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
+          "email": "ischeduledu@gmail.com",
           "availableLanguage": "English"
+        },
+        "knowsAbout": [
+          "Teacher scheduling",
+          "Emergency schedule management", 
+          "Equal time division algorithms",
+          "Educational technology",
+          "Classroom management",
+          "School administration",
+          "iOS development",
+          "Educational software",
+          "Fire drill scheduling",
+          "Assembly interruption handling",
+          "Weather delay management",
+          "Substitute teacher handoff",
+          "Universal Link sharing",
+          "QR code integration",
+          "PDF export functionality"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "iSchedulEDU Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "SoftwareApplication",
+                "name": "iSchedulEDU Emergency Schedule Generator"
+              }
+            }
+          ]
         }
       }
     </script>

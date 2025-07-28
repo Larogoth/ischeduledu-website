@@ -85,6 +85,8 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                         content={review.content}
                         stars={review.stars}
                         isAppStoreReview={review.isAppStoreReview}
+                        version={review.version}
+                        location={review.location}
                       />
                     </div>
                   </div>
@@ -161,6 +163,8 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
                         content={review.content}
                         stars={review.stars}
                         isAppStoreReview={review.isAppStoreReview}
+                        version={review.version}
+                        location={review.location}
                       />
                     </div>
                   </div>

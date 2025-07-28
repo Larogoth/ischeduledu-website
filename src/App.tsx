@@ -17,6 +17,9 @@ import ShareablePlans from "./pages/ShareablePlans";
 import About from "./pages/About";
 import Features from "./pages/Features";
 import AppNameTest from "./components/AppNameTest";
+import EmergencyScheduleGuide from "./pages/EmergencyScheduleGuide";
+import RotatingScheduleGuide from "./pages/RotatingScheduleGuide";
+import CustomScheduleGuide from "./pages/CustomScheduleGuide";
 import { initializeSecurity } from "./utils/securityInit";
 import { usePageView } from "./hooks/usePageView";
 
@@ -167,6 +170,9 @@ const App = () => {
               <Route path="/shareable-plans" element={<ShareablePlans />} />
               <Route path="/about" element={<About />} />
               <Route path="/features" element={<Features />} />
+              <Route path="/emergency-schedule-guide" element={<EmergencyScheduleGuide />} />
+              <Route path="/rotating-schedule-guide" element={<RotatingScheduleGuide />} />
+              <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
               <Route path="/test-appname" element={<AppNameTest />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
