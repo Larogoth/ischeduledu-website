@@ -105,20 +105,20 @@ const FAQ: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb Navigation */}
         <div className="mb-8">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-            <Link 
-              to="/" 
-              className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-              </svg>
-              Home
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-gray-900 dark:text-gray-100 font-semibold">FAQ</span>
-          </nav>
-        </div>
+              <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                <Link 
+                  to="/" 
+                  className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                  </svg>
+                  Home
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+                <span className="text-gray-900 dark:text-gray-100 font-semibold">FAQ</span>
+              </nav>
+            </div>
 
         {/* Header */}
         <div className="text-center mb-12">
@@ -160,20 +160,20 @@ const FAQ: React.FC = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400">Smart Alerts</p>
             </CardContent>
           </Card>
-        </div>
-
+          </div>
+          
         {/* FAQ Categories */}
         <div className="space-y-8">
           {faqData.map((category, categoryIndex) => (
             <Card key={categoryIndex} className="shadow-lg">
-              <CardHeader>
+                <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Badge variant="secondary" className="text-sm">
                     {category.category}
                   </Badge>
                 </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </CardHeader>
+                <CardContent>
                 <Accordion type="single" collapsible className="w-full">
                   {category.questions.map((item, index) => (
                     <AccordionItem key={index} value={`item-${categoryIndex}-${index}`}>
@@ -188,9 +188,9 @@ const FAQ: React.FC = () => {
                     </AccordionItem>
                   ))}
                 </Accordion>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))}
         </div>
 
         {/* CTA Section */}

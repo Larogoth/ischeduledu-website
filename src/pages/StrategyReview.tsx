@@ -470,6 +470,83 @@ const StrategyReview: React.FC = () => {
           </Card>
         </div>
       </div>
+
+      {/* External links for SEO - Hidden from navigation */}
+      <div className="mt-16 py-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+            Educational Technology & Business Resources
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="text-center">
+              <a 
+                href="https://www.apple.com/business/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Apple Business
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Enterprise iOS solutions</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.microsoft.com/en-us/microsoft-365/education" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Microsoft 365 Education
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Educational productivity tools</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://workspace.google.com/education/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Google Workspace Education
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Collaborative learning tools</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.edweek.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Education Week
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Education industry insights</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.edsurge.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                EdSurge
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Educational technology news</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.nea.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                National Education Association
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Teacher advocacy and resources</p>
+            </div>
+          </div>
+        </div>
+      </div>
       
       {/* Footer */}
       <Footer />

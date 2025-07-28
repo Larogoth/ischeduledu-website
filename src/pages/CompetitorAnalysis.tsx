@@ -432,6 +432,83 @@ const CompetitorAnalysis: React.FC = () => {
           </Card>
         </div>
       </div>
+
+      {/* External links for SEO - Hidden from navigation */}
+      <div className="mt-16 py-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+            Educational Technology Resources
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="text-center">
+              <a 
+                href="https://www.apple.com/education/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Apple Education
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">iOS and iPadOS in education</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.microsoft.com/en-us/education" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Microsoft Education
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Office 365 for schools</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://edu.google.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Google for Education
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Google Workspace for education</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.khanacademy.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Khan Academy
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Free educational resources</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.edutopia.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                Edutopia
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Educational best practices</p>
+            </div>
+            <div className="text-center">
+              <a 
+                href="https://www.iste.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+              >
+                ISTE
+              </a>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">International Society for Technology in Education</p>
+            </div>
+          </div>
+        </div>
+      </div>
       
       {/* Footer */}
       <Footer />
