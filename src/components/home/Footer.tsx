@@ -52,7 +52,7 @@ const Footer = () => {
                 to="/faq" 
                 className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
               >
-                Support
+                FAQ
               </Link>
             </nav>
           </div>
