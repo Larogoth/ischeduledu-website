@@ -2,7 +2,9 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { Target, TrendingUp, Users, Smartphone, Clock, Share2, Bell, QrCode, Calendar, Award, Lightbulb, BarChart3, Globe, Zap, Download } from 'lucide-react';
+import { Target, TrendingUp, Users, Smartphone, Clock, Share2, Bell, QrCode, Calendar, Award, Lightbulb, BarChart3, Globe, Zap, Download, ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Footer from '../components/home/Footer';
 
 const StrategyReview: React.FC = () => {
   const strategyData = {
@@ -171,6 +173,14 @@ const StrategyReview: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
+        {/* Header with Navigation */}
+        <div className="mb-8">
+          <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 mb-4">
+            <ChevronLeft className="w-4 h-4 mr-1" />
+            Back to Home
+          </Link>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -440,8 +450,7 @@ const StrategyReview: React.FC = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-blue-600"
+                  className="bg-white/10 border-white text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm"
                   onClick={() => window.open('https://ischeduledu.app', '_blank')}
                 >
                   <Globe className="w-5 h-5 mr-2" />
@@ -452,6 +461,9 @@ const StrategyReview: React.FC = () => {
           </Card>
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

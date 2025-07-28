@@ -5,6 +5,7 @@ import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { ExternalLink, Download, Smartphone, Clock, Share2, Bell, QrCode, Calendar, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Footer from '../components/home/Footer';
 
 const FAQ: React.FC = () => {
   const faqData = [
@@ -250,6 +251,9 @@ const FAQ: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
