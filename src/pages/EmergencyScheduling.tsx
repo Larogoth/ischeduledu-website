@@ -116,7 +116,7 @@ const EmergencyScheduling = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <StickyNavigation />
         <div className="pt-20">
 
@@ -141,14 +141,14 @@ const EmergencyScheduling = () => {
           
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <AlertTriangle className="w-4 h-4" />
               Emergency Scheduling Solution
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               iOS App to Generate Emergency Class Schedules
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
               When your school day gets thrown off by assemblies, fire drills, or weather delays, 
               <AppName /> creates equal-length schedules instantly. No more panic, no more manual calculations.
             </p>
@@ -170,7 +170,7 @@ const EmergencyScheduling = () => {
 
           {/* Features Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Why Teachers Choose <AppName /> for Emergency Scheduling
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -179,9 +179,9 @@ const EmergencyScheduling = () => {
                   <CardHeader>
                     <div className="flex items-center gap-4 mb-4">
                       {feature.icon}
-                      <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">{feature.title}</h3>
                     </div>
-                    <p className="text-gray-600 mb-4">{feature.description}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{feature.description}</p>
                     <div className="flex items-center gap-2 text-green-600 font-semibold">
                       <CheckCircle className="w-4 h-4" />
                       {feature.benefit}
@@ -194,15 +194,15 @@ const EmergencyScheduling = () => {
 
           {/* Use Cases Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Real Emergency Scenarios <AppName /> Solves
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {useCases.map((useCase, index) => (
                 <Card key={index} className="border-l-4 border-[#0FA0CE]">
                   <CardContent className="py-6">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{useCase.scenario}</h3>
-                    <p className="text-gray-600 mb-3">{useCase.description}</p>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{useCase.scenario}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-3">{useCase.description}</p>
                     <div className="flex items-center gap-2 text-[#0FA0CE] font-semibold">
                       <Clock className="w-4 h-4" />
                       Time Saved: {useCase.timeSaved}
@@ -215,31 +215,31 @@ const EmergencyScheduling = () => {
 
           {/* How It Works */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               How Emergency Schedule Generation Works
             </h2>
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     1
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Input Your Constraints</h3>
-                  <p className="text-gray-600">Set your start time, end time, and any fixed events like lunch or recess.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Input Your Constraints</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Set your start time, end time, and any fixed events like lunch or recess.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     2
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Auto-Generate Equal Periods</h3>
-                  <p className="text-gray-600">The app automatically calculates equal class periods for your remaining time.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Auto-Generate Equal Periods</h3>
+                  <p className="text-gray-600 dark:text-gray-300">The app automatically calculates equal class periods for your remaining time.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     3
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Share & Save</h3>
-                  <p className="text-gray-600">Share via Universal Links, QR codes, text, or PDF. Save for future reference.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Share & Save</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Share via Universal Links, QR codes, text, or PDF. Save for future reference.</p>
                 </div>
               </div>
             </div>
@@ -247,16 +247,16 @@ const EmergencyScheduling = () => {
 
           {/* FAQ Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Can I create printable schedules from <AppName />?</CardTitle>
+                  <CardTitle className="text-lg dark:text-white">Can I create printable schedules from <AppName />?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-300">
                     Yes! <AppName /> generates printable schedules that you can post in your classroom, 
                     share with administrators, or keep for documentation. The app creates clean, 
                     professional layouts perfect for any emergency situation.
@@ -265,10 +265,10 @@ const EmergencyScheduling = () => {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Does it support QR code sharing or PDFs?</CardTitle>
+                  <CardTitle className="text-lg dark:text-white">Does it support QR code sharing or PDFs?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-300">
                     Absolutely! <AppName /> supports multiple sharing methods: Universal Links for app users and non-app users, 
                     QR codes for app users, text messages, and PDF export for professional documentation. 
                     Universal Links automatically import schedules for app users or show web versions for non-app users.
@@ -277,10 +277,10 @@ const EmergencyScheduling = () => {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">How fast can I create an emergency schedule?</CardTitle>
+                  <CardTitle className="text-lg dark:text-white">How fast can I create an emergency schedule?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-300">
                     Most teachers create emergency schedules in under 2 minutes. Simply input your 
                     start time, end time, and any fixed events, then let the app handle the math. 
                     No manual calculations needed!
@@ -294,10 +294,10 @@ const EmergencyScheduling = () => {
           <div className="text-center">
             <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
               <CardContent className="py-12">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                   Never Panic About Schedule Changes Again
                 </h3>
-                <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                   Join hundreds of teachers who trust <AppName /> for emergency scheduling. 
                   Be prepared for any disruption to your school day.
                 </p>

@@ -116,7 +116,7 @@ const EqualTimePlanning = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <StickyNavigation />
         <div className="pt-20">
 
@@ -141,14 +141,14 @@ const EqualTimePlanning = () => {
           
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Calculator className="w-4 h-4" />
               Equal Time Lesson Planning
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               App for Equal Time Lesson Planning
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
               Stop playing favorites with your subjects! <AppName /> automatically creates perfectly balanced 
               schedules where every subject gets equal time. Fair, fast, and frustration-free.
             </p>
@@ -170,7 +170,7 @@ const EqualTimePlanning = () => {
 
           {/* Benefits Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Why Equal Time Planning Matters
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -179,9 +179,9 @@ const EqualTimePlanning = () => {
                   <CardHeader>
                     <div className="flex items-center gap-4 mb-4">
                       {benefit.icon}
-                      <h3 className="text-xl font-bold text-gray-900">{benefit.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">{benefit.title}</h3>
                     </div>
-                    <p className="text-gray-600 mb-4">{benefit.description}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{benefit.description}</p>
                     <div className="flex items-center gap-2 text-green-600 font-semibold">
                       <CheckCircle className="w-4 h-4" />
                       {benefit.benefit}
@@ -194,15 +194,15 @@ const EqualTimePlanning = () => {
 
           {/* Scenarios Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Perfect Equal Time Scenarios
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {scenarios.map((scenario, index) => (
                 <Card key={index} className="border-l-4 border-[#0FA0CE]">
                   <CardContent className="py-6">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{scenario.title}</h3>
-                    <p className="text-gray-600 mb-3">{scenario.description}</p>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{scenario.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-3">{scenario.description}</p>
                     <div className="flex items-center gap-2 text-[#0FA0CE] font-semibold">
                       <Clock className="w-4 h-4" />
                       {scenario.timeExample}
@@ -215,38 +215,38 @@ const EqualTimePlanning = () => {
 
           {/* How It Works */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               How Equal Time Planning Works
             </h2>
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     1
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Set Time Frame</h3>
-                  <p className="text-gray-600">Input your start and end times, plus any fixed events.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Set Time Frame</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Input your start and end times, plus any fixed events.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     2
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Auto-Calculate</h3>
-                  <p className="text-gray-600">App divides remaining time into perfectly equal periods.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Auto-Calculate</h3>
+                  <p className="text-gray-600 dark:text-gray-300">App divides remaining time into perfectly equal periods.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     3
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Review & Adjust</h3>
-                  <p className="text-gray-600">See your balanced schedule and make any final tweaks.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Review & Adjust</h3>
+                  <p className="text-gray-600 dark:text-gray-300">See your balanced schedule and make any final tweaks.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                     4
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Save & Share</h3>
-                  <p className="text-gray-600">Save your equal-time template and share with others.</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Save & Share</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Save your equal-time template and share with others.</p>
                 </div>
               </div>
             </div>
@@ -254,54 +254,54 @@ const EqualTimePlanning = () => {
 
           {/* Example Schedule */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Example: Perfect Equal Time Schedule
             </h2>
             <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
               <CardContent className="py-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Real App-Generated Schedule</h3>
-                  <p className="text-gray-600">7:55 AM to 3:00 PM with lunch interruption (11:00-11:30)</p>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Real App-Generated Schedule</h3>
+                  <p className="text-gray-600 dark:text-gray-300">7:55 AM to 3:00 PM with lunch interruption (11:00-11:30)</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Math</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Math</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
-                    <p className="text-sm text-gray-500">7:55-9:14</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">7:55-9:14</p>
                   </div>
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Reading</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Reading</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
-                    <p className="text-sm text-gray-500">9:14-10:33</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">9:14-10:33</p>
                   </div>
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Science</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Science</h4>
                     <p className="text-[#0FA0CE] font-semibold">27m</p>
-                    <p className="text-sm text-gray-500">10:33-11:00</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">10:33-11:00</p>
                   </div>
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Lunch</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Lunch</h4>
                     <p className="text-[#0FA0CE] font-semibold">30m</p>
-                    <p className="text-sm text-gray-500">11:00-11:30</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">11:00-11:30</p>
                   </div>
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Science (cont.)</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Science (cont.)</h4>
                     <p className="text-[#0FA0CE] font-semibold">52m</p>
-                    <p className="text-sm text-gray-500">11:30-12:22</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">11:30-12:22</p>
                   </div>
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Social Studies</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Social Studies</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
-                    <p className="text-sm text-gray-500">12:22-1:41</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">12:22-1:41</p>
                   </div>
-                  <div className="text-center p-4 bg-white rounded-lg shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">Writing</h4>
+                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Writing</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
-                    <p className="text-sm text-gray-500">1:41-3:00</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">1:41-3:00</p>
                   </div>
                 </div>
                 <div className="text-center mt-6">
-                  <p className="text-sm text-gray-500">Note: Science is interrupted by lunch and continues afterward. The app intelligently handles interruptions while maintaining equal time distribution.</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Note: Science is interrupted by lunch and continues afterward. The app intelligently handles interruptions while maintaining equal time distribution.</p>
                 </div>
               </CardContent>
             </Card>
@@ -309,16 +309,16 @@ const EqualTimePlanning = () => {
 
           {/* FAQ Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">How does <AppName /> ensure truly equal time periods?</CardTitle>
+                  <CardTitle className="text-lg dark:text-white">How does <AppName /> ensure truly equal time periods?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-300">
                     The app uses intelligent mathematical calculations to divide your remaining time into equal periods. 
                     When perfect division isn't possible, it makes the first periods equal and adjusts the last period 
                     to handle any remaining minutes. For example, with 307 minutes divided into 5 periods, you'd get 
@@ -329,10 +329,10 @@ const EqualTimePlanning = () => {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Can I adjust the equal periods if needed?</CardTitle>
+                  <CardTitle className="text-lg dark:text-white">Can I adjust the equal periods if needed?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-300">
                     Yes! While <AppName /> creates perfectly equal periods automatically, you can always make manual 
                     adjustments if you need to prioritize certain subjects or accommodate special activities.
                   </p>
@@ -340,10 +340,10 @@ const EqualTimePlanning = () => {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">What if I have an odd number of minutes remaining?</CardTitle>
+                  <CardTitle className="text-lg dark:text-white">What if I have an odd number of minutes remaining?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-300">
                     <AppName /> handles odd numbers intelligently. It will create the most equal distribution possible, 
                     with any extra minute or two distributed strategically to maintain balance across your schedule.
                   </p>
@@ -356,10 +356,10 @@ const EqualTimePlanning = () => {
           <div className="text-center">
             <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
               <CardContent className="py-12">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                   Give Every Subject Equal Time
                 </h3>
-                <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                   Stop playing favorites with your subjects. <AppName /> ensures every class gets the time it deserves 
                   with automatic equal-time calculations.
                 </p>
