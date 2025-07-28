@@ -559,10 +559,10 @@ const ImportSchedule = () => {
                         {/* Primary Download Section */}
                         <div className="text-center">
                           <a 
-                            href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                            href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge"
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => trackAppStoreClick('mobile_main_cta')}
+
                             className="inline-block w-full max-w-sm"
                           >
                             <img 
@@ -729,10 +729,9 @@ const ImportSchedule = () => {
                         {/* Primary CTA */}
                         <div className="text-center">
                           <a 
-                            href="https://apps.apple.com/us/app/ischeduledu-class-planner/id6504114850"
+                            href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge"
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => trackAppStoreClick('desktop_main_cta')}
                             className="inline-block hover:scale-105 transition-transform duration-200"
                           >
                             <img 

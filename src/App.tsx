@@ -14,6 +14,9 @@ import BlogPost from "./pages/BlogPost";
 import EmergencyScheduling from "./pages/EmergencyScheduling";
 import EqualTimePlanning from "./pages/EqualTimePlanning";
 import ShareablePlans from "./pages/ShareablePlans";
+import About from "./pages/About";
+import Features from "./pages/Features";
+import AppNameTest from "./components/AppNameTest";
 import { initializeSecurity } from "./utils/securityInit";
 import { usePageView } from "./hooks/usePageView";
 
@@ -162,6 +165,9 @@ const App = () => {
               <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
               <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
               <Route path="/shareable-plans" element={<ShareablePlans />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/features" element={<Features />} />
+              <Route path="/test-appname" element={<AppNameTest />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, Share2, QrCode, MessageSquare, Download, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
+import Breadcrumb from "@/components/ui/breadcrumb";
+import RelatedContent from "@/components/RelatedContent";
 import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
 
@@ -101,6 +103,15 @@ const ShareablePlans = () => {
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
+          {/* Breadcrumb Navigation */}
+          <div className="mb-8">
+            <Breadcrumb 
+              items={[
+                { label: "Shareable Plans", href: "/shareable-plans", current: true }
+              ]} 
+            />
+          </div>
+          
           {/* Hero Section */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
@@ -374,6 +385,10 @@ const ShareablePlans = () => {
           </div>
         </div>
       </div>
+      
+      {/* Related Content Section */}
+      <RelatedContent currentPage="shareable-plans" />
+      
       </div>
     </div>
     </>

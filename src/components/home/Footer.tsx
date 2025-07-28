@@ -41,18 +41,54 @@ const Footer = () => {
 
           <div className="text-center">
             <p className="mb-6 text-gray-200 dark:text-gray-300">© 2024 <AppName size="sm" className="text-white" />. All rights reserved.</p>
-            <nav className="flex justify-center gap-6" aria-label="Footer navigation">
+            <nav className="flex justify-center gap-6 flex-wrap" aria-label="Footer navigation">
               <Link 
-                to="/privacy-policy" 
+                to="/emergency-scheduling" 
                 className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
               >
-                Privacy Policy
+                Emergency Scheduling
+              </Link>
+              <Link 
+                to="/equal-time-planning" 
+                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
+              >
+                Equal Time Planning
+              </Link>
+              <Link 
+                to="/shareable-plans" 
+                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
+              >
+                Shareable Plans
+              </Link>
+              <Link 
+                to="/features" 
+                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
+              >
+                Features
+              </Link>
+              <Link 
+                to="/about" 
+                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
+              >
+                About
               </Link>
               <Link 
                 to="/faq" 
                 className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
               >
                 FAQ
+              </Link>
+              <Link 
+                to="/blog" 
+                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
+              >
+                Blog
+              </Link>
+              <Link 
+                to="/privacy-policy" 
+                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
+              >
+                Privacy Policy
               </Link>
             </nav>
           </div>

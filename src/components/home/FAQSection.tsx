@@ -22,7 +22,7 @@ const FAQSection = () => {
     },
     {
       question: "What devices does iSchedulEDU work on?",
-      answer: "iSchedulEDU is available for iPhone and iPad running iOS 14 or later. The app is optimized for both phone and tablet use, making it perfect for classroom or home planning."
+      answer: "iSchedulEDU is available for iPhone and iPad running iOS 17.6 or later. The app is optimized for both phone and tablet use, making it perfect for classroom or home planning."
     },
     {
       question: "Can I share schedules with other teachers?",
