@@ -149,7 +149,7 @@ const Features = () => {
       
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="py-8 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto">
             {/* Breadcrumb Navigation */}
             <div className="mb-8">
               <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
