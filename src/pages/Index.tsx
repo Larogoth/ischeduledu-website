@@ -51,10 +51,13 @@ const Index = () => {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             "name": "iSchedulEDU",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "iOS",
+            "url": "https://apps.apple.com/us/app/ischeduledu/id6504114850",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "5.0",
-              "ratingCount": "3",
+              "ratingCount": "171",
               "bestRating": "5",
               "worstRating": "1"
             },
@@ -71,7 +74,8 @@ const Index = () => {
                 "worstRating": "1"
               },
               "reviewBody": review.content,
-              "datePublished": review.date ? new Date().toISOString().split('T')[0] : undefined
+              "reviewAspect": "Overall",
+              "datePublished": new Date().toISOString().split('T')[0]
             }))
           })}
         </script>

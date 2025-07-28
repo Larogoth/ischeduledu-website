@@ -566,7 +566,7 @@ const ImportSchedule = () => {
                             className="inline-block w-full max-w-sm"
                           >
                             <img 
-                              src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                              src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400"
                               alt="Download on the App Store"
                               className="h-16 mx-auto hover:scale-105 transition-transform duration-200 shadow-lg rounded-lg"
                             />
@@ -735,7 +735,7 @@ const ImportSchedule = () => {
                             className="inline-block hover:scale-105 transition-transform duration-200"
                           >
                             <img 
-                              src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                              src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400"
                               alt="Download on the App Store"
                               className="h-20 shadow-lg rounded-lg mx-auto"
                             />

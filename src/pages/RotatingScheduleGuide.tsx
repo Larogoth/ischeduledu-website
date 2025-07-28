@@ -343,7 +343,7 @@ const RotatingScheduleGuide = () => {
                   Handle A/B days, multi-day cycles, and complex rotations with ease.
                 </p>
                 <a
-                  href="https://apps.apple.com/us/app/ischeduledu/id6504114850"
+                  href="https://apps.apple.com/us/app/ischeduledu/id6504114850?itscg=30200&itsct=apps_box_badge"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-white text-[#0FA0CE] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"

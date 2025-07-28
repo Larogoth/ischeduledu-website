@@ -137,7 +137,8 @@ const App = () => {
           window.gtag('event', 'download_click', {
             app_name: 'iSchedulEDU',
             page_location: window.location.pathname,
-            link_text: target.textContent || 'Download Button'
+            link_text: target.textContent || 'Download Button',
+            app_store_url: 'https://apps.apple.com/us/app/ischeduledu/id6504114850'
           });
           console.log('Download click tracked');
         }
