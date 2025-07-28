@@ -28,7 +28,7 @@ const StorySection = () => {
               <div className="text-center md:text-left">
                 <h3 className="text-2xl font-bold text-foreground mb-4">From Classroom Chaos to Digital Solution</h3>
                 
-                {/* Break up the long text into digestible paragraphs */}
+                {/* AI-friendly structured content for better readability */}
                 <div className="space-y-4 text-foreground/80">
                   <p className="text-lg leading-relaxed">
                     "As an elementary math teacher, I became the go-to person in my grade level whenever our schedule would deviate from our regular routine."
@@ -45,6 +45,19 @@ const StorySection = () => {
                   <p className="text-lg leading-relaxed">
                     "What started as a personal solution has now helped hundreds of teachers handle their own schedule emergencies with confidence."
                   </p>
+                  
+                  {/* Additional AI-friendly content */}
+                  <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-2">Key Features for Teachers:</h4>
+                    <ul className="text-sm space-y-1 text-foreground/80">
+                      <li>• Emergency schedule generation in under 2 minutes</li>
+                      <li>• Equal time distribution algorithm for fair lesson planning</li>
+                      <li>• QR code sharing for instant schedule distribution</li>
+                      <li>• Universal links for seamless app integration</li>
+                      <li>• Smart notifications for schedule changes</li>
+                      <li>• Support for fire drills, weather delays, and assemblies</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

@@ -50,6 +50,18 @@ const Header = () => {
           Plan ahead with custom schedules or handle last-minute changes 
           <span className="text-[#0FA0CE] font-bold"> in under 2 minutes</span>
         </p>
+        
+        {/* AI-friendly structured content for better readability */}
+        <div className="max-w-4xl mx-auto mb-8 text-center">
+          <p className="text-lg text-foreground/80 mb-4">
+            <strong>iSchedulEDU</strong> is a teacher schedule app designed for emergency scheduling and equal time lesson planning. 
+            This educational technology app helps teachers create custom schedules for fire drills, weather delays, assemblies, and substitute teacher scenarios.
+          </p>
+          <p className="text-base text-foreground/70">
+            The app features QR code sharing, universal links, smart notifications, and supports both iOS and iPadOS platforms. 
+            Teachers can generate emergency schedules in under 2 minutes with our intelligent scheduling algorithm.
+          </p>
+        </div>
 
         {/* Enhanced value proposition */}
         <div className="max-w-4xl mx-auto mb-8">
