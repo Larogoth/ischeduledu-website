@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
-import { Sparkles, Download, Users, Clock, Star, CheckCircle } from "lucide-react";
+import { Sparkles, Download, Users, Clock, Star, CheckCircle, Facebook } from "lucide-react";
+import XLogo from "@/components/XLogo";
 
 const Header = () => {
   return (
@@ -148,6 +149,33 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full animate-pulse"></div>
             <span className="font-medium">iOS & iPadOS Ready</span>
+          </div>
+        </div>
+        
+        {/* Social sharing buttons */}
+        <div className="max-w-4xl mx-auto mt-8 text-center">
+          <p className="text-sm text-foreground/60 mb-4">Share with other teachers:</p>
+          <div className="flex justify-center gap-4">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://ischeduledu.app')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              aria-label="Share on Facebook"
+            >
+              <Facebook className="w-4 h-4" />
+              <span className="text-sm">Facebook</span>
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Check out iSchedulEDU - Emergency Schedule Generator for Teachers! Create schedules in under 2 minutes. #TeacherTools #EdTech #EmergencyScheduling')}&url=${encodeURIComponent('https://ischeduledu.app')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+              aria-label="Share on X (Twitter)"
+            >
+              <XLogo />
+              <span className="text-sm">X (Twitter)</span>
+            </a>
           </div>
         </div>
         

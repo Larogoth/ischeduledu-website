@@ -186,20 +186,7 @@ const featuresContent = `
 
 // Extract Emergency Scheduling page content
 const emergencyContent = `
-<h2>Emergency Schedule Generator for Teachers - iSchedulEDU</h2>
-<p>Create emergency schedules for fire drills, weather delays, assemblies, and substitute scenarios. Generate schedules in under 2 minutes with intelligent algorithms that ensure equal time distribution.</p>
 
-<h3>How Emergency Scheduling Works</h3>
-<p>When unexpected events disrupt your school day, iSchedulEDU's intelligent algorithms automatically redistribute remaining time into equal class periods. This ensures no subject receives preferential treatment while maximizing learning opportunities.</p>
-
-<h3>Fire Drill Schedules</h3>
-<p>Create custom schedules for fire drills by inputting your start time, end time, and number of class rotations. The app will generate an equal-time schedule that fits within the available time, ensuring all classes get fair time allocation.</p>
-<ul>
-<li>Automatic time calculation</li>
-<li>Equal period distribution</li>
-<li>Lunch break handling</li>
-<li>Professional formatting</li>
-</ul>
 
 <h3>Weather Delay Management</h3>
 <p>Handle weather delays by inputting your delayed start time and desired end time. iSchedulEDU will create a schedule that maximizes learning time while ensuring equal distribution among all classes.</p>

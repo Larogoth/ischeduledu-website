@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Mail, Facebook } from "lucide-react";
+import { Mail, Facebook, Instagram } from "lucide-react";
 import XLogo from "@/components/XLogo";
 import AppName from "@/components/AppName";
 
@@ -9,26 +9,38 @@ const Footer = () => {
     <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12" role="contentinfo">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center space-y-6">
-          <nav className="flex space-x-6" aria-label="Social media links">
-            <a
-              href="https://x.com/ischeduledu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#0FA0CE] transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded"
-              aria-label="Follow us on X (formerly Twitter)"
-            >
-              <XLogo />
-            </a>
-            <a
-              href="https://www.facebook.com/share/15dGQKa8ha/?mibextid=wwXIfr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#0FA0CE] transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded"
-              aria-label="Follow us on Facebook"
-            >
-              <Facebook className="h-6 w-6" />
-            </a>
-          </nav>
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-300 dark:text-gray-400">Visit us at:</span>
+            <nav className="flex space-x-6" aria-label="Social media links">
+              <a
+                href="https://x.com/ischeduledu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0FA0CE] transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded"
+                aria-label="Follow us on X (formerly Twitter)"
+              >
+                <XLogo />
+              </a>
+              <a
+                href="https://www.facebook.com/share/15dGQKa8ha/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0FA0CE] transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded"
+                aria-label="Follow us on Facebook"
+              >
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a
+                href="https://www.instagram.com/ischeduledu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0FA0CE] transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+            </nav>
+          </div>
 
           <a
             href="mailto:ischeduledu@gmail.com"
