@@ -11,7 +11,7 @@ import { toast } from "@/components/ui/use-toast";
 import { validateScheduleData } from '@/utils/inputValidation';
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
-
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface ScheduleData {
  name: string;
@@ -333,6 +333,13 @@ const ImportSchedule = () => {
       <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
       
 
+
+      {/* Floating Theme Toggle */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 dark:border-gray-700">
+          <ThemeToggle />
+        </div>
+      </div>
 
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
         <div className="text-center mb-12">
