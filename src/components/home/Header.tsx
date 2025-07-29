@@ -44,6 +44,7 @@ const Header = () => {
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent">
           iSchedulEDU
+          <span className="sr-only"> - Emergency Schedule Generator for Teachers</span>
         </h1>
         
         <p className="text-lg md:text-xl text-foreground/70 mb-16 font-medium">
