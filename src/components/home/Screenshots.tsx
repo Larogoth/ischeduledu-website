@@ -54,9 +54,9 @@ const Screenshots = () => {
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <span>📱 App Preview</span>
           </div>
-          <h2 id="screenshots-title" className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <h3 id="screenshots-title" className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             See iSchedulEDU in Action
-          </h2>
+          </h3>
           <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
             Experience the intuitive interface that makes schedule management effortless for teachers
           </p>

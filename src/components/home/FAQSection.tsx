@@ -38,9 +38,9 @@ const FAQSection = () => {
     <section className="py-20 bg-muted/50">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+          <h3 className="text-4xl font-bold text-foreground mb-4">
             Frequently Asked Questions
-          </h2>
+          </h3>
           <p className="text-xl text-foreground/70">
             Everything you need to know about iSchedulEDU
           </p>

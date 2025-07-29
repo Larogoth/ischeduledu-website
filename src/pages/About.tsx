@@ -234,8 +234,8 @@ const About = () => {
               <CardContent>
                 <div className="grid md:grid-cols-3 gap-6 text-center">
                   <div>
-                    <div className="text-3xl font-bold text-blue-600 mb-2">166+</div>
-                    <p className="text-gray-600 dark:text-gray-400">Teacher Reviews</p>
+                    <div className="text-3xl font-bold text-blue-600 mb-2">171+</div>
+                    <p className="text-gray-600 dark:text-gray-400">Downloads</p>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-green-600 mb-2">5.0</div>

@@ -52,9 +52,9 @@ const GenerationProcess = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-background to-[#F5F9FF] dark:to-blue-950/30">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4 text-foreground">
+        <h3 className="text-4xl font-bold text-center mb-4 text-foreground">
           Two Ways to Create Your Perfect Schedule
-        </h2>
+        </h3>
         <p className="text-xl text-foreground/70 text-center mb-16 max-w-2xl mx-auto">
           Choose between quick auto-generation or full custom creation
         </p>
@@ -62,9 +62,9 @@ const GenerationProcess = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Auto-Generation Process */}
           <div>
-            <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
+            <h4 className="text-2xl font-semibold text-center mb-8 text-foreground">
               Quick Schedule Generation
-            </h3>
+            </h4>
             <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
               <Carousel className="w-full">
                 <CarouselContent>
@@ -81,9 +81,9 @@ const GenerationProcess = () => {
                             />
                           </div>
                           <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-foreground">
+                            <h5 className="text-xl font-semibold mb-2 text-foreground">
                               {step.title}
-                            </h3>
+                            </h5>
                             <p className="text-foreground/70">
                               {step.description}
                             </p>
@@ -101,9 +101,9 @@ const GenerationProcess = () => {
 
           {/* Custom Creation Process */}
           <div>
-            <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
+            <h4 className="text-2xl font-semibold text-center mb-8 text-foreground">
               Custom Schedule Creation
-            </h3>
+            </h4>
             <div className="max-w-xs mx-auto sm:max-w-sm md:max-w-md relative">
               <Carousel className="w-full">
                 <CarouselContent>
@@ -120,9 +120,9 @@ const GenerationProcess = () => {
                             />
                           </div>
                           <div className="p-6 text-center">
-                            <h3 className="text-xl font-semibold mb-2 text-foreground">
+                            <h5 className="text-xl font-semibold mb-2 text-foreground">
                               {step.title}
-                            </h3>
+                            </h5>
                             <p className="text-foreground/70">
                               {step.description}
                             </p>

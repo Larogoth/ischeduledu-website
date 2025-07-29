@@ -34,9 +34,9 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
           <div className="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
             <span>⭐ Real App Store Reviews</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             What Our Users Are Saying
-          </h2>
+          </h3>
           <p className="text-lg md:text-xl text-foreground/70">
             Don't just take our word for it - hear from real users of iSchedulEDU
           </p>

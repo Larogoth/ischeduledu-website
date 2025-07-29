@@ -29,9 +29,9 @@ const FeaturesHighlight = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h3 className="text-4xl font-bold text-gray-900 mb-4">
             Why Teachers Love iSchedulEDU
-          </h2>
+          </h3>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Stop spending hours manually adjusting schedules. Let iSchedulEDU handle the math while you focus on teaching.
           </p>
@@ -44,9 +44,9 @@ const FeaturesHighlight = () => {
                 <div className="mb-6">
                   {feature.icon}
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                <h4 className="text-3xl font-bold text-gray-900 mb-6">
                   {feature.title}
-                </h3>
+                </h4>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {feature.description}
                 </p>

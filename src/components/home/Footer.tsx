@@ -43,30 +43,6 @@ const Footer = () => {
             <p className="mb-6 text-gray-200 dark:text-gray-300">© 2024 <AppName size="sm" className="text-white" />. All rights reserved.</p>
             <nav className="flex justify-center gap-6 flex-wrap" aria-label="Footer navigation">
               <Link 
-                to="/emergency-scheduling" 
-                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
-              >
-                Emergency Scheduling
-              </Link>
-              <Link 
-                to="/equal-time-planning" 
-                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
-              >
-                Equal Time Planning
-              </Link>
-              <Link 
-                to="/shareable-plans" 
-                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
-              >
-                Shareable Plans
-              </Link>
-              <Link 
-                to="/features" 
-                className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
-              >
-                Features
-              </Link>
-              <Link 
                 to="/about" 
                 className="text-gray-200 dark:text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 dark:focus:ring-offset-gray-950 rounded px-1"
               >

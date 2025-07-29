@@ -6,9 +6,9 @@ const FinalCTA = () => {
     <section className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Transform Your Schedule Management?
-          </h2>
+          </h3>
           <p className="text-xl text-blue-100 mb-8 leading-relaxed">
             Join hundreds of teachers who've already saved hours every week with iSchedulEDU
           </p>

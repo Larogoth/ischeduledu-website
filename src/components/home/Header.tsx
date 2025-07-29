@@ -43,18 +43,18 @@ const Header = () => {
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent">
-          iSchedulEDU
+          iSchedulEDU - Emergency Schedule Generator for Teachers
         </h1>
         
-        <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium">
           Plan ahead with custom schedules or handle last-minute changes 
           <span className="text-[#0FA0CE] font-bold"> in under 2 minutes</span>
-        </p>
+        </h2>
         
         {/* AI-friendly structured content for better readability */}
         <div className="max-w-4xl mx-auto mb-8 text-center">
           <p className="text-lg text-foreground/80 mb-4">
-            <strong>iSchedulEDU</strong> helps teachers generate emergency schedules in minutes. Create custom scheduling plans for fire drills, weather delays, assemblies, and substitute scenarios. Perfect for elementary and middle school teachers who need quick schedule solutions.
+            <strong>iSchedulEDU</strong> helps teachers generate emergency schedules in minutes. Perfect for elementary and middle school teachers who need quick schedule solutions.
           </p>
         </div>
 

@@ -16,9 +16,9 @@ const StorySection = () => {
             <span>👨‍🏫 The Story Behind iSchedulEDU</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-foreground">
+          <h3 className="text-4xl md:text-5xl font-bold mb-8 text-foreground">
             Built by a Teacher, for Teachers
-          </h2>
+          </h3>
           
           <div className="bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-700 text-left">
             <div className="flex flex-col md:flex-row items-start gap-6 mb-8">
@@ -26,7 +26,7 @@ const StorySection = () => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <div className="text-center md:text-left">
-                <h3 className="text-2xl font-bold text-foreground mb-4">From Classroom Chaos to Digital Solution</h3>
+                <h4 className="text-2xl font-bold text-foreground mb-4">From Classroom Chaos to Digital Solution</h4>
                 
                 {/* AI-friendly structured content for better readability */}
                 <div className="space-y-4 text-foreground/80">
@@ -74,9 +74,9 @@ const StorySection = () => {
         {/* How It Works Section */}
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            <h3 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               How iSchedulEDU Works
-            </h2>
+            </h3>
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
               Plan ahead for announced events or handle last-minute emergencies with equal ease
             </p>
@@ -95,7 +95,7 @@ const StorySection = () => {
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <Clock className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Set Your Parameters</h3>
+                  <h4 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Set Your Parameters</h4>
                   <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
                     Enter your start time, end time, and any fixed events like lunch or assemblies. Create custom schedules for planned events or handle emergencies.
                   </p>
@@ -115,7 +115,7 @@ const StorySection = () => {
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Create & Customize</h3>
+                  <h4 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Create & Customize</h4>
                   <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
                     Auto-generate evenly distributed schedules, or customize times for any scenario.
                   </p>
@@ -135,7 +135,7 @@ const StorySection = () => {
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <Rocket className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Share & Save</h3>
+                  <h4 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 text-center">Share & Save</h4>
                   <p className="text-foreground/70 leading-relaxed text-sm md:text-base text-center">
                     Save your schedule, set smart notifications, and share with colleagues via Universal Links, QR code, PDF, or text.
                   </p>

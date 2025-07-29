@@ -12,7 +12,7 @@ const FeatureSection = ({ icon: Icon, title, items }: {
       <div className="p-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-lg">
         <Icon className="h-5 w-5 text-white" />
       </div>
-      <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+      <h4 className="text-lg font-semibold text-foreground">{title}</h4>
     </div>
     <ul className="space-y-2">
       {items.map((item, index) => (
@@ -39,9 +39,9 @@ const Pricing = () => {
             <span>Built by a Teacher</span>
           </div>
           
-          <h2 id="pricing-title" className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <h3 id="pricing-title" className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Transform Your School Day with <AppName size="xl" className="inline text-[#0FA0CE]" />
-          </h2>
+          </h3>
           
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
             Plan custom schedules for announced events or handle unexpected changes instantly!

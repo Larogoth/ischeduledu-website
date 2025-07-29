@@ -51,9 +51,9 @@ const BenefitsSection = () => {
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg">
             <span>🚀 Why Choose iSchedulEDU</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+          <h3 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
             Transform Your Teaching Day
-          </h2>
+          </h3>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Experience the difference that intelligent scheduling makes in your daily routine
           </p>
@@ -69,9 +69,9 @@ const BenefitsSection = () => {
               <div className="mb-6">
                 {benefit.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-900 mb-4">
                 {benefit.title}
-              </h3>
+              </h4>
               <p className="text-gray-700 leading-relaxed">
                 {benefit.description}
               </p>
@@ -82,9 +82,9 @@ const BenefitsSection = () => {
         {/* Enhanced CTA section */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 rounded-3xl p-8 max-w-4xl mx-auto border border-[#0FA0CE]/20">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
               Ready to Experience the Difference?
-            </h3>
+            </h4>
             <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
               Join hundreds of teachers who've already simplified their daily scheduling with iSchedulEDU
             </p>
