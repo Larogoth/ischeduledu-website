@@ -55,6 +55,14 @@ const ImportSchedule = () => {
  const [isLoading, setIsLoading] = useState(true);
  const [error, setError] = useState<string | null>(null);
  const [shareUrlCopied, setShareUrlCopied] = useState(false);
+ const [isLocalhost, setIsLocalhost] = useState(false);
+ const [forceMobileView, setForceMobileView] = useState(false);
+ const actualIsMobile = forceMobileView || isMobile;
+
+ // Detect if we're on localhost
+ useEffect(() => {
+   setIsLocalhost(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+ }, []);
 
  // --- Improved Decoding and Validation Logic ---
  const extractDataParameters = (): { data: string | null; version: string; isCompressed: boolean } => {
@@ -341,6 +349,23 @@ const ImportSchedule = () => {
         </div>
       </div>
 
+      {/* Mobile View Toggle (Localhost Only) */}
+      {isLocalhost && (
+        <div className="fixed bottom-4 left-4 z-50">
+          <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+            <Button
+              onClick={() => setForceMobileView(!forceMobileView)}
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2"
+            >
+              <Smartphone className="w-4 h-4" />
+              View as {forceMobileView ? 'Desktop' : 'Mobile'}
+            </Button>
+          </div>
+        </div>
+      )}
+
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
@@ -494,7 +519,7 @@ const ImportSchedule = () => {
 
             <div className="space-y-6">
               {/* Mobile App Download Card - Optimized for Conversion */}
-              {isMobile ? (
+              {actualIsMobile ? (
                 <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm overflow-hidden">
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
@@ -524,14 +549,14 @@ const ImportSchedule = () => {
                       </p>
 
                       {/* Social Proof */}
-                      <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                      <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-700">
                         <div className="flex items-center justify-center gap-1 mb-2">
                           {[...Array(5)].map((_, i) => (
                             <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                           ))}
-                          <span className="text-sm font-semibold text-gray-700 ml-2">5/5 Stars</span>
+                          <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 ml-2">5/5 Stars</span>
                         </div>
-                        <div className="flex items-center justify-center gap-2 text-sm text-green-700">
+                        <div className="flex items-center justify-center gap-2 text-sm text-green-700 dark:text-green-400">
                           <Users className="w-4 h-4" />
                           <span className="font-medium">Trusted by teachers worldwide</span>
                         </div>
@@ -602,7 +627,7 @@ const ImportSchedule = () => {
                             <Button 
                               onClick={copyShareLink}
                               variant="outline"
-                              className="w-full max-w-sm flex items-center gap-2 py-3 border-2 hover:bg-white mb-4"
+                              className="w-full max-w-sm mx-auto flex items-center gap-2 py-3 border-2 hover:bg-white mb-4"
                             >
                               {shareUrlCopied ? (
                                 <>
@@ -629,16 +654,16 @@ const ImportSchedule = () => {
                         </div>
                         
                         {/* Learn More CTA */}
-                        <div className="bg-white/60 rounded-xl p-4 border border-gray-200">
+                        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
                           <div className="text-center">
-                            <p className="text-sm text-gray-600 mb-3">
+                            <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
                               Want to learn more about iSchedulEDU's features?
                             </p>
                             <a 
                               href="https://ischeduledu.app"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-cyan-600 hover:text-cyan-700 font-medium text-sm underline"
+                              className="text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 font-medium text-sm underline"
                             >
                               Visit our website →
                             </a>
