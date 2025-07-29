@@ -704,10 +704,10 @@ const BlogPost = () => {
             <div className="mt-12 pt-8 border-t border-gray-200">
               <Card className="bg-gradient-to-r from-[#0FA0CE]/10 to-blue-500/10 border-[#0FA0CE]/20">
                 <CardContent className="py-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                     Ready to Try <AppName />?
                   </h3>
-                  <p className="text-lg text-gray-700 mb-6">
+                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
                     Download the app and experience the difference that intelligent scheduling makes in your daily routine.
                   </p>
                   <a 

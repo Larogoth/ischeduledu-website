@@ -42,7 +42,7 @@ const StrategyReview = () => {
                      Strategy Review - <AppName />
                    </h1>
             
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Business Strategy & Market Positioning
               </h2>
@@ -100,7 +100,7 @@ const StrategyReview = () => {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Growth Strategy
               </h2>

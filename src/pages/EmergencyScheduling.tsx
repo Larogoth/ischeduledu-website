@@ -219,7 +219,7 @@ const EmergencyScheduling = () => {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               How Emergency Schedule Generation Works
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
@@ -317,11 +317,11 @@ const EmergencyScheduling = () => {
               </CardContent>
             </Card>
           </div>
+          
+          {/* Related Content Section */}
+          <RelatedContent currentPage="emergency-scheduling" />
         </div>
       </div>
-      
-      {/* Related Content Section */}
-      <RelatedContent currentPage="emergency-scheduling" />
       
       {/* Footer */}
       <Footer />

@@ -103,7 +103,7 @@ const PrivacyPolicy = () => {
             <p className="text-gray-600 dark:text-gray-300">Effective Date: 06/05/2024</p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-sm p-6">
             <div className="space-y-8">
               <p className="text-gray-600 dark:text-gray-300">
                 Thank you for using <AppName />. This Privacy Policy explains how we collect, use, and protect your information when you use our application.

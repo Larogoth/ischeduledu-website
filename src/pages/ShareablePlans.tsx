@@ -228,7 +228,7 @@ const ShareablePlans = () => {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               How Schedule Sharing Works
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
@@ -273,37 +273,37 @@ const ShareablePlans = () => {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Sample Schedule - App Generated</h3>
                   <p className="text-gray-600 dark:text-gray-300">This is a sample of the schedule format your app creates</p>
                 </div>
-                <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg max-w-2xl mx-auto">
+                <div className="bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg p-6 shadow-lg max-w-2xl mx-auto">
                   <div className="text-center mb-4">
                     <h4 className="font-bold text-lg text-gray-900 dark:text-white">Mrs. Johnson's Class - Regular Day Schedule</h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Monday, July 28th - 7:55 AM to 3:00 PM</p>
                   </div>
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">7:55-9:14</span>
                       <span className="dark:text-gray-300">Math - Fractions Review</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">9:14-10:33</span>
                       <span className="dark:text-gray-300">Reading - Chapter 5 Discussion</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">10:33-11:00</span>
                       <span className="dark:text-gray-300">Science - Weather Unit</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">11:00-11:30</span>
                       <span className="dark:text-gray-300">Lunch</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">11:30-12:22</span>
                       <span className="dark:text-gray-300">Science (continued) - Weather Unit</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">12:22-1:41</span>
                       <span className="dark:text-gray-300">Social Studies - Community Helpers</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded">
+                    <div className="flex justify-between items-center p-2 bg-gray-50/50 dark:bg-gray-600/50 backdrop-blur-sm rounded">
                       <span className="font-semibold dark:text-white">1:41-3:00</span>
                       <span className="dark:text-gray-300">Writing - Journal Entry</span>
                     </div>
@@ -415,11 +415,11 @@ const ShareablePlans = () => {
               </CardContent>
             </Card>
           </div>
+          
+          {/* Related Content Section */}
+          <RelatedContent currentPage="shareable-plans" />
         </div>
       </div>
-      
-      {/* Related Content Section */}
-      <RelatedContent currentPage="shareable-plans" />
       
       {/* Footer */}
       <Footer />

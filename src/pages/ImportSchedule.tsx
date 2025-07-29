@@ -11,7 +11,7 @@ import { toast } from "@/components/ui/use-toast";
 import { validateScheduleData } from '@/utils/inputValidation';
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
-import StickyNavigation from "@/components/home/StickyNavigation";
+
 
 interface ScheduleData {
  name: string;
@@ -320,19 +320,19 @@ const ImportSchedule = () => {
           <div className="relative">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-cyan-200 border-t-cyan-600 mx-auto mb-4"></div>
           </div>
-          <p className="text-gray-700 font-medium">Loading your schedule...</p>
+                          <p className="text-gray-700 dark:text-gray-300 font-medium">Loading your schedule...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-100 relative overflow-hidden">
-      <StickyNavigation />
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-cyan-200/20 to-teal-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 dark:bg-[#0FA0CE]/10 rounded-full blur-3xl -translate-x-1/2"></div>
+      <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
+      
+
 
       <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
         <div className="text-center mb-12">
@@ -343,11 +343,11 @@ const ImportSchedule = () => {
               className="w-20 h-20 object-contain mx-auto"
             />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-[#0FA0CE] to-gray-900 bg-clip-text text-transparent mb-3 font-euclid">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-[#0FA0CE] to-gray-900 dark:from-white dark:via-[#0FA0CE] dark:to-white bg-clip-text text-transparent mb-3 font-euclid">
             iSchedulEDU
           </h1>
-          <p className="text-xl text-gray-600 font-medium">Teacher Schedule Management</p>
-          <p className="text-gray-500 mt-2">Import your shared schedule seamlessly</p>
+          <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">Teacher Schedule Management</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-2">Import your shared schedule seamlessly</p>
         </div>
 
         {error ? (
@@ -357,8 +357,8 @@ const ImportSchedule = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center mx-auto mb-6">
                   <AlertCircle className="w-8 h-8 text-red-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Unable to Load Schedule</h3>
-                <p className="text-gray-700 mb-6 max-w-md mx-auto leading-relaxed text-sm">{error}</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Unable to Load Schedule</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-6 max-w-md mx-auto leading-relaxed text-sm">{error}</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button onClick={() => window.location.reload()} variant="outline" className="hover:bg-red-50">
                     Try Again
@@ -378,7 +378,7 @@ const ImportSchedule = () => {
                 {/* Mobile view - simple text */}
                 <div className="md:hidden flex items-center justify-center gap-2 text-center">
                   <Sparkles className="w-4 h-4 text-cyan-600" />
-                  <span className="text-gray-700 font-medium">Generated with</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">Generated with</span>
                   <span className="font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
                     iSchedulEDU
                   </span>
@@ -387,13 +387,13 @@ const ImportSchedule = () => {
                 <div className="hidden md:flex items-center justify-center gap-3 text-center">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-cyan-600" />
-                    <span className="text-gray-700 font-medium">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">
                       Generated with the
                     </span>
                     <span className="font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
                       iSchedulEDU
                     </span>
-                    <span className="text-gray-700 font-medium">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">
                       iOS/iPadOS app
                     </span>
                   </div>
@@ -401,7 +401,7 @@ const ImportSchedule = () => {
               </div>
             </div>
 
-            <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/80 backdrop-blur-sm">
+            <Card className="mb-8 shadow-2xl border-0 overflow-hidden bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
               <CardHeader className="bg-gradient-to-r from-cyan-500 via-[#0FA0CE] to-teal-600 text-white p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-teal-600/20"></div>
                 <div className="relative z-10">
@@ -425,7 +425,7 @@ const ImportSchedule = () => {
                       <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-lg flex items-center justify-center">
                         <Calendar className="w-4 h-4 text-white" />
                       </div>
-                      <h4 className="text-xl font-bold text-gray-900">
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">
                         Schedule Events
                       </h4>
                       <Badge className="bg-gradient-to-r from-cyan-500 to-teal-600 text-white border-0">
@@ -436,45 +436,45 @@ const ImportSchedule = () => {
                       {processedEvents.map((event, index) => (
                         <div 
                           key={index} 
-                          className="group relative bg-gradient-to-r from-white to-gray-50/50 rounded-xl p-4 md:p-6 border border-gray-200/50 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] overflow-hidden"
+                          className="group relative bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 md:p-6 border border-gray-200/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] overflow-hidden backdrop-blur-sm"
                         >
                           <div 
                             className="absolute left-0 top-0 bottom-0 w-1.5 rounded-r-full"
                             style={{ backgroundColor: event.color }}
                           ></div>
                           <div className="md:hidden pl-4">
-                            <h5 className="font-bold text-gray-900 text-lg mb-3 group-hover:text-cyan-600 transition-colors break-words">
+                            <h5 className="font-bold text-gray-900 dark:text-white text-lg mb-3 group-hover:text-cyan-600 transition-colors break-words">
                               {event.name}
                             </h5>
                             <div className="space-y-2">
-                              <div className="flex items-center gap-2 text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 rounded-lg px-3 py-2">
                                 <Clock className="w-4 h-4 flex-shrink-0" />
                                 <div className="text-sm font-medium">
                                   <div>{event.startTime} - {event.endTime}</div>
-                                  <div className="text-xs text-gray-500">{event.duration}</div>
+                                  <div className="text-xs text-gray-500 dark:text-gray-400">{event.duration}</div>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div className="hidden md:flex items-center justify-between">
                             <div className="flex-1 pl-4">
-                              <h5 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-cyan-600 transition-colors">
+                              <h5 className="font-bold text-gray-900 dark:text-white text-xl mb-2 group-hover:text-cyan-600 transition-colors">
                                 {event.name}
                               </h5>
                             </div>
-                            <div className="text-right">
-                              <div className="flex items-center gap-3 text-gray-600 bg-gray-50 rounded-lg px-4 py-2">
-                                <Clock className="w-5 h-5" />
-                                <div className="font-semibold">
-                                  <div className="text-lg">
-                                    {event.startTime} - {event.endTime}
-                                  </div>
-                                  <div className="text-sm text-gray-500">
-                                    {event.duration}
+                                                          <div className="text-right">
+                                <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 rounded-lg px-4 py-2">
+                                  <Clock className="w-5 h-5" />
+                                  <div className="font-semibold">
+                                    <div className="text-lg">
+                                      {event.startTime} - {event.endTime}
+                                    </div>
+                                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                                      {event.duration}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-r from-cyan-50/0 to-teal-50/0 group-hover:from-cyan-50/30 group-hover:to-teal-50/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
                         </div>
@@ -488,7 +488,7 @@ const ImportSchedule = () => {
             <div className="space-y-6">
               {/* Mobile App Download Card - Optimized for Conversion */}
               {isMobile ? (
-                <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden">
+                <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm overflow-hidden">
                   <CardContent className="pt-8 pb-8">
                     <div className="text-center">
                       {/* Smart Banner Notice */}
@@ -511,8 +511,8 @@ const ImportSchedule = () => {
                         </div>
                       </div>
                       
-                      <h3 className="text-3xl font-bold text-gray-900 mb-4">Get iSchedulEDU</h3>
-                      <p className="text-gray-600 mb-6 text-lg leading-relaxed max-w-md mx-auto">
+                      <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Get iSchedulEDU</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg leading-relaxed max-w-md mx-auto">
                         Join teachers worldwide who trust iSchedulEDU for seamless schedule management.
                       </p>
 
@@ -536,25 +536,25 @@ const ImportSchedule = () => {
                           <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                             <Zap className="w-4 h-4 text-blue-600" />
                           </div>
-                          <span className="font-medium text-gray-800">One-tap schedule importing</span>
+                          <span className="font-medium text-gray-800 dark:text-gray-200">One-tap schedule importing</span>
                         </div>
                         <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
                           <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
                             <Shield className="w-4 h-4 text-purple-600" />
                           </div>
-                          <span className="font-medium text-gray-800">Smart notifications & alarms</span>
+                          <span className="font-medium text-gray-800 dark:text-gray-200">Smart notifications & alarms</span>
                         </div>
                         <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
                           <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                             <Download className="w-4 h-4 text-green-600" />
                           </div>
-                          <span className="font-medium text-gray-800">QR code & PDF sharing</span>
+                          <span className="font-medium text-gray-800 dark:text-gray-200">QR code & PDF sharing</span>
                         </div>
                         <div className="flex items-center gap-3 text-left bg-white/50 rounded-lg p-3">
                           <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
                             <Heart className="w-4 h-4 text-pink-600" />
                           </div>
-                          <span className="font-medium text-gray-800">Works offline & ad-free</span>
+                          <span className="font-medium text-gray-800 dark:text-gray-200">Works offline & ad-free</span>
                         </div>
                       </div>
 
@@ -583,12 +583,12 @@ const ImportSchedule = () => {
                         </div>
 
                         {/* Share Section */}
-                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border border-gray-200">
+                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800/50 dark:to-blue-900/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                           <div className="text-center">
-                            <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                               Share This Schedule
                             </h4>
-                            <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
                               Copy the schedule url to share with colleagues via any platform
                             </p>
                             
@@ -611,10 +611,10 @@ const ImportSchedule = () => {
                             </Button>
                             
                             <div className="space-y-2">
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
                                 Includes schedule link
                               </p>
-                              <p className="text-xs text-gray-400">
+                              <p className="text-xs text-gray-400 dark:text-gray-500">
                                 Perfect for iMessage, email, Slack, or any messaging app
                               </p>
                             </div>
@@ -643,7 +643,7 @@ const ImportSchedule = () => {
                 </Card>
               ) : (
                 /* Desktop/Tablet View - Focused on Mobile Download */
-                <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden">
+                <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm overflow-hidden">
                   <CardContent className="pt-10 pb-10">
                     <div className="text-center max-w-2xl mx-auto">
                       <div className="relative inline-block mb-8">
@@ -655,75 +655,75 @@ const ImportSchedule = () => {
                         </div>
                       </div>
                       
-                      <h3 className="text-4xl font-bold text-gray-900 mb-4">Get iSchedulEDU on Mobile</h3>
-                      <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                      <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Get iSchedulEDU on Mobile</h3>
+                      <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                         This schedule is designed for mobile import. Download the iSchedulEDU app on your iPhone or iPad to import and manage your schedules seamlessly.
                       </p>
 
                       {/* Enhanced Social Proof for Desktop */}
                       <div className="grid md:grid-cols-3 gap-6 mb-10">
-                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-700">
                           <div className="flex items-center justify-center gap-1 mb-3">
                             {[...Array(5)].map((_, i) => (
                               <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
                             ))}
                           </div>
-                          <p className="font-bold text-gray-900 text-lg">5/5 Stars</p>
-                          <p className="text-sm text-gray-600">App Store Rating</p>
+                          <p className="font-bold text-gray-900 dark:text-white text-lg">5/5 Stars</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">App Store Rating</p>
                         </div>
                         
-                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border border-green-200 dark:border-green-700">
                           <Users className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                          <p className="font-bold text-gray-900 text-lg">Teachers</p>
-                          <p className="text-sm text-gray-600">Worldwide</p>
+                          <p className="font-bold text-gray-900 dark:text-white text-lg">Teachers</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">Worldwide</p>
                         </div>
                         
-                        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                        <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
                           <Heart className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-                          <p className="font-bold text-gray-900 text-lg">Ad-Free</p>
-                          <p className="text-sm text-gray-600">Clean Experience</p>
+                          <p className="font-bold text-gray-900 dark:text-white text-lg">Ad-Free</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">Clean Experience</p>
                         </div>
                       </div>
 
                       {/* Feature Highlights */}
                       <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
-                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
-                          <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <div className="flex items-start gap-4 bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+                          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
                             <Zap className="w-6 h-6 text-blue-600" />
                           </div>
                           <div>
-                            <h4 className="font-bold text-gray-900 mb-2">Instant Import</h4>
-                            <p className="text-gray-600 text-sm">Import shared schedules with a single tap using our Smart Banner technology.</p>
+                            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Instant Import</h4>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm">Import shared schedules with a single tap using our Smart Banner technology.</p>
                           </div>
                         </div>
                         
-                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
-                          <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <div className="flex items-start gap-4 bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+                          <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center">
                             <Shield className="w-6 h-6 text-purple-600" />
                           </div>
                           <div>
-                            <h4 className="font-bold text-gray-900 mb-2">Smart Notifications</h4>
-                            <p className="text-gray-600 text-sm">Never miss a class ending with intelligent alerts and upcoming AlarmKit integration.</p>
+                            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Smart Notifications</h4>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm">Never miss a class ending with intelligent alerts and upcoming AlarmKit integration.</p>
                           </div>
                         </div>
                         
-                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
-                          <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <div className="flex items-start gap-4 bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+                          <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center">
                             <Download className="w-6 h-6 text-green-600" />
                           </div>
                           <div>
-                            <h4 className="font-bold text-gray-900 mb-2">Multiple Sharing Options</h4>
-                            <p className="text-gray-600 text-sm">Share schedules via Universal Links, QR codes, PDFs, text, or web links - all generated in-app.</p>
+                            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Multiple Sharing Options</h4>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm">Share schedules via Universal Links, QR codes, PDFs, text, or web links - all generated in-app.</p>
                           </div>
                         </div>
                         
-                        <div className="flex items-start gap-4 bg-white/60 rounded-xl p-6 border border-gray-200">
-                          <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                        <div className="flex items-start gap-4 bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+                          <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center">
                             <Heart className="w-6 h-6 text-orange-600" />
                           </div>
                           <div>
-                            <h4 className="font-bold text-gray-900 mb-2">One-Time Purchase</h4>
-                            <p className="text-gray-600 text-sm">Free to try with 4 sessions, then just $4.99 for unlimited access. No subscriptions!</p>
+                            <h4 className="font-bold text-gray-900 dark:text-white mb-2">One-Time Purchase</h4>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm">Free to try with 4 sessions, then just $4.99 for unlimited access. No subscriptions!</p>
                           </div>
                         </div>
                       </div>
@@ -747,12 +747,12 @@ const ImportSchedule = () => {
                         </div>
                         
                         {/* Share Section */}
-                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 border border-gray-200">
+                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800/50 dark:to-blue-900/50 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
                           <div className="text-center max-w-md mx-auto">
-                            <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                               Share This Schedule
                             </h4>
-                            <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm leading-relaxed">
                               Copy the schedule url to share with colleagues via any platform
                             </p>
                             
@@ -775,10 +775,10 @@ const ImportSchedule = () => {
                             </Button>
                             
                             <div className="space-y-2">
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
                                 Includes schedule link
                               </p>
-                              <p className="text-xs text-gray-400">
+                              <p className="text-xs text-gray-400 dark:text-gray-500">
                                 Perfect for iMessage, email, Slack, or any messaging app
                               </p>
                             </div>
@@ -788,21 +788,21 @@ const ImportSchedule = () => {
                       
                       <div className="mt-6">
                         <p className="text-sm text-green-600 font-semibold">✓ Free Download • 4 Free Sessions • $4.99 One-Time Purchase</p>
-                        <p className="text-xs text-gray-500 mt-2 italic leading-relaxed">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 italic leading-relaxed">
                           Users with iSchedulEDU can tap shared links to import directly into the app.<br />
                           Others will view the schedule webpage, where they can also download the app for full access to all features.
                         </p>
                         
                         {/* Learn More Link for Desktop */}
-                        <div className="mt-4 pt-3 border-t border-gray-200">
-                          <p className="text-sm text-gray-600 mb-2">
+                        <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700">
+                          <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
                             Want to explore all of iSchedulEDU's powerful features?
                           </p>
                           <a 
                             href="https://ischeduledu.app"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-cyan-600 hover:text-cyan-700 font-medium underline"
+                            className="text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 font-medium underline"
                           >
                             Learn more on our website →
                           </a>
@@ -816,14 +816,14 @@ const ImportSchedule = () => {
           </>
         ) : null}
 
-        <div className="text-center mt-12 pt-8 border-t border-gray-200/50">
+        <div className="text-center mt-12 pt-8 border-t border-gray-200/50 dark:border-gray-700/50">
           <div className="flex items-center justify-center gap-2 mb-2">
             <GraduationCap className="w-5 h-5 text-cyan-600" />
-            <p className="text-gray-600 font-medium">
+            <p className="text-gray-600 dark:text-gray-300 font-medium">
               iSchedulEDU - Teacher Schedule Management
             </p>
           </div>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Streamline your teaching schedule with intelligent automation
           </p>
         </div>

@@ -219,7 +219,7 @@ const EqualTimePlanning = () => {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               How Equal Time Planning Works
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#0FA0CE] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
@@ -265,37 +265,37 @@ const EqualTimePlanning = () => {
                   <p className="text-gray-600 dark:text-gray-300">7:55 AM to 3:00 PM with lunch interruption (11:00-11:30)</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Math</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">7:55-9:14</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Reading</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">9:14-10:33</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Science</h4>
                     <p className="text-[#0FA0CE] font-semibold">27m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">10:33-11:00</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Lunch</h4>
                     <p className="text-[#0FA0CE] font-semibold">30m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">11:00-11:30</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Science (cont.)</h4>
                     <p className="text-[#0FA0CE] font-semibold">52m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">11:30-12:22</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Social Studies</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">12:22-1:41</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="text-center p-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">Writing</h4>
                     <p className="text-[#0FA0CE] font-semibold">1h 19m</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">1:41-3:00</p>
@@ -379,11 +379,11 @@ const EqualTimePlanning = () => {
               </CardContent>
             </Card>
           </div>
+          
+          {/* Related Content Section */}
+          <RelatedContent currentPage="equal-time-planning" />
         </div>
       </div>
-      
-      {/* Related Content Section */}
-      <RelatedContent currentPage="equal-time-planning" />
       
       {/* Footer */}
       <Footer />

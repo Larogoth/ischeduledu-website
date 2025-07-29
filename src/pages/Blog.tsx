@@ -231,13 +231,13 @@ const Blog = () => {
                   </CardContent>
                 </Card>
               </div>
+              
+              {/* Related Content Section */}
+              <RelatedContent currentPage="blog" />
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Related Content Section */}
-      <RelatedContent currentPage="blog" />
       
       {/* Footer */}
       <Footer />

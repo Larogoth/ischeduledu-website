@@ -223,7 +223,7 @@ const Features = () => {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   {emergencyScenarios.map((scenario, index) => (
-                    <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div key={index} className="flex items-start gap-4 p-4 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-lg">
                       {scenario.icon}
                       <div>
                         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{scenario.title}</h3>
@@ -314,12 +314,12 @@ const Features = () => {
                 </a>
               </CardContent>
             </Card>
+            
+            {/* Related Content Section */}
+            <RelatedContent currentPage="features" />
           </div>
         </div>
       </div>
-      
-      {/* Related Content Section */}
-      <RelatedContent currentPage="features" />
       
       {/* Footer */}
       <Footer />

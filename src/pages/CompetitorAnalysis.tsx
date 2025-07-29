@@ -404,7 +404,7 @@ const CompetitorAnalysis: React.FC = () => {
 
         {/* CTA Section */}
         <div className="mt-12 text-center">
-          <Card className="bg-white dark:bg-gray-800 shadow-lg">
+                          <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg">
             <CardContent className="pt-8 pb-8">
               <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
                 Experience the Difference
