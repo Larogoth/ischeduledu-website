@@ -1,5 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import AppName from "@/components/AppName";
+import StickyNavigation from "@/components/home/StickyNavigation";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 
 const StrategyReview = () => {
   return (
@@ -14,12 +17,30 @@ const StrategyReview = () => {
         <link rel="canonical" href="https://ischeduledu.app/strategy-review" />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-14">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Strategy Review - <AppName />
-            </h1>
+                                <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-14">
+               <StickyNavigation />
+               <div className="container mx-auto px-4 py-16">
+                 <div className="max-w-4xl mx-auto">
+                   {/* Breadcrumb Navigation */}
+                   <div className="mb-8">
+                     <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                       <Link 
+                         to="/" 
+                         className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+                       >
+                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                           <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                         </svg>
+                         Home
+                       </Link>
+                       <ChevronRight className="w-4 h-4" />
+                       <span className="text-gray-900 dark:text-gray-100 font-semibold">Strategy Review</span>
+                     </nav>
+                   </div>
+                   
+                   <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                     Strategy Review - <AppName />
+                   </h1>
             
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">

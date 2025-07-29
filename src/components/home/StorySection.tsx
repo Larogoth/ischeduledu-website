@@ -1,6 +1,7 @@
 
 import { Clock, Users, Lightbulb, Rocket } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const StorySection = () => {
   return (
@@ -84,13 +85,13 @@ const StorySection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-0">
             {/* Step 1 */}
-            <div className="relative group ml-6">
+            <Link to="/emergency-scheduling" className="relative group ml-6 block">
               <div className="absolute -top-6 -left-6 z-10">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                   1
                 </div>
               </div>
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-full">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-full cursor-pointer">
                 <CardContent className="p-4 md:p-6 aspect-[1.618/1] flex flex-col justify-center">
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-[#0FA0CE] rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <Clock className="w-8 h-8 md:w-10 md:h-10 text-white" />
@@ -101,16 +102,16 @@ const StorySection = () => {
                   </p>
                 </CardContent>
               </Card>
-            </div>
+            </Link>
 
             {/* Step 2 */}
-            <div className="relative group ml-6">
+            <Link to="/equal-time-planning" className="relative group ml-6 block">
               <div className="absolute -top-6 -left-6 z-10">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                   2
                 </div>
               </div>
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-full">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-full cursor-pointer">
                 <CardContent className="p-4 md:p-6 aspect-[1.618/1] flex flex-col justify-center">
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-white" />
@@ -121,16 +122,16 @@ const StorySection = () => {
                   </p>
                 </CardContent>
               </Card>
-            </div>
+            </Link>
 
             {/* Step 3 */}
-            <div className="relative group ml-6">
+            <Link to="/shareable-plans" className="relative group ml-6 block">
               <div className="absolute -top-6 -left-6 z-10">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                   3
                 </div>
               </div>
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-full">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-full cursor-pointer">
                 <CardContent className="p-4 md:p-6 aspect-[1.618/1] flex flex-col justify-center">
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <Rocket className="w-8 h-8 md:w-10 md:h-10 text-white" />
@@ -141,7 +142,7 @@ const StorySection = () => {
                   </p>
                 </CardContent>
               </Card>
-            </div>
+            </Link>
           </div>
         </div>
 

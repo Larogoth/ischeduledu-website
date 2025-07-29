@@ -8,6 +8,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import RelatedContent from "@/components/RelatedContent";
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
+import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
 
 const About = () => {
@@ -90,6 +91,7 @@ const About = () => {
       </Helmet>
       
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <StickyNavigation />
         <div className="py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
             {/* Breadcrumb Navigation */}

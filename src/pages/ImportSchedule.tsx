@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useSearchParams, useLocation } from 'react-router-dom';
+import { useParams, useSearchParams, useLocation, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, Star, Users, GraduationCap, Copy, Sparkles, Shield, Zap, Heart } from 'lucide-react';
+import { Smartphone, Download, Calendar, Clock, CheckCircle, AlertCircle, Star, Users, GraduationCap, Copy, Sparkles, Shield, Zap, Heart, ChevronRight } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as pako from 'pako';
 import { toast } from "@/components/ui/use-toast";
 import { validateScheduleData } from '@/utils/inputValidation';
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
+import StickyNavigation from "@/components/home/StickyNavigation";
 
 interface ScheduleData {
  name: string;
@@ -327,6 +328,7 @@ const ImportSchedule = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-100 relative overflow-hidden">
+      <StickyNavigation />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-cyan-200/20 to-teal-200/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl"></div>

@@ -217,7 +217,7 @@ const RelatedContent: React.FC<RelatedContentProps> = ({ currentPage, className 
   if (currentRelatedPages.length === 0) return null;
 
   return (
-    <section className={`py-12 bg-gray-50 dark:bg-gray-900 ${className}`}>
+    <section className={`py-12 bg-transparent ${className}`}>
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">

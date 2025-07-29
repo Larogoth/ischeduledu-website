@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import AppName from "@/components/AppName";
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
+import StickyNavigation from "@/components/home/StickyNavigation";
 import { useEffect } from "react";
 
 const PrivacyPolicy = () => {
@@ -72,9 +73,14 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+          <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 dark:bg-[#0FA0CE]/10 rounded-full blur-3xl -translate-x-1/2"></div>
+        <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
+        
+        <StickyNavigation />
+        <div className="py-8 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto">
           {/* Breadcrumb Navigation */}
           <div className="mb-8">
             <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">

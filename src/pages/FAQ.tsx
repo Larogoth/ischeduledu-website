@@ -7,6 +7,7 @@ import { ExternalLink, Download, Smartphone, Clock, Share2, Bell, QrCode, Calend
 import { Link } from 'react-router-dom';
 import Footer from '../components/home/Footer';
 import BackToTop from '../components/BackToTop';
+import StickyNavigation from '../components/home/StickyNavigation';
 
 const FAQ: React.FC = () => {
   const faqData = [
@@ -102,6 +103,7 @@ const FAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <StickyNavigation />
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb Navigation */}
         <div className="mb-8">

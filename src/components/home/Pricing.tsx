@@ -1,29 +1,39 @@
 
 import { Clock, Heart, UserCheck, Shuffle, MessageSquare, Star, CheckCircle } from "lucide-react";
 import AppName from "@/components/AppName";
+import { Link } from "react-router-dom";
 
-const FeatureSection = ({ icon: Icon, title, items }: { 
+const FeatureSection = ({ icon: Icon, title, items, href }: { 
   icon: React.ComponentType<any>;
   title: string;
   items: string[];
-}) => (
-  <div className="text-left space-y-4 p-6 bg-gradient-to-br from-background to-blue-50/50 dark:to-blue-950/50 rounded-xl border border-blue-100 dark:border-blue-900/30 hover:border-[#0FA0CE]/30 transition-all duration-300 hover:shadow-lg">
-    <div className="flex items-center gap-3">
-      <div className="p-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-lg">
-        <Icon className="h-5 w-5 text-white" />
+  href?: string;
+}) => {
+  const content = (
+    <div className="text-left space-y-4 p-6 bg-gradient-to-br from-background to-blue-50/50 dark:to-blue-950/50 rounded-xl border border-blue-100 dark:border-blue-900/30 hover:border-[#0FA0CE]/30 transition-all duration-300 hover:shadow-lg cursor-pointer">
+      <div className="flex items-center gap-3">
+        <div className="p-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-lg">
+          <Icon className="h-5 w-5 text-white" />
+        </div>
+        <h4 className="text-lg font-semibold text-foreground">{title}</h4>
       </div>
-      <h4 className="text-lg font-semibold text-foreground">{title}</h4>
+      <ul className="space-y-2">
+        {items.map((item, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+            <span className="text-foreground/70 text-sm leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
-    <ul className="space-y-2">
-      {items.map((item, index) => (
-        <li key={index} className="flex items-start gap-2">
-          <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
-          <span className="text-foreground/70 text-sm leading-relaxed">{item}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+  );
+
+  return href ? (
+    <Link to={href} className="block">
+      {content}
+    </Link>
+  ) : content;
+};
 
 const Pricing = () => {
   return (
@@ -72,6 +82,7 @@ const Pricing = () => {
                   "Emergency solutions in under 2 minutes",
                   "More time for what matters: teaching"
                 ]}
+                href="/emergency-scheduling"
               />
 
               <FeatureSection
@@ -82,6 +93,7 @@ const Pricing = () => {
                   "Always know your next class timing",
                   "Peace of mind with error-free schedules"
                 ]}
+                href="/features"
               />
 
               <FeatureSection
@@ -92,6 +104,7 @@ const Pricing = () => {
                   "Impress administrators with organization",
                   "Maintain smooth educational flow"
                 ]}
+                href="/about"
               />
 
               <FeatureSection
@@ -102,6 +115,7 @@ const Pricing = () => {
                   "Last-minute changes handled instantly",
                   "Always stay flexible and prepared"
                 ]}
+                href="/equal-time-planning"
               />
 
               <FeatureSection
@@ -112,6 +126,7 @@ const Pricing = () => {
                   "QR codes for instant communication",
                   "Never leave anyone confused"
                 ]}
+                href="/shareable-plans"
               />
 
               <div className="md:col-span-2 lg:col-span-1 bg-gradient-to-br from-[#0FA0CE]/10 to-blue-600/10 dark:from-[#0FA0CE]/5 dark:to-blue-600/5 rounded-xl p-6 border-2 border-[#0FA0CE]/30 relative">

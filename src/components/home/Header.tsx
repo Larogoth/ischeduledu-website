@@ -42,9 +42,13 @@ const Header = () => {
           />
         </div>
 
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent">
-          iSchedulEDU - Emergency Schedule Generator for Teachers
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent">
+          iSchedulEDU
         </h1>
+        
+        <p className="text-lg md:text-xl text-foreground/70 mb-16 font-medium">
+          Emergency Schedule Generator for Teachers
+        </p>
         
         <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium">
           Plan ahead with custom schedules or handle last-minute changes 
@@ -61,24 +65,24 @@ const Header = () => {
         {/* Enhanced value proposition */}
         <div className="max-w-4xl mx-auto mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="flex items-center justify-center gap-3 text-foreground/80">
-              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-full">
+            <Link to="/features" className="flex items-center justify-center gap-3 text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 group">
+              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-full group-hover:bg-green-200 dark:group-hover:bg-green-800/40 transition-colors">
                 <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
               </div>
               <span className="font-semibold">Free to Start</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-foreground/80">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+            </Link>
+            <Link to="/emergency-scheduling" className="flex items-center justify-center gap-3 text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 group">
+              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full group-hover:bg-blue-200 dark:group-hover:bg-blue-800/40 transition-colors">
                 <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
               <span className="font-semibold">2-Minute Setup</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-foreground/80">
-              <div className="p-2 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/20 rounded-full">
+            </Link>
+            <Link to="/about" className="flex items-center justify-center gap-3 text-foreground/80 hover:text-[#0FA0CE] transition-colors duration-200 group">
+              <div className="p-2 bg-[#0FA0CE]/10 dark:bg-[#0FA0CE]/20 rounded-full group-hover:bg-[#0FA0CE]/20 dark:group-hover:bg-[#0FA0CE]/30 transition-colors">
                 <Users className="w-5 h-5 text-[#0FA0CE]" />
               </div>
               <span className="font-semibold">Teacher-Tested</span>
-            </div>
+            </Link>
           </div>
         </div>
 

@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
-import { ChevronLeft, Share2, Clock, AlertTriangle, Users, Download } from "lucide-react";
+import { ChevronLeft, ChevronRight, Share2, Clock, AlertTriangle, Users, Download } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AppName from "@/components/AppName";
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
+import StickyNavigation from "@/components/home/StickyNavigation";
 import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
@@ -650,16 +651,37 @@ const BlogPost = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50">
-        <div className="sticky top-0 z-10 bg-gray-50 p-4 border-b">
-          <Link to="/blog" className="inline-flex items-center text-primary hover:underline">
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Back to Blog
-          </Link>
-        </div>
-
-      <div className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 dark:bg-[#0FA0CE]/10 rounded-full blur-3xl -translate-x-1/2"></div>
+        <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
+        
+        <StickyNavigation />
+        <div className="pt-20 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Breadcrumb Navigation */}
+            <div className="mb-8">
+              <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                <Link 
+                  to="/" 
+                  className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                  </svg>
+                  Home
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+                <Link 
+                  to="/blog" 
+                  className="hover:text-[#0FA0CE] transition-colors duration-200 font-medium"
+                >
+                  Blog
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+                <span className="text-gray-900 dark:text-gray-100 font-semibold">{post.title}</span>
+              </nav>
+            </div>
           <article>
             <header className="mb-8">
               <div className="flex items-center gap-3 mb-4">

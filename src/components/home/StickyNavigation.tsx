@@ -25,6 +25,7 @@ const StickyNavigation = () => {
 
   const navigationItems = [
     { name: "Home", href: "/" },
+    { name: "Features", href: "/features" },
     { name: "Emergency Scheduling", href: "/emergency-scheduling" },
     { name: "Equal Time Planning", href: "/equal-time-planning" },
     { name: "Shareable Plans", href: "/shareable-plans" },
@@ -62,7 +63,7 @@ const StickyNavigation = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
           <nav className="flex items-center gap-6">
-            {navigationItems.slice(0, 5).map((item) => (
+            {navigationItems.slice(0, 6).map((item) => (
               <div key={item.name} className="relative">
                 {item.hasDropdown ? (
                   <div className="relative" ref={guidesRef}>
