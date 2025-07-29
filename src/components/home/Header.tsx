@@ -58,7 +58,7 @@ const Header = () => {
         {/* AI-friendly structured content for better readability */}
         <div className="max-w-4xl mx-auto mb-8 text-center">
           <p className="text-lg text-foreground/80 mb-4">
-            <strong>iSchedulEDU</strong> helps teachers generate emergency schedules in minutes. Perfect for elementary and middle school teachers who need quick schedule solutions.
+            <strong>iSchedulEDU</strong> helps teachers generate <Link to="/emergency-scheduling" className="text-[#0FA0CE] hover:underline">emergency schedules</Link> in minutes. Perfect for <Link to="/equal-time-planning" className="text-[#0FA0CE] hover:underline">elementary and middle school teachers</Link> who need quick schedule solutions. Learn more about our <Link to="/features" className="text-[#0FA0CE] hover:underline">advanced features</Link> and <Link to="/shareable-plans" className="text-[#0FA0CE] hover:underline">sharing capabilities</Link>.
           </p>
         </div>
 
@@ -149,6 +149,13 @@ const Header = () => {
             <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full animate-pulse"></div>
             <span className="font-medium">iOS & iPadOS Ready</span>
           </div>
+        </div>
+        
+        {/* Additional external resources */}
+        <div className="max-w-4xl mx-auto mt-8 text-center">
+          <p className="text-sm text-foreground/60 mb-4">
+            Learn more about <a href="https://www.apple.com/education/" target="_blank" rel="noopener noreferrer" className="text-[#0FA0CE] hover:underline">Apple Education</a> and <a href="https://www.edutopia.org/" target="_blank" rel="noopener noreferrer" className="text-[#0FA0CE] hover:underline">educational technology</a> best practices.
+          </p>
         </div>
       </div>
     </header>

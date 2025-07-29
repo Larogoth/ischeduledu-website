@@ -2,7 +2,7 @@ export const comprehensiveSEOContent = `
 <!-- Comprehensive pre-rendered content for all pages -->
 <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;">
   <!-- Homepage Content -->
-  <h1>iSchedulEDU - Emergency Schedule Generator for Teachers</h1>
+  <h2>iSchedulEDU - Emergency Schedule Generator for Teachers</h2>
   <p>Plan ahead with custom schedules or handle last-minute changes in under 2 minutes. iSchedulEDU helps teachers generate emergency schedules in minutes. Create custom scheduling plans for fire drills, weather delays, assemblies, and substitute scenarios. Perfect for elementary and middle school teachers who need quick schedule solutions.</p>
   
   
