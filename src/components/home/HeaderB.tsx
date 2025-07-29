@@ -14,11 +14,10 @@ const HeaderB = () => {
               <span>5.0★ App Store Rating</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <div className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Create Class Schedules in 
               <span className="text-[#0FA0CE]"> Seconds</span>
-              <span className="sr-only"> - iSchedulEDU Emergency Schedule Generator for Teachers</span>
-            </h1>
+            </div>
             
             <p className="text-xl text-gray-700 mb-8 leading-relaxed">
               Generate perfect class schedules for early dismissals, delays, and special events. 
