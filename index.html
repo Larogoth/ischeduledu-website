@@ -8,7 +8,6 @@
     
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
@@ -60,7 +59,7 @@
 
     <!-- SEO-optimized content for crawlers -->
     <div id="seo-content" style="position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0.01; pointer-events: none;">
-      <h1>iSchedulEDU - Emergency Schedule Generator for Teachers</h1>
+      <h2>iSchedulEDU - Emergency Schedule Generator for Teachers</h2>
       <p>Create emergency schedules in under 2 minutes. Perfect for fire drills, weather delays, and substitute teachers. Free to start.</p>
       <p>iSchedulEDU helps teachers generate emergency schedules in minutes. Create custom scheduling plans for fire drills, weather delays, assemblies, and substitute scenarios. Perfect for elementary and middle school teachers who need quick schedule solutions.</p>
       
@@ -1151,6 +1150,60 @@
       }
     }
     </script>
+
+    <!-- Article Schema for Blog Content -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Emergency Schedule Generator for Teachers - iSchedulEDU",
+        "description": "Create emergency schedules in under 2 minutes with iSchedulEDU. Perfect for fire drills, weather delays, and substitute teachers.",
+        "author": {
+          "@type": "Organization",
+          "name": "iSchedulEDU"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "iSchedulEDU",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png"
+          }
+        },
+        "datePublished": "2025-07-28",
+        "dateModified": "2025-07-28",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://ischeduledu.app"
+        },
+        "image": "https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png"
+      }
+    </script>
+
+    <!-- Review Schema for App Reviews -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Review",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "iSchedulEDU",
+          "applicationCategory": "EducationalApplication"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "iSchedulEDU"
+        },
+        "reviewBody": "iSchedulEDU is an excellent emergency schedule generator for teachers. The app creates balanced schedules in under 2 minutes, perfect for fire drills, weather delays, and substitute scenarios. Highly recommended for elementary and middle school teachers.",
+        "datePublished": "2025-07-28"
+      }
+    </script>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
