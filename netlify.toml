@@ -43,14 +43,6 @@
   for = "/lovable-uploads/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-    X-Content-Type-Options = "nosniff"
-
-# Compress images
-[[headers]]
-  for = "*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Encoding = "gzip"
 
 # SEO-friendly headers
 [[headers]]

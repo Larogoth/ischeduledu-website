@@ -4,8 +4,8 @@ export const comprehensiveSEOContent = `
   <!-- Homepage Content -->
 
 <h2>iSchedulEDU - Emergency Schedule Generator for Teachers</h2>
-  <p>Plan ahead with custom schedules or handle last-minute changes in under 2 minutes. iSchedulEDU helps teachers generate emergency schedules in minutes. Create custom scheduling plans for fire drills, weather delays, assemblies, and substitute scenarios. Perfect for elementary and middle school teachers who need quick schedule solutions.</p>
-  
+<p>Plan ahead with custom schedules or handle last-minute changes in under 2 minutes. iSchedulEDU helps teachers generate emergency schedules in minutes. Create custom scheduling plans for fire drills, weather delays, assemblies, and substitute scenarios. Perfect for elementary and middle school teachers who need quick schedule solutions.</p>
+
 <h2>Frequently Asked Questions - iSchedulEDU</h2>
 <p>Everything you need to know about iSchedulEDU - the emergency schedule generator for teachers. Schedule creation time: 2 minutes. Required iOS version: 17.6+. Features QR sharing for instant schedule sharing and smart notifications.</p>
 <p>iSchedulEDU is an emergency schedule generator app designed specifically for teachers. It allows you to create custom school schedules in under 2 minutes, handle A/B rotations, manage early dismissals, delays, and emergency schedule changes instantly. The app automatically generates equal-time schedules and provides features like notifications, QR code sharing, and visual timeline views.</p>
@@ -25,7 +25,7 @@ export const comprehensiveSEOContent = `
 <p>The visual timeline view provides a clear, graphical representation of your daily schedule. It shows each period as a block with start and end times, making it easy to see the flow of your day at a glance. This is especially helpful for complex schedules with multiple periods.</p>
 <p>iSchedulEDU allows you to input your school's bell schedule as a custom schedule. You can set up different bell schedules for different days or special events, ensuring your schedules align with your school's timing system.</p>
 <p>Yes, iSchedulEDU allows you to save frequently used schedules for quick access. This is especially useful for common scenarios like fire drills, early dismissals, or special events. You can also modify saved schedules to fit new situations.</p>
-  
+
 <h2>About iSchedulEDU - Educational Technology Company</h2>
 <p>Revolutionizing teacher scheduling with intelligent algorithms and comprehensive emergency management solutions</p>
 <p>At iSchedulEDU, we believe that teachers should spend their time educating students, not calculating schedules. Our mission is to provide educators with intelligent, reliable tools that handle the complex mathematics of emergency scheduling while ensuring every subject receives fair instructional time.</p>
@@ -37,7 +37,7 @@ export const comprehensiveSEOContent = `
 <p>Our proprietary mathematical algorithms handle complex scheduling scenarios with precision. When perfect time division isn't possible, our technology makes strategic decisions to ensure maximum fairness across all subjects.</p>
 <p>Schedule generation happens in under 2 minutes, allowing teachers to respond quickly to emergency situations without sacrificing instructional quality or time distribution fairness.</p>
 <p>Our sharing technology works for everyone - whether they have the app or not. Universal Links provide seamless experiences for app users while offering web-based alternatives for others.</p>
-  
+
 <h2>Advanced Features - iSchedulEDU Teacher Schedule App</h2>
 <p>Emergency schedule generation with intelligent algorithms that automatically redistribute remaining time into equal class periods. Teachers input start time, end time, and number of class rotations, and the app generates a balanced schedule in under 2 minutes.</p>
 <p>Generate perfectly balanced schedules with equal time distribution. Handle schedule interruptions like lunch breaks while maintaining fair time allocation for all classes. When perfect division isn't possible, the app makes strategic decisions to ensure maximum fairness.</p>
@@ -47,7 +47,7 @@ export const comprehensiveSEOContent = `
 <p>Create custom daily schedules with specific times, periods, activities, and personalized schedules for regular days, special events, substitute teachers, and unique school situations. The app adapts to your specific needs.</p>
 <p>For fire drills, weather delays, assemblies, and substitute teacher scenarios. Generate schedules in under 2 minutes with intelligent algorithms that ensure equal time distribution. Perfect for emergency situations that require quick, reliable scheduling solutions.</p>
 <p>iSchedulEDU requires iOS 17.6 or later and iPadOS 17.6 or later. The app is optimized for both iPhone and iPad, making it perfect for teachers who use multiple devices throughout their day.</p>
-  
+
 <h2>Equal Time Lesson Planning App - iSchedulEDU</h2>
 <p>Generate perfectly balanced schedules with equal time distribution. Handle schedule interruptions like lunch breaks while maintaining fair time allocation for all classes. Intelligent mathematical calculations ensure maximum fairness.</p>
 <p>Perfect equal time schedule example: 8:00-8:30 Math, 8:30-9:00 Reading, 9:00-9:30 Science, 9:30-10:00 Lunch, 10:00-10:30 Science (cont.), 10:30-11:00 Social Studies, 11:00-11:30 Writing. Each subject gets exactly 30 minutes, with lunch as a pre-set break.</p>
@@ -55,7 +55,7 @@ export const comprehensiveSEOContent = `
 <p>Yes, you can adjust the equal periods if needed. The app allows manual adjustments while maintaining the overall equal time distribution principle. This flexibility ensures the schedule meets your specific classroom needs.</p>
 <p>When there's an odd number of minutes remaining, iSchedulEDU makes intelligent decisions to distribute the extra time fairly. The app typically adds the extra minute to the last period or distributes it across multiple periods to maintain balance.</p>
 <p>Equal time planning ensures every subject receives fair instructional time, reduces teacher stress during schedule disruptions, improves student learning consistency, and maintains classroom routine even during emergencies.</p>
-  
+
 <h2>Shareable School Day Plans for Teachers - iSchedulEDU</h2>
 <p>Share schedules with other teachers, substitutes, and administrators using QR codes, universal links, text messages, or PDF exports. Universal links work for both app users and non-app users, ensuring everyone can access the schedule regardless of whether they have the app installed.</p>
 <p>Shared schedule format includes class names, start and end times, total duration, and any special notes. The format is clean and easy to read, making it perfect for substitutes and other teachers who need to quickly understand the schedule structure.</p>
@@ -65,14 +65,14 @@ export const comprehensiveSEOContent = `
 <p>Yes, you can customize what information is shared. The app allows you to include or exclude specific details based on your needs and the preferences of the recipients.</p>
 <p>Share schedules like never before with iSchedulEDU's advanced sharing technology. Whether you're sharing with app users or non-app users, our universal links and QR codes ensure everyone has access to the most up-to-date schedule information.</p>
 
-  <h2>Teacher Blog - iSchedulEDU Emergency Scheduling & Classroom Management Tips</h2>
-  <p>Teacher blog featuring emergency scheduling tips, classroom management advice, and educational technology insights. Articles about fire drill preparation, weather delay management, substitute teacher communication, and schedule sharing best practices.</p>
-  
-  <h2>Privacy Policy - iSchedulEDU</h2>
-  <p>iSchedulEDU privacy policy and data protection information. Details about data collection, usage, sharing, and user rights for the teacher schedule app.</p>
-  
+<h2>Teacher Blog - iSchedulEDU Emergency Scheduling & Classroom Management Tips</h2>
+<p>Teacher blog featuring emergency scheduling tips, classroom management advice, and educational technology insights. Articles about fire drill preparation, weather delay management, substitute teacher communication, and schedule sharing best practices.</p>
+
+<h2>Privacy Policy - iSchedulEDU</h2>
+<p>iSchedulEDU privacy policy and data protection information. Details about data collection, usage, sharing, and user rights for the teacher schedule app.</p>
+
 <!-- Internal links for SEO -->
-  <nav>
+<nav>
   <a href="/about">About iSchedulEDU Company</a>
   <a href="/features">Teacher App Features</a>
   <a href="/faq">Frequently Asked Questions</a>
@@ -81,9 +81,9 @@ export const comprehensiveSEOContent = `
   <a href="/shareable-plans">Shareable Schedule Plans</a>
   <a href="/blog">Teacher Blog</a>
   <a href="/privacy-policy">Privacy Policy Information</a>
-    <a href="/competitor-analysis">Competitor Analysis</a>
-    <a href="/strategy-review">Strategy Review</a>
-  </nav>
+  <a href="/competitor-analysis">Competitor Analysis</a>
+  <a href="/strategy-review">Strategy Review</a>
+</nav>
 
 </div>
 `;

@@ -40,19 +40,10 @@ export default defineConfig(({ mode }) => ({
           router: ['react-router-dom'],
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-select', '@radix-ui/react-tabs', '@radix-ui/react-toast', '@radix-ui/react-tooltip'],
           icons: ['lucide-react'],
-          utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
         },
       },
     },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-    target: 'es2015',
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
