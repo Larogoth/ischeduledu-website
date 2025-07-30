@@ -7,8 +7,8 @@
   NODE_VERSION = "18"
 
 # Enable prerendering for better SEO
-# [[plugins]]
-#   package = "@netlify/plugin-lighthouse"
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
 
 # Redirect all routes to index.html for SPA
 [[redirects]]
