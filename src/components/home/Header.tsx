@@ -179,12 +179,7 @@ const Header = () => {
           </div>
         </div>
         
-        {/* Additional external resources */}
-        <div className="max-w-4xl mx-auto mt-8 text-center">
-          <p className="text-sm text-foreground/60 mb-4">
-            Learn more about <a href="https://www.apple.com/education/" target="_blank" rel="noopener noreferrer" className="text-[#0FA0CE] hover:underline">Apple Education</a> and <a href="https://www.edutopia.org/" target="_blank" rel="noopener noreferrer" className="text-[#0FA0CE] hover:underline">educational technology</a> best practices.
-          </p>
-        </div>
+
       </div>
     </header>
   );
