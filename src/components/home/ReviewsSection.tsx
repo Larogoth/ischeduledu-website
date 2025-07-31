@@ -111,10 +111,11 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   index === currentIndex ? "bg-[#0FA0CE] scale-125" : "bg-gray-300"
                 }`}
                 onClick={() => goToSlide(index)}
+                aria-label={`Go to review ${index + 1}`}
               />
             ))}
           </div>
@@ -189,10 +190,11 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   index === currentIndex ? "bg-[#0FA0CE]" : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 onClick={() => goToSlide(index)}
+                aria-label={`Go to review ${index + 1}`}
               />
             ))}
           </div>
