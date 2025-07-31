@@ -16,6 +16,7 @@ import EqualTimePlanning from "./pages/EqualTimePlanning";
 import ShareablePlans from "./pages/ShareablePlans";
 import About from "./pages/About";
 import Features from "./pages/Features";
+
 import EmergencyScheduleGuide from "./pages/EmergencyScheduleGuide";
 import RotatingScheduleGuide from "./pages/RotatingScheduleGuide";
 import CustomScheduleGuide from "./pages/CustomScheduleGuide";
@@ -97,7 +98,16 @@ const RouteDebugger = () => {
     // Additional debugging for import routes
     if (location.pathname.includes('import') || location.search.includes('data')) {
       console.log('=== IMPORT ROUTE DETECTED ===');
-      console.log('Import route data:', location.search);
+      console.log('Pathname includes import?', location.pathname.includes('import'));
+      console.log('Search includes data?', location.search.includes('data'));
+      console.log('Search params:', new URLSearchParams(location.search).get('data') ? 'DATA FOUND' : 'NO DATA');
+      
+      // Log the actual data parameter if it exists
+      const dataParam = new URLSearchParams(location.search).get('data');
+      if (dataParam) {
+        console.log('Data parameter length:', dataParam.length);
+        console.log('Data parameter preview:', dataParam.substring(0, 50) + '...');
+      }
     }
   }, [location]);
   

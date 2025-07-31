@@ -42,7 +42,6 @@ const Header = () => {
             height="160"
             loading="eager"
             decoding="async"
-            fetchPriority="high"
             onError={(e) => {
               console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
             }}
@@ -130,9 +129,6 @@ const Header = () => {
               className="w-[280px] h-[94px] object-contain relative z-10 dark:invert"
               width="280"
               height="94"
-              loading="lazy"
-              decoding="async"
-              fetchPriority="low"
             />
           </a>
         </div>

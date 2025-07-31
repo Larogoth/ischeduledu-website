@@ -86,9 +86,6 @@ const Screenshots = () => {
                       className="relative z-10 w-48 md:w-64 h-auto rounded-xl md:rounded-2xl shadow-xl transform hover:scale-105 transition-transform duration-300"
                       width="192"
                       height="416"
-                      loading="lazy"
-                      decoding="async"
-                      fetchPriority={activeIndex === 0 ? "high" : "low"}
                       onError={(e) => {
                         console.error('Screenshot failed to load:', (e.target as HTMLImageElement).src);
                       }}
