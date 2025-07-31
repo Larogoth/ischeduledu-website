@@ -104,7 +104,7 @@ const FAQ: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <StickyNavigation />
-      <div className="container mx-auto px-4 pt-20 pb-8">
+      <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb Navigation */}
         <div className="mb-8">
               <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
