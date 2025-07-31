@@ -25,7 +25,6 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';"
-    X-Frame-Options = "DENY"
 
 # Cache static assets
 [[headers]]
