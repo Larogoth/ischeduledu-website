@@ -131,7 +131,7 @@ const Screenshots = () => {
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                className={`w-4 h-4 rounded-full transition-all duration-200 ${
                   index === activeIndex 
                     ? 'bg-[#0FA0CE] scale-125' 
                     : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'

@@ -111,7 +111,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
                   index === currentIndex ? "bg-[#0FA0CE] scale-125" : "bg-gray-300"
                 }`}
                 onClick={() => goToSlide(index)}
@@ -190,7 +190,7 @@ const ReviewsSection = ({ reviews, isLoadingReviews }: ReviewsSectionProps) => {
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
                   index === currentIndex ? "bg-[#0FA0CE]" : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 onClick={() => goToSlide(index)}
