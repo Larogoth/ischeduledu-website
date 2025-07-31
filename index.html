@@ -6,21 +6,22 @@
     <link rel="icon" type="image/png" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
     <link rel="apple-touch-icon" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
     
-    <!-- Preload critical images -->
-    <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
-    <link rel="preload" as="image" href="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/fonts/Euclid Circular B Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Euclid Circular B Medium.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Euclid Circular B Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preconnect" href="https://toolbox.marketingtools.apple.com">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://www.google-analytics.com">
+    <!-- DNS prefetch and preconnect for critical resources -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://toolbox.marketingtools.apple.com">
     <link rel="dns-prefetch" href="https://apps.apple.com">
+    <link rel="dns-prefetch" href="https://peerpush.net">
+    <link rel="preconnect" href="https://toolbox.marketingtools.apple.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="preconnect" href="https://peerpush.net" crossorigin>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/fonts/Euclid Circular B Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Euclid Circular B Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Euclid Circular B Bold.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -38,9 +39,71 @@
     <!-- Critical CSS for above-the-fold content -->
     <style>
       /* Critical rendering path styles */
-      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      body { 
+        margin: 0; 
+        font-family: system-ui, -apple-system, sans-serif; 
+        background-color: #ffffff;
+        color: #000000;
+        line-height: 1.5;
+      }
+      .dark body {
+        background-color: #000000;
+        color: #ffffff;
+      }
+      .sr-only { 
+        position: absolute; 
+        width: 1px; 
+        height: 1px; 
+        padding: 0; 
+        margin: -1px; 
+        overflow: hidden; 
+        clip: rect(0, 0, 0, 0); 
+        white-space: nowrap; 
+        border: 0; 
+      }
+      /* Prevent layout shift for critical images */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* Critical layout styles */
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      /* Critical button styles */
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: inherit;
+      }
+      /* Critical link styles */
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      /* Critical flexbox utilities */
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .justify-between { justify-content: space-between; }
+      .min-h-screen { min-height: 100vh; }
+      .w-full { width: 100%; }
+      .h-full { height: 100%; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .text-center { text-align: center; }
     </style>
+    
+    <!-- Load CSS normally -->
+    <link rel="stylesheet" href="/src/index.css">
     
     <!-- Theme detection -->
     <script>
@@ -78,6 +141,21 @@
           }
         })
       })()
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
     </script>
 
     <!-- SEO-optimized content for crawlers -->
