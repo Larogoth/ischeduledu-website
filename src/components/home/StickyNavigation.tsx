@@ -49,6 +49,8 @@ const StickyNavigation = () => {
               src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png"
               alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"
               className="w-10 h-10 object-contain"
+              loading="eager"
+              decoding="async"
               onError={(e) => {
                 console.error('StickyNav logo failed to load:', (e.target as HTMLImageElement).src);
               }}
@@ -58,7 +60,7 @@ const StickyNavigation = () => {
             </div>
           </div>
           <span className="font-bold text-xl text-foreground">iSchedulEDU</span>
-          <span className="hidden sm:inline-block bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
+          <span className="hidden sm:inline-block bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{color: 'white'}}>
             Teacher's Choice
           </span>
         </div>
@@ -126,10 +128,12 @@ const StickyNavigation = () => {
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-3">
           <ThemeToggle />
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 text-foreground hover:text-[#0FA0CE] transition-colors duration-200"
-          >
+                      <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-foreground hover:text-[#0FA0CE] transition-colors duration-200"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+            >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>

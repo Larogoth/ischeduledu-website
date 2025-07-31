@@ -40,6 +40,8 @@ const Header = () => {
             className="mx-auto w-32 h-32 md:w-40 md:h-40 mb-8 object-contain"
             width="160"
             height="160"
+            loading="eager"
+            decoding="async"
             onError={(e) => {
               console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
             }}
