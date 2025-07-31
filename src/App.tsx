@@ -16,7 +16,7 @@ import EqualTimePlanning from "./pages/EqualTimePlanning";
 import ShareablePlans from "./pages/ShareablePlans";
 import About from "./pages/About";
 import Features from "./pages/Features";
-import AppNameTest from "./components/AppNameTest";
+
 import EmergencyScheduleGuide from "./pages/EmergencyScheduleGuide";
 import RotatingScheduleGuide from "./pages/RotatingScheduleGuide";
 import CustomScheduleGuide from "./pages/CustomScheduleGuide";
@@ -180,7 +180,6 @@ const App = () => {
               <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
               <Route path="/competitor-analysis" element={<CompetitorAnalysis />} />
               <Route path="/strategy-review" element={<StrategyReview />} />
-              <Route path="/test-appname" element={<AppNameTest />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
