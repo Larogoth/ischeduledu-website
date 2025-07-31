@@ -10,48 +10,7 @@
 # [[plugins]]
 #   package = "@netlify/plugin-lighthouse"
 
-# Specific redirects for key pages
-[[redirects]]
-  from = "/faq"
-  to = "/faq/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/privacy-policy"
-  to = "/privacy-policy/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/about"
-  to = "/about/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/features"
-  to = "/features/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/emergency-scheduling"
-  to = "/emergency-scheduling/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/equal-time-planning"
-  to = "/equal-time-planning/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/shareable-plans"
-  to = "/shareable-plans/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog"
-  to = "/blog/index.html"
-  status = 200
-
-# Fallback redirect for SPA
+# Redirect all routes to index.html for SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"

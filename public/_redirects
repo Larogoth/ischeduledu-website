@@ -1,20 +1,18 @@
-
 # Netlify redirects for SPA
+# Handle all routes and redirect to index.html for client-side routing
+/*    /index.html   200
 
-# Specific redirects for key pages with proper status codes
-/faq                     /faq/index.html                200
-/privacy-policy          /privacy-policy/index.html     200
-/about                   /about/index.html              200
-/features                /features/index.html           200
+# SEO-friendly redirects for key pages
+/about    /about/index.html   200
+/features    /features/index.html   200
+/faq    /faq/index.html   200
 /emergency-scheduling    /emergency-scheduling/index.html   200
-/equal-time-planning     /equal-time-planning/index.html    200
-/shareable-plans         /shareable-plans/index.html    200
-/competitor-analysis     /competitor-analysis/index.html    200
-/strategy-review         /strategy-review/index.html    200
-/blog                    /blog/index.html               200
-
-# Handle all other routes and redirect to index.html for client-side routing
-/*                       /index.html                    200
+/equal-time-planning    /equal-time-planning/index.html   200
+/shareable-plans    /shareable-plans/index.html   200
+/competitor-analysis    /competitor-analysis/index.html   200
+/strategy-review    /strategy-review/index.html   200
+/blog    /blog/index.html   200
+/privacy-policy    /privacy-policy/index.html   200
 
 # Handle 404s gracefully
-/404                     /index.html                    200
+/404    /index.html   200 
