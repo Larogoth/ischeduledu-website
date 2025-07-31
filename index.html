@@ -917,30 +917,12 @@
       gtag('js', new Date());
       gtag('config', 'G-R6BRCJ44YH');
     </script>
-    <!-- Google Tag Manager - Deferred for performance -->
-    <script>
-      // Defer GTM loading to improve initial page load
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH';
-          script.crossOrigin = 'anonymous';
-          script.referrerPolicy = 'no-referrer-when-downgrade';
-          document.head.appendChild(script);
-          
-          // Initialize gtag after script loads
-          script.onload = function() {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-R6BRCJ44YH', {
-              'send_page_view': false,
-              'anonymize_ip': true
-            });
-          };
-        }, 3000); // Load GTM after 3 seconds
-      });
+    <script 
+      async 
+      defer
+      src="https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer-when-downgrade">
     </script>
     
     <script type="text/javascript">
