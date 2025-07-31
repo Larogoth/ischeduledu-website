@@ -2,6 +2,7 @@ const CACHE_NAME = 'ischeduledu-v1';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/src/index.css',
   '/fonts/Euclid Circular B Regular.woff2',
   '/fonts/Euclid Circular B Medium.woff2',
   '/fonts/Euclid Circular B Bold.woff2',
@@ -20,32 +21,16 @@ self.addEventListener('install', (event) => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
-      .catch((error) => {
-        console.log('Cache install failed:', error);
-      })
   );
 });
 
 // Fetch event - serve from cache when offline
 self.addEventListener('fetch', (event) => {
-  // Skip external resources and critical assets
-  if (event.request.url.includes('googletagmanager.com') || 
-      event.request.url.includes('google-analytics.com') ||
-      event.request.url.includes('peerpush.net') ||
-      event.request.url.includes('toolbox.marketingtools.apple.com')) {
-    return;
-  }
-
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Return cached version or fetch from network
-        return response || fetch(event.request).catch(() => {
-          // Return a fallback for navigation requests
-          if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
-          }
-        });
+        return response || fetch(event.request);
       })
   );
 });
