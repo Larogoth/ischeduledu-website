@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
         <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
         
         <StickyNavigation />
-        <div className="py-8 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="pt-20 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
           {/* Breadcrumb Navigation */}
           <div className="mb-8">
