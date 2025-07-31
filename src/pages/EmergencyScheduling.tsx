@@ -63,7 +63,7 @@ const EmergencyScheduling = () => {
   return (
     <>
       <Helmet>
-        <title>Emergency Schedule Generator for Teachers | iSchedulEDU - Fire Drill & Assembly Scheduling</title>
+        <title>Emergency Schedule Generator | iSchedulEDU - Fire Drill & Assembly</title>
         <meta name="description" content="Create emergency schedules instantly when fire drills, assemblies, or weather delays disrupt your school day. Generate equal-length class periods in under 2 minutes with iSchedulEDU." />
         <meta name="keywords" content="emergency schedule generator, fire drill schedule, assembly interruption, weather delay schedule, substitute teacher emergency, classroom scheduling app" />
         <meta property="og:title" content="Emergency Schedule Generator for Teachers | iSchedulEDU" />

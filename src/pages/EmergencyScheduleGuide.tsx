@@ -113,7 +113,7 @@ const EmergencyScheduleGuide = () => {
   return (
     <>
       <Helmet>
-        <title>How to Create Emergency Schedules with iSchedulEDU - Step-by-Step Guide</title>
+        <title>Emergency Schedule Guide | iSchedulEDU - Step-by-Step</title>
         <meta name="description" content="Learn how to create emergency schedules in under 2 minutes with iSchedulEDU. Complete step-by-step guide for fire drills, weather delays, assemblies, and early dismissals." />
         <meta name="keywords" content="emergency schedule guide, fire drill schedule, weather delay schedule, assembly schedule, early dismissal schedule, teacher emergency planning, school schedule emergency, abbreviated schedule tutorial" />
         <meta property="og:title" content="How to Create Emergency Schedules with iSchedulEDU" />

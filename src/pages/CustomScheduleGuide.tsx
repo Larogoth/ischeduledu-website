@@ -149,7 +149,7 @@ const CustomScheduleGuide = () => {
   return (
     <>
       <Helmet>
-        <title>How to Create Custom Schedules with iSchedulEDU - Complete Guide</title>
+        <title>Custom Schedule Guide | iSchedulEDU - Complete Tutorial</title>
         <meta name="description" content="Learn how to create custom daily schedules with iSchedulEDU. Step-by-step guide for building personalized schedules for regular days, early dismissals, and substitute teachers." />
         <meta name="keywords" content="custom schedule guide, daily schedule creation, teacher schedule builder, class schedule maker, school schedule creator, personalized schedule, teacher planning, classroom schedule" />
         <meta property="og:title" content="How to Create Custom Schedules with iSchedulEDU" />

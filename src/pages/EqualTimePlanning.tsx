@@ -63,7 +63,7 @@ const EqualTimePlanning = () => {
   return (
     <>
       <Helmet>
-        <title>Equal Time Lesson Planning App | iSchedulEDU - Fair Schedule Division for Teachers</title>
+        <title>Equal Time Planning | iSchedulEDU - Fair Schedule Division</title>
         <meta name="description" content="Create perfectly balanced schedules where every subject gets equal time. Stop playing favorites with your subjects. Fair, fast, and frustration-free lesson planning." />
         <meta name="keywords" content="equal time lesson planning, balanced schedule division, fair subject time, classroom schedule app, teacher planning tool, equal period scheduling" />
         <meta property="og:title" content="Equal Time Lesson Planning App | iSchedulEDU" />

@@ -72,7 +72,7 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Teacher Blog | iSchedulEDU - Emergency Scheduling & Classroom Management Tips</title>
+        <title>Teacher Blog | iSchedulEDU - Emergency Scheduling Tips</title>
         <meta name="description" content="Read expert tips on emergency scheduling, classroom management, and teacher tools. Learn how to handle fire drills, weather delays, and substitute teacher handoffs with confidence." />
         <meta name="keywords" content="teacher blog, emergency scheduling, classroom management, fire drill schedule, weather delay planning, substitute teacher tips, teacher tools" />
         <meta property="og:title" content="Teacher Blog | iSchedulEDU - Emergency Scheduling & Classroom Management Tips" />

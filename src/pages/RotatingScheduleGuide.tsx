@@ -116,7 +116,7 @@ const RotatingScheduleGuide = () => {
   return (
     <>
       <Helmet>
-        <title>How to Set Up Rotating Schedules with iSchedulEDU - Complete Guide</title>
+        <title>Rotating Schedule Guide | iSchedulEDU - A/B Day Setup</title>
         <meta name="description" content="Learn how to set up A/B day rotations, multi-day cycles, and complex rotating schedules with iSchedulEDU. Step-by-step guide for teachers and administrators." />
         <meta name="keywords" content="rotating schedule guide, A/B day schedule, block schedule, multi-day rotation, school rotation schedule, teacher rotation guide, alternating schedule, school calendar rotation" />
         <meta property="og:title" content="How to Set Up Rotating Schedules with iSchedulEDU" />

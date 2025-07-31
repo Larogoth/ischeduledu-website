@@ -114,7 +114,7 @@ const Features = () => {
   return (
     <>
       <Helmet>
-        <title>Features - iSchedulEDU | Advanced Teacher Scheduling Features</title>
+        <title>Features - iSchedulEDU | Advanced Teacher Scheduling</title>
         <meta name="description" content="Explore iSchedulEDU's advanced features: intelligent equal time division, Universal Link sharing, QR code support, PDF export, AlarmKit integration, and privacy-first design for teachers." />
         <meta name="keywords" content="teacher scheduling features, equal time division, Universal Link sharing, QR code schedule sharing, PDF export, AlarmKit integration, emergency schedule management, classroom scheduling features, educational app features" />
         <meta property="og:title" content="Features - iSchedulEDU | Advanced Teacher Scheduling Features" />

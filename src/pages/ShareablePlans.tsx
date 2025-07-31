@@ -67,7 +67,7 @@ const ShareablePlans = () => {
   return (
     <>
       <Helmet>
-        <title>Shareable School Day Plans for Teachers | iSchedulEDU - Schedule Sharing & Collaboration</title>
+        <title>Shareable School Plans | iSchedulEDU - Teacher Schedule Sharing</title>
         <meta name="description" content="Create professional, shareable schedules that everyone can access instantly. From substitute teachers to parents, iSchedulEDU makes schedule sharing effortless with QR codes, Universal Links, and PDF exports." />
         <meta name="keywords" content="shareable school schedules, substitute teacher schedule sharing, QR code schedule sharing, Universal Links sharing, PDF schedule export, teacher collaboration app" />
         <meta property="og:title" content="Shareable School Day Plans for Teachers | iSchedulEDU" />

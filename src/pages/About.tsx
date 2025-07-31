@@ -15,7 +15,7 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About iSchedulEDU - Educational Technology Company | Teacher Schedule Solutions</title>
+        <title>About iSchedulEDU - Educational Technology Company</title>
         <meta name="description" content="Learn about iSchedulEDU, the educational technology company revolutionizing teacher scheduling. Discover our mission to help teachers manage emergency schedules, equal time divisions, and classroom disruptions with intelligent algorithms." />
         <meta name="keywords" content="iSchedulEDU company, educational technology, teacher scheduling solutions, emergency schedule management, equal time division algorithms, classroom management software, educational software company, teacher tools, school administration software" />
         <meta property="og:title" content="About iSchedulEDU - Educational Technology Company" />
