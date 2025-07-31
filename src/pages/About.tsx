@@ -31,7 +31,7 @@ const About = () => {
             "@type": "Organization",
             "name": "iSchedulEDU",
             "url": "https://ischeduledu.app",
-            "logo": "https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png",
+            "logo": "https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png",
             "description": "Educational technology company focused on creating intelligent scheduling solutions for teachers and school administrators. Specializing in emergency schedule management, equal time division algorithms, and seamless schedule sharing across educational environments.",
             "foundingDate": "2024",
             "industry": "Educational Technology",
