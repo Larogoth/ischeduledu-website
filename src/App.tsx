@@ -116,18 +116,24 @@ const RouteDebugger = () => {
 };
 
 const App = () => {
-  // Initialize security and theme
+  // Initialize security and theme - optimized to reduce forced reflows
   useEffect(() => {
-    // Initialize security checks
-    initializeSecurity();
-    
-    // Check for system/stored theme preference
-    const savedTheme = localStorage.getItem("theme")
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    // Batch DOM operations to reduce reflows
+    const initApp = () => {
+      // Initialize security checks
+      initializeSecurity();
+      
+      // Check for system/stored theme preference
+      const savedTheme = localStorage.getItem("theme")
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 
-    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
-      document.documentElement.classList.add("dark")
-    }
+      if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add("dark")
+      }
+    };
+
+    // Use requestAnimationFrame to batch DOM operations
+    requestAnimationFrame(initApp);
   }, [])
 
   usePageView();

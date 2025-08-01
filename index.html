@@ -8,17 +8,14 @@
     
     <!-- Preload critical images -->
     <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" />
-    <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-saved-schedules-management-interface-256.png" />
     <link rel="preload" as="image" href="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Preload critical resources -->
     <link rel="preload" href="/fonts/Euclid Circular B Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Euclid Circular B Medium.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Euclid Circular B Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preconnect" href="https://toolbox.marketingtools.apple.com">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://toolbox.marketingtools.apple.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://toolbox.marketingtools.apple.com">
     <link rel="dns-prefetch" href="https://apps.apple.com">
@@ -28,7 +25,7 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
     
     <!-- Primary Meta Tags -->
     <title>iSchedulEDU - Teacher Schedule Generator</title>
@@ -39,8 +36,28 @@
     <!-- Critical CSS for above-the-fold content -->
     <style>
       /* Critical rendering path styles */
-      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      body { 
+        margin: 0; 
+        font-family: system-ui, -apple-system, sans-serif; 
+        background: linear-gradient(to bottom, #0FA0CE, #1a2233, #101624);
+        color: #ffffff;
+      }
+      .sr-only { 
+        position: absolute; 
+        width: 1px; 
+        height: 1px; 
+        padding: 0; 
+        margin: -1px; 
+        overflow: hidden; 
+        clip: rect(0, 0, 0, 0); 
+        white-space: nowrap; 
+        border: 0; 
+      }
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
     </style>
     
     <!-- Theme detection -->

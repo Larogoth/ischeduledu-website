@@ -98,7 +98,6 @@ const Screenshots = () => {
                       height="416"
                       loading="lazy"
                       decoding="async"
-                      fetchPriority={activeIndex === 0 ? "high" : "low"}
                       onError={(e) => {
                         console.error('Screenshot failed to load:', (e.target as HTMLImageElement).src);
                       }}
