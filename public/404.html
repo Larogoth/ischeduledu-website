@@ -1,113 +1,140 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>iSchedulEDU</title>
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // Modified to handle Universal Links with query parameters correctly
-      
-      (function() {
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - iSchedulEDU</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(to bottom, #E6F3FF, #ffffff, #F0F8FF);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+        h1 {
+            color: #0FA0CE;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #374151;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background: #0FA0CE;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background: #0B8BA8;
+        }
+        .loading {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>Oops! The page you're looking for doesn't exist.</p>
+        <p>It might have been moved or you entered the wrong URL.</p>
+        <a href="/" class="btn">Go to Homepage</a>
+    </div>
+    
+    <script>
+        // Check if this is a valid SPA route that should be handled
         var location = window.location;
         var pathName = location.pathname;
         var search = location.search;
         var hash = location.hash;
         
-        console.log('404.html redirect script - Starting redirect process');
-        console.log('404.html redirect script - Original URL:', location.href);
-        console.log('404.html redirect script - Pathname:', pathName);
-        console.log('404.html redirect script - Search:', search);
-        console.log('404.html redirect script - Hash:', hash);
+        // List of valid routes in your SPA
+        var validRoutes = [
+            '/',
+            '/about',
+            '/features',
+            '/faq',
+            '/emergency-scheduling',
+            '/equal-time-planning',
+            '/shareable-plans',
+            '/blog',
+            '/privacy-policy',
+            '/emergency-schedule-guide',
+            '/rotating-schedule-guide',
+            '/custom-schedule-guide',
+            '/strategy-review',
+            '/competitor-analysis'
+        ];
         
-        // Handle Universal Links for import routes with query parameters
+        // Check if this is a valid route that should be handled by SPA
+        var isValidRoute = validRoutes.some(function(route) {
+            return pathName === route || pathName.startsWith('/blog/');
+        });
+        
+        // Handle Universal Links for import routes
         if (pathName === '/import' && search && search.includes('data=')) {
-          console.log('404.html redirect script - MATCHED Universal Link for /import with data parameter');
-          console.log('404.html redirect script - Preserving URL as-is for Universal Link');
-          
-          // For Universal Links, we don't need to modify the URL structure
-          // Just redirect to the root with the proper SPA routing format
-          var correctUrl = location.protocol + '//' + location.hostname + 
-                          (location.port ? ':' + location.port : '') + 
-                          '/?/import' + search;
-          
-          console.log('404.html redirect script - Constructed correct URL:', correctUrl);
-          console.log('404.html redirect script - About to redirect...');
-          
-          window.location.replace(correctUrl);
-          return;
+            var correctUrl = location.protocol + '//' + location.hostname + 
+                            (location.port ? ':' + location.port : '') + 
+                            '/?/import' + search;
+            window.location.replace(correctUrl);
+            return;
         }
         
-        // Handle the malformed Universal Link case where the URL structure gets corrupted
+        // Handle malformed Universal Links
         if (pathName.startsWith('/data=') && pathName.endsWith('/import')) {
-          console.log('404.html redirect script - MATCHED malformed Universal Link pattern /data=.../import');
-          console.log('404.html redirect script - Full pathname:', pathName);
-          
-          // Extract the data parameter from the pathname
-          var dataParam = pathName.substring(6); // Remove '/data=' prefix
-          console.log('404.html redirect script - After removing /data= prefix:', dataParam);
-          
-          dataParam = dataParam.substring(0, dataParam.length - 7); // Remove '/import' suffix
-          console.log('404.html redirect script - After removing /import suffix:', dataParam);
-          
-          // Reconstruct the correct URL
-          var correctUrl = location.protocol + '//' + location.hostname + 
-                          (location.port ? ':' + location.port : '') + 
-                          '/?/import?data=' + dataParam;
-          
-          console.log('404.html redirect script - Constructed correct URL:', correctUrl);
-          console.log('404.html redirect script - About to redirect...');
-          
-          window.location.replace(correctUrl);
-          return;
+            var dataParam = pathName.substring(6);
+            dataParam = dataParam.substring(0, dataParam.length - 7);
+            var correctUrl = location.protocol + '//' + location.hostname + 
+                            (location.port ? ':' + location.port : '') + 
+                            '/?/import?data=' + dataParam;
+            window.location.replace(correctUrl);
+            return;
         }
         
-        // Handle any other import routes
+        // Handle other import routes
         if (pathName.startsWith('/import')) {
-          console.log('404.html redirect script - MATCHED import route');
-          var correctUrl = location.protocol + '//' + location.hostname + 
-                          (location.port ? ':' + location.port : '') + 
-                          '/?/' + pathName.substring(1);
-          
-          if (search) {
-            correctUrl += search;
-          }
-          
-          console.log('404.html redirect script - Import route redirect URL:', correctUrl);
-          window.location.replace(correctUrl);
-          return;
+            var correctUrl = location.protocol + '//' + location.hostname + 
+                            (location.port ? ':' + location.port : '') + 
+                            '/?/' + pathName.substring(1);
+            if (search) {
+                correctUrl += search;
+            }
+            window.location.replace(correctUrl);
+            return;
         }
         
-        console.log('404.html redirect script - No Universal Link pattern matched, proceeding with normal GitHub Pages SPA routing');
+        // If it's a valid route, redirect to SPA
+        if (isValidRoute) {
+            var redirectUrl = location.protocol + '//' + location.hostname + 
+                            (location.port ? ':' + location.port : '') + 
+                            '/?/' + pathName.substring(1);
+            if (search) {
+                redirectUrl += search;
+            }
+            if (hash) {
+                redirectUrl += hash;
+            }
+            window.location.replace(redirectUrl);
+            return;
+        }
         
-        // Handle normal GitHub Pages SPA routing
-        var segmentCount = 0;
-        var redirectUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
-
-        if (pathName.slice(-1) === '/') {
-          pathName = pathName.slice(0, -1);
-        }
-
-        var cleanPath = pathName.split('/?/').join('/');
-        cleanPath = cleanPath.split(/[?#]/)[0];
-
-        redirectUrl += cleanPath.split('/').slice(0, 1 + segmentCount).join('/');
-        redirectUrl += '/?/' + cleanPath.slice(1).split('/').slice(segmentCount).join('/');
-
-        if (search && search.indexOf('?/') !== 0) {
-          redirectUrl = redirectUrl.replace('/?/', '/?/' + search.slice(1) + '/');
-        }
-        if (hash) {
-          redirectUrl += hash;
-        }
-
-        console.log('404.html redirect script - Normal redirect URL:', redirectUrl);
-        window.location.replace(redirectUrl);
-      })();
+        // If we get here, it's a real 404 - let Netlify handle the status
+        // The page will show the 404 content above
     </script>
-  </head>
-  <body>
-    <p>Redirecting...</p>
-  </body>
+</body>
 </html>
