@@ -7,6 +7,8 @@ const Screenshots = () => {
   const screenshots = [
     {
       src: "/lovable-uploads/ischeduledu-saved-schedules-management-interface.png",
+      srcSet: "/lovable-uploads/ischeduledu-saved-schedules-management-interface-256.png 256w, /lovable-uploads/ischeduledu-saved-schedules-management-interface-384.png 384w, /lovable-uploads/ischeduledu-saved-schedules-management-interface.png 883w",
+      sizes: "(max-width: 768px) 256px, (max-width: 1024px) 384px, 883px",
       alt: "iSchedulEDU saved schedules management interface showing organized school timetables for teachers and administrators",
       title: "Smart Schedule Management",
       description: "Organize and access all your schedules in one place. Never lose track of your timetables again.",
@@ -14,6 +16,8 @@ const Screenshots = () => {
     },
     {
       src: "/lovable-uploads/ischeduledu-daily-notifications-setup-screen.png",
+      srcSet: "/lovable-uploads/ischeduledu-daily-notifications-setup-screen.png 1x",
+      sizes: "(max-width: 768px) 256px, 384px",
       alt: "iSchedulEDU daily schedule notifications setup screen for class period alerts and reminders for educators",
       title: "Smart Notifications",
       description: "Get timely reminders for class changes and important schedule updates throughout your day.",
@@ -21,6 +25,8 @@ const Screenshots = () => {
     },
     {
       src: "/lovable-uploads/ischeduledu-daily-timeline-schedule-view.png",
+      srcSet: "/lovable-uploads/ischeduledu-daily-timeline-schedule-view.png 1x",
+      sizes: "(max-width: 768px) 256px, 384px",
       alt: "iSchedulEDU daily timeline view displaying complete school day schedule with class periods and break times",
       title: "Timeline View",
       description: "See your entire day at a glance with our intuitive timeline interface.",
@@ -28,6 +34,8 @@ const Screenshots = () => {
     },
     {
       src: "/lovable-uploads/ischeduledu-rotating-block-schedule-calendar.png",
+      srcSet: "/lovable-uploads/ischeduledu-rotating-block-schedule-calendar.png 1x",
+      sizes: "(max-width: 768px) 256px, 384px",
       alt: "iSchedulEDU rotating block schedule calendar managing A-day B-day alternating class periods for schools",
       title: "Rotating Schedules",
       description: "Handle A/B day rotations and complex schedule patterns with ease.",
@@ -82,10 +90,15 @@ const Screenshots = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-[#0FA0CE]/20 to-blue-500/20 rounded-2xl md:rounded-3xl blur-xl"></div>
                     <img
                       src={screenshots[activeIndex].src}
+                      srcSet={screenshots[activeIndex].srcSet}
+                      sizes={screenshots[activeIndex].sizes}
                       alt={screenshots[activeIndex].alt}
                       className="relative z-10 w-48 md:w-64 h-auto rounded-xl md:rounded-2xl shadow-xl transform hover:scale-105 transition-transform duration-300"
                       width="192"
                       height="416"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority={activeIndex === 0 ? "high" : "low"}
                       onError={(e) => {
                         console.error('Screenshot failed to load:', (e.target as HTMLImageElement).src);
                       }}
