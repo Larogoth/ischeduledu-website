@@ -10,11 +10,7 @@
 # [[plugins]]
 #   package = "@netlify/plugin-lighthouse"
 
-# Redirect all routes to index.html for SPA
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Redirects handled in public/_redirects file
 
 # Headers for better SEO and performance
 [[headers]]

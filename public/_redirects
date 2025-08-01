@@ -3,4 +3,7 @@
 /*    /index.html   200
 
 # Handle 404s properly
-/404    /404.html   404 
+/404    /404.html   404
+
+# Ensure import functionality works
+/import    /index.html   200 

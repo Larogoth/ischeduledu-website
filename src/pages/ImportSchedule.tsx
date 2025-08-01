@@ -366,7 +366,7 @@ const ImportSchedule = () => {
         </div>
       )}
 
-      <div className="relative z-10 max-w-4xl mx-auto pt-8 px-4 pb-12">
+      <div className="relative z-10 max-w-4xl mx-auto pt-20 px-4 pb-12">
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
             <img 
