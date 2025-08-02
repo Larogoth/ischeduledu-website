@@ -232,9 +232,26 @@
       .critical-logo {
         display: block;
         margin: 0 auto 2rem auto;
-        width: 8rem;
-        height: 8rem;
+        width: 10rem;
+        height: 10rem;
         object-fit: contain;
+      }
+      
+      /* Force logo to render immediately */
+      img[src*="ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+        content-visibility: visible !important;
+        will-change: auto;
+        contain: none;
+      }
+      
+      /* Delay text rendering to prioritize logo LCP */
+      .text-delay {
+        content-visibility: auto;
+        contain-intrinsic-size: 0 4rem;
       }
       
       /* Optimize logo container for faster rendering */

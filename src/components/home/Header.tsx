@@ -13,7 +13,7 @@ const Header = () => {
       
       <div className="relative z-10">
         {/* Logo - LCP Element - Made larger to ensure it's the LCP */}
-        <div className="mb-8 logo-container">
+        <div className="mb-8">
           <img
             src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
             alt="iSchedulEDU - school schedule generator app logo for teachers, administrators, and educational institutions"
@@ -56,7 +56,7 @@ const Header = () => {
           iSchedulEDU
         </div>
         
-        <p className="text-lg md:text-xl text-foreground/70 mb-16 font-medium">
+        <p className="text-lg md:text-xl text-foreground/70 mb-16 font-medium text-delay">
           Emergency Schedule Generator for Teachers
         </p>
         
