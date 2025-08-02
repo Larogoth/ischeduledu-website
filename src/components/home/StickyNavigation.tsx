@@ -45,19 +45,22 @@ const StickyNavigation = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="logo-container">
-            <img
-              src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
-              alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"
-              className="w-10 h-10 object-contain"
-              width="40"
-              height="40"
-              loading="eager"
-              decoding="async"
-              {...{ 'fetchpriority': 'high' }}
-              onError={(e) => {
-                console.error('StickyNav logo failed to load:', (e.target as HTMLImageElement).src);
-              }}
-            />
+            <picture>
+              <source srcSet="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.webp" type="image/webp" />
+              <img
+                src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
+                alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"
+                className="w-10 h-10 object-contain"
+                width="40"
+                height="40"
+                loading="eager"
+                decoding="async"
+                {...{ 'fetchpriority': 'high' }}
+                onError={(e) => {
+                  console.error('StickyNav logo failed to load:', (e.target as HTMLImageElement).src);
+                }}
+              />
+            </picture>
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-[#0FA0CE] to-blue-600 rounded-full flex items-center justify-center">
               <Sparkles className="w-2 h-2 text-white" />
             </div>
