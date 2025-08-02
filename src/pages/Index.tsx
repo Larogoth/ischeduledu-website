@@ -22,8 +22,8 @@ const Index = () => {
         <meta property="og:description" content="Create emergency schedules in under 2 minutes. Perfect for fire drills, weather delays, and substitute teachers. Free to start." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ischeduledu.app" />
-        <meta property="og:image" content="https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" />
-        {/* Canonical link handled in index.html */}
+        <meta property="og:image" content="https://ischeduledu.app/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
+        <link rel="canonical" href="https://ischeduledu.app" />
         
 
       </Helmet>
