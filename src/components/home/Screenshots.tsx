@@ -175,6 +175,8 @@ const Screenshots = () => {
                 className="w-[280px] h-[94px] object-contain dark:invert"
                 width="280"
                 height="94"
+                loading="lazy"
+                decoding="async"
               />
             </a>
           </div>
