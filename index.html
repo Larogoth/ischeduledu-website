@@ -249,6 +249,25 @@
         content-visibility: auto;
         contain-intrinsic-size: auto 4rem;
       }
+      
+      /* Critical above-the-fold optimizations */
+      .hero-section {
+        content-visibility: auto;
+        contain: layout style paint;
+      }
+      
+      /* Defer non-critical animations */
+      @media (prefers-reduced-motion: no-preference) {
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+      }
+      
+      /* Optimize gradients for better performance */
+      .bg-gradient-optimized {
+        background: linear-gradient(180deg, #E6F3FF 0%, #ffffff 50%, #F0F8FF 100%);
+        will-change: auto;
+      }
     </style>
     
     <!-- Theme detection -->
@@ -1051,19 +1070,43 @@
       }
     </script>
 
-    <!-- Google Analytics with SRI Protection -->
+    <!-- Deferred Google Analytics for better LCP -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-R6BRCJ44YH');
-    </script>
-    <script 
-      async 
-      defer
-      src="https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer-when-downgrade">
+      // Defer GA loading until after page interaction or timeout
+      function loadGoogleAnalytics() {
+        if (window.gtag) return; // Already loaded
+        
+        const script = document.createElement('script');
+        script.async = true;
+        script.defer = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH';
+        script.crossOrigin = 'anonymous';
+        script.referrerPolicy = 'no-referrer-when-downgrade';
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R6BRCJ44YH');
+        window.gtag = gtag;
+      }
+      
+      // Load GA after user interaction or 3 seconds (whichever comes first)
+      let gaLoaded = false;
+      function initGA() {
+        if (!gaLoaded) {
+          gaLoaded = true;
+          loadGoogleAnalytics();
+        }
+      }
+      
+      // Load on first user interaction
+      ['click', 'scroll', 'keydown', 'touchstart'].forEach(event => {
+        document.addEventListener(event, initGA, { once: true, passive: true });
+      });
+      
+      // Fallback: load after 3 seconds if no interaction
+      setTimeout(initGA, 3000);
     </script>
     
     <script type="text/javascript">

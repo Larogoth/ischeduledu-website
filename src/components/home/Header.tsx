@@ -54,6 +54,8 @@ const Header = () => {
               src="https://peerpush.net/p/ischeduledu/badge"
               alt="iSchedulEDU badge"
               className="h-12 sm:h-[60px]"
+              width="221.54"
+              height="60"
               loading="eager"
               decoding="async"
               {...{ 'fetchpriority': 'high' }}

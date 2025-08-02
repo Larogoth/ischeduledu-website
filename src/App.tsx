@@ -4,24 +4,35 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import Index from "./pages/Index";
-import FAQ from "./pages/FAQ";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ImportSchedule from "./pages/ImportSchedule";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import EmergencyScheduling from "./pages/EmergencyScheduling";
-import EqualTimePlanning from "./pages/EqualTimePlanning";
-import ShareablePlans from "./pages/ShareablePlans";
-import About from "./pages/About";
-import Features from "./pages/Features";
 
-import EmergencyScheduleGuide from "./pages/EmergencyScheduleGuide";
-import RotatingScheduleGuide from "./pages/RotatingScheduleGuide";
-import CustomScheduleGuide from "./pages/CustomScheduleGuide";
-import CompetitorAnalysis from "./pages/CompetitorAnalysis";
-import StrategyReview from "./pages/StrategyReview";
+// Lazy load non-critical pages to reduce initial bundle size
+const FAQ = lazy(() => import("./pages/FAQ"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const EmergencyScheduling = lazy(() => import("./pages/EmergencyScheduling"));
+const EqualTimePlanning = lazy(() => import("./pages/EqualTimePlanning"));
+const ShareablePlans = lazy(() => import("./pages/ShareablePlans"));
+const About = lazy(() => import("./pages/About"));
+const Features = lazy(() => import("./pages/Features"));
+const EmergencyScheduleGuide = lazy(() => import("./pages/EmergencyScheduleGuide"));
+const RotatingScheduleGuide = lazy(() => import("./pages/RotatingScheduleGuide"));
+const CustomScheduleGuide = lazy(() => import("./pages/CustomScheduleGuide"));
+const CompetitorAnalysis = lazy(() => import("./pages/CompetitorAnalysis"));
+const StrategyReview = lazy(() => import("./pages/StrategyReview"));
+
+// Loading component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <div className="w-8 h-8 border-4 border-[#0FA0CE] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p className="text-foreground/60">Loading...</p>
+    </div>
+  </div>
+);
 import { initializeSecurity } from "./utils/securityInit";
 import { usePageView } from "./hooks/usePageView";
 import { useScrollToTop } from "./hooks/useScrollToTop";
@@ -170,26 +181,28 @@ const App = () => {
             <Sonner />
             <GithubPagesRouter />
             <RouteDebugger />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/import" element={<ImportSchedule />} />
-              <Route path="/import/:scheduleId" element={<ImportSchedule />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:postId" element={<BlogPost />} />
-              <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
-              <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
-              <Route path="/shareable-plans" element={<ShareablePlans />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/features" element={<Features />} />
-              <Route path="/emergency-schedule-guide" element={<EmergencyScheduleGuide />} />
-              <Route path="/rotating-schedule-guide" element={<RotatingScheduleGuide />} />
-              <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
-              <Route path="/competitor-analysis" element={<CompetitorAnalysis />} />
-              <Route path="/strategy-review" element={<StrategyReview />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/import" element={<ImportSchedule />} />
+                <Route path="/import/:scheduleId" element={<ImportSchedule />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:postId" element={<BlogPost />} />
+                <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
+                <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
+                <Route path="/shareable-plans" element={<ShareablePlans />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/features" element={<Features />} />
+                <Route path="/emergency-schedule-guide" element={<EmergencyScheduleGuide />} />
+                <Route path="/rotating-schedule-guide" element={<RotatingScheduleGuide />} />
+                <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
+                <Route path="/competitor-analysis" element={<CompetitorAnalysis />} />
+                <Route path="/strategy-review" element={<StrategyReview />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
           </div>
         </TooltipProvider>
       </QueryClientProvider>
