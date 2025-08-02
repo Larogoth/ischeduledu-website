@@ -236,6 +236,18 @@
         height: 8rem;
         object-fit: contain;
       }
+      
+      /* Optimize logo container for faster rendering */
+      .logo-container {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 8rem;
+      }
+      
+      /* Prevent text from blocking logo render */
+      .logo-text {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 4rem;
+      }
     </style>
     
     <!-- Theme detection -->
