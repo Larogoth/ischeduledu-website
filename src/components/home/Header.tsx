@@ -38,27 +38,12 @@ const Header = () => {
           />
         </div>
 
-        {/* Enhanced Badges Row */}
+        {/* Enhanced Badges Row - Only text badge above fold */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
             <Sparkles className="w-4 h-4" />
             <span>Trusted by Teachers Worldwide</span>
           </div>
-          <a
-            href="https://peerpush.net/p/ischeduledu"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center"
-          >
-            <img
-              src="https://peerpush.net/p/ischeduledu/badge"
-              alt="iSchedulEDU badge"
-              className="h-12 sm:h-[60px]"
-              height="60"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
         </div>
 
         <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent logo-text" style={{ 
@@ -204,6 +189,24 @@ const Header = () => {
           </div>
         </div>
         
+        {/* PeerPush Badge - Below the fold to avoid LCP conflict */}
+        <div className="flex justify-center mt-8">
+          <a
+            href="https://peerpush.net/p/ischeduledu"
+            target="_blank"
+            rel="noopener"
+            className="flex items-center"
+          >
+            <img
+              src="https://peerpush.net/p/ischeduledu/badge"
+              alt="iSchedulEDU badge"
+              className="h-12 sm:h-[60px]"
+              height="60"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </div>
 
       </div>
     </header>
