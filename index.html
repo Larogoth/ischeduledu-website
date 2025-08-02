@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
     
     <!-- Preload critical images -->
-    <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" />
+    <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" fetchpriority="high" />
     <link rel="preload" as="image" href="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
@@ -226,6 +226,15 @@
       }
       .mb-8 {
         margin-bottom: 2rem;
+      }
+      
+      /* Immediate logo rendering without waiting for React */
+      .critical-logo {
+        display: block;
+        margin: 0 auto 2rem auto;
+        width: 8rem;
+        height: 8rem;
+        object-fit: contain;
       }
     </style>
     

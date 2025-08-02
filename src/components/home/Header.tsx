@@ -28,6 +28,8 @@ const Header = () => {
               src="https://peerpush.net/p/ischeduledu/badge"
               alt="iSchedulEDU badge"
               className="h-12 sm:h-[60px]"
+              loading="lazy"
+              decoding="async"
             />
           </a>
         </div>
@@ -43,6 +45,15 @@ const Header = () => {
             loading="eager"
             decoding="async"
             {...{ 'fetchpriority': 'high' }}
+            style={{
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: '8rem',
+              height: '8rem',
+              marginBottom: '2rem',
+              objectFit: 'contain'
+            }}
             onError={(e) => {
               console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
             }}
