@@ -44,7 +44,7 @@ const StickyNavigation = () => {
     <div className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm shadow-lg border-b border-[#0FA0CE]/20 z-50 transition-all duration-300">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="relative">
+          <div className="logo-container">
             <img
               src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
               alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"

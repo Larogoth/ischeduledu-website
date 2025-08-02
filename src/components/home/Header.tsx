@@ -34,8 +34,7 @@ const Header = () => {
           </a>
         </div>
 
-        <div className="relative mb-8">
-          <div className="absolute inset-0 bg-[#0FA0CE] opacity-10 dark:opacity-5 rounded-full blur-3xl transform -translate-y-1/2"></div>
+        <div className="mb-8 logo-container">
           <img
             src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
             alt="iSchedulEDU - school schedule generator app logo for teachers, administrators, and educational institutions"
@@ -60,8 +59,7 @@ const Header = () => {
           />
         </div>
 
-        <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent" style={{ 
-          contentVisibility: 'auto', 
+        <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent logo-text" style={{ 
           fontFamily: '"Euclid Circular B", system-ui, -apple-system, sans-serif',
           fontSize: '4rem',
           lineHeight: '1',
