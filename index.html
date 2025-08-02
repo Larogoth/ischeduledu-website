@@ -20,12 +20,18 @@
     <link rel="dns-prefetch" href="https://toolbox.marketingtools.apple.com">
     <link rel="dns-prefetch" href="https://apps.apple.com">
     
+    <!-- Prefetch critical routes for faster navigation -->
+    <link rel="prefetch" href="/emergency-scheduling">
+    <link rel="prefetch" href="/equal-time-planning">
+    <link rel="prefetch" href="/features">
+    <link rel="prefetch" href="/shareable-plans">
+    
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
     
     <!-- Primary Meta Tags -->
     <title>iSchedulEDU - Teacher Schedule Generator</title>
@@ -61,6 +67,68 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+      }
+      
+      /* Critical LCP text styles */
+      .text-lg {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+      .text-foreground\/80 {
+        color: rgb(15 23 42 / 0.8);
+      }
+      .dark .text-foreground\/80 {
+        color: rgb(248 250 252 / 0.8);
+      }
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+      .max-w-4xl {
+        max-width: 56rem;
+      }
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .mb-8 {
+        margin-bottom: 2rem;
+      }
+      
+      /* Ensure LCP text renders immediately */
+      .text-lg {
+        font-display: swap;
+      }
+      
+      /* Optimize for LCP */
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      /* Critical LCP text optimization */
+      .text-lg.text-foreground\/80 {
+        will-change: opacity;
+        contain: layout style paint;
+      }
+      
+      /* Optimize React Router links for LCP */
+      .text-lg a {
+        text-decoration: none;
+        transition: text-decoration 0.2s ease;
+      }
+      .text-lg a:hover {
+        text-decoration: underline;
+      }
+      .text-lg a:focus {
+        outline: 2px solid #0FA0CE;
+        outline-offset: 2px;
       }
     </style>
     

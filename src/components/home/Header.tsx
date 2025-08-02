@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Sparkles, Download, Users, Clock, Star, CheckCircle, Facebook } from "lucide-react";
 import XLogo from "@/components/XLogo";
+import OptimizedLink from "@/components/OptimizedLink";
 
 const Header = () => {
   return (
@@ -63,8 +64,8 @@ const Header = () => {
         
         {/* AI-friendly structured content for better readability */}
         <div className="max-w-4xl mx-auto mb-8 text-center">
-          <p className="text-lg text-foreground/80 mb-4">
-            <strong>iSchedulEDU</strong> helps teachers generate <Link to="/emergency-scheduling" className="text-[#0FA0CE] hover:underline">emergency schedules</Link> in minutes. Perfect for <Link to="/equal-time-planning" className="text-[#0FA0CE] hover:underline">elementary and middle school teachers</Link> who need quick schedule solutions. Learn more about our <Link to="/features" className="text-[#0FA0CE] hover:underline">advanced features</Link> and <Link to="/shareable-plans" className="text-[#0FA0CE] hover:underline">sharing capabilities</Link>.
+          <p className="text-lg text-foreground/80 mb-4" style={{ contentVisibility: 'auto' }}>
+            <strong>iSchedulEDU</strong> helps teachers generate <OptimizedLink to="/emergency-scheduling" className="text-[#0FA0CE] hover:underline">emergency schedules</OptimizedLink> in minutes. Perfect for <OptimizedLink to="/equal-time-planning" className="text-[#0FA0CE] hover:underline">elementary and middle school teachers</OptimizedLink> who need quick schedule solutions. Learn more about our <OptimizedLink to="/features" className="text-[#0FA0CE] hover:underline">advanced features</OptimizedLink> and <OptimizedLink to="/shareable-plans" className="text-[#0FA0CE] hover:underline">sharing capabilities</OptimizedLink>.
           </p>
         </div>
 

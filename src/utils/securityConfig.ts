@@ -8,7 +8,7 @@ export const SECURITY_CONFIG = {
     style-src 'self' 'unsafe-inline';
     img-src 'self' data: https: blob:;
     font-src 'self' data:;
-    connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://itunes.apple.com https://api.mymemory.translated.net;
+    connect-src 'self' https://itunes.apple.com https://api.mymemory.translated.net;
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'self';
