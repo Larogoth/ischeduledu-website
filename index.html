@@ -205,6 +205,28 @@
           font-size: 8rem !important;
         }
       }
+      
+      /* Critical LCP logo optimization */
+      .w-32.h-32.md\:w-40.md\:h-40 {
+        width: 8rem;
+        height: 8rem;
+      }
+      @media (min-width: 768px) {
+        .w-32.h-32.md\:w-40.md\:h-40 {
+          width: 10rem;
+          height: 10rem;
+        }
+      }
+      .object-contain {
+        object-fit: contain;
+      }
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .mb-8 {
+        margin-bottom: 2rem;
+      }
     </style>
     
     <!-- Theme detection -->

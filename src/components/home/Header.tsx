@@ -42,6 +42,7 @@ const Header = () => {
             height="160"
             loading="eager"
             decoding="async"
+            fetchPriority="high"
             onError={(e) => {
               console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
             }}
