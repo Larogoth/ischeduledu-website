@@ -12,28 +12,7 @@ const Header = () => {
       <div className="absolute bottom-10 right-1/4 w-16 h-16 bg-[#0FA0CE]/30 dark:bg-[#0FA0CE]/15 rounded-full blur-xl animate-pulse delay-1000"></div>
       
       <div className="relative z-10">
-        {/* Enhanced Badges Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <Sparkles className="w-4 h-4" />
-            <span>Trusted by Teachers Worldwide</span>
-          </div>
-          <a
-            href="https://peerpush.net/p/ischeduledu"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center"
-          >
-            <img
-              src="https://peerpush.net/p/ischeduledu/badge"
-              alt="iSchedulEDU badge"
-              className="h-12 sm:h-[60px]"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
-        </div>
-
+        {/* Logo - LCP Element */}
         <div className="mb-8 logo-container">
           <img
             src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
@@ -57,6 +36,29 @@ const Header = () => {
               console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
             }}
           />
+        </div>
+
+        {/* Enhanced Badges Row */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0FA0CE] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Sparkles className="w-4 h-4" />
+            <span>Trusted by Teachers Worldwide</span>
+          </div>
+          <a
+            href="https://peerpush.net/p/ischeduledu"
+            target="_blank"
+            rel="noopener"
+            className="flex items-center"
+          >
+            <img
+              src="https://peerpush.net/p/ischeduledu/badge"
+              alt="iSchedulEDU badge"
+              className="h-12 sm:h-[60px]"
+              loading="eager"
+              decoding="async"
+              {...{ 'fetchpriority': 'high' }}
+            />
+          </a>
         </div>
 
         <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent logo-text" style={{ 
