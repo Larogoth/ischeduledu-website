@@ -49,8 +49,8 @@ const StickyNavigation = () => {
               src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
               alt="iSchedulEDU school scheduling app logo for teachers and educational institutions"
               className="w-10 h-10 object-contain"
-                          loading="eager"
-            decoding="sync"
+              loading="eager"
+              decoding="async"
               onError={(e) => {
                 console.error('StickyNav logo failed to load:', (e.target as HTMLImageElement).src);
               }}

@@ -6,37 +6,26 @@
     <link rel="icon" type="image/png" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
     <link rel="apple-touch-icon" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
     
-    <!-- Preload critical images with high priority -->
-    <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" fetchpriority="high" />
-    <link rel="preload" as="image" href="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" fetchpriority="high" />
-    
-    <!-- Critical CSS and JS will be loaded by Vite -->
-    <noscript><link rel="stylesheet" href="/assets/index-r2UgBCnw.css" /></noscript>
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" />
+    <link rel="preload" as="image" href="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1718150400" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Preload critical resources -->
     <link rel="preload" href="/fonts/Euclid Circular B Regular.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://toolbox.marketingtools.apple.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link rel="preconnect" href="https://apps.apple.com" crossorigin>
-    <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
-    
-    <!-- DNS prefetch for additional domains -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://toolbox.marketingtools.apple.com">
     <link rel="dns-prefetch" href="https://apps.apple.com">
-    <link rel="dns-prefetch" href="https://itunes.apple.com">
-    <link rel="dns-prefetch" href="https://api.mymemory.translated.net">
     
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
     
     <!-- Primary Meta Tags -->
     <title>iSchedulEDU - Teacher Schedule Generator</title>
@@ -52,7 +41,6 @@
         font-family: system-ui, -apple-system, sans-serif; 
         background: linear-gradient(to bottom, #E6F3FF, #ffffff, #F0F8FF);
         color: #1f2937;
-        line-height: 1.5;
       }
       .dark body {
         background: linear-gradient(to bottom, #111827, #111827, #1f2937);
@@ -74,27 +62,6 @@
         display: flex;
         flex-direction: column;
       }
-      /* Critical layout styles */
-      .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-      .flex { display: flex; }
-      .items-center { align-items: center; }
-      .justify-center { justify-content: center; }
-      .text-center { text-align: center; }
-      .font-bold { font-weight: 700; }
-      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
-      .mb-3 { margin-bottom: 0.75rem; }
-      .mb-6 { margin-bottom: 1.5rem; }
-      .w-20 { width: 5rem; }
-      .h-20 { height: 5rem; }
-      .object-contain { object-fit: contain; }
-      .mx-auto { margin-left: auto; margin-right: auto; }
-      .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
-      .from-gray-900 { --tw-gradient-from: #111827; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(17, 24, 39, 0)); }
-      .via-\[\#0FA0CE\] { --tw-gradient-stops: var(--tw-gradient-from), #0FA0CE, var(--tw-gradient-to, rgba(15, 160, 206, 0)); }
-      .to-gray-900 { --tw-gradient-to: #111827; }
-      .bg-clip-text { background-clip: text; }
-      .text-transparent { color: transparent; }
-      .font-euclid { font-family: 'Euclid Circular B', system-ui, sans-serif; }
     </style>
     
     <!-- Theme detection -->
@@ -907,8 +874,7 @@
       defer
       src="https://www.googletagmanager.com/gtag/js?id=G-R6BRCJ44YH"
       crossorigin="anonymous"
-      referrerpolicy="no-referrer-when-downgrade"
-      fetchpriority="low">
+      referrerpolicy="no-referrer-when-downgrade">
     </script>
     
     <script type="text/javascript">

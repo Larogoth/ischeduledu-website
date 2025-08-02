@@ -35,66 +35,53 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Core React chunks
-          if (id.includes('react') || id.includes('react-dom')) {
-            return 'vendor';
-          }
-          
-          // Router chunk
-          if (id.includes('react-router-dom')) {
-            return 'router';
-          }
-          
-          // UI components chunk
-          if (id.includes('@radix-ui/react-')) {
-            return 'ui';
-          }
-          
-          // Icons chunk
-          if (id.includes('lucide-react')) {
-            return 'icons';
-          }
-          
-          // Utility libraries
-          if (id.includes('clsx') || id.includes('tailwind-merge') || id.includes('class-variance-authority')) {
-            return 'utils';
-          }
-          
-          // Form handling
-          if (id.includes('react-hook-form') || id.includes('@hookform/resolvers')) {
-            return 'forms';
-          }
-          
-          // SEO and analytics
-          if (id.includes('react-helmet-async')) {
-            return 'seo';
-          }
-          
-          // Compression and data handling
-          if (id.includes('pako')) {
-            return 'compression';
-          }
-          
-          // Default chunk for other dependencies
-          return 'app';
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: [
+            '@radix-ui/react-accordion', 
+            '@radix-ui/react-alert-dialog',
+            '@radix-ui/react-aspect-ratio',
+            '@radix-ui/react-avatar',
+            '@radix-ui/react-checkbox',
+            '@radix-ui/react-collapsible',
+            '@radix-ui/react-context-menu',
+            '@radix-ui/react-dialog', 
+            '@radix-ui/react-dropdown-menu', 
+            '@radix-ui/react-hover-card',
+            '@radix-ui/react-label',
+            '@radix-ui/react-menubar',
+            '@radix-ui/react-navigation-menu',
+            '@radix-ui/react-popover',
+            '@radix-ui/react-progress',
+            '@radix-ui/react-radio-group',
+            '@radix-ui/react-scroll-area',
+            '@radix-ui/react-select', 
+            '@radix-ui/react-separator',
+            '@radix-ui/react-slider',
+            '@radix-ui/react-slot',
+            '@radix-ui/react-switch',
+            '@radix-ui/react-tabs', 
+            '@radix-ui/react-toast', 
+            '@radix-ui/react-toggle',
+            '@radix-ui/react-toggle-group',
+            '@radix-ui/react-tooltip'
+          ],
+          icons: ['lucide-react'],
+          utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
+          hooks: ['react-hook-form', '@hookform/resolvers'],
+          analytics: ['react-helmet-async'],
         },
       },
     },
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 1000,
     minify: 'terser',
-    target: 'es2015',
-    sourcemap: false,
-    reportCompressedSize: false,
-    modulePreload: {
-      polyfill: false,
-    },
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 4,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 3,
         toplevel: true,
         unsafe: true,
         unsafe_comps: true,
@@ -103,16 +90,17 @@ export default defineConfig(({ mode }) => ({
         unsafe_proto: true,
         unsafe_regexp: true,
         unsafe_undefined: true,
-        dead_code: true,
-        global_defs: {
-          __REACT_DEVTOOLS_GLOBAL_HOOK__: 'undefined',
-        },
       },
       mangle: {
         toplevel: true,
         safari10: true,
-        reserved: ['__REACT_DEVTOOLS_GLOBAL_HOOK__'],
       },
+    },
+    target: 'es2015',
+    sourcemap: false,
+    reportCompressedSize: false,
+    modulePreload: {
+      polyfill: false,
     },
   },
   optimizeDeps: {
