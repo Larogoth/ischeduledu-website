@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
+    <link rel="icon" type="image/png" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" fetchpriority="high" />
     <link rel="apple-touch-icon" href="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner.png" />
     
     <!-- Preload critical images -->
@@ -20,18 +20,12 @@
     <link rel="dns-prefetch" href="https://toolbox.marketingtools.apple.com">
     <link rel="dns-prefetch" href="https://apps.apple.com">
     
-    <!-- Prefetch critical routes for faster navigation -->
-    <link rel="prefetch" href="/emergency-scheduling">
-    <link rel="prefetch" href="/equal-time-planning">
-    <link rel="prefetch" href="/features">
-    <link rel="prefetch" href="/shareable-plans">
-    
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://toolbox.marketingtools.apple.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://toolbox.marketingtools.apple.com https://developer.apple.com; font-src 'self' data:; connect-src 'self' https://bfwojaofxczxxfxlfvqf.supabase.co wss://bfwojaofxczxxfxlfvqf.supabase.co https://www.google-analytics.com https://itunes.apple.com https://api.mymemory.translated.net; base-uri 'self'; form-action 'self';">
     
     <!-- Primary Meta Tags -->
     <title>iSchedulEDU - Teacher Schedule Generator</title>
@@ -67,174 +61,6 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-      }
-      
-      /* Critical LCP text styles */
-      .text-lg {
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-      }
-      .text-foreground\/80 {
-        color: rgb(15 23 42 / 0.8);
-      }
-      .dark .text-foreground\/80 {
-        color: rgb(248 250 252 / 0.8);
-      }
-      .mb-4 {
-        margin-bottom: 1rem;
-      }
-      .max-w-4xl {
-        max-width: 56rem;
-      }
-      .mx-auto {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .text-center {
-        text-align: center;
-      }
-      .mb-8 {
-        margin-bottom: 2rem;
-      }
-      
-      /* Ensure LCP text renders immediately */
-      .text-lg {
-        font-display: swap;
-      }
-      
-      /* Optimize for LCP */
-      .animate-fade-in {
-        animation: fadeIn 0.3s ease-in-out;
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      
-      /* Critical LCP text optimization */
-      .text-lg.text-foreground\/80 {
-        will-change: opacity;
-        contain: layout style paint;
-      }
-      
-      /* Optimize React Router links for LCP */
-      .text-lg a {
-        text-decoration: none;
-        transition: text-decoration 0.2s ease;
-      }
-      .text-lg a:hover {
-        text-decoration: underline;
-      }
-      .text-lg a:focus {
-        outline: 2px solid #0FA0CE;
-        outline-offset: 2px;
-      }
-      
-      /* Critical H2 LCP optimization */
-      .text-xl.md\:text-2xl.lg\:text-3xl {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-      @media (min-width: 768px) {
-        .text-xl.md\:text-2xl.lg\:text-3xl {
-          font-size: 1.5rem;
-          line-height: 2rem;
-        }
-      }
-      @media (min-width: 1024px) {
-        .text-xl.md\:text-2xl.lg\:text-3xl {
-          font-size: 1.875rem;
-          line-height: 2.25rem;
-        }
-      }
-      .text-foreground\/90 {
-        color: rgb(15 23 42 / 0.9);
-      }
-      .dark .text-foreground\/90 {
-        color: rgb(248 250 252 / 0.9);
-      }
-      .leading-relaxed {
-        line-height: 1.625;
-      }
-      .font-medium {
-        font-weight: 500;
-      }
-      
-      /* Critical gradient text optimization */
-      .bg-gradient-to-r.from-foreground.via-\[#0FA0CE\].to-foreground {
-        background: linear-gradient(to right, rgb(15 23 42), rgb(15 160 206), rgb(15 23 42));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .dark .bg-gradient-to-r.from-foreground.via-\[#0FA0CE\].to-foreground {
-        background: linear-gradient(to right, rgb(248 250 252), rgb(15 160 206), rgb(248 250 252));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .text-5xl {
-        font-size: 3rem;
-        line-height: 1;
-      }
-      .text-6xl {
-        font-size: 3.75rem;
-        line-height: 1;
-      }
-      .text-8xl {
-        font-size: 6rem;
-        line-height: 1;
-      }
-      .text-9xl {
-        font-size: 8rem;
-        line-height: 1;
-      }
-      .font-euclid {
-        font-family: "Euclid Circular B", system-ui, sans-serif;
-      }
-      
-      /* Responsive font sizes for the main title */
-      @media (min-width: 768px) {
-        .text-6xl.md\:text-8xl.lg\:text-9xl {
-          font-size: 6rem !important;
-        }
-      }
-      @media (min-width: 1024px) {
-        .text-6xl.md\:text-8xl.lg\:text-9xl {
-          font-size: 8rem !important;
-        }
-      }
-      
-      /* Critical LCP logo optimization */
-      .w-32.h-32.md\:w-40.md\:h-40 {
-        width: 8rem;
-        height: 8rem;
-      }
-      @media (min-width: 768px) {
-        .w-32.h-32.md\:w-40.md\:h-40 {
-          width: 10rem;
-          height: 10rem;
-        }
-      }
-      .object-contain {
-        object-fit: contain;
-      }
-      .mx-auto {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .mb-8 {
-        margin-bottom: 2rem;
-      }
-      
-      /* Immediate logo rendering without waiting for React */
-      .critical-logo {
-        display: block;
-        margin: 0 auto 2rem auto;
-        width: 8rem;
-        height: 8rem;
-        object-fit: contain;
       }
     </style>
     
@@ -461,8 +287,6 @@
     <!-- Euclid Circular B Font -->
     <link rel="preload" href="/fonts/Euclid Circular B Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/Euclid Circular B Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Euclid Circular B Medium.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Euclid Circular B SemiBold.woff2" as="font" type="font/woff2" crossorigin>
     <style>
       @font-face {
         font-family: 'Euclid Circular B';

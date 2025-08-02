@@ -28,8 +28,6 @@ const Header = () => {
               src="https://peerpush.net/p/ischeduledu/badge"
               alt="iSchedulEDU badge"
               className="h-12 sm:h-[60px]"
-              loading="lazy"
-              decoding="async"
             />
           </a>
         </div>
@@ -44,30 +42,13 @@ const Header = () => {
             height="160"
             loading="eager"
             decoding="async"
-            {...{ 'fetchpriority': 'high' }}
-            style={{
-              display: 'block',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              width: '8rem',
-              height: '8rem',
-              marginBottom: '2rem',
-              objectFit: 'contain'
-            }}
             onError={(e) => {
               console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
             }}
           />
         </div>
 
-        <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent" style={{ 
-          contentVisibility: 'auto', 
-          fontFamily: '"Euclid Circular B", system-ui, -apple-system, sans-serif',
-          fontSize: '4rem',
-          lineHeight: '1',
-          fontWeight: 'bold',
-          letterSpacing: '-0.025em'
-        }}>
+        <div className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent">
           iSchedulEDU
         </div>
         
@@ -75,14 +56,15 @@ const Header = () => {
           Emergency Schedule Generator for Teachers
         </p>
         
-        <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium" style={{ contentVisibility: 'auto' }}>
-          Plan ahead with custom schedules or handle last-minute changes <span style={{ color: '#0FA0CE', fontWeight: 'bold' }}>in under 2 minutes</span>
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium">
+          Plan ahead with custom schedules or handle last-minute changes 
+          <span className="text-[#0FA0CE] font-bold"> in under 2 minutes</span>
         </h2>
         
         {/* AI-friendly structured content for better readability */}
         <div className="max-w-4xl mx-auto mb-8 text-center">
-          <p className="text-lg text-foreground/80 mb-4" style={{ contentVisibility: 'auto' }}>
-            <strong>iSchedulEDU</strong> helps teachers generate emergency schedules in minutes. Perfect for elementary and middle school teachers who need quick schedule solutions.
+          <p className="text-lg text-foreground/80 mb-4">
+            <strong>iSchedulEDU</strong> helps teachers generate <Link to="/emergency-scheduling" className="text-[#0FA0CE] hover:underline">emergency schedules</Link> in minutes. Perfect for <Link to="/equal-time-planning" className="text-[#0FA0CE] hover:underline">elementary and middle school teachers</Link> who need quick schedule solutions. Learn more about our <Link to="/features" className="text-[#0FA0CE] hover:underline">advanced features</Link> and <Link to="/shareable-plans" className="text-[#0FA0CE] hover:underline">sharing capabilities</Link>.
           </p>
         </div>
 
