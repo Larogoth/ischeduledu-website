@@ -369,19 +369,16 @@ const ImportSchedule = () => {
       <div className="relative z-10 max-w-4xl mx-auto pt-20 px-4 pb-12">
         <div className="text-center mb-12">
           <div className="relative inline-block mb-6">
-            <picture>
-              <source srcSet="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.webp" type="image/webp" />
-              <img 
-                src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" 
-                alt="iSchedulEDU Logo" 
-                className="w-20 h-20 object-contain mx-auto"
-                width="80"
-                height="80"
-                loading="eager"
-                decoding="async"
-                {...{ 'fetchpriority': 'high' }}
-              />
-            </picture>
+            <img 
+              src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png" 
+              alt="iSchedulEDU Logo" 
+              className="w-20 h-20 object-contain mx-auto"
+              width="80"
+              height="80"
+              loading="eager"
+              decoding="async"
+              {...{ 'fetchpriority': 'high' }}
+            />
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-[#0FA0CE] to-gray-900 dark:from-white dark:via-[#0FA0CE] dark:to-white bg-clip-text text-transparent mb-3 font-euclid">
             iSchedulEDU

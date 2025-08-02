@@ -12,38 +12,30 @@ const Header = () => {
       <div className="absolute bottom-10 right-1/4 w-16 h-16 bg-[#0FA0CE]/30 dark:bg-[#0FA0CE]/15 rounded-full blur-xl animate-pulse delay-1000"></div>
       
       <div className="relative z-10">
-        {/* Logo - LCP Element - Optimized for fastest render */}
+        {/* Logo - LCP Element - Made larger to ensure it's the LCP */}
         <div className="mb-8">
-          <picture>
-            <source srcSet="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.webp" type="image/webp" />
-            <img
-              src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
-              alt="iSchedulEDU - school schedule generator app logo for teachers, administrators, and educational institutions"
-              className="critical-logo"
-              width="160"
-              height="160"
-              loading="eager"
-              decoding="sync"
-              {...{ 'fetchpriority': 'high' }}
-              style={{
-                display: 'block',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                width: '10rem',
-                height: '10rem',
-                marginBottom: '2rem',
-                objectFit: 'contain',
-                imageRendering: '-webkit-optimize-contrast'
-              }}
-              onLoad={() => {
-                // Mark LCP element as loaded for performance tracking
-                performance.mark('logo-painted');
-              }}
-              onError={(e) => {
-                console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
-              }}
-            />
-          </picture>
+          <img
+            src="/lovable-uploads/ischeduledu-app-logo-elementary-teacher-schedule-planner-256.png"
+            alt="iSchedulEDU - school schedule generator app logo for teachers, administrators, and educational institutions"
+            className="mx-auto w-40 h-40 md:w-48 md:h-48 mb-8 object-contain"
+            width="192"
+            height="192"
+            loading="eager"
+            decoding="async"
+            {...{ 'fetchpriority': 'high' }}
+            style={{
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: '10rem',
+              height: '10rem',
+              marginBottom: '2rem',
+              objectFit: 'contain'
+            }}
+            onError={(e) => {
+              console.error('Header logo failed to load:', (e.target as HTMLImageElement).src);
+            }}
+          />
         </div>
 
         {/* Enhanced Badges Row - Only text badge above fold */}
