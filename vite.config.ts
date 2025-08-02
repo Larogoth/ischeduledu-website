@@ -82,37 +82,12 @@ export default defineConfig(({ mode }) => ({
       },
     },
     chunkSizeWarningLimit: 500,
-    minify: 'terser',
+    minify: 'esbuild',
     target: 'es2015',
     sourcemap: false,
     reportCompressedSize: false,
     modulePreload: {
       polyfill: false,
-    },
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 2,
-        toplevel: false,
-        unsafe: false,
-        unsafe_comps: false,
-        unsafe_Function: false,
-        unsafe_math: false,
-        unsafe_proto: false,
-        unsafe_regexp: false,
-        unsafe_undefined: false,
-        dead_code: true,
-        global_defs: {
-          __REACT_DEVTOOLS_GLOBAL_HOOK__: 'undefined',
-        },
-      },
-      mangle: {
-        toplevel: false,
-        safari10: true,
-        reserved: ['__REACT_DEVTOOLS_GLOBAL_HOOK__', 'unstable_scheduleCallback', 'unstable_runWithPriority', 'unstable_wrapCallback'],
-      },
     },
   },
   optimizeDeps: {
