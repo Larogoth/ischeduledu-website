@@ -48,7 +48,7 @@ const Header = () => {
           />
         </div>
 
-        <div className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent">
+        <div className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent" style={{ contentVisibility: 'auto' }}>
           iSchedulEDU
         </div>
         
@@ -56,9 +56,8 @@ const Header = () => {
           Emergency Schedule Generator for Teachers
         </p>
         
-        <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium">
-          Plan ahead with custom schedules or handle last-minute changes 
-          <span className="text-[#0FA0CE] font-bold"> in under 2 minutes</span>
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed font-medium" style={{ contentVisibility: 'auto' }}>
+          Plan ahead with custom schedules or handle last-minute changes <span style={{ color: '#0FA0CE', fontWeight: 'bold' }}>in under 2 minutes</span>
         </h2>
         
         {/* AI-friendly structured content for better readability */}
