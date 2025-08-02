@@ -193,6 +193,18 @@
       .font-euclid {
         font-family: "Euclid Circular B", system-ui, sans-serif;
       }
+      
+      /* Responsive font sizes for the main title */
+      @media (min-width: 768px) {
+        .text-6xl.md\:text-8xl.lg\:text-9xl {
+          font-size: 6rem !important;
+        }
+      }
+      @media (min-width: 1024px) {
+        .text-6xl.md\:text-8xl.lg\:text-9xl {
+          font-size: 8rem !important;
+        }
+      }
     </style>
     
     <!-- Theme detection -->

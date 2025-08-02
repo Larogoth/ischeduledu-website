@@ -48,7 +48,14 @@ const Header = () => {
           />
         </div>
 
-        <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent" style={{ contentVisibility: 'auto', fontFamily: '"Euclid Circular B", system-ui, -apple-system, sans-serif' }}>
+        <div className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight font-euclid bg-gradient-to-r from-foreground via-[#0FA0CE] to-foreground bg-clip-text text-transparent" style={{ 
+          contentVisibility: 'auto', 
+          fontFamily: '"Euclid Circular B", system-ui, -apple-system, sans-serif',
+          fontSize: '4rem',
+          lineHeight: '1',
+          fontWeight: 'bold',
+          letterSpacing: '-0.025em'
+        }}>
           iSchedulEDU
         </div>
         
