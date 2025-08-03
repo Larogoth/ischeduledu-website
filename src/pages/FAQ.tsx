@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { Badge } from '../components/ui/badge';
@@ -10,6 +10,18 @@ import BackToTop from '../components/BackToTop';
 import StickyNavigation from '../components/home/StickyNavigation';
 
 const FAQ: React.FC = () => {
+  const [isInApp, setIsInApp] = useState(false);
+
+  useEffect(() => {
+    // Detect if viewing within iSchedulEDU app
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isInAppView = userAgent.includes('ischeduledu') || 
+                       userAgent.includes('wkwebview') ||
+                       window.location.search.includes('inapp=true');
+    
+    setIsInApp(isInAppView);
+  }, []);
+
   const faqData = [
     {
       category: "App Features",
@@ -103,24 +115,27 @@ const FAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <StickyNavigation />
-      <div className="container mx-auto px-4 pt-20 pb-8">
-        {/* Breadcrumb Navigation */}
-        <div className="mb-8">
-              <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                <Link 
-                  to="/" 
-                  className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                  </svg>
-                  Home
-                </Link>
-                <ChevronRight className="w-4 h-4" />
-                <span className="text-gray-900 dark:text-gray-100 font-semibold">FAQ</span>
-              </nav>
-            </div>
+      {/* Only show navigation if not in app */}
+      {!isInApp && <StickyNavigation />}
+      <div className={`container mx-auto px-4 ${isInApp ? 'pt-8' : 'pt-20'} pb-8`}>
+        {/* Breadcrumb Navigation - Only show if not in app */}
+        {!isInApp && (
+          <div className="mb-8">
+                <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                  <Link 
+                    to="/" 
+                    className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    Home
+                  </Link>
+                  <ChevronRight className="w-4 h-4" />
+                  <span className="text-gray-900 dark:text-gray-100 font-semibold">FAQ</span>
+                </nav>
+              </div>
+        )}
 
         {/* Header */}
         <div className="text-center mb-12">
@@ -195,80 +210,84 @@ const FAQ: React.FC = () => {
             ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white dark:from-blue-800 dark:to-indigo-800">
-            <CardContent className="pt-8 pb-8">
-              <h2 className="text-3xl font-bold mb-4">
-                Ready to Simplify Your Schedule Management?
-              </h2>
-              <p className="text-xl mb-6 opacity-90">
-                Join thousands of teachers who trust iSchedulEDU for emergency schedule generation
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
-                  className="bg-white text-blue-600 hover:bg-gray-100 dark:bg-white dark:text-blue-600 dark:hover:bg-gray-100"
-                  onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu/id6504114850', '_blank')}
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download on App Store
-                </Button>
-                <Button 
-                  size="lg" 
-                  className="bg-white/10 border-white text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm dark:bg-white/10 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600"
-                  onClick={() => window.open('https://ischeduledu.app', '_blank')}
-                >
-                  <ExternalLink className="w-5 h-5 mr-2" />
-                  Learn More
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Additional Resources */}
-        <div className="mt-12">
-          <h3 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
-            Additional Resources
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="pt-6">
-                <Calendar className="w-8 h-8 mb-4 text-blue-600" />
-                <h4 className="font-semibold mb-2">Emergency Schedule Guide</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Step-by-step instructions for creating emergency schedules
+        {/* CTA Section - Only show if not in app */}
+        {!isInApp && (
+          <div className="mt-16 text-center">
+            <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white dark:from-blue-800 dark:to-indigo-800">
+              <CardContent className="pt-8 pb-8">
+                <h2 className="text-3xl font-bold mb-4">
+                  Ready to Simplify Your Schedule Management?
+                </h2>
+                <p className="text-xl mb-6 opacity-90">
+                  Join thousands of teachers who trust iSchedulEDU for emergency schedule generation
                 </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="pt-6">
-                <Share2 className="w-8 h-8 mb-4 text-green-600" />
-                <h4 className="font-semibold mb-2">Rotating Schedule Guide</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Complete guide for A/B day rotations and multi-day cycles
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="pt-6">
-                <Smartphone className="w-8 h-8 mb-4 text-purple-600" />
-                <h4 className="font-semibold mb-2">Custom Schedule Guide</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Guide for creating personalized daily schedules
-                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-blue-600 hover:bg-gray-100 dark:bg-white dark:text-blue-600 dark:hover:bg-gray-100"
+                    onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu/id6504114850', '_blank')}
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download on App Store
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    className="bg-white/10 border-white text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm dark:bg-white/10 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600"
+                    onClick={() => window.open('https://ischeduledu.app', '_blank')}
+                  >
+                    <ExternalLink className="w-5 h-5 mr-2" />
+                    Learn More
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
-        </div>
+        )}
+
+        {/* Additional Resources - Only show if not in app */}
+        {!isInApp && (
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+              Additional Resources
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="pt-6">
+                  <Calendar className="w-8 h-8 mb-4 text-blue-600" />
+                  <h4 className="font-semibold mb-2">Emergency Schedule Guide</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Step-by-step instructions for creating emergency schedules
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="pt-6">
+                  <Share2 className="w-8 h-8 mb-4 text-green-600" />
+                  <h4 className="font-semibold mb-2">Rotating Schedule Guide</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Complete guide for A/B day rotations and multi-day cycles
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="pt-6">
+                  <Smartphone className="w-8 h-8 mb-4 text-purple-600" />
+                  <h4 className="font-semibold mb-2">Custom Schedule Guide</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Guide for creating personalized daily schedules
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
       </div>
       
-      {/* Footer */}
-      <Footer />
+      {/* Footer - Only show if not in app */}
+      {!isInApp && <Footer />}
       
-      {/* Back to Top Button */}
-      <BackToTop />
+      {/* Back to Top Button - Only show if not in app */}
+      {!isInApp && <BackToTop />}
     </div>
   );
 };
