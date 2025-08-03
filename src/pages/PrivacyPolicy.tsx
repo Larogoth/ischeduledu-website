@@ -16,16 +16,18 @@ const PrivacyPolicy = () => {
     {
       title: "1. Information We Collect",
       content: [
-        "Personal Information: iSchedulEDU does not collect any personal information such as your name, email address, or contact details.",
-        "Usage Data: We collect data about how you use the app, such as the features you use and the actions you take within the app. This data is collected in an anonymized form and does not personally identify you.",
-        "Device Information: We may collect information about your device, including the device model, operating system, and unique device identifiers."
+        "Personal Information: iSchedulEDU does not collect personal information such as your name, email address, or contact details.",
+        "Usage Data: We collect anonymous usage data to improve our app, including which features you use (schedule generation, QR scanning, etc.), how you navigate through the app (which tabs you visit), app performance and crash data, and device information (device model, operating system).",
+        "Analytics Data: We use Firebase Analytics (a Google service) to collect anonymous usage statistics. This includes app opens and session duration, feature usage patterns, user engagement metrics, and device and app version information.",
+        "Local Data: Your schedules and settings are stored locally on your device."
       ]
     },
     {
       title: "2. How We Use Your Information",
       content: [
-        "App Functionality: The information collected is used solely to ensure the proper functioning of the app and to improve your user experience.",
-        "Data Storage: Your schedules and settings are stored locally on your device. We do not upload, share, or transmit your data to any external servers."
+        "App Functionality: The information collected is used to ensure proper app functioning, improve user experience, fix bugs and crashes, and understand which features are most popular.",
+        "Analytics: We use Firebase Analytics to track app usage patterns, identify popular features, improve app performance, and make data-driven development decisions.",
+        "Data Storage: Your schedules and settings are stored locally on your device. Analytics data is processed by Google's Firebase service."
       ]
     },
     {
@@ -37,19 +39,22 @@ const PrivacyPolicy = () => {
     {
       title: "4. Data Sharing and Disclosure",
       content: [
-        "We do not share, sell, or distribute your information to third parties. Your data remains private and secure within your device."
+        "Local Data: Your schedules and settings remain private and secure on your device.",
+        "Analytics Data: Anonymous usage data is shared with Google Firebase for analytics purposes. This data is anonymous (no personal identification), used only for app improvement, not sold to third parties, and not used for advertising."
       ]
     },
     {
       title: "5. Third-Party Services",
       content: [
-        "iSchedulEDU does not integrate with third-party services that would collect your information. However, the app may display ads from third-party advertisers. These advertisers may use cookies or other tracking technologies to collect information about your use of the app to provide targeted advertisements."
+        "Firebase Analytics: We use Google's Firebase Analytics service to collect anonymous usage statistics. Firebase's privacy policy can be found at: https://firebase.google.com/support/privacy",
+        "No Advertising: iSchedulEDU does not display ads or use advertising tracking."
       ]
     },
     {
       title: "6. User Rights",
       content: [
-        "Since we do not collect personal information, there are no personal data-related rights applicable, such as access, correction, deletion, or portability."
+        "Analytics Opt-Out: You can opt out of analytics data collection by disabling analytics in your device settings.",
+        "Local Data: You have full control over your local schedules and settings."
       ]
     },
     {
