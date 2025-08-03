@@ -119,10 +119,8 @@ const EmergencyScheduling = () => {
       
       <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <StickyNavigation />
-        <div className="pt-20">
-
-      <div className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="pt-20 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto">
           {/* Breadcrumb Navigation */}
           <div className="mb-8">
             <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
@@ -328,7 +326,6 @@ const EmergencyScheduling = () => {
       
       {/* Back to Top Button */}
       <BackToTop />
-      </div>
     </div>
     </>
   );

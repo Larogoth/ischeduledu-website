@@ -110,9 +110,8 @@ const Blog = () => {
         <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
         
         <StickyNavigation />
-        <div className="pt-20">
-          <div className="py-8 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-6xl mx-auto">
+        <div className="pt-20 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto">
               {/* Breadcrumb Navigation */}
               <div className="mb-8">
                 <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
@@ -237,7 +236,6 @@ const Blog = () => {
             </div>
           </div>
         </div>
-      </div>
       
       {/* Footer */}
       <Footer />

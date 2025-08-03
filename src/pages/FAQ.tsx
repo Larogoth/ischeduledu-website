@@ -103,7 +103,7 @@ const FAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 pt-8 pb-8">
+      <div className="container mx-auto px-4 pt-20 pb-8">
         {/* Breadcrumb Navigation - Only show if not in app */}
         {!window.location.search.includes('inapp=true') && (
           <div className="mb-8">
