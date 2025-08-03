@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { Badge } from '../components/ui/badge';
@@ -7,20 +7,8 @@ import { ExternalLink, Download, Smartphone, Clock, Share2, Bell, QrCode, Calend
 import { Link } from 'react-router-dom';
 import Footer from '../components/home/Footer';
 import BackToTop from '../components/BackToTop';
-import StickyNavigation from '../components/home/StickyNavigation';
 
 const FAQ: React.FC = () => {
-  const [isInApp, setIsInApp] = useState(false);
-
-  useEffect(() => {
-    // Detect if viewing within iSchedulEDU app
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isInAppView = userAgent.includes('ischeduledu') || 
-                       userAgent.includes('wkwebview') ||
-                       window.location.search.includes('inapp=true');
-    
-    setIsInApp(isInAppView);
-  }, []);
 
   const faqData = [
     {
@@ -115,11 +103,9 @@ const FAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      {/* Only show navigation if not in app */}
-      {!isInApp && <StickyNavigation />}
-      <div className={`container mx-auto px-4 ${isInApp ? 'pt-8' : 'pt-20'} pb-8`}>
+      <div className="container mx-auto px-4 pt-8 pb-8">
         {/* Breadcrumb Navigation - Only show if not in app */}
-        {!isInApp && (
+        {!window.location.search.includes('inapp=true') && (
           <div className="mb-8">
                 <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
                   <Link 
@@ -211,7 +197,7 @@ const FAQ: React.FC = () => {
         </div>
 
         {/* CTA Section - Only show if not in app */}
-        {!isInApp && (
+        {!window.location.search.includes('inapp=true') && (
           <div className="mt-16 text-center">
             <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white dark:from-blue-800 dark:to-indigo-800">
               <CardContent className="pt-8 pb-8">
@@ -245,7 +231,7 @@ const FAQ: React.FC = () => {
         )}
 
         {/* Additional Resources - Only show if not in app */}
-        {!isInApp && (
+        {!window.location.search.includes('inapp=true') && (
           <div className="mt-12">
             <h3 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
               Additional Resources
@@ -284,10 +270,10 @@ const FAQ: React.FC = () => {
       </div>
       
       {/* Footer - Only show if not in app */}
-      {!isInApp && <Footer />}
+      {!window.location.search.includes('inapp=true') && <Footer />}
       
       {/* Back to Top Button - Only show if not in app */}
-      {!isInApp && <BackToTop />}
+      {!window.location.search.includes('inapp=true') && <BackToTop />}
     </div>
   );
 };

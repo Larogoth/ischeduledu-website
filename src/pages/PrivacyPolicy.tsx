@@ -4,22 +4,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import AppName from "@/components/AppName";
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
-import StickyNavigation from "@/components/home/StickyNavigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const PrivacyPolicy = () => {
-  const [isInApp, setIsInApp] = useState(false);
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    
-    // Detect if viewing within iSchedulEDU app
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isInAppView = userAgent.includes('ischeduledu') || 
-                       userAgent.includes('wkwebview') ||
-                       window.location.search.includes('inapp=true');
-    
-    setIsInApp(isInAppView);
   }, []);
 
   const sections = [
@@ -93,12 +82,10 @@ const PrivacyPolicy = () => {
         <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 dark:bg-[#0FA0CE]/10 rounded-full blur-3xl -translate-x-1/2"></div>
         <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
         
-        {/* Only show navigation if not in app */}
-        {!isInApp && <StickyNavigation />}
-        <div className={`${isInApp ? 'pt-8' : 'pt-20'} pb-8 px-4 sm:px-6 lg:px-8 relative z-10`}>
+        <div className="pt-8 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
           {/* Breadcrumb Navigation - Only show if not in app */}
-          {!isInApp && (
+          {!window.location.search.includes('inapp=true') && (
             <div className="mb-8">
               <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
                 <Link 
@@ -145,10 +132,10 @@ const PrivacyPolicy = () => {
       </div>
       
       {/* Footer - Only show if not in app */}
-      {!isInApp && <Footer />}
+      {!window.location.search.includes('inapp=true') && <Footer />}
       
       {/* Back to Top Button - Only show if not in app */}
-      {!isInApp && <BackToTop />}
+      {!window.location.search.includes('inapp=true') && <BackToTop />}
     </div>
   );
 };

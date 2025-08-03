@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useState } from "react";
 import Index from "./pages/Index";
 import ImportSchedule from "./pages/ImportSchedule";
 
@@ -127,6 +127,8 @@ const RouteDebugger = () => {
 };
 
 const App = () => {
+  const [isInApp, setIsInApp] = useState(false);
+
   // Initialize security and theme - optimized to reduce forced reflows
   useEffect(() => {
     // Batch DOM operations to reduce reflows
@@ -146,6 +148,16 @@ const App = () => {
     // Use requestAnimationFrame to batch DOM operations
     requestAnimationFrame(initApp);
   }, [])
+
+  // Detect if viewing within iSchedulEDU app
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isInAppView = userAgent.includes('ischeduledu') || 
+                       userAgent.includes('wkwebview') ||
+                       window.location.search.includes('inapp=true');
+    
+    setIsInApp(isInAppView);
+  }, []);
 
   usePageView();
   useScrollToTop();
@@ -176,7 +188,8 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <div className="min-h-screen bg-gradient-to-b from-[#0FA0CE] via-[#1a2233] to-[#101624] dark:from-[#0FA0CE] dark:via-[#1a2233] dark:to-[#101624] text-foreground">
-            <StickyNavigation />
+            {/* Only show navigation if not in app */}
+            {!isInApp && <StickyNavigation />}
             <Toaster />
             <Sonner />
             <GithubPagesRouter />
