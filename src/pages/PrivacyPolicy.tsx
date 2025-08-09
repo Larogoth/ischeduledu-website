@@ -52,7 +52,6 @@ const PrivacyPolicy = () => {
     {
       title: "6. User Rights",
       content: [
-        "Analytics Opt-Out: You can opt out of analytics data collection by disabling analytics in your device settings.",
         "Local Data: You have full control over your local schedules and settings."
       ]
     },
