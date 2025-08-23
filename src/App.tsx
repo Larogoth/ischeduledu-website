@@ -197,22 +197,22 @@ const App = () => {
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/faq/" element={<FAQ />} />
+                <Route path="/privacy-policy/" element={<PrivacyPolicy />} />
                 <Route path="/import" element={<ImportSchedule />} />
                 <Route path="/import/:scheduleId" element={<ImportSchedule />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/" element={<Blog />} />
                 <Route path="/blog/:postId" element={<BlogPost />} />
-                <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
-                <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
-                <Route path="/shareable-plans" element={<ShareablePlans />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/features" element={<Features />} />
-                <Route path="/emergency-schedule-guide" element={<EmergencyScheduleGuide />} />
-                <Route path="/rotating-schedule-guide" element={<RotatingScheduleGuide />} />
-                <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
-                <Route path="/competitor-analysis" element={<CompetitorAnalysis />} />
-                <Route path="/strategy-review" element={<StrategyReview />} />
+                <Route path="/emergency-scheduling/" element={<EmergencyScheduling />} />
+                <Route path="/equal-time-planning/" element={<EqualTimePlanning />} />
+                <Route path="/shareable-plans/" element={<ShareablePlans />} />
+                <Route path="/about/" element={<About />} />
+                <Route path="/features/" element={<Features />} />
+                <Route path="/emergency-schedule-guide/" element={<EmergencyScheduleGuide />} />
+                <Route path="/rotating-schedule-guide/" element={<RotatingScheduleGuide />} />
+                <Route path="/custom-schedule-guide/" element={<CustomScheduleGuide />} />
+                <Route path="/competitor-analysis/" element={<CompetitorAnalysis />} />
+                <Route path="/strategy-review/" element={<StrategyReview />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Suspense>
