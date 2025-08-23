@@ -197,8 +197,8 @@ const Header = () => {
           </div>
         </div>
         
-        {/* PeerPush Badge - Below the fold to avoid LCP conflict */}
-        <div className="flex justify-center mt-8">
+        {/* Badges - Below the fold to avoid LCP conflict */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
           <a
             href="https://peerpush.net/p/ischeduledu"
             target="_blank"
@@ -209,6 +209,22 @@ const Header = () => {
               src="https://peerpush.net/p/ischeduledu/badge"
               alt="iSchedulEDU badge"
               className="h-12 sm:h-[60px]"
+              height="60"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <a
+            href="https://saashub.net"
+            target="_blank"
+            rel="noopener"
+            className="flex items-center"
+          >
+            <img
+              src="https://saashub.net/api/badges/simple"
+              alt="SaasHub - Product Launch Platform"
+              className="h-12 sm:h-[60px]"
+              width="200"
               height="60"
               loading="lazy"
               decoding="async"
