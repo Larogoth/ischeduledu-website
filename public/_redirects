@@ -6,4 +6,29 @@
 /404    /404.html   404
 
 # Ensure import functionality works
-/import    /index.html   200 
+/import    /index.html   200
+
+# Redirect URL variations to canonical versions
+/import-schedule    /import    301
+/rotating-schedule-guide    /rotating-schedule-guide/    301
+/custom-schedule-guide    /custom-schedule-guide/    301
+/emergency-schedule-guide    /emergency-schedule-guide/    301
+/about    /about/    301
+/equal-time-planning    /equal-time-planning/    301
+/shareable-plans    /shareable-plans/    301
+/features    /features/    301
+/blog    /blog/    301
+/faq    /faq/    301
+/privacy-policy    /privacy-policy/    301
+/emergency-scheduling    /emergency-scheduling/    301
+/competitor-analysis    /competitor-analysis/    301
+/strategy-review    /strategy-review/    301
+
+# Redirect referral parameters to clean URLs
+/?ref=*    /    301
+/?utm_*    /    301
+/?fbclid=*    /    301
+/?gclid=*    /    301
+
+# Block search pages from indexing
+/search    /    301 

@@ -10,21 +10,21 @@
 
   <!-- Information Pages -->
   <url>
-    <loc>https://ischeduledu.app/about</loc>
+    <loc>https://ischeduledu.app/about/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/features</loc>
+    <loc>https://ischeduledu.app/features/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/faq</loc>
+    <loc>https://ischeduledu.app/faq/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -32,21 +32,21 @@
 
   <!-- How-To Guides -->
   <url>
-    <loc>https://ischeduledu.app/emergency-schedule-guide</loc>
+    <loc>https://ischeduledu.app/emergency-schedule-guide/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/rotating-schedule-guide</loc>
+    <loc>https://ischeduledu.app/rotating-schedule-guide/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/custom-schedule-guide</loc>
+    <loc>https://ischeduledu.app/custom-schedule-guide/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -54,21 +54,21 @@
 
   <!-- Feature Pages -->
   <url>
-    <loc>https://ischeduledu.app/emergency-scheduling</loc>
+    <loc>https://ischeduledu.app/emergency-scheduling/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/equal-time-planning</loc>
+    <loc>https://ischeduledu.app/equal-time-planning/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/shareable-plans</loc>
+    <loc>https://ischeduledu.app/shareable-plans/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -76,14 +76,14 @@
 
   <!-- Strategic Content -->
   <url>
-    <loc>https://ischeduledu.app/competitor-analysis</loc>
+    <loc>https://ischeduledu.app/competitor-analysis/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://ischeduledu.app/strategy-review</loc>
+    <loc>https://ischeduledu.app/strategy-review/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -91,7 +91,7 @@
 
   <!-- Blog Section -->
   <url>
-    <loc>https://ischeduledu.app/blog</loc>
+    <loc>https://ischeduledu.app/blog/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -99,7 +99,7 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://ischeduledu.app/privacy-policy</loc>
+    <loc>https://ischeduledu.app/privacy-policy/</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { useEffect, lazy, Suspense, useState } from "react";
 import Index from "./pages/Index";
@@ -126,6 +126,51 @@ const RouteDebugger = () => {
   return null;
 };
 
+// URL Cleanup component to handle referral parameters and ensure proper canonicalization
+const URLCleanup = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Clean up referral parameters and redirect to canonical URLs
+    const searchParams = new URLSearchParams(location.search);
+    const hasReferralParams = searchParams.has('ref') || 
+                             searchParams.has('utm_source') || 
+                             searchParams.has('utm_medium') || 
+                             searchParams.has('utm_campaign') ||
+                             searchParams.has('fbclid') ||
+                             searchParams.has('gclid');
+    
+    // If we have referral parameters, redirect to clean URL
+    if (hasReferralParams && location.pathname === '/') {
+      navigate('/', { replace: true });
+      return;
+    }
+    
+    // Handle trailing slash consistency for specific routes
+    const routesWithTrailingSlash = [
+      '/about', '/equal-time-planning', '/shareable-plans', '/features', 
+      '/blog', '/faq', '/privacy-policy', '/emergency-scheduling',
+      '/emergency-schedule-guide', '/rotating-schedule-guide', 
+      '/custom-schedule-guide', '/competitor-analysis', '/strategy-review'
+    ];
+    
+    if (routesWithTrailingSlash.includes(location.pathname)) {
+      navigate(location.pathname + '/', { replace: true });
+      return;
+    }
+    
+    // Handle /import-schedule redirect to /import
+    if (location.pathname === '/import-schedule') {
+      navigate('/import', { replace: true });
+      return;
+    }
+    
+  }, [location, navigate]);
+  
+  return null;
+};
+
 const App = () => {
   const [isInApp, setIsInApp] = useState(false);
 
@@ -194,25 +239,26 @@ const App = () => {
             <Sonner />
             <GithubPagesRouter />
             <RouteDebugger />
+            <URLCleanup />
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/faq/" element={<FAQ />} />
+                <Route path="/privacy-policy/" element={<PrivacyPolicy />} />
                 <Route path="/import" element={<ImportSchedule />} />
                 <Route path="/import/:scheduleId" element={<ImportSchedule />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/" element={<Blog />} />
                 <Route path="/blog/:postId" element={<BlogPost />} />
-                <Route path="/emergency-scheduling" element={<EmergencyScheduling />} />
-                <Route path="/equal-time-planning" element={<EqualTimePlanning />} />
-                <Route path="/shareable-plans" element={<ShareablePlans />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/features" element={<Features />} />
-                <Route path="/emergency-schedule-guide" element={<EmergencyScheduleGuide />} />
-                <Route path="/rotating-schedule-guide" element={<RotatingScheduleGuide />} />
-                <Route path="/custom-schedule-guide" element={<CustomScheduleGuide />} />
-                <Route path="/competitor-analysis" element={<CompetitorAnalysis />} />
-                <Route path="/strategy-review" element={<StrategyReview />} />
+                <Route path="/emergency-scheduling/" element={<EmergencyScheduling />} />
+                <Route path="/equal-time-planning/" element={<EqualTimePlanning />} />
+                <Route path="/shareable-plans/" element={<ShareablePlans />} />
+                <Route path="/about/" element={<About />} />
+                <Route path="/features/" element={<Features />} />
+                <Route path="/emergency-schedule-guide/" element={<EmergencyScheduleGuide />} />
+                <Route path="/rotating-schedule-guide/" element={<RotatingScheduleGuide />} />
+                <Route path="/custom-schedule-guide/" element={<CustomScheduleGuide />} />
+                <Route path="/competitor-analysis/" element={<CompetitorAnalysis />} />
+                <Route path="/strategy-review/" element={<StrategyReview />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Suspense>
