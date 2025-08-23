@@ -79,12 +79,6 @@ Disallow: /private/
 Disallow: /api/
 Disallow: /_headers
 Disallow: /test-appname
-Disallow: /search
-Disallow: /import-schedule
-Disallow: /*?ref=*
-Disallow: /*?utm_*
-Disallow: /*?fbclid=*
-Disallow: /*?gclid=*
 
 # Sitemap
 Sitemap: https://ischeduledu.app/sitemap.xml
