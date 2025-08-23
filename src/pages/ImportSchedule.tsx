@@ -12,6 +12,7 @@ import { validateScheduleData } from '@/utils/inputValidation';
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Helmet } from "react-helmet-async";
 
 interface ScheduleData {
  name: string;
@@ -335,7 +336,32 @@ const ImportSchedule = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <>
+      <Helmet>
+        <title>Import Schedule | iSchedulEDU - Share & Import Teacher Schedules</title>
+        <meta name="description" content="Import and view shared teacher schedules with iSchedulEDU. Scan QR codes, use universal links, or import schedule data to access emergency schedules, lesson plans, and classroom timetables." />
+        <meta name="keywords" content="import teacher schedule, shared schedule viewer, QR code schedule import, universal link schedule sharing, teacher schedule collaboration, classroom schedule import" />
+        <meta property="og:title" content="Import Schedule | iSchedulEDU - Share & Import Teacher Schedules" />
+        <meta property="og:description" content="Import and view shared teacher schedules with iSchedulEDU. Scan QR codes, use universal links, or import schedule data." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/import" />
+        <link rel="canonical" href="https://ischeduledu.app/import" />
+        
+        {/* Import Schedule Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "iSchedulEDU Schedule Importer",
+            "description": "Import and view shared teacher schedules",
+            "url": "https://ischeduledu.app/import",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "iOS"
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 dark:bg-[#0FA0CE]/10 rounded-full blur-3xl -translate-x-1/2"></div>
       <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
@@ -871,7 +897,8 @@ const ImportSchedule = () => {
       
       {/* Back to Top Button */}
       <BackToTop />
-    </div>
+      </div>
+    </>
   );
 };
 
