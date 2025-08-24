@@ -6,6 +6,7 @@ import { CheckCircle, XCircle, Star, Download, Smartphone, Clock, Share2, Bell, 
 import { Link } from 'react-router-dom';
 import Footer from '../components/home/Footer';
 import StickyNavigation from '../components/home/StickyNavigation';
+import { Helmet } from 'react-helmet-async';
 
 const CompetitorAnalysis: React.FC = () => {
   const competitors = [
@@ -177,344 +178,379 @@ const CompetitorAnalysis: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <StickyNavigation />
-      <div className="container mx-auto px-4 py-8">
-        {/* Breadcrumb Navigation */}
-        <div className="mb-8">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-            <Link 
-              to="/" 
-              className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-              </svg>
-              Home
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-gray-900 dark:text-gray-100 font-semibold">Competitor Analysis</span>
-          </nav>
-        </div>
+    <>
+      <Helmet>
+        <title>Competitor Analysis | iSchedulEDU - Teacher Schedule App Comparison</title>
+        <meta name="description" content="Compare iSchedulEDU with other teacher scheduling apps. See how our emergency schedule generator outperforms general planning tools for fire drills, weather delays, and substitute scenarios." />
+        <meta name="keywords" content="teacher schedule app comparison, emergency scheduling tools, fire drill schedule apps, weather delay planning, substitute teacher apps, educational technology comparison" />
+        <meta property="og:title" content="Competitor Analysis | iSchedulEDU - Teacher Schedule App Comparison" />
+        <meta property="og:description" content="Compare iSchedulEDU with other teacher scheduling apps. See how our emergency schedule generator outperforms general planning tools." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/competitor-analysis" />
+        <link rel="canonical" href="https://ischeduledu.app/competitor-analysis" />
+        
+        {/* Competitor Analysis Schema Markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Competitor Analysis: iSchedulEDU vs Other Teacher Scheduling Apps",
+            "description": "Compare iSchedulEDU with other teacher scheduling apps. See how our emergency schedule generator outperforms general planning tools for fire drills, weather delays, and substitute scenarios.",
+            "author": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://ischeduledu.app/competitor-analysis"
+            }
+          })}
+        </script>
+      </Helmet>
 
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Competitive Landscape Analysis
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
-            How iSchedulEDU compares to other educational scheduling and planning tools in the market
-          </p>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+        <StickyNavigation />
+        <div className="container mx-auto px-4 py-8">
+          {/* Breadcrumb Navigation */}
+          <div className="mb-8">
+            <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+              <Link 
+                to="/" 
+                className="hover:text-[#0FA0CE] transition-colors duration-200 flex items-center gap-1 font-medium"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+                Home
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-gray-900 dark:text-gray-100 font-semibold">Competitor Analysis</span>
+            </nav>
+          </div>
 
-        {/* Market Overview */}
-        <Card className="mb-12 shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Award className="w-6 h-6 text-blue-600" />
-              Market Overview
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="text-center">
-                <p className="text-3xl font-bold text-blue-600">{marketAnalysis.totalMarket}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Total Market Size</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-green-600">{marketAnalysis.growthRate}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Annual Growth Rate</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-bold text-purple-600">5</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Key Competitors</p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Key Market Trends</h3>
-                <ul className="space-y-2">
-                  {marketAnalysis.keyTrends.map((trend, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      {trend}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Market Opportunities</h3>
-                <ul className="space-y-2">
-                  {marketAnalysis.opportunities.map((opportunity, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <Star className="w-4 h-4 text-yellow-500" />
-                      {opportunity}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Competitive Landscape Analysis
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+              How iSchedulEDU compares to other educational scheduling and planning tools in the market
+            </p>
+          </div>
 
-        {/* Competitor Comparison */}
-        <div className="space-y-8">
-          {competitors.map((competitor, index) => (
-            <Card key={index} className={`shadow-lg ${competitor.isOurApp ? 'ring-2 ring-blue-500' : ''}`}>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <CardTitle className="text-xl">
-                      {competitor.name}
-                      {competitor.isOurApp && (
-                        <Badge className="ml-2 bg-blue-600">Our App</Badge>
-                      )}
-                    </CardTitle>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-center">
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                        <span className="font-semibold">{competitor.rating}</span>
+          {/* Market Overview */}
+          <Card className="mb-12 shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Award className="w-6 h-6 text-blue-600" />
+                Market Overview
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-blue-600">{marketAnalysis.totalMarket}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Total Market Size</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-green-600">{marketAnalysis.growthRate}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Annual Growth Rate</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-purple-600">5</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Key Competitors</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Key Market Trends</h3>
+                  <ul className="space-y-2">
+                    {marketAnalysis.keyTrends.map((trend, index) => (
+                      <li key={index} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        {trend}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Market Opportunities</h3>
+                  <ul className="space-y-2">
+                    {marketAnalysis.opportunities.map((opportunity, index) => (
+                      <li key={index} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <Star className="w-4 h-4 text-yellow-500" />
+                        {opportunity}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Competitor Comparison */}
+          <div className="space-y-8">
+            {competitors.map((competitor, index) => (
+              <Card key={index} className={`shadow-lg ${competitor.isOurApp ? 'ring-2 ring-blue-500' : ''}`}>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <CardTitle className="text-xl">
+                        {competitor.name}
+                        {competitor.isOurApp && (
+                          <Badge className="ml-2 bg-blue-600">Our App</Badge>
+                        )}
+                      </CardTitle>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-center">
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                          <span className="font-semibold">{competitor.rating}</span>
+                        </div>
+                        <p className="text-xs text-gray-500">Rating</p>
                       </div>
-                      <p className="text-xs text-gray-500">Rating</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-semibold">{competitor.downloads}</p>
-                      <p className="text-xs text-gray-500">Downloads</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-semibold">{competitor.price}</p>
-                      <p className="text-xs text-gray-500">Price</p>
+                      <div className="text-center">
+                        <p className="font-semibold">{competitor.downloads}</p>
+                        <p className="text-xs text-gray-500">Downloads</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="font-semibold">{competitor.price}</p>
+                        <p className="text-xs text-gray-500">Price</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                  <span className="flex items-center gap-1">
-                    <Smartphone className="w-4 h-4" />
-                    {competitor.platform}
-                  </span>
-                  <span>{competitor.type}</span>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Strengths */}
-                  <div>
-                    <h4 className="font-semibold mb-3 text-green-700 dark:text-green-400 flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4" />
-                      Strengths
-                    </h4>
-                    <ul className="space-y-2">
-                      {competitor.strengths.map((strength, idx) => (
-                        <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
-                          <CheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
-                          {strength}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span className="flex items-center gap-1">
+                      <Smartphone className="w-4 h-4" />
+                      {competitor.platform}
+                    </span>
+                    <span>{competitor.type}</span>
                   </div>
-
-                  {/* Weaknesses */}
-                  {competitor.weaknesses.length > 0 && (
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* Strengths */}
                     <div>
-                      <h4 className="font-semibold mb-3 text-red-700 dark:text-red-400 flex items-center gap-2">
-                        <XCircle className="w-4 h-4" />
-                        Weaknesses
+                      <h4 className="font-semibold mb-3 text-green-700 dark:text-green-400 flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4" />
+                        Strengths
                       </h4>
                       <ul className="space-y-2">
-                        {competitor.weaknesses.map((weakness, idx) => (
+                        {competitor.strengths.map((strength, idx) => (
                           <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
-                            <XCircle className="w-3 h-3 text-red-500 mt-0.5 flex-shrink-0" />
-                            {weakness}
+                            <CheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                            {strength}
                           </li>
                         ))}
                       </ul>
                     </div>
-                  )}
 
-                  {/* Unique Features */}
-                  <div>
-                    <h4 className="font-semibold mb-3 text-blue-700 dark:text-blue-400 flex items-center gap-2">
-                      <Star className="w-4 h-4" />
-                      Unique Features
-                    </h4>
-                    <ul className="space-y-2">
-                      {competitor.uniqueFeatures.map((feature, idx) => (
-                        <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
-                          <Star className="w-3 h-3 text-blue-500 mt-0.5 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Weaknesses */}
+                    {competitor.weaknesses.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold mb-3 text-red-700 dark:text-red-400 flex items-center gap-2">
+                          <XCircle className="w-4 h-4" />
+                          Weaknesses
+                        </h4>
+                        <ul className="space-y-2">
+                          {competitor.weaknesses.map((weakness, idx) => (
+                            <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
+                              <XCircle className="w-3 h-3 text-red-500 mt-0.5 flex-shrink-0" />
+                              {weakness}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Unique Features */}
+                    <div>
+                      <h4 className="font-semibold mb-3 text-blue-700 dark:text-blue-400 flex items-center gap-2">
+                        <Star className="w-4 h-4" />
+                        Unique Features
+                      </h4>
+                      <ul className="space-y-2">
+                        {competitor.uniqueFeatures.map((feature, idx) => (
+                          <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
+                            <Star className="w-3 h-3 text-blue-500 mt-0.5 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
+
+                  {/* Target Audience */}
+                  <div className="mt-6 pt-4 border-t">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Target Audience</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{competitor.targetAudience}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Competitive Advantages */}
+          <Card className="mt-12 shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+            <CardHeader>
+              <CardTitle className="text-white">iSchedulEDU Competitive Advantages</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <Clock className="w-12 h-12 mx-auto mb-3 text-blue-200" />
+                  <h4 className="font-semibold mb-2">Speed</h4>
+                  <p className="text-sm opacity-90">Create emergency schedules in under 2 minutes</p>
                 </div>
-
-                {/* Target Audience */}
-                <div className="mt-6 pt-4 border-t">
-                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Target Audience</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">{competitor.targetAudience}</p>
+                <div className="text-center">
+                  <Users className="w-12 h-12 mx-auto mb-3 text-blue-200" />
+                  <h4 className="font-semibold mb-2">Teacher-Focused</h4>
+                  <p className="text-sm opacity-90">Designed specifically for educational scenarios</p>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Competitive Advantages */}
-        <Card className="mt-12 shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-          <CardHeader>
-            <CardTitle className="text-white">iSchedulEDU Competitive Advantages</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="text-center">
-                <Clock className="w-12 h-12 mx-auto mb-3 text-blue-200" />
-                <h4 className="font-semibold mb-2">Speed</h4>
-                <p className="text-sm opacity-90">Create emergency schedules in under 2 minutes</p>
-              </div>
-              <div className="text-center">
-                <Users className="w-12 h-12 mx-auto mb-3 text-blue-200" />
-                <h4 className="font-semibold mb-2">Teacher-Focused</h4>
-                <p className="text-sm opacity-90">Designed specifically for educational scenarios</p>
-              </div>
-              <div className="text-center">
-                <QrCode className="w-12 h-12 mx-auto mb-3 text-blue-200" />
-                <h4 className="font-semibold mb-2">Easy Sharing</h4>
-                <p className="text-sm opacity-90">QR codes and universal links for instant sharing</p>
-              </div>
-              <div className="text-center">
-                <Bell className="w-12 h-12 mx-auto mb-3 text-blue-200" />
-                <h4 className="font-semibold mb-2">Smart Notifications</h4>
-                <p className="text-sm opacity-90">Automated alerts for schedule changes</p>
-              </div>
-              <div className="text-center">
-                <Calendar className="w-12 h-12 mx-auto mb-3 text-blue-200" />
-                <h4 className="font-semibold mb-2">Emergency Ready</h4>
-                <p className="text-sm opacity-90">Optimized for fire drills, weather delays, assemblies</p>
-              </div>
-              <div className="text-center">
-                <Smartphone className="w-12 h-12 mx-auto mb-3 text-blue-200" />
-                <h4 className="font-semibold mb-2">Mobile First</h4>
-                <p className="text-sm opacity-90">Native iOS and iPadOS experience</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* CTA Section */}
-        <div className="mt-12 text-center">
-                          <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg">
-            <CardContent className="pt-8 pb-8">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                Experience the Difference
-              </h2>
-              <p className="text-xl mb-6 text-gray-600 dark:text-gray-300">
-                Join thousands of teachers who choose iSchedulEDU for emergency schedule generation
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
-                  className="bg-blue-600 hover:bg-blue-700"
-                  onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu/id6504114850', '_blank')}
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download iSchedulEDU
-                </Button>
-                <Button 
-                  size="lg" 
-                  className="bg-white/10 border-gray-300 text-gray-700 hover:bg-gray-100 backdrop-blur-sm"
-                  onClick={() => window.open('https://ischeduledu.app', '_blank')}
-                >
-                  <Smartphone className="w-5 h-5 mr-2" />
-                  Learn More
-                </Button>
+                <div className="text-center">
+                  <QrCode className="w-12 h-12 mx-auto mb-3 text-blue-200" />
+                  <h4 className="font-semibold mb-2">Easy Sharing</h4>
+                  <p className="text-sm opacity-90">QR codes and universal links for instant sharing</p>
+                </div>
+                <div className="text-center">
+                  <Bell className="w-12 h-12 mx-auto mb-3 text-blue-200" />
+                  <h4 className="font-semibold mb-2">Smart Notifications</h4>
+                  <p className="text-sm opacity-90">Automated alerts for schedule changes</p>
+                </div>
+                <div className="text-center">
+                  <Calendar className="w-12 h-12 mx-auto mb-3 text-blue-200" />
+                  <h4 className="font-semibold mb-2">Emergency Ready</h4>
+                  <p className="text-sm opacity-90">Optimized for fire drills, weather delays, assemblies</p>
+                </div>
+                <div className="text-center">
+                  <Smartphone className="w-12 h-12 mx-auto mb-3 text-blue-200" />
+                  <h4 className="font-semibold mb-2">Mobile First</h4>
+                  <p className="text-sm opacity-90">Native iOS and iPadOS experience</p>
+                </div>
               </div>
             </CardContent>
           </Card>
-        </div>
-      </div>
 
-      {/* External links for SEO - Hidden from navigation */}
-      <div className="mt-16 py-8 border-t border-gray-200 dark:border-gray-700">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-            Educational Technology Resources
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="text-center">
-              <a 
-                href="https://www.apple.com/education/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
-              >
-                Apple Education
-              </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">iOS and iPadOS in education</p>
-            </div>
-            <div className="text-center">
-              <a 
-                href="https://www.microsoft.com/en-us/education" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
-              >
-                Microsoft Education
-              </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Office 365 for schools</p>
-            </div>
-            <div className="text-center">
-              <a 
-                href="https://edu.google.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
-              >
-                Google for Education
-              </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Google Workspace for education</p>
-            </div>
-            <div className="text-center">
-              <a 
-                href="https://www.khanacademy.org/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
-              >
-                Khan Academy
-              </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Free educational resources</p>
-            </div>
-            <div className="text-center">
-              <a 
-                href="https://www.edutopia.org/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
-              >
-                Edutopia
-              </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Educational best practices</p>
-            </div>
-            <div className="text-center">
-              <a 
-                href="https://www.iste.org/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
-              >
-                ISTE
-              </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">International Society for Technology in Education</p>
+          {/* CTA Section */}
+          <div className="mt-12 text-center">
+            <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg">
+              <CardContent className="pt-8 pb-8">
+                <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+                  Experience the Difference
+                </h2>
+                <p className="text-xl mb-6 text-gray-600 dark:text-gray-300">
+                  Join thousands of teachers who choose iSchedulEDU for emergency schedule generation
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-blue-600 hover:bg-blue-700"
+                    onClick={() => window.open('https://apps.apple.com/us/app/ischeduledu/id6504114850', '_blank')}
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download iSchedulEDU
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    className="bg-white/10 border-gray-300 text-gray-700 hover:bg-gray-100 backdrop-blur-sm"
+                    onClick={() => window.open('https://ischeduledu.app', '_blank')}
+                  >
+                    <Smartphone className="w-5 h-5 mr-2" />
+                    Learn More
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* External links for SEO - Hidden from navigation */}
+        <div className="mt-16 py-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+              Educational Technology Resources
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="text-center">
+                <a 
+                  href="https://www.apple.com/education/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+                >
+                  Apple Education
+                </a>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">iOS and iPadOS in education</p>
+              </div>
+              <div className="text-center">
+                <a 
+                  href="https://www.microsoft.com/en-us/education" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+                >
+                  Microsoft Education
+                </a>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Office 365 for schools</p>
+              </div>
+              <div className="text-center">
+                <a 
+                  href="https://edu.google.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+                >
+                  Google for Education
+                </a>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Google Workspace for education</p>
+              </div>
+              <div className="text-center">
+                <a 
+                  href="https://www.khanacademy.org/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+                >
+                  Khan Academy
+                </a>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Free educational resources</p>
+              </div>
+              <div className="text-center">
+                <a 
+                  href="https://www.edutopia.org/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+                >
+                  Edutopia
+                </a>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Educational best practices</p>
+              </div>
+              <div className="text-center">
+                <a 
+                  href="https://www.iste.org/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0FA0CE] hover:text-blue-600 font-medium transition-colors block"
+                >
+                  ISTE
+                </a>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">International Society for Technology in Education</p>
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Footer */}
+        <Footer />
       </div>
-      
-      {/* Footer */}
-      <Footer />
-    </div>
+    </>
   );
 };
 
