@@ -6,4 +6,34 @@
 /404    /404.html   404
 
 # Ensure import functionality works
-/import    /index.html   200 
+/import    /index.html   200
+
+# Redirect trailing slash versions to non-trailing slash (canonical URLs)
+/about/    /about    301
+/features/    /features    301
+/blog/    /blog    301
+/equal-time-planning/    /equal-time-planning    301
+/shareable-plans/    /shareable-plans    301
+/emergency-scheduling/    /emergency-scheduling    301
+/faq/    /faq    301
+/privacy-policy/    /privacy-policy    301
+
+# Redirect old URLs with trailing slashes to canonical versions
+/emergency-schedule-guide/    /emergency-schedule-guide    301
+/rotating-schedule-guide/    /rotating-schedule-guide    301
+/custom-schedule-guide/    /custom-schedule-guide    301
+/competitor-analysis/    /competitor-analysis    301
+/strategy-review/    /strategy-review    301
+
+# Redirect duplicate URLs to canonical versions
+/import-schedule    /import    301
+/test-appname    /    301
+
+# Handle search parameter redirects (remove tracking parameters)
+/?ref=*    /    301
+/?utm_*    /    301
+/?fbclid=*    /    301
+/?gclid=*    /    301
+
+# Redirect old blog post URLs if they exist
+/blog/*/    /blog/:splat    301 

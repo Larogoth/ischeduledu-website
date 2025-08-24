@@ -60,7 +60,14 @@ User-agent: LinkedInBot
 Allow: /
 Crawl-delay: 1
 
-# Specific Page Allowances for AI Crawlers
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_headers
+Disallow: /test-appname
+
+# Allow all important pages for crawling
 Allow: /faq
 Allow: /competitor-analysis
 Allow: /strategy-review
@@ -72,13 +79,9 @@ Allow: /features
 Allow: /emergency-scheduling
 Allow: /equal-time-planning
 Allow: /shareable-plans
-
-# Disallow admin and private areas
-Disallow: /admin/
-Disallow: /private/
-Disallow: /api/
-Disallow: /_headers
-Disallow: /test-appname
+Allow: /blog
+Allow: /privacy-policy
+Allow: /import
 
 # Sitemap
 Sitemap: https://ischeduledu.app/sitemap.xml

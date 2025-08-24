@@ -5,6 +5,7 @@ import AppName from "@/components/AppName";
 import Footer from "@/components/home/Footer";
 import BackToTop from "@/components/BackToTop";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -76,7 +77,34 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-          <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <>
+      <Helmet>
+        <title>Privacy Policy | iSchedulEDU - Data Protection & Privacy</title>
+        <meta name="description" content="Learn about iSchedulEDU's privacy policy and data protection practices. We prioritize your privacy with local data storage and minimal data collection." />
+        <meta name="keywords" content="iSchedulEDU privacy policy, teacher app privacy, data protection, local data storage, educational app privacy, teacher data security" />
+        <meta property="og:title" content="Privacy Policy | iSchedulEDU - Data Protection & Privacy" />
+        <meta property="og:description" content="Learn about iSchedulEDU's privacy policy and data protection practices. We prioritize your privacy with local data storage and minimal data collection." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ischeduledu.app/privacy-policy" />
+        <link rel="canonical" href="https://ischeduledu.app/privacy-policy" />
+        
+        {/* Privacy Policy Schema Markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Privacy Policy",
+            "description": "iSchedulEDU Privacy Policy - Data Protection & Privacy Information",
+            "url": "https://ischeduledu.app/privacy-policy",
+            "publisher": {
+              "@type": "Organization",
+              "name": "iSchedulEDU"
+            }
+          })}
+        </script>
+      </Helmet>
+
+      <div className="min-h-screen bg-gradient-to-b from-[#E6F3FF] via-white to-[#F0F8FF] dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="fixed top-1/4 left-0 w-96 h-96 bg-[#0FA0CE]/5 dark:bg-[#0FA0CE]/10 rounded-full blur-3xl -translate-x-1/2"></div>
         <div className="fixed bottom-1/4 right-0 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl translate-x-1/2"></div>
@@ -130,12 +158,13 @@ const PrivacyPolicy = () => {
         </div>
       </div>
       
-      {/* Footer - Only show if not in app */}
-      {!window.location.search.includes('inapp=true') && <Footer />}
-      
-      {/* Back to Top Button - Only show if not in app */}
-      {!window.location.search.includes('inapp=true') && <BackToTop />}
-    </div>
+              {/* Footer - Only show if not in app */}
+        {!window.location.search.includes('inapp=true') && <Footer />}
+        
+        {/* Back to Top Button - Only show if not in app */}
+        {!window.location.search.includes('inapp=true') && <BackToTop />}
+      </div>
+    </>
   );
 };
 

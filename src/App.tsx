@@ -159,6 +159,50 @@ const App = () => {
     setIsInApp(isInAppView);
   }, []);
 
+  // SEO Meta Tag Handler - Ensure proper canonical URLs
+  useEffect(() => {
+    const updateCanonicalUrl = () => {
+      const currentPath = window.location.pathname;
+      const baseUrl = 'https://ischeduledu.app';
+      
+      // Remove trailing slash for consistency
+      const cleanPath = currentPath.endsWith('/') && currentPath !== '/' 
+        ? currentPath.slice(0, -1) 
+        : currentPath;
+      
+      const canonicalUrl = baseUrl + cleanPath;
+      
+      // Update or create canonical link
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonicalUrl);
+      
+      // Update og:url meta tag
+      let ogUrlMeta = document.querySelector('meta[property="og:url"]');
+      if (!ogUrlMeta) {
+        ogUrlMeta = document.createElement('meta');
+        ogUrlMeta.setAttribute('property', 'og:url');
+        document.head.appendChild(ogUrlMeta);
+      }
+      ogUrlMeta.setAttribute('content', canonicalUrl);
+    };
+
+    // Update canonical URL on route changes
+    updateCanonicalUrl();
+    
+    // Listen for route changes
+    const handleRouteChange = () => {
+      setTimeout(updateCanonicalUrl, 100);
+    };
+    
+    window.addEventListener('popstate', handleRouteChange);
+    return () => window.removeEventListener('popstate', handleRouteChange);
+  }, []);
+
   usePageView();
   useScrollToTop();
 
